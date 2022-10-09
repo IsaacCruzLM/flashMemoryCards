@@ -12,3 +12,5 @@ export const database = new Database({
   adapter,
   modelClasses: [ModuleModel],
 });
+
+console.log(database);
