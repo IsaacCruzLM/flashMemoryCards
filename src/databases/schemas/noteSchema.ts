@@ -12,15 +12,11 @@ export const noteSchema = tableSchema({
       type: 'string',
     },
     {
-      name: 'module_id',
-      type: 'string',
-    },
-    {
-      name: 'student_id',
-      type: 'string',
-    },
-    {
       name: 'initial_date',
+      type: 'string',
+    },
+    {
+      name: 'module_id',
       type: 'string',
     },
   ],
