@@ -13,7 +13,10 @@ import {View, Text, Button} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import DatabaseProvider from '@nozbe/watermelondb/DatabaseProvider';
+import {Provider as PaperProvider, useTheme} from 'react-native-paper';
+
 import {database} from './src/databases';
+import theme from './src/styles/themes';
 
 function HomeScreen({navigation}: any) {
   return (
@@ -36,18 +39,23 @@ function AboutScreen({navigation}: any) {
   );
 }
 
+export type AppTheme = typeof theme;
+export const useAppTheme = () => useTheme<AppTheme>();
+
 const Stack = createNativeStackNavigator();
 
 const App = () => {
   return (
-    <DatabaseProvider database={database}>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Home" component={HomeScreen} />
-          <Stack.Screen name="About" component={AboutScreen} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </DatabaseProvider>
+    <PaperProvider theme={theme}>
+      <DatabaseProvider database={database}>
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="About" component={AboutScreen} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </DatabaseProvider>
+    </PaperProvider>
   );
 };
 
