@@ -1,0 +1,62 @@
+import React from 'react';
+import {View, Button, Text} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createDrawerNavigator} from '@react-navigation/drawer';
+
+import SideMenu from '../components/sideMenu';
+import NavigationService from './NavigationService';
+
+function HomeScreen({navigation}: any) {
+  return (
+    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <Text>Home Screen</Text>
+      <Button
+        title="Go to About"
+        onPress={() => navigation.navigate('About')}
+      />
+    </View>
+  );
+}
+
+function AboutScreen({navigation}: any) {
+  return (
+    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <Text>About Screen</Text>
+      <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
+    </View>
+  );
+}
+
+function Home() {
+  return (
+    <Drawer.Navigator
+      initialRouteName="Home"
+      drawerContent={props => <SideMenu {...props} />}>
+      <Drawer.Screen name="Home" component={HomeScreen} />
+    </Drawer.Navigator>
+  );
+}
+
+const Stack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator();
+
+const Routes = () => {
+  return (
+    <NavigationContainer
+      ref={navigatorRef => {
+        NavigationService.setTopLevelNavigator(navigatorRef);
+      }}>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen name="About" component={AboutScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
+
+export default Routes;
