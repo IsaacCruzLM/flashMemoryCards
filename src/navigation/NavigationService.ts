@@ -1,15 +1,25 @@
-import {CommonActions} from '@react-navigation/native';
+import {
+  CommonActions,
+  DrawerActions,
+  NavigationContainerRef,
+} from '@react-navigation/native';
 
-let _navigator: {dispatch: (arg0: any) => void};
+let _navigator: any;
 
-function setTopLevelNavigator(navigatorRef: any) {
+function setTopLevelNavigator(
+  navigatorRef: NavigationContainerRef<any> | null,
+) {
   _navigator = navigatorRef;
 }
 
-function navigate(name: string) {
+function navigate(name: string, params?: object | undefined) {
+  if (name === 'Home') {
+    _navigator.dispatch(DrawerActions.closeDrawer());
+  }
   _navigator.dispatch(
     CommonActions.navigate({
       name,
+      params,
     }),
   );
 }
