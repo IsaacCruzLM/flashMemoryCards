@@ -7,6 +7,8 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import SideMenu from '../components/sideMenu';
 import NavigationService from './NavigationService';
 
+import InitialPage from '../screens/InitialPage';
+
 function HomeScreen({navigation}: any) {
   return (
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
@@ -15,15 +17,6 @@ function HomeScreen({navigation}: any) {
         title="Go to About"
         onPress={() => navigation.navigate('About')}
       />
-    </View>
-  );
-}
-
-function AboutScreen({navigation}: any) {
-  return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>About Screen</Text>
-      <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
     </View>
   );
 }
@@ -48,12 +41,12 @@ const Routes = () => {
         NavigationService.setTopLevelNavigator(navigatorRef);
       }}>
       <Stack.Navigator>
+        <Stack.Screen name="InitialPage" component={InitialPage} />
         <Stack.Screen
           name="Home"
           component={Home}
           options={{headerShown: false}}
         />
-        <Stack.Screen name="About" component={AboutScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
