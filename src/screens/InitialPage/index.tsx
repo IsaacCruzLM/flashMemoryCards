@@ -1,11 +1,14 @@
-import React from 'react';
-import {View, Text} from 'react-native';
+import * as React from 'react';
+import {Text} from 'react-native';
+
+import LinearGradientView from '../../components/LinearGradientView';
 
 const InitialPage = () => {
   return (
-    <View>
-      <Text>Initial Screen</Text>
-    </View>
+    <LinearGradientView>
+      <Text>TExto qualquer</Text>
+      <Text>TExto qualquer 2</Text>
+    </LinearGradientView>
   );
 };
 

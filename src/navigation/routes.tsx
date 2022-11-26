@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import {View, Button, Text} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -41,7 +41,11 @@ const Routes = () => {
         NavigationService.setTopLevelNavigator(navigatorRef);
       }}>
       <Stack.Navigator>
-        <Stack.Screen name="InitialPage" component={InitialPage} />
+        <Stack.Screen
+          name="InitialPage"
+          component={InitialPage}
+          options={{headerShown: false}}
+        />
         <Stack.Screen
           name="Home"
           component={Home}
