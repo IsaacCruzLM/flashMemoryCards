@@ -2,8 +2,7 @@ import * as React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 
 import styles from './styles';
-
-import {LinearGradientViewProps} from '../../types/components/LinearGradientView';
+import {LinearGradientViewProps} from './types';
 
 const LinearGradientView = ({
   colors = ['rgba(34, 39, 46, 0.7)', 'rgba(34, 39, 46, 1)'],
