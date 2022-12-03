@@ -34,7 +34,7 @@ export default {
   typography: {
     fontSizeLargeTitle: 20,
     fontSizeTitle: 16,
-    fontSizeText: 12,
-    fontSizeSmallText: 8,
+    fontSizeText: 14,
+    fontSizeSmallText: 10,
   },
 };

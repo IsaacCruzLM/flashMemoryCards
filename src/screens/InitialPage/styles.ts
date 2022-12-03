@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import themes from '../../styles/themes';
 
 const styles = StyleSheet.create({
   container: {
@@ -11,6 +12,22 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     width: '100%',
+  },
+  title: {
+    fontFamily: themes.fonts.medium.fontFamily,
+    fontSize: themes.typography.fontSizeLargeTitle,
+    color: themes.colors.background,
+    fontWeight: '700',
+    textAlign: 'center',
+    marginBottom: 30,
+  },
+  subTitle: {
+    fontFamily: themes.fonts.regular.fontFamily,
+    fontSize: themes.typography.fontSizeText,
+    color: themes.colors.background,
+    textAlign: 'center',
+    marginBottom: 70,
+    fontWeight: '500',
   },
 });
 

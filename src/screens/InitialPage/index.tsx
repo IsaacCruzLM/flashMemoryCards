@@ -1,5 +1,7 @@
 import * as React from 'react';
-import {View} from 'react-native';
+import {View, Text} from 'react-native';
+
+import NavigationService from '../../navigation/NavigationService';
 
 import LogoSvg from '../../assets/logo.svg';
 
@@ -16,7 +18,17 @@ const InitialPage = () => {
           <LogoSvg height={78} width={93} fill="#ffffff" />
         </View>
         <View style={styles.buttonContainer}>
-          <Button label="Teste" />
+          <Text style={styles.title}>
+            {`Bem vindo(a) ao${'\n'}Flash Memory${'\n'}Cards`}
+          </Text>
+          <Text style={styles.subTitle}>
+            Seja relembrado de suas anotações, para que o conhecimento seja
+            realmente fixado!
+          </Text>
+          <Button
+            onPress={() => NavigationService.navigate('Tutorial')}
+            label="Entrar"
+          />
         </View>
       </View>
     </LinearGradientView>
