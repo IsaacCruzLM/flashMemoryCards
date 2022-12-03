@@ -8,6 +8,7 @@ import SideMenu from '../components/sideMenu';
 import NavigationService from './NavigationService';
 
 import InitialPage from '../screens/InitialPage';
+import TutorialPage from '../screens/TutorialPage';
 
 function HomeScreen({navigation}: any) {
   return (
@@ -44,6 +45,11 @@ const Routes = () => {
         <Stack.Screen
           name="InitialPage"
           component={InitialPage}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Tutorial"
+          component={TutorialPage}
           options={{headerShown: false}}
         />
         <Stack.Screen
