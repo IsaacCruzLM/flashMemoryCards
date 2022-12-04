@@ -6,4 +6,5 @@ export interface ButtonProps {
   buttonColorParam?: string;
   textColorParam?: string;
   style?: object;
+  disabled?: boolean;
 }

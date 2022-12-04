@@ -13,6 +13,7 @@ const Button = ({
   buttonColorParam,
   textColorParam,
   style,
+  disabled = false,
 }: ButtonProps) => {
   const mode = modeParam || 'contained';
   const buttonColor = buttonColorParam || Theme.colors.dark;
@@ -20,6 +21,7 @@ const Button = ({
 
   return (
     <PaperButton
+      disabled={disabled}
       icon={icon}
       mode={mode}
       onPress={onPress}
