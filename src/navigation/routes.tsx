@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {View, Button, Text} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createDrawerNavigator} from '@react-navigation/drawer';
@@ -9,18 +8,7 @@ import NavigationService from './NavigationService';
 
 import InitialPage from '../screens/InitialPage';
 import TutorialPage from '../screens/TutorialPage';
-
-function HomeScreen({navigation}: any) {
-  return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Home Screen</Text>
-      <Button
-        title="Go to About"
-        onPress={() => navigation.navigate('About')}
-      />
-    </View>
-  );
-}
+import HomeScreen from '../screens/Home';
 
 function Home() {
   return (
@@ -53,7 +41,7 @@ const Routes = () => {
           options={{headerShown: false}}
         />
         <Stack.Screen
-          name="Home"
+          name="HomeScreen"
           component={Home}
           options={{headerShown: false}}
         />
