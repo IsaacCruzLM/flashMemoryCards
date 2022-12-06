@@ -5,10 +5,12 @@ import type {DrawerContentComponentProps} from '@react-navigation/drawer';
 
 import NavigationService from '../../navigation/NavigationService';
 
+import styles from './styles';
+
 const SideMenu = (props: DrawerContentComponentProps) => {
   return (
-    <View style={{flex: 1}}>
-      <View style={{height: '90%'}}>
+    <View style={styles.container}>
+      <View style={styles.subContainer}>
         <DrawerContentScrollView {...props}>
           <DrawerItem
             label={'Home'}

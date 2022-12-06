@@ -4,7 +4,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 
-import SideMenu from '../components/sideMenu';
+import SideMenu from '../components/SideMenu';
 import NavigationService from './NavigationService';
 
 import InitialPage from '../screens/InitialPage';
