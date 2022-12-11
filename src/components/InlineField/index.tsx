@@ -2,9 +2,9 @@ import * as React from 'react';
 import {View, Text} from 'react-native';
 
 import styles from './styles';
-import {ListCardProps} from './types';
+import {InlineFieldProps} from './types';
 
-const InlineField = ({label, content}: ListCardProps) => {
+const InlineField = ({label, content}: InlineFieldProps) => {
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{`${label}: `}</Text>

@@ -1,4 +1,4 @@
-export interface ListCardProps {
+export interface InlineFieldProps {
   label: string;
   content: string;
 }
