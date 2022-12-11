@@ -2,8 +2,12 @@ import {StyleSheet} from 'react-native';
 import themes from '../../styles/themes';
 
 const styles = StyleSheet.create({
+  paragraphContainer: {
+    marginVertical: themes.spacing.unit / 2,
+  },
   container: {
     flex: 1,
+    flexDirection: 'row',
   },
   label: {
     fontFamily: themes.fonts.medium.fontFamily,
@@ -19,7 +23,8 @@ const styles = StyleSheet.create({
   },
   chip: {
     marginHorizontal: 5,
-    padding: 20,
+    paddingVertical: themes.spacing.unit / 4,
+    paddingHorizontal: themes.spacing.unit,
     borderRadius: 30,
   },
 });

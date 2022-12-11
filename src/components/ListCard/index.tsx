@@ -29,7 +29,7 @@ const ListCard = ({
           <InlineField label="Ultima revisão" content={lastRevisionDate} />
           <InlineField label="Tipo de anotação" content={noteType} />
           <InlineField label="Categoria" content={category} />
-          {/* <InlineFieldChips label="Assuntos" arrayOfContents={subjects} /> */}
+          <InlineFieldChips label="Assuntos" arrayOfContents={subjects} />
         </Card.Content>
       </Card>
     </View>

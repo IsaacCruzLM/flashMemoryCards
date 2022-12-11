@@ -2,6 +2,9 @@ import {StyleSheet} from 'react-native';
 import themes from '../../styles/themes';
 
 const styles = StyleSheet.create({
+  paragraphContainer: {
+    marginVertical: themes.spacing.unit / 2,
+  },
   container: {
     flex: 1,
     flexDirection: 'row',

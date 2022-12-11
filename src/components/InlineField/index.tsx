@@ -7,7 +7,7 @@ import {InlineFieldProps} from './types';
 
 const InlineField = ({label, content}: InlineFieldProps) => {
   return (
-    <Paragraph>
+    <Paragraph style={styles.paragraphContainer}>
       <View style={styles.container}>
         <Text style={styles.label}>{`${label}: `}</Text>
         <Text style={styles.content}>{content}</Text>
