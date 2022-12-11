@@ -4,6 +4,7 @@ import themes from '../../styles/themes';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'row',
   },
   label: {
     fontFamily: themes.fonts.medium.fontFamily,
