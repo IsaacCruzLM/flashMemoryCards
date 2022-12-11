@@ -3,7 +3,7 @@ export interface InlineFieldChipsProps {
   arrayOfContents: contentProps[];
 }
 
-interface contentProps {
+export interface contentProps {
   content: string;
   color: string;
 }
