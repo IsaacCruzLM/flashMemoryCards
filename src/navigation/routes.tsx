@@ -10,12 +10,21 @@ import InitialPage from '../screens/InitialPage';
 import TutorialPage from '../screens/TutorialPage';
 import HomeScreen from '../screens/Home';
 
+import themes from '../styles/themes';
+
 function Home() {
   return (
     <Drawer.Navigator
-      initialRouteName="Home"
+      initialRouteName="HomeScreen"
       drawerContent={props => <SideMenu {...props} />}>
-      <Drawer.Screen name="Home" component={HomeScreen} />
+      <Drawer.Screen
+        name="HomeScreen"
+        component={HomeScreen}
+        options={{
+          title: 'Anotações para revisar',
+          ...headerStyled,
+        }}
+      />
     </Drawer.Navigator>
   );
 }
@@ -41,7 +50,7 @@ const Routes = () => {
           options={{headerShown: false}}
         />
         <Stack.Screen
-          name="HomeScreen"
+          name="Home"
           component={Home}
           options={{headerShown: false}}
         />
@@ -49,5 +58,18 @@ const Routes = () => {
     </NavigationContainer>
   );
 };
+
+const headerStyled = {
+  headerStyle: {
+    backgroundColor: themes.colors.primary,
+  },
+  headerTintColor: themes.colors.background,
+  headerTitleStyle: {
+    fontWeight: '700',
+    fontFamily: themes.fonts.medium.fontFamily,
+    fontSize: themes.typography.fontSizeLargeTitle,
+    color: themes.colors.background,
+  },
+} as React.CSSProperties;
 
 export default Routes;
