@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
     fontSize: themes.typography.fontSizeText,
     color: themes.colors.primary,
     fontWeight: '700',
+    textAlignVertical: 'center',
   },
   content: {
     fontFamily: themes.fonts.regular.fontFamily,

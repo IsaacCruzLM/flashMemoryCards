@@ -21,6 +21,9 @@ const styles = StyleSheet.create({
     color: themes.colors.background,
     fontWeight: '700',
   },
+  contentBackground: {
+    padding: themes.spacing.unit,
+  },
 });
 
 export default styles;

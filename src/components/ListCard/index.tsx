@@ -24,7 +24,7 @@ const ListCard = ({
           titleStyle={styles.headerTitle}
           style={styles.headerBackground}
         />
-        <Card.Content>
+        <Card.Content style={styles.contentBackground}>
           <InlineField label="Data de criação" content={creationDate} />
           <InlineField label="Ultima revisão" content={lastRevisionDate} />
           <InlineField label="Tipo de anotação" content={noteType} />
