@@ -15,7 +15,11 @@ const InlineFieldChips = ({label, arrayOfContents}: InlineFieldChipsProps) => {
 
         return (
           <View style={[styles.chip, {backgroundColor: color}]}>
-            <Text style={[styles.content, {color: textColor}]}>{content}</Text>
+            <Text
+              numberOfLines={1}
+              style={[styles.content, {color: textColor}]}>
+              {content}
+            </Text>
           </View>
         );
       })}
