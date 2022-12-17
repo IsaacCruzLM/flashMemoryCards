@@ -16,8 +16,7 @@ const Home = () => {
         category={'Categoria X'}
         subjects={[
           {content: 'Assunto 1', color: '#C31717'},
-          {content: 'Assunto 2', color: '#1766C3'},
-          {content: 'Assunto 3', color: '#8db4e0'},
+          {content: 'Assunto 2', color: '#8db4e0'},
         ]}
       />
     </View>

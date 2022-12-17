@@ -2,11 +2,8 @@ import {StyleSheet} from 'react-native';
 import themes from '../../styles/themes';
 
 const styles = StyleSheet.create({
-  paragraphContainer: {
-    marginVertical: themes.spacing.unit / 2,
-  },
   container: {
-    flex: 1,
+    marginVertical: themes.spacing.unit / 2,
     flexDirection: 'row',
   },
   label: {
@@ -16,6 +13,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   content: {
+    flex: 1,
     fontFamily: themes.fonts.regular.fontFamily,
     fontSize: themes.typography.fontSizeText,
     color: themes.colors.textColor2,
