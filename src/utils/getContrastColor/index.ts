@@ -2,13 +2,11 @@ import getContrastRatio from 'get-contrast-ratio';
 
 import themes from '../../styles/themes';
 
-import {getContrastColorProps} from './types';
-
-const getContrastColor = ({
-  backgroundColor,
-  firstOptionColor = themes.colors.textColor2,
-  secondOptionColor = themes.colors.background,
-}: getContrastColorProps) => {
+const getContrastColor = (
+  backgroundColor: string,
+  firstOptionColor: string = themes.colors.textColor2,
+  secondOptionColor: string = themes.colors.background,
+) => {
   const firstColorContrast = getContrastRatio(
     backgroundColor,
     firstOptionColor,
@@ -20,7 +18,7 @@ const getContrastColor = ({
 
   return firstColorContrast >= secondColorContrast
     ? firstOptionColor
-    : secondColorContrast;
+    : secondOptionColor;
 };
 
 export default getContrastColor;
