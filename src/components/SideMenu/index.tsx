@@ -1,5 +1,6 @@
 import React from 'react';
 import {View} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
 import type {DrawerContentComponentProps} from '@react-navigation/drawer';
 
@@ -13,8 +14,12 @@ const SideMenu = (props: DrawerContentComponentProps) => {
       <View style={styles.subContainer}>
         <DrawerContentScrollView {...props}>
           <DrawerItem
-            label={'Home'}
+            label={'Anotações para revisar'}
             onPress={() => NavigationService.navigate('Home')}
+            icon={({color, size}) => (
+              <Icon color={color} size={size} name={'notebook-edit'} />
+            )}
+            labelStyle={styles.labelStyle}
           />
           <DrawerItem
             label={'About'}
