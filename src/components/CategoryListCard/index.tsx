@@ -24,7 +24,9 @@ const CategoryListCard = ({
             name={icon}
           />
           <View style={styles.contentInfoContainer}>
-            <Text style={styles.categoryTitle}>{title}</Text>
+            <Text numberOfLines={1} style={styles.categoryTitle}>
+              {title}
+            </Text>
             <View style={styles.subInfoContainer}>
               <Text
                 style={styles.infoText}>{`${numberOfNotes} anotações`}</Text>
