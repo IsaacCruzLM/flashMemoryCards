@@ -3,6 +3,8 @@ import {View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Card, Text} from 'react-native-paper';
 
+import themes from '../../styles/themes';
+
 import styles from './styles';
 import {CategoryListCardProps} from './types';
 
@@ -15,13 +17,20 @@ const CategoryListCard = ({
   return (
     <View style={styles.container}>
       <Card style={styles.cardContainer}>
-        <Card.Content style={styles.contentBackground}>
-          <Icon color={'#000'} size={32} name={icon} />
-          <View>
-            <Text>{title}</Text>
-            <View>
-              <Text>{`${numberOfNotes} anotações`}</Text>
-              <Text>{creationDate}</Text>
+        <Card.Content style={styles.contentContainer}>
+          <Icon
+            color={themes.colors.primary}
+            size={themes.spacing.unit * 5}
+            name={icon}
+          />
+          <View style={styles.contentInfoContainer}>
+            <Text style={styles.categoryTitle}>{title}</Text>
+            <View style={styles.subInfoContainer}>
+              <Text
+                style={
+                  styles.numberOfNotesText
+                }>{`${numberOfNotes} anotações`}</Text>
+              <Text style={styles.creationDateText}>{creationDate}</Text>
             </View>
           </View>
         </Card.Content>

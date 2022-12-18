@@ -3,7 +3,6 @@ import themes from '../../styles/themes';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     width: '100%',
   },
   cardContainer: {
@@ -20,8 +19,37 @@ const styles = StyleSheet.create({
     color: themes.colors.background,
     fontWeight: '700',
   },
-  contentBackground: {
+  contentContainer: {
     padding: themes.spacing.unit,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  contentInfoContainer: {
+    marginLeft: themes.spacing.unit * 3,
+    flex: 1,
+  },
+  subInfoContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  categoryTitle: {
+    fontFamily: themes.fonts.medium.fontFamily,
+    fontSize: themes.typography.fontSizeText,
+    color: themes.colors.primary,
+    fontWeight: '700',
+  },
+  numberOfNotesText: {
+    fontFamily: themes.fonts.regular.fontFamily,
+    fontSize: themes.typography.fontSizeText,
+    color: themes.colors.textColor2,
+    fontWeight: '500',
+  },
+  creationDateText: {
+    fontFamily: themes.fonts.regular.fontFamily,
+    fontSize: themes.typography.fontSizeText,
+    color: themes.colors.textColor2,
+    fontWeight: '500',
   },
 });
 
