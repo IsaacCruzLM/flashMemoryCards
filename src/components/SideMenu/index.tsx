@@ -22,8 +22,12 @@ const SideMenu = (props: DrawerContentComponentProps) => {
             labelStyle={styles.labelStyle}
           />
           <DrawerItem
-            label={'About'}
-            onPress={() => NavigationService.navigate('About')}
+            label={'Categorias'}
+            onPress={() => NavigationService.navigate('Categorias')}
+            icon={({color, size}) => (
+              <Icon color={color} size={size} name={'folder-eye'} />
+            )}
+            labelStyle={styles.labelStyle}
           />
         </DrawerContentScrollView>
       </View>
