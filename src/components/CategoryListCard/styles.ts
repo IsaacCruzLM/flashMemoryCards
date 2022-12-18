@@ -38,12 +38,30 @@ const styles = StyleSheet.create({
     fontSize: themes.typography.fontSizeText,
     color: themes.colors.primary,
     fontWeight: '700',
+    marginBottom: themes.spacing.unit / 2,
   },
   infoText: {
     fontFamily: themes.fonts.regular.fontFamily,
     fontSize: themes.typography.fontSizeText,
     color: themes.colors.textColor2,
     fontWeight: '500',
+  },
+  notificationContainer: {
+    backgroundColor: themes.colors.red,
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    top: 10,
+    right: 16,
+  },
+  notificationText: {
+    fontFamily: themes.fonts.medium.fontFamily,
+    fontSize: themes.typography.fontSizeText,
+    color: themes.colors.background,
+    fontWeight: '700',
   },
 });
 

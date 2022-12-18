@@ -13,6 +13,7 @@ const CategoryListCard = ({
   creationDate,
   numberOfNotes,
   icon,
+  numberNotesToReview = 0,
 }: CategoryListCardProps) => {
   return (
     <View style={styles.container}>
@@ -35,6 +36,11 @@ const CategoryListCard = ({
           </View>
         </Card.Content>
       </Card>
+      {numberNotesToReview > 0 && (
+        <View style={styles.notificationContainer}>
+          <Text style={styles.notificationText}>{numberNotesToReview}</Text>
+        </View>
+      )}
     </View>
   );
 };

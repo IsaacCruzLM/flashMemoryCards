@@ -13,6 +13,7 @@ const Categories = () => {
         creationDate={'24/04/1997'}
         numberOfNotes={16}
         icon={'cloud-download'}
+        numberNotesToReview={2}
       />
     </DefaultContainerView>
   );

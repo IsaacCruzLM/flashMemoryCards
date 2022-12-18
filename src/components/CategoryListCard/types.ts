@@ -3,4 +3,5 @@ export interface CategoryListCardProps {
   creationDate: string;
   numberOfNotes: number;
   icon: string;
+  numberNotesToReview?: number;
 }
