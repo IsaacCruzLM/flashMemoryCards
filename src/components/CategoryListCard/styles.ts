@@ -39,13 +39,7 @@ const styles = StyleSheet.create({
     color: themes.colors.primary,
     fontWeight: '700',
   },
-  numberOfNotesText: {
-    fontFamily: themes.fonts.regular.fontFamily,
-    fontSize: themes.typography.fontSizeText,
-    color: themes.colors.textColor2,
-    fontWeight: '500',
-  },
-  creationDateText: {
+  infoText: {
     fontFamily: themes.fonts.regular.fontFamily,
     fontSize: themes.typography.fontSizeText,
     color: themes.colors.textColor2,

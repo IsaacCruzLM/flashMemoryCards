@@ -27,10 +27,8 @@ const CategoryListCard = ({
             <Text style={styles.categoryTitle}>{title}</Text>
             <View style={styles.subInfoContainer}>
               <Text
-                style={
-                  styles.numberOfNotesText
-                }>{`${numberOfNotes} anotações`}</Text>
-              <Text style={styles.creationDateText}>{creationDate}</Text>
+                style={styles.infoText}>{`${numberOfNotes} anotações`}</Text>
+              <Text style={styles.infoText}>{creationDate}</Text>
             </View>
           </View>
         </Card.Content>
