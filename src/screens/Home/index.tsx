@@ -1,13 +1,13 @@
 import React from 'react';
-import {View} from 'react-native';
 
 import ListCard from '../../components/ListCard';
+import DefaultContainerView from '../../components/DefaultContainerView';
 
-import styles from './styles';
+// import styles from './styles';
 
 const Home = () => {
   return (
-    <View style={styles.container}>
+    <DefaultContainerView>
       <ListCard
         title={'Titulo da anotação'}
         creationDate={'24/04/1997'}
@@ -19,7 +19,7 @@ const Home = () => {
           {content: 'Assunto 2', color: '#8db4e0'},
         ]}
       />
-    </View>
+    </DefaultContainerView>
   );
 };
 
