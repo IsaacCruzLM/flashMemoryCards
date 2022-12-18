@@ -1,13 +1,15 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {Text} from 'react-native';
 
-import styles from './styles';
+import DefaultContainerView from '../../components/DefaultContainerView';
+
+// import styles from './styles';
 
 const Categories = () => {
   return (
-    <View style={styles.container}>
+    <DefaultContainerView>
       <Text>Categorias</Text>
-    </View>
+    </DefaultContainerView>
   );
 };
 
