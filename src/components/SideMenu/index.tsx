@@ -23,7 +23,7 @@ const SideMenu = (props: DrawerContentComponentProps) => {
           />
           <DrawerItem
             label={'Categorias'}
-            onPress={() => NavigationService.navigate('Categorias')}
+            onPress={() => NavigationService.navigate('Categories')}
             icon={({color, size}) => (
               <Icon color={color} size={size} name={'folder-eye'} />
             )}
