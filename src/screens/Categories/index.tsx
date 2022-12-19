@@ -16,7 +16,7 @@ const Categories = () => {
         icon={'cloud-download'}
         numberNotesToReview={2}
       />
-      <FloatingAddButton routeName={'Teste'} />
+      <FloatingAddButton routeName="Home" />
     </DefaultContainerView>
   );
 };
