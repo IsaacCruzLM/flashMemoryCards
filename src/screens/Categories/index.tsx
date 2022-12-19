@@ -2,6 +2,7 @@ import React from 'react';
 
 import DefaultContainerView from '../../components/DefaultContainerView';
 import CategoryListCard from '../../components/CategoryListCard';
+import FloatingAddButton from '../../components/FloatingAddButton';
 
 // import styles from './styles';
 
@@ -15,6 +16,7 @@ const Categories = () => {
         icon={'cloud-download'}
         numberNotesToReview={2}
       />
+      <FloatingAddButton routeName={'Teste'} />
     </DefaultContainerView>
   );
 };
