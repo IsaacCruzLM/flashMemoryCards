@@ -14,6 +14,7 @@ import InitialPage from '../screens/InitialPage';
 import TutorialPage from '../screens/TutorialPage';
 import HomeScreen from '../screens/Home';
 import Categories from '../screens/Categories';
+import NewCategory from '../screens/NewCategory';
 
 import themes from '../styles/themes';
 
@@ -82,6 +83,14 @@ const Routes = () => {
                 onPress={() => {}}
               />
             ),
+          }}
+        />
+        <Stack.Screen
+          name="NewCategory"
+          component={NewCategory}
+          options={{
+            title: 'Nova Categoria',
+            ...headerStyled,
           }}
         />
       </Stack.Navigator>
