@@ -1,24 +1,29 @@
-import React, {useState} from 'react';
-import {Button, View} from 'react-native';
+import React from 'react';
+import {View} from 'react-native';
 
 import DefaultContainerView from '../../components/DefaultContainerView';
 import TextInput from '../../components/TextInput';
-import {MyReactNativeForm} from '../../components/Form';
+import Form from '../../components/Form';
 
-// import styles from './styles';
+import styles from './styles';
+import {NewCategoryFormProps} from './types';
 
 const NewCategory = () => {
-  const [name, setName] = useState('');
   return (
     <DefaultContainerView>
-      <MyReactNativeForm
-        form={({handleChange, handleBlur, handleSubmit, values}) => (
-          <View style={{width: '100%'}}>
+      <Form
+        form={({
+          handleChange,
+          handleBlur,
+          // handleSubmit,
+          values,
+        }: NewCategoryFormProps) => (
+          <View style={styles.formContainer}>
             <TextInput
-              label={'Nome da categoria'}
+              label={'Email'}
               setText={handleChange('email')}
               onBlur={handleBlur('email')}
-              placeholder={'Nome da categoria'}
+              placeholder={'Email'}
               value={values.email}
             />
             <TextInput
@@ -26,10 +31,12 @@ const NewCategory = () => {
               setText={handleChange('nome')}
               onBlur={handleBlur('nome')}
               placeholder={'Nome da categoria'}
-              value={values.email}
+              value={values.nome}
             />
           </View>
         )}
+        initialValues={{nome: '', email: ''}}
+        onSubmit={values => console.log(values)}
       />
     </DefaultContainerView>
   );

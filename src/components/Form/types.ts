@@ -2,7 +2,7 @@ import {ReactNode} from 'react';
 import {FormikHelpers} from 'formik';
 
 export interface FormProps {
-  form: ReactNode | React.FC;
+  form: ReactNode | React.FC<any> | JSX.Element;
   initialValues: object;
   onSubmit: ((
     values: object,
