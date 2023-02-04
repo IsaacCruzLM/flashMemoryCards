@@ -4,4 +4,5 @@ export interface TextInputProps {
   placeholder: string;
   value: string;
   style?: object;
+  onBlur?: Function | any;
 }
