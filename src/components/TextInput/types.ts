@@ -3,4 +3,5 @@ export interface TextInputProps {
   setText: Function;
   placeholder: string;
   value: string;
+  style?: object;
 }

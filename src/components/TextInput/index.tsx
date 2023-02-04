@@ -4,6 +4,7 @@ import {TextInput as PaperTextInput} from 'react-native-paper';
 
 import themes from '../../styles/themes';
 
+import styles from './styles';
 import {TextInputProps} from './types';
 
 const TextInput = ({
@@ -11,10 +12,11 @@ const TextInput = ({
   setText,
   placeholder,
   value,
+  style,
   ...otherProps
 }: TextInputProps) => {
   return (
-    <View style={{height: 36, width: '100%'}}>
+    <View style={styles.container}>
       <PaperTextInput
         mode="outlined"
         label={label}
@@ -22,6 +24,7 @@ const TextInput = ({
         placeholder={placeholder}
         value={value}
         theme={themes}
+        style={[styles.inputDefaultStyle, style]}
         {...otherProps}
       />
     </View>
