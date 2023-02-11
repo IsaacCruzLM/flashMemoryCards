@@ -10,6 +10,7 @@ import styles from './styles';
 
 const SelectIcon = () => {
   const [initalIconIndex, setInitalIconIndex] = useState(0);
+  const [selectedIcon, setSelectedIcon] = useState('');
   const MaterialCommunityIconListNames = Object.keys(MaterialCommunityIconList);
 
   const renderIconList = () => {
@@ -17,12 +18,23 @@ const SelectIcon = () => {
     for (let index = initalIconIndex; index < initalIconIndex + 4; index++) {
       console.log(index);
       elementList.push(
-        <Icon
-          color={Theme.colors.primary}
-          size={Theme.spacing.unit * 4}
-          name={MaterialCommunityIconListNames[index]}
-          onPress={() => {}}
-        />,
+        <TouchableOpacity
+          onPress={() =>
+            setSelectedIcon(MaterialCommunityIconListNames[index])
+          }>
+          <View
+            style={
+              selectedIcon === MaterialCommunityIconListNames[index]
+                ? styles.selectedIconContainer
+                : styles.defaultIconContainer
+            }>
+            <Icon
+              color={Theme.colors.primary}
+              size={Theme.spacing.unit * 4}
+              name={MaterialCommunityIconListNames[index]}
+            />
+          </View>
+        </TouchableOpacity>,
       );
     }
     return elementList;

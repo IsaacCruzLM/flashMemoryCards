@@ -18,6 +18,23 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
+  defaultIconContainer: {
+    width: themes.spacing.unit * 6,
+    height: themes.spacing.unit * 6,
+    borderRadius: themes.spacing.unit * 3,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: themes.spacing.unit,
+  },
+  selectedIconContainer: {
+    width: themes.spacing.unit * 6,
+    height: themes.spacing.unit * 6,
+    borderRadius: themes.spacing.unit * 3,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: themes.spacing.unit,
+    backgroundColor: themes.colors.red,
+  },
 });
 
 export default styles;
