@@ -7,6 +7,7 @@ import Form from '../../components/Form';
 
 import styles from './styles';
 import {NewCategoryFormProps} from './types';
+import SelectIcon from '../../components/SelectIcon';
 
 const NewCategory = () => {
   return (
@@ -33,6 +34,7 @@ const NewCategory = () => {
               placeholder={'Nome da categoria'}
               value={values.nome}
             />
+            <SelectIcon />
           </View>
         )}
         initialValues={{nome: '', email: ''}}
