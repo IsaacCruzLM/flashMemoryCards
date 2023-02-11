@@ -9,6 +9,14 @@ const styles = StyleSheet.create({
   labelStyle: {
     fontSize: themes.typography.fontSizeTitle,
     fontWeight: '700',
+    color: themes.colors.textColor2,
+    marginBottom: themes.spacing.unit * 2,
+  },
+  iconListContainer: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
 });
 

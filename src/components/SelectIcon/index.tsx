@@ -1,10 +1,12 @@
 import React, {useState} from 'react';
-import {Text, View} from 'react-native';
+import {Text, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import Theme from '../../styles/themes';
 
 import MaterialCommunityIconList from '../../assets/materialCommunityIconList';
+
+import styles from './styles';
 
 const SelectIcon = () => {
   const [initalIconIndex, setInitalIconIndex] = useState(0);
@@ -17,7 +19,7 @@ const SelectIcon = () => {
       elementList.push(
         <Icon
           color={Theme.colors.primary}
-          size={Theme.spacing.unit * 5}
+          size={Theme.spacing.unit * 4}
           name={MaterialCommunityIconListNames[index]}
           onPress={() => {}}
         />,
@@ -26,31 +28,31 @@ const SelectIcon = () => {
     return elementList;
   };
 
-  console.log(initalIconIndex);
-
   return (
-    <View>
-      <View>
-        <Text>Selecione um icone</Text>
-        <View>
+    <View style={styles.container}>
+      <Text style={styles.labelStyle}>Selecione um icone</Text>
+      <View style={styles.iconListContainer}>
+        <TouchableOpacity
+          onPress={() => setInitalIconIndex(initalIconIndex - 4)}
+          disabled={initalIconIndex - 4 < 0}>
           <Icon
             color={Theme.colors.primary}
-            size={Theme.spacing.unit * 5}
+            size={Theme.spacing.unit * 8}
             name={'chevron-left'}
-            onPress={() => setInitalIconIndex(initalIconIndex - 4)}
-            disabled={initalIconIndex - 4 < 0}
           />
-          {renderIconList()}
+        </TouchableOpacity>
+        {renderIconList()}
+        <TouchableOpacity
+          onPress={() => setInitalIconIndex(initalIconIndex + 4)}
+          disabled={
+            initalIconIndex + 7 > MaterialCommunityIconListNames.length - 1
+          }>
           <Icon
             color={Theme.colors.primary}
-            size={Theme.spacing.unit * 5}
+            size={Theme.spacing.unit * 8}
             name={'chevron-right'}
-            onPress={() => setInitalIconIndex(initalIconIndex + 4)}
-            disabled={
-              initalIconIndex + 7 > MaterialCommunityIconListNames.length - 1
-            }
           />
-        </View>
+        </TouchableOpacity>
       </View>
     </View>
   );
