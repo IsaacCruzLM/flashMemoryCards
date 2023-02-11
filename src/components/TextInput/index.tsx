@@ -13,6 +13,7 @@ const TextInput = ({
   placeholder,
   value,
   style,
+  onBlur,
   ...otherProps
 }: TextInputProps) => {
   return (
@@ -24,6 +25,7 @@ const TextInput = ({
         placeholder={placeholder}
         value={value}
         theme={themes}
+        onBlur={onBlur}
         style={[styles.inputDefaultStyle, style]}
         {...otherProps}
       />

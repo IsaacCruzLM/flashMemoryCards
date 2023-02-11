@@ -1,6 +1,6 @@
 export interface TextInputProps {
   label: string;
-  setText: () => any;
+  setText: (arg0: string) => any;
   placeholder: string;
   value: string;
   style?: object;
