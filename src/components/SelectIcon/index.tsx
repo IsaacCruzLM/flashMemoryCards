@@ -7,8 +7,9 @@ import Theme from '../../styles/themes';
 import MaterialCommunityIconList from '../../assets/materialCommunityIconList';
 
 import styles from './styles';
+import {SelectIconProps} from './types';
 
-const SelectIcon = () => {
+const SelectIcon = ({onPress}: SelectIconProps) => {
   const [initalIconIndex, setInitalIconIndex] = useState(0);
   const [selectedIcon, setSelectedIcon] = useState('');
   const MaterialCommunityIconListNames = Object.keys(MaterialCommunityIconList);
@@ -19,9 +20,10 @@ const SelectIcon = () => {
       console.log(index);
       elementList.push(
         <TouchableOpacity
-          onPress={() =>
-            setSelectedIcon(MaterialCommunityIconListNames[index])
-          }>
+          onPress={() => {
+            onPress && onPress(MaterialCommunityIconListNames[index]);
+            setSelectedIcon(MaterialCommunityIconListNames[index]);
+          }}>
           <View
             style={
               selectedIcon === MaterialCommunityIconListNames[index]
