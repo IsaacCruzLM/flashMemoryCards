@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View} from 'react-native';
 
 import DefaultContainerView from '../../components/DefaultContainerView';
@@ -10,6 +10,9 @@ import {NewCategoryFormProps} from './types';
 import SelectIcon from '../../components/SelectIcon';
 
 const NewCategory = () => {
+  const [icon, setIcon] = useState('');
+  console.log(icon);
+
   return (
     <DefaultContainerView>
       <Form
@@ -34,7 +37,7 @@ const NewCategory = () => {
               placeholder={'Nome da categoria'}
               value={values.nome}
             />
-            <SelectIcon />
+            <SelectIcon onPress={iconLabel => setIcon(iconLabel)} />
           </View>
         )}
         initialValues={{nome: '', email: ''}}

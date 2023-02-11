@@ -17,25 +17,23 @@ const SelectIcon = ({onPress}: SelectIconProps) => {
   const renderIconList = () => {
     const elementList = [];
     for (let index = initalIconIndex; index < initalIconIndex + 4; index++) {
-      console.log(index);
       elementList.push(
         <TouchableOpacity
+          style={
+            selectedIcon === MaterialCommunityIconListNames[index]
+              ? styles.selectedIconContainer
+              : styles.defaultIconContainer
+          }
           onPress={() => {
             onPress && onPress(MaterialCommunityIconListNames[index]);
             setSelectedIcon(MaterialCommunityIconListNames[index]);
-          }}>
-          <View
-            style={
-              selectedIcon === MaterialCommunityIconListNames[index]
-                ? styles.selectedIconContainer
-                : styles.defaultIconContainer
-            }>
-            <Icon
-              color={Theme.colors.primary}
-              size={Theme.spacing.unit * 4}
-              name={MaterialCommunityIconListNames[index]}
-            />
-          </View>
+          }}
+          key={MaterialCommunityIconListNames[index]}>
+          <Icon
+            color={Theme.colors.primary}
+            size={Theme.spacing.unit * 4}
+            name={MaterialCommunityIconListNames[index]}
+          />
         </TouchableOpacity>,
       );
     }
