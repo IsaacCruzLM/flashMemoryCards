@@ -8,6 +8,7 @@ import Form from '../../components/Form';
 import styles from './styles';
 import {NewCategoryFormProps} from './types';
 import SelectIcon from '../../components/SelectIcon';
+import ColorPicker from '../../components/ColorPicker';
 
 const NewCategory = () => {
   const [icon, setIcon] = useState('');
@@ -38,6 +39,7 @@ const NewCategory = () => {
               value={values.nome}
             />
             <SelectIcon onPress={iconLabel => setIcon(iconLabel)} />
+            <ColorPicker />
           </View>
         )}
         initialValues={{nome: '', email: ''}}
