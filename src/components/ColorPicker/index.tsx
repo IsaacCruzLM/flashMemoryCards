@@ -6,16 +6,18 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import Theme from '../../styles/themes';
 
-import styles from './styles';
 import Button from '../Button';
-// import {SelectIconProps} from './types';
 
-const ColorPickerComponent = () => {
+import styles from './styles';
+import {ColorPickerProps} from './types';
+
+const ColorPickerComponent = ({iconName, onChangeColor}: ColorPickerProps) => {
   const [background, setBackground] = useState('#fff');
   const [visible, setVisible] = React.useState(false);
 
   const handleChangeComplete = (color: string) => {
     setBackground(color);
+    onChangeColor && onChangeColor(color);
   };
 
   const showDialog = () => setVisible(true);
@@ -37,13 +39,13 @@ const ColorPickerComponent = () => {
             />
           </TouchableOpacity>
         </View>
-        {background !== '#fff' && (
+        {background !== '#fff' && iconName && (
           <View style={styles.infoContainer}>
             <Text style={styles.labelStyle}>Preview</Text>
             <Icon
               color={background}
               size={Theme.spacing.unit * 8}
-              name={'chevron-right'}
+              name={iconName}
             />
           </View>
         )}
