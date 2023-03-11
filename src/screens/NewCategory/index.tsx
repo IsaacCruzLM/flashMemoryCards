@@ -39,7 +39,10 @@ const NewCategory = () => {
               value={values.nome}
             />
             <SelectIcon onPress={iconLabel => setIcon(iconLabel)} />
-            <ColorPicker />
+            <ColorPicker
+              iconName={icon}
+              onChangeColor={color => console.log(color)}
+            />
           </View>
         )}
         initialValues={{nome: '', email: ''}}
