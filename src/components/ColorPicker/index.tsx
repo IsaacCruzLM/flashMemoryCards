@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {TouchableOpacity, View} from 'react-native';
+import {TouchableOpacity, View, Text} from 'react-native';
 import ColorPicker from 'react-native-wheel-color-picker';
 import {Dialog, Portal} from 'react-native-paper';
 
@@ -21,23 +21,22 @@ const ColorPickerComponent = () => {
   return (
     <View style={styles.container}>
       <View>
+        <Text>Cor do Icone</Text>
         <TouchableOpacity onPress={() => showDialog()}>
           <View
-            style={{
-              width: 50,
-              height: 50,
-              borderRadius: 25,
-              borderWidth: 3,
-              borderColor: '#000',
-              backgroundColor: background,
-            }}
+            style={[
+              styles.colorPreview,
+              {
+                backgroundColor: background,
+              },
+            ]}
           />
         </TouchableOpacity>
       </View>
       <View>
         <Portal>
           <Dialog
-            style={{height: 380, padding: 8}}
+            style={styles.dialogContainer}
             visible={visible}
             onDismiss={hideDialog}>
             <Dialog.Content>
@@ -52,12 +51,7 @@ const ColorPickerComponent = () => {
                 />
               </View>
             </Dialog.Content>
-            <Dialog.Actions
-              style={{
-                flex: 1,
-                justifyContent: 'flex-end',
-                alignItems: 'flex-end',
-              }}>
+            <Dialog.Actions style={styles.dialogAction}>
               <Button onPress={() => hideDialog()} label="OK" />
             </Dialog.Actions>
           </Dialog>
