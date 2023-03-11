@@ -7,11 +7,12 @@ const styles = StyleSheet.create({
     marginBottom: themes.spacing.unit * 6,
   },
   colorPreview: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
+    width: themes.spacing.unit * 6,
+    height: themes.spacing.unit * 6,
+    borderRadius: themes.spacing.unit * 3,
     borderWidth: 3,
     borderColor: '#000',
+    margin: themes.spacing.unit,
   },
   dialogContainer: {
     height: 380,
@@ -21,6 +22,21 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-end',
     alignItems: 'flex-end',
+  },
+  labelStyle: {
+    fontSize: themes.typography.fontSizeTitle,
+    fontWeight: '700',
+    color: themes.colors.textColor2,
+    marginBottom: themes.spacing.unit,
+  },
+  contentContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+  },
+  infoContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

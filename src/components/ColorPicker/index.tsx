@@ -2,6 +2,9 @@ import React, {useState} from 'react';
 import {TouchableOpacity, View, Text} from 'react-native';
 import ColorPicker from 'react-native-wheel-color-picker';
 import {Dialog, Portal} from 'react-native-paper';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
+import Theme from '../../styles/themes';
 
 import styles from './styles';
 import Button from '../Button';
@@ -20,19 +23,32 @@ const ColorPickerComponent = () => {
 
   return (
     <View style={styles.container}>
-      <View>
-        <Text>Cor do Icone</Text>
-        <TouchableOpacity onPress={() => showDialog()}>
-          <View
-            style={[
-              styles.colorPreview,
-              {
-                backgroundColor: background,
-              },
-            ]}
-          />
-        </TouchableOpacity>
+      <View style={styles.contentContainer}>
+        <View style={styles.infoContainer}>
+          <Text style={styles.labelStyle}>Cor do Icone</Text>
+          <TouchableOpacity onPress={() => showDialog()}>
+            <View
+              style={[
+                styles.colorPreview,
+                {
+                  backgroundColor: background,
+                },
+              ]}
+            />
+          </TouchableOpacity>
+        </View>
+        {background !== '#fff' && (
+          <View style={styles.infoContainer}>
+            <Text style={styles.labelStyle}>Preview</Text>
+            <Icon
+              color={background}
+              size={Theme.spacing.unit * 8}
+              name={'chevron-right'}
+            />
+          </View>
+        )}
       </View>
+
       <View>
         <Portal>
           <Dialog
