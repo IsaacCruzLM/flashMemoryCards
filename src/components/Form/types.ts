@@ -10,3 +10,10 @@ export interface FormProps {
   ) => void | Promise<any>) &
     (Function | Promise<any>);
 }
+
+export interface DefaultFormProps {
+  handleChange: (field: string) => any;
+  handleBlur: (field: string) => any;
+  handleSubmit: (field: string) => any;
+  setFieldValue: (field: string, value: any) => void;
+}

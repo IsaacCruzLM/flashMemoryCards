@@ -1,8 +1,6 @@
-export interface NewCategoryFormProps {
-  handleChange: (field: string) => any;
-  handleBlur: (field: string) => any;
-  handleSubmit: (field: string) => any;
-  setFieldValue: (field: string, value: any) => void;
+import {DefaultFormProps} from '../../components/Form/types';
+
+export interface NewCategoryFormProps extends DefaultFormProps {
   values: formValues;
 }
 
