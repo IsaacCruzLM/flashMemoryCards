@@ -17,7 +17,25 @@ const Button = ({
 }: ButtonProps) => {
   const mode = modeParam || 'contained';
   const buttonColor = buttonColorParam || Theme.colors.dark;
-  const textColor = textColorParam || Theme.colors.background;
+  const textColor =
+    textColorParam || mode === 'contained'
+      ? Theme.colors.background
+      : Theme.colors.dark;
+
+  const getDefaultStyle = () => {
+    let defaultStyle;
+    switch (mode) {
+      case 'outlined':
+        defaultStyle = {borderWidth: 2, borderColor: Theme.colors.dark};
+        break;
+      case 'contained':
+      case 'text':
+      default:
+        defaultStyle = {};
+        break;
+    }
+    return defaultStyle;
+  };
 
   return (
     <PaperButton
@@ -25,9 +43,9 @@ const Button = ({
       icon={icon}
       mode={mode}
       onPress={onPress}
-      buttonColor={buttonColor}
+      buttonColor={mode === 'contained' ? buttonColor : ''}
       textColor={textColor}
-      style={[style]}>
+      style={[getDefaultStyle(), style]}>
       {label}
     </PaperButton>
   );

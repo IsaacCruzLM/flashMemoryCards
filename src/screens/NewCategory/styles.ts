@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import themes from '../../styles/themes';
 
 const styles = StyleSheet.create({
   container: {
@@ -9,6 +10,9 @@ const styles = StyleSheet.create({
   },
   formContainer: {
     width: '100%',
+  },
+  createButton: {
+    marginBottom: themes.spacing.unit * 3,
   },
 });
 
