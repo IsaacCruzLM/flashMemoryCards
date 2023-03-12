@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View} from 'react-native';
 
 import DefaultContainerView from '../../components/DefaultContainerView';
@@ -9,28 +9,20 @@ import styles from './styles';
 import {NewCategoryFormProps} from './types';
 import SelectIcon from '../../components/SelectIcon';
 import ColorPicker from '../../components/ColorPicker';
+import Button from '../../components/Button';
 
 const NewCategory = () => {
-  const [icon, setIcon] = useState('');
-  console.log(icon);
-
   return (
     <DefaultContainerView>
       <Form
         form={({
           handleChange,
           handleBlur,
+          setFieldValue,
           // handleSubmit,
           values,
         }: NewCategoryFormProps) => (
           <View style={styles.formContainer}>
-            <TextInput
-              label={'Email'}
-              setText={handleChange('email')}
-              onBlur={handleBlur('email')}
-              placeholder={'Email'}
-              value={values.email}
-            />
             <TextInput
               label={'Nome da categoria'}
               setText={handleChange('nome')}
@@ -38,14 +30,17 @@ const NewCategory = () => {
               placeholder={'Nome da categoria'}
               value={values.nome}
             />
-            <SelectIcon onPress={iconLabel => setIcon(iconLabel)} />
-            <ColorPicker
-              iconName={icon}
-              onChangeColor={color => console.log(color)}
+            <SelectIcon
+              onPress={iconLabel => setFieldValue('icon', iconLabel)}
             />
+            <ColorPicker
+              iconName={values.icon}
+              onChangeColor={color => setFieldValue('color', color)}
+            />
+            <Button label="Logar" onPress={() => console.log(values)} />
           </View>
         )}
-        initialValues={{nome: '', email: ''}}
+        initialValues={{nome: '', icon: '', color: ''}}
         onSubmit={values => console.log(values)}
       />
     </DefaultContainerView>
