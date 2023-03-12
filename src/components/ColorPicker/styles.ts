@@ -38,6 +38,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  iconStyle: {
+    margin: themes.spacing.unit,
+  },
 });
 
 export default styles;

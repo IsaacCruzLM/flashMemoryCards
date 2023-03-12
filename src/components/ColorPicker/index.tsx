@@ -44,8 +44,9 @@ const ColorPickerComponent = ({iconName, onChangeColor}: ColorPickerProps) => {
             <Text style={styles.labelStyle}>Preview</Text>
             <Icon
               color={background}
-              size={Theme.spacing.unit * 8}
+              size={Theme.spacing.unit * 6}
               name={iconName}
+              style={styles.iconStyle}
             />
           </View>
         )}
