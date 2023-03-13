@@ -53,7 +53,7 @@ const Routes = () => {
       ref={navigatorRef => {
         NavigationService.setTopLevelNavigator(navigatorRef);
       }}>
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator initialRouteName="NewCategory">
         <Stack.Screen
           name="InitialPage"
           component={InitialPage}
