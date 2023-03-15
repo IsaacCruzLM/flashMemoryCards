@@ -4,7 +4,7 @@ export interface NewCategoryFormProps extends DefaultFormProps {
   values: formValues;
 }
 
-interface formValues {
+export interface formValues {
   nome: string;
   icon: string;
   color: string;
