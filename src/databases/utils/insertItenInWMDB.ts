@@ -1,3 +1,4 @@
+import Model from '@nozbe/watermelondb/Model';
 import {snakeCase} from 'snake-case';
 import {database} from '..';
 
@@ -9,7 +10,7 @@ export default async function insertItenInWMDB(model: string, data: Object) {
       .create(wmdbModel => {
         const dataKeys = Object.keys(data);
         dataKeys.map((key: string) => {
-          (wmdbModel as any)[key] = (data as any)[key];
+          (wmdbModel as Model | any)[key] = (data as Object | any)[key];
         });
       });
     return itemCreated;
