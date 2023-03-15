@@ -27,7 +27,7 @@ const NewCategory = () => {
           handleBlur,
           setFieldValue,
           resetForm,
-          // handleSubmit,
+          handleSubmit,
           values,
         }: NewCategoryFormProps) => (
           <View style={styles.formContainer}>
@@ -47,7 +47,7 @@ const NewCategory = () => {
             />
             <Button
               label="Criar Categoria"
-              onPress={() => console.log(values)}
+              onPress={handleSubmit}
               style={styles.createButton}
             />
             <Button
