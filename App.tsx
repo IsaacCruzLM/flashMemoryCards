@@ -11,6 +11,7 @@
 import React from 'react';
 import DatabaseProvider from '@nozbe/watermelondb/DatabaseProvider';
 import {Provider as PaperProvider, useTheme} from 'react-native-paper';
+import {AlertNotificationRoot} from 'react-native-alert-notification';
 
 import {database} from './src/databases';
 import theme from './src/styles/themes';
@@ -22,9 +23,11 @@ export const useAppTheme = () => useTheme<AppTheme>();
 const App = () => {
   return (
     <PaperProvider theme={theme}>
-      <DatabaseProvider database={database}>
-        <Routes />
-      </DatabaseProvider>
+      <AlertNotificationRoot>
+        <DatabaseProvider database={database}>
+          <Routes />
+        </DatabaseProvider>
+      </AlertNotificationRoot>
     </PaperProvider>
   );
 };
