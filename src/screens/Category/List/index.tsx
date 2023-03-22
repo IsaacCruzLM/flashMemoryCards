@@ -1,12 +1,12 @@
 import React from 'react';
 
-import DefaultContainerView from '../../components/DefaultContainerView';
-import CategoryListCard from '../../components/CategoryListCard';
-import FloatingAddButton from '../../components/FloatingAddButton';
+import DefaultContainerView from '../../../components/DefaultContainerView';
+import CategoryListCard from '../../../components/CategoryListCard';
+import FloatingAddButton from '../../../components/FloatingAddButton';
 
 // import styles from './styles';
 
-const Categories = () => {
+const List = () => {
   return (
     <DefaultContainerView>
       <CategoryListCard
@@ -21,4 +21,4 @@ const Categories = () => {
   );
 };
 
-export default Categories;
+export default List;

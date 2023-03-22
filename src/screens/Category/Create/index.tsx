@@ -1,20 +1,20 @@
 import React from 'react';
 import {View} from 'react-native';
 
-import NavigationService from '../../navigation/NavigationService';
-import insertItenInWMDB from '../../databases/utils/insertItenInWMDB';
+import NavigationService from '../../../navigation/NavigationService';
+import insertItenInWMDB from '../../../databases/utils/insertItenInWMDB';
 
-import DefaultContainerView from '../../components/DefaultContainerView';
-import TextInput from '../../components/TextInput';
-import Form from '../../components/Form';
-import SelectIcon from '../../components/SelectIcon';
-import ColorPicker from '../../components/ColorPicker';
-import Button from '../../components/Button';
+import DefaultContainerView from '../../../components/DefaultContainerView';
+import TextInput from '../../../components/TextInput';
+import Form from '../../../components/Form';
+import SelectIcon from '../../../components/SelectIcon';
+import ColorPicker from '../../../components/ColorPicker';
+import Button from '../../../components/Button';
 
 import styles from './styles';
-import {NewCategoryFormProps, formValues} from './types';
+import {CreateFormProps, formValues} from './types';
 
-const NewCategory = () => {
+const Create = () => {
   const cancelAction = (resetForm: () => void) => {
     resetForm();
     NavigationService.navigate('Categories');
@@ -35,7 +35,7 @@ const NewCategory = () => {
           resetForm,
           handleSubmit,
           values,
-        }: NewCategoryFormProps) => (
+        }: CreateFormProps) => (
           <View style={styles.formContainer}>
             <TextInput
               label={'Nome da categoria'}
@@ -70,4 +70,4 @@ const NewCategory = () => {
   );
 };
 
-export default NewCategory;
+export default Create;

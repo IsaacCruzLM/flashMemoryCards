@@ -1,11 +1,11 @@
 import React from 'react';
 import {Text} from 'react-native';
 
-import DefaultContainerView from '../../components/DefaultContainerView';
+import DefaultContainerView from '../../../components/DefaultContainerView';
 
 // import styles from './styles';
 
-const Notes = () => {
+const List = () => {
   return (
     <DefaultContainerView>
       <Text>Página de Lista de Notas</Text>
@@ -13,4 +13,4 @@ const Notes = () => {
   );
 };
 
-export default Notes;
+export default List;

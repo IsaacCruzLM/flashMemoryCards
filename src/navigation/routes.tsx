@@ -13,9 +13,8 @@ import NavigationService from './NavigationService';
 import InitialPage from '../screens/InitialPage';
 import TutorialPage from '../screens/TutorialPage';
 import HomeScreen from '../screens/Home';
-import Categories from '../screens/Categories';
-import NewCategory from '../screens/NewCategory';
-import Notes from '../screens/Notes';
+import Category from '../screens/Category';
+import Note from '../screens/Note';
 
 import themes from '../styles/themes';
 
@@ -72,7 +71,7 @@ const Routes = () => {
         />
         <Stack.Screen
           name="Categories"
-          component={Categories}
+          component={Category.list}
           options={{
             title: 'Anotações para revisar',
             ...headerStyled,
@@ -88,7 +87,7 @@ const Routes = () => {
         />
         <Stack.Screen
           name="NewCategory"
-          component={NewCategory}
+          component={Category.create}
           options={{
             title: 'Nova Categoria',
             ...headerStyled,
@@ -96,7 +95,7 @@ const Routes = () => {
         />
         <Stack.Screen
           name="Notes"
-          component={Notes}
+          component={Note.list}
           options={{
             title: 'Categoria X',
             ...headerStyled,
