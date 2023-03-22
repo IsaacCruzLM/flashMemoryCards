@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {NavigationContainer} from '@react-navigation/native';
 import {
@@ -17,6 +18,7 @@ import Category from '../screens/Category';
 import Note from '../screens/Note';
 
 import themes from '../styles/themes';
+import sharedStyles from '../styles/sharedStyles';
 
 function Home() {
   return (
@@ -78,7 +80,7 @@ const Routes = () => {
             headerRight: () => (
               <Icon
                 color={themes.colors.background}
-                size={themes.spacing.unit * 3}
+                size={themes.spacing.unit * 3.5}
                 name="magnify"
                 onPress={() => {}}
               />
@@ -99,6 +101,24 @@ const Routes = () => {
           options={{
             title: 'Categoria X',
             ...headerStyled,
+            headerRight: () => (
+              <View style={sharedStyles.headerRightIconView}>
+                <Icon
+                  color={themes.colors.background}
+                  size={themes.spacing.unit * 3.5}
+                  name="filter-variant"
+                  onPress={() => {}}
+                  style={sharedStyles.headerIconWithMargin}
+                />
+                <Icon
+                  color={themes.colors.background}
+                  size={themes.spacing.unit * 3.5}
+                  name="magnify"
+                  onPress={() => {}}
+                  style={sharedStyles.headerIconWithMargin}
+                />
+              </View>
+            ),
           }}
         />
       </Stack.Navigator>
