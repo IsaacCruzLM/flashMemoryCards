@@ -15,6 +15,7 @@ import TutorialPage from '../screens/TutorialPage';
 import HomeScreen from '../screens/Home';
 import Categories from '../screens/Categories';
 import NewCategory from '../screens/NewCategory';
+import Notes from '../screens/Notes';
 
 import themes from '../styles/themes';
 
@@ -53,7 +54,7 @@ const Routes = () => {
       ref={navigatorRef => {
         NavigationService.setTopLevelNavigator(navigatorRef);
       }}>
-      <Stack.Navigator initialRouteName="NewCategory">
+      <Stack.Navigator initialRouteName="Notes">
         <Stack.Screen
           name="InitialPage"
           component={InitialPage}
@@ -90,6 +91,14 @@ const Routes = () => {
           component={NewCategory}
           options={{
             title: 'Nova Categoria',
+            ...headerStyled,
+          }}
+        />
+        <Stack.Screen
+          name="Notes"
+          component={Notes}
+          options={{
+            title: 'Categoria X',
             ...headerStyled,
           }}
         />
