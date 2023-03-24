@@ -17,8 +17,8 @@ const CategoryListCard = ({
   onPress,
 }: CategoryListCardProps) => {
   return (
-    <TouchableOpacity onPress={onPress}>
-      <View style={styles.container}>
+    <View style={styles.container}>
+      <TouchableOpacity onPress={onPress}>
         <Card style={styles.cardContainer}>
           <Card.Content style={styles.contentContainer}>
             <Icon
@@ -43,8 +43,8 @@ const CategoryListCard = ({
             <Text style={styles.notificationText}>{numberNotesToReview}</Text>
           </View>
         )}
-      </View>
-    </TouchableOpacity>
+      </TouchableOpacity>
+    </View>
   );
 };
 
