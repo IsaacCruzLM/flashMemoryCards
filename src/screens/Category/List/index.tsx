@@ -1,5 +1,7 @@
 import React from 'react';
 
+import NavigationService from '../../../navigation/NavigationService';
+
 import DefaultContainerView from '../../../components/DefaultContainerView';
 import CategoryListCard from '../../../components/CategoryListCard';
 import FloatingAddButton from '../../../components/FloatingAddButton';
@@ -15,6 +17,9 @@ const List = () => {
         numberOfNotes={16}
         icon={'cloud-download'}
         numberNotesToReview={2}
+        onPress={() => {
+          NavigationService.navigate('Notes', {categoryId: 'IdTeste'});
+        }}
       />
       <FloatingAddButton routeName="NewCategory" />
     </DefaultContainerView>
