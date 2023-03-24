@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useContext} from 'react';
 import {View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {NavigationContainer} from '@react-navigation/native';
@@ -8,14 +8,16 @@ import {
 } from '@react-navigation/native-stack';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 
-import SideMenu from '../components/SideMenu';
 import NavigationService from './NavigationService';
+import AppContext from '../context/appContext';
 
 import InitialPage from '../screens/InitialPage';
 import TutorialPage from '../screens/TutorialPage';
 import HomeScreen from '../screens/Home';
 import Category from '../screens/Category';
 import Note from '../screens/Note';
+
+import SideMenu from '../components/SideMenu';
 
 import themes from '../styles/themes';
 import sharedStyles from '../styles/sharedStyles';
@@ -50,6 +52,7 @@ const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
 const Routes = () => {
+  const {globalState} = useContext(AppContext);
   return (
     <NavigationContainer
       ref={navigatorRef => {
@@ -99,7 +102,7 @@ const Routes = () => {
           name="Notes"
           component={Note.list}
           options={{
-            title: 'Categoria X',
+            title: `${globalState.currentCategoryName || ''}`,
             ...headerStyled,
             headerRight: () => (
               <View style={sharedStyles.headerRightIconView}>

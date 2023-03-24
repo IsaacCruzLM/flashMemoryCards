@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
-import AppContext from '../../../context/appContext';
 
+import AppContext from '../../../context/appContext';
 import NavigationService from '../../../navigation/NavigationService';
 
 import DefaultContainerView from '../../../components/DefaultContainerView';

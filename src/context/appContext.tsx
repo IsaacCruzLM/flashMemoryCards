@@ -1,12 +1,18 @@
 import {createContext} from 'react';
 
+interface globalStateType {
+  currentCategoryName: string;
+}
+
 interface ContextType {
-  globalState: object;
+  globalState: globalStateType;
   setCurrentCategoryName: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const AppContext = createContext<ContextType>({
-  globalState: {},
+  globalState: {
+    currentCategoryName: '',
+  },
   setCurrentCategoryName: () => {},
 });
 
