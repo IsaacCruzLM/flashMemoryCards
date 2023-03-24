@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import AppContext from '../../../context/appContext';
 
 import NavigationService from '../../../navigation/NavigationService';
 
@@ -9,6 +10,8 @@ import FloatingAddButton from '../../../components/FloatingAddButton';
 // import styles from './styles';
 
 const List = () => {
+  const {setCurrentCategoryName} = useContext(AppContext);
+
   return (
     <DefaultContainerView>
       <CategoryListCard
@@ -18,6 +21,7 @@ const List = () => {
         icon={'cloud-download'}
         numberNotesToReview={2}
         onPress={() => {
+          setCurrentCategoryName('Categoria 1');
           NavigationService.navigate('Notes', {categoryId: 'IdTeste'});
         }}
       />
