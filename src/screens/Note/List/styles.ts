@@ -14,6 +14,13 @@ const styles = StyleSheet.create({
   createButton: {
     marginBottom: themes.spacing.unit * 3,
   },
+  listHeader: {
+    fontWeight: '700',
+    fontFamily: themes.fonts.medium.fontFamily,
+    fontSize: themes.typography.fontSizeLargeTitle,
+    color: themes.colors.primary,
+    marginBottom: themes.spacing.unit * 2,
+  },
 });
 
 export default styles;
