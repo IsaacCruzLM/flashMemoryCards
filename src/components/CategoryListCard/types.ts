@@ -4,4 +4,5 @@ export interface CategoryListCardProps {
   numberOfNotes: number;
   icon: string;
   numberNotesToReview?: number;
+  onPress: () => void;
 }

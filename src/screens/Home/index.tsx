@@ -1,14 +1,14 @@
 import React from 'react';
 
-import ListCard from '../../components/ListCard';
 import DefaultContainerView from '../../components/DefaultContainerView';
+import NoteListCard from '../../components/NoteListCard';
 
 // import styles from './styles';
 
 const Home = () => {
   return (
     <DefaultContainerView>
-      <ListCard
+      <NoteListCard
         title={'Titulo da anotação'}
         creationDate={'24/04/1997'}
         lastRevisionDate={'24/04/1998'}

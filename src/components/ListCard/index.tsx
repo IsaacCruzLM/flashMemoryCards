@@ -2,22 +2,17 @@ import * as React from 'react';
 import {View} from 'react-native';
 import {Card} from 'react-native-paper';
 
-import InlineField from '../InlineField';
-import InlineFieldChips from '../InlineFieldChips';
-
 import styles from './styles';
 import {ListCardProps} from './types';
 
 const ListCard = ({
   title,
-  creationDate,
-  lastRevisionDate,
-  noteType,
-  category,
-  subjects,
+  children,
+  containerStyle = {},
+  ...props
 }: ListCardProps) => {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, containerStyle]}>
       <Card style={styles.cardContainer}>
         <Card.Title
           title={title}
@@ -25,11 +20,22 @@ const ListCard = ({
           style={styles.headerBackground}
         />
         <Card.Content style={styles.contentBackground}>
-          <InlineField label="Data de criação" content={creationDate} />
-          <InlineField label="Ultima revisão" content={lastRevisionDate} />
-          <InlineField label="Tipo de anotação" content={noteType} />
-          <InlineField label="Categoria" content={category} />
-          <InlineFieldChips label="Assuntos" arrayOfContents={subjects} />
+          {children && children.length
+            ? children.map((child: Element, index: number) =>
+                React.isValidElement(child)
+                  ? React.cloneElement(child, {
+                      key: index,
+                      ...(props as object),
+                      ...(child.props as object),
+                    })
+                  : null,
+              )
+            : React.isValidElement(children)
+            ? React.cloneElement(children, {
+                ...(props as object),
+                ...(children.props as object),
+              })
+            : null}
         </Card.Content>
       </Card>
     </View>

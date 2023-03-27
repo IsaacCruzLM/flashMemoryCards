@@ -16,19 +16,22 @@ import {AlertNotificationRoot} from 'react-native-alert-notification';
 import {database} from './src/databases';
 import theme from './src/styles/themes';
 import Routes from './src/navigation/routes';
+import ContextProvider from './src/context/appProvider';
 
 export type AppTheme = typeof theme;
 export const useAppTheme = () => useTheme<AppTheme>();
 
 const App = () => {
   return (
-    <PaperProvider theme={theme}>
-      <AlertNotificationRoot>
-        <DatabaseProvider database={database}>
-          <Routes />
-        </DatabaseProvider>
-      </AlertNotificationRoot>
-    </PaperProvider>
+    <ContextProvider>
+      <PaperProvider theme={theme}>
+        <AlertNotificationRoot>
+          <DatabaseProvider database={database}>
+            <Routes />
+          </DatabaseProvider>
+        </AlertNotificationRoot>
+      </PaperProvider>
+    </ContextProvider>
   );
 };
 

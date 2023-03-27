@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React, {useContext} from 'react';
+import {View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {NavigationContainer} from '@react-navigation/native';
 import {
@@ -7,16 +8,19 @@ import {
 } from '@react-navigation/native-stack';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 
-import SideMenu from '../components/SideMenu';
 import NavigationService from './NavigationService';
+import AppContext from '../context/appContext';
 
 import InitialPage from '../screens/InitialPage';
 import TutorialPage from '../screens/TutorialPage';
 import HomeScreen from '../screens/Home';
-import Categories from '../screens/Categories';
-import NewCategory from '../screens/NewCategory';
+import Category from '../screens/Category';
+import Note from '../screens/Note';
+
+import SideMenu from '../components/SideMenu';
 
 import themes from '../styles/themes';
+import sharedStyles from '../styles/sharedStyles';
 
 function Home() {
   return (
@@ -48,12 +52,13 @@ const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
 const Routes = () => {
+  const {globalState} = useContext(AppContext);
   return (
     <NavigationContainer
       ref={navigatorRef => {
         NavigationService.setTopLevelNavigator(navigatorRef);
       }}>
-      <Stack.Navigator initialRouteName="NewCategory">
+      <Stack.Navigator initialRouteName="Home">
         <Stack.Screen
           name="InitialPage"
           component={InitialPage}
@@ -71,14 +76,14 @@ const Routes = () => {
         />
         <Stack.Screen
           name="Categories"
-          component={Categories}
+          component={Category.list}
           options={{
             title: 'Anotações para revisar',
             ...headerStyled,
             headerRight: () => (
               <Icon
                 color={themes.colors.background}
-                size={themes.spacing.unit * 3}
+                size={themes.spacing.unit * 3.5}
                 name="magnify"
                 onPress={() => {}}
               />
@@ -87,10 +92,36 @@ const Routes = () => {
         />
         <Stack.Screen
           name="NewCategory"
-          component={NewCategory}
+          component={Category.create}
           options={{
             title: 'Nova Categoria',
             ...headerStyled,
+          }}
+        />
+        <Stack.Screen
+          name="Notes"
+          component={Note.list}
+          options={{
+            title: `${globalState.currentCategoryName || ''}`,
+            ...headerStyled,
+            headerRight: () => (
+              <View style={sharedStyles.headerRightIconView}>
+                <Icon
+                  color={themes.colors.background}
+                  size={themes.spacing.unit * 3.5}
+                  name="filter-variant"
+                  onPress={() => {}}
+                  style={sharedStyles.headerIconWithMargin}
+                />
+                <Icon
+                  color={themes.colors.background}
+                  size={themes.spacing.unit * 3.5}
+                  name="magnify"
+                  onPress={() => {}}
+                  style={sharedStyles.headerIconWithMargin}
+                />
+              </View>
+            ),
           }}
         />
       </Stack.Navigator>

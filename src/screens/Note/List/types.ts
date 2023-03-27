@@ -1,4 +1,4 @@
-import {DefaultFormProps} from '../../components/Form/types';
+import {DefaultFormProps} from '../../../components/Form/types';
 
 export interface NewCategoryFormProps extends DefaultFormProps {
   values: formValues;
