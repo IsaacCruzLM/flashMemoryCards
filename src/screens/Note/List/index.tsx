@@ -77,12 +77,13 @@ const List = () => {
             noteType={item.noteType}
             category={item.category}
             subjects={item.subjects}
+            containerStyle={styles.cardCustomStyle}
           />
         )}
         renderSectionHeader={({section: {title}}) => (
           <Text style={styles.listHeader}>{title}</Text>
         )}
-        style={{flex: 1, width: '100%'}}
+        style={styles.sectionList}
       />
     </DefaultContainerView>
   );

@@ -21,6 +21,13 @@ const styles = StyleSheet.create({
     color: themes.colors.primary,
     marginBottom: themes.spacing.unit * 2,
   },
+  sectionList: {
+    flex: 1,
+    width: '100%',
+  },
+  cardCustomStyle: {
+    marginBottom: themes.spacing.unit * 1.5,
+  },
 });
 
 export default styles;
