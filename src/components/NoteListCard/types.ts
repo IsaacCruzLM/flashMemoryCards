@@ -7,4 +7,5 @@ export interface NoteListCardProps {
   noteType: string;
   category: string;
   subjects: contentProps[];
+  containerStyle?: object;
 }
