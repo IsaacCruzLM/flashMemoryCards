@@ -3,6 +3,7 @@ import {Text, SectionList} from 'react-native';
 
 import DefaultContainerView from '../../../components/DefaultContainerView';
 import NoteListCard from '../../../components/NoteListCard';
+import FloatingAddButton from '../../../components/FloatingAddButton';
 
 import styles from './styles';
 
@@ -85,6 +86,7 @@ const List = () => {
         )}
         style={styles.sectionList}
       />
+      <FloatingAddButton routeName="NewNote" />
     </DefaultContainerView>
   );
 };
