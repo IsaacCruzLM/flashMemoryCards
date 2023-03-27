@@ -5,9 +5,14 @@ import {Card} from 'react-native-paper';
 import styles from './styles';
 import {ListCardProps} from './types';
 
-const ListCard = ({title, children, ...props}: ListCardProps) => {
+const ListCard = ({
+  title,
+  children,
+  containerStyle = {},
+  ...props
+}: ListCardProps) => {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, containerStyle]}>
       <Card style={styles.cardContainer}>
         <Card.Title
           title={title}
