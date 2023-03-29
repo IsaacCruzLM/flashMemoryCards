@@ -5,7 +5,7 @@ export interface CreateFormProps extends DefaultFormProps {
 }
 
 export interface formValues {
-  nome: string;
+  name: string;
   icon: string;
   color: string;
 }
