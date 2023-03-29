@@ -16,4 +16,5 @@ export const database = new Database({
   modelClasses: [CategoryModel, NoteModel, NoteSubjectModel, SubjectModel],
 });
 
-console.log(database);
+export const logDatabase = () => console.log(database);
+// logDatabase();

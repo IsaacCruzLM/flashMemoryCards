@@ -21,7 +21,7 @@ const Create = () => {
   };
 
   const createAction = async (values: formValues | Object) => {
-    await insertItenInWMDB('Subjects', values);
+    await insertItenInWMDB('categories', values);
     NavigationService.navigate('Categories');
   };
 
