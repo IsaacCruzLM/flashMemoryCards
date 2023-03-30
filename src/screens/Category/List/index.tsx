@@ -1,4 +1,7 @@
 import React, {useContext} from 'react';
+import withObservables from '@nozbe/with-observables';
+import {withDatabase} from '@nozbe/watermelondb/DatabaseProvider';
+import {compose} from 'recompose';
 
 import AppContext from '../../../context/appContext';
 import NavigationService from '../../../navigation/NavigationService';
@@ -9,9 +12,9 @@ import FloatingAddButton from '../../../components/FloatingAddButton';
 
 // import styles from './styles';
 
-const List = () => {
+const List = ({categories}: any) => {
   const {setCurrentCategoryName} = useContext(AppContext);
-
+  console.log(categories);
   return (
     <DefaultContainerView>
       <CategoryListCard
@@ -30,4 +33,9 @@ const List = () => {
   );
 };
 
-export default List;
+export default compose(
+  withDatabase,
+  withObservables([], ({database}: any) => ({
+    categories: database.get('categories').query(),
+  })),
+)(List);
