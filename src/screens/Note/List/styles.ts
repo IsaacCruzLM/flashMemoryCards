@@ -28,6 +28,10 @@ const styles = StyleSheet.create({
   cardCustomStyle: {
     marginBottom: themes.spacing.unit * 1.5,
   },
+  listContainer: {
+    paddingVertical: themes.spacing.unit * 3,
+    paddingHorizontal: themes.spacing.unit * 2 + 4,
+  },
 });
 
 export default styles;

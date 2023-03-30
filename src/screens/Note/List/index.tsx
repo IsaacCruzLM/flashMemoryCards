@@ -1,7 +1,6 @@
 import React from 'react';
 import {Text, SectionList} from 'react-native';
 
-import DefaultContainerView from '../../../components/DefaultContainerView';
 import NoteListCard from '../../../components/NoteListCard';
 import FloatingAddButton from '../../../components/FloatingAddButton';
 
@@ -66,9 +65,10 @@ const DATA_MOCK = [
 
 const List = () => {
   return (
-    <DefaultContainerView>
+    <>
       <SectionList
         sections={DATA_MOCK}
+        contentContainerStyle={styles.listContainer}
         keyExtractor={(item, index) => item.title + index}
         renderItem={({item}) => (
           <NoteListCard
@@ -87,7 +87,7 @@ const List = () => {
         style={styles.sectionList}
       />
       <FloatingAddButton routeName="NewNote" />
-    </DefaultContainerView>
+    </>
   );
 };
 
