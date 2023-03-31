@@ -13,16 +13,18 @@ const CategoryListCard = ({
   creationDate,
   numberOfNotes,
   icon,
+  iconColor,
   numberNotesToReview = 0,
   onPress,
+  containerStyle,
 }: CategoryListCardProps) => {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, containerStyle]}>
       <TouchableOpacity onPress={onPress}>
         <Card style={styles.cardContainer}>
           <Card.Content style={styles.contentContainer}>
             <Icon
-              color={themes.colors.primary}
+              color={iconColor || themes.colors.primary}
               size={themes.spacing.unit * 5}
               name={icon}
             />

@@ -2,7 +2,7 @@ import {Database} from '@nozbe/watermelondb';
 import SQLiteAdapter from '@nozbe/watermelondb/adapters/sqlite';
 
 import {schemas} from './schemas';
-import {ModuleModel} from './models/moduleModel';
+import {CategoryModel} from './models/categoryModel';
 import {NoteModel} from './models/noteModel';
 import {NoteSubjectModel} from './models/noteSubjectModel';
 import {SubjectModel} from './models/subjectModel';
@@ -13,7 +13,8 @@ const adapter = new SQLiteAdapter({
 
 export const database = new Database({
   adapter,
-  modelClasses: [ModuleModel, NoteModel, NoteSubjectModel, SubjectModel],
+  modelClasses: [CategoryModel, NoteModel, NoteSubjectModel, SubjectModel],
 });
 
-console.log(database);
+export const logDatabase = () => console.log(database);
+// logDatabase();

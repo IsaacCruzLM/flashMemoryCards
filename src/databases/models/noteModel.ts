@@ -17,6 +17,6 @@ export class NoteModel extends Model {
   @field('initial_date')
   initialDate!: string;
 
-  @relation('modules', 'module_id')
-  module!: string;
+  @relation('categories', 'category_id')
+  category!: string;
 }

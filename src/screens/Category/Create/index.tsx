@@ -21,7 +21,7 @@ const Create = () => {
   };
 
   const createAction = async (values: formValues | Object) => {
-    await insertItenInWMDB('Subjects', values);
+    await insertItenInWMDB('categories', {...values, createdAt: new Date()});
     NavigationService.navigate('Categories');
   };
 
@@ -39,10 +39,10 @@ const Create = () => {
           <View style={styles.formContainer}>
             <TextInput
               label={'Nome da categoria'}
-              setText={handleChange('nome')}
-              onBlur={handleBlur('nome')}
+              setText={handleChange('name')}
+              onBlur={handleBlur('name')}
               placeholder={'Nome da categoria'}
-              value={values.nome}
+              value={values.name}
             />
             <SelectIcon
               onPress={iconLabel => setFieldValue('icon', iconLabel)}
@@ -63,7 +63,7 @@ const Create = () => {
             />
           </View>
         )}
-        initialValues={{nome: '', icon: '', color: ''}}
+        initialValues={{name: '', icon: '', color: ''}}
         onSubmit={values => createAction(values)}
       />
     </DefaultContainerView>

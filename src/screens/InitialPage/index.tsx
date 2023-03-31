@@ -6,7 +6,7 @@ import Animated, {
   interpolate,
   Extrapolate,
   useSharedValue,
-  withSequence,
+  withRepeat,
 } from 'react-native-reanimated';
 
 import NavigationService from '../../navigation/NavigationService';
@@ -33,10 +33,7 @@ const InitialPage = () => {
   });
 
   useEffect(() => {
-    logoPosition.value = withSequence(
-      withTiming(10, {duration: 750}),
-      withTiming(0, {duration: 750}),
-    );
+    logoPosition.value = withRepeat(withTiming(10, {duration: 1500}), -1, true);
   });
 
   const titleStyle = useAnimatedStyle(() => {
