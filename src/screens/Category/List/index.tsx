@@ -38,6 +38,7 @@ const List = ({categories}: any) => {
             creationDate={item.createdAt.toLocaleDateString('pt-br')}
             numberOfNotes={16}
             icon={item.icon}
+            iconColor={item.color}
             numberNotesToReview={2}
             onPress={() => {
               setCurrentCategoryName(item.name);
