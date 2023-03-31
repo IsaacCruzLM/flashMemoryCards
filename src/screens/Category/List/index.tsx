@@ -43,6 +43,7 @@ const List = ({categories}: any) => {
               setCurrentCategoryName(item.name);
               NavigationService.navigate('Notes', {categoryId: item.id});
             }}
+            containerStyle={styles.itemStyle}
           />
         )}
         style={styles.flatList}

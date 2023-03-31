@@ -16,6 +16,9 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
   },
+  itemStyle: {
+    marginBottom: themes.spacing.unit * 3,
+  },
 });
 
 export default styles;
