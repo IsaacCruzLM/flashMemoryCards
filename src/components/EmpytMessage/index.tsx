@@ -1,8 +1,13 @@
-import * as React from 'react';
+import React, {useEffect} from 'react';
 import {Text, View} from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Animated, {
+  withTiming,
+  useAnimatedStyle,
+  useSharedValue,
+  withRepeat,
+} from 'react-native-reanimated';
 
-import themes from '../../styles/themes';
+import LogoSvg from '../../assets/logo.svg';
 
 import styles from './styles';
 import {EmpytMessageProps} from './types';
@@ -14,14 +19,23 @@ const EmpytMessage = ({
   actionLabel,
   onPressAction,
 }: EmpytMessageProps) => {
+  const logoPosition = useSharedValue(0);
+
+  useEffect(() => {
+    logoPosition.value = withRepeat(withTiming(20, {duration: 2000}), -1, true);
+  });
+
+  const logoViewStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{translateY: logoPosition.value}],
+    };
+  });
+
   return (
     <View style={[styles.container, customStyle]}>
-      <Icon
-        color={themes.colors.primary}
-        size={themes.spacing.unit * 12}
-        name={'sleep'}
-        style={styles.icon}
-      />
+      <Animated.View style={[styles.icon, logoViewStyle]}>
+        <LogoSvg height={93} width={108} />
+      </Animated.View>
       <Text style={styles.title}>Opsss!</Text>
       <Text style={styles.message}>{message}</Text>
       {actionLabel && onPressAction && (

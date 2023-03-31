@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   icon: {
-    marginBottom: themes.spacing.unit * 5,
+    marginBottom: themes.spacing.unit * 8,
   },
   title: {
     fontWeight: '700',
