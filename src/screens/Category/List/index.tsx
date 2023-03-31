@@ -15,9 +15,8 @@ import styles from './styles';
 
 const List = ({categories}: any) => {
   const {setCurrentCategoryName} = useContext(AppContext);
-  console.log(categories);
 
-  if (true) {
+  if (categories.length <= 0) {
     return (
       <EmpytMessage
         message={'Nenhuma Categoria Encontrada'}
