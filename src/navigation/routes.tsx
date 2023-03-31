@@ -78,7 +78,7 @@ const Routes = () => {
           name="Categories"
           component={Category.list}
           options={{
-            title: 'Anotações para revisar',
+            title: 'Categorias',
             ...headerStyled,
             headerRight: () => (
               <Icon
