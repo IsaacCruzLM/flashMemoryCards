@@ -9,12 +9,24 @@ import NavigationService from '../../../navigation/NavigationService';
 
 import CategoryListCard from '../../../components/CategoryListCard';
 import FloatingAddButton from '../../../components/FloatingAddButton';
+import EmpytMessage from '../../../components/EmpytMessage';
 
 import styles from './styles';
 
 const List = ({categories}: any) => {
   const {setCurrentCategoryName} = useContext(AppContext);
   console.log(categories);
+
+  if (true) {
+    return (
+      <EmpytMessage
+        message={'Nenhuma Categoria Encontrada'}
+        actionLabel={'Crie uma nova categoria'}
+        onPressAction={() => NavigationService.navigate('NewCategory')}
+      />
+    );
+  }
+
   return (
     <>
       <FlatList
