@@ -15,5 +15,9 @@ export const categorySchema = tableSchema({
       name: 'color',
       type: 'string',
     },
+    {
+      name: 'created_at',
+      type: 'number',
+    },
   ],
 });

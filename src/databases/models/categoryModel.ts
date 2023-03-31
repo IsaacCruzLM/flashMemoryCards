@@ -1,5 +1,5 @@
 import {Model} from '@nozbe/watermelondb';
-import {field} from '@nozbe/watermelondb/decorators';
+import {field, date} from '@nozbe/watermelondb/decorators';
 
 export class CategoryModel extends Model {
   static table = 'categories';
@@ -15,4 +15,7 @@ export class CategoryModel extends Model {
 
   @field('color')
   color!: string;
+
+  @date('created_at')
+  createdAt!: number;
 }

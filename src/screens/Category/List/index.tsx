@@ -35,7 +35,7 @@ const List = ({categories}: any) => {
         renderItem={({item}) => (
           <CategoryListCard
             title={item.name}
-            creationDate={'24/04/1997'}
+            creationDate={item.createdAt.toLocaleDateString('pt-br')}
             numberOfNotes={16}
             icon={item.icon}
             numberNotesToReview={2}
