@@ -22,7 +22,7 @@ const EmpytMessage = ({
   const logoPosition = useSharedValue(0);
 
   useEffect(() => {
-    logoPosition.value = withRepeat(withTiming(20, {duration: 2000}), -1, true);
+    logoPosition.value = withRepeat(withTiming(10, {duration: 2000}), -1, true);
   });
 
   const logoViewStyle = useAnimatedStyle(() => {
