@@ -11,8 +11,12 @@ import Button from '../Button';
 import styles from './styles';
 import {ColorPickerProps} from './types';
 
-const ColorPickerComponent = ({iconName, onChangeColor}: ColorPickerProps) => {
-  const [background, setBackground] = useState('#fff');
+const ColorPickerComponent = ({
+  value = '#fff',
+  iconName,
+  onChangeColor,
+}: ColorPickerProps) => {
+  const [background, setBackground] = useState(value);
   const [visible, setVisible] = React.useState(false);
 
   const handleChangeComplete = (color: string) => {
