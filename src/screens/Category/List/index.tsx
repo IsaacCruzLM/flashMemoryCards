@@ -44,7 +44,10 @@ const List = ({categories}: any) => {
               numberNotesToReview={2}
               onPress={() => {
                 setCurrentCategory({name, id});
-                NavigationService.navigate('Notes', {categoryId: id});
+                NavigationService.navigate('Notes', {
+                  categoryName: name,
+                  categoryId: id,
+                });
               }}
               containerStyle={styles.itemStyle}
             />
