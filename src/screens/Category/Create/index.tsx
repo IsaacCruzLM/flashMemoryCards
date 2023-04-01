@@ -4,6 +4,7 @@ import withObservables from '@nozbe/with-observables';
 import {withDatabase} from '@nozbe/watermelondb/DatabaseProvider';
 import {compose} from 'recompose';
 import get from 'lodash/get';
+import {of as $of} from 'rxjs';
 
 import NavigationService from '../../../navigation/NavigationService';
 import insertItenInWMDB from '../../../databases/utils/insertItenInWMDB';
@@ -16,9 +17,12 @@ import ColorPicker from '../../../components/ColorPicker';
 import Button from '../../../components/Button';
 
 import styles from './styles';
-import {CreateFormProps, formValues} from './types';
+import {CreateProps, CreateFormProps, formValues} from './types';
 
-const Create = ({route, category}) => {
+const Create: React.FunctionComponent<any> = ({
+  route,
+  category,
+}: CreateProps) => {
   const isEdit = get(route, 'params.isEdit', false);
 
   const cancelAction = (resetForm: () => void) => {
@@ -91,7 +95,7 @@ export default compose(
     return {
       category: isEdit
         ? database.get('categories').findAndObserve(categoryId)
-        : {},
+        : $of(null),
     };
   }),
 )(Create);
