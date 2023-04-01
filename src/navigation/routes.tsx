@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {View} from 'react-native';
+import {TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {NavigationContainer} from '@react-navigation/native';
 import {
@@ -102,24 +102,34 @@ const Routes = () => {
           name="Notes"
           component={Note.list}
           options={{
-            title: `${globalState.currentCategoryName || ''}`,
+            title: `${globalState.currentCategory.name || ''}`,
             ...headerStyled,
             headerRight: () => (
               <View style={sharedStyles.headerRightIconView}>
-                <Icon
-                  color={themes.colors.background}
-                  size={themes.spacing.unit * 3.5}
-                  name="filter-variant"
-                  onPress={() => {}}
-                  style={sharedStyles.headerIconWithMargin}
-                />
-                <Icon
-                  color={themes.colors.background}
-                  size={themes.spacing.unit * 3.5}
-                  name="magnify"
-                  onPress={() => {}}
-                  style={sharedStyles.headerIconWithMargin}
-                />
+                <TouchableOpacity onPress={() => {}}>
+                  <Icon
+                    color={themes.colors.background}
+                    size={themes.spacing.unit * 3.5}
+                    name="square-edit-outline"
+                    style={sharedStyles.headerIconWithMargin}
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => {}}>
+                  <Icon
+                    color={themes.colors.background}
+                    size={themes.spacing.unit * 3.5}
+                    name="filter-variant"
+                    style={sharedStyles.headerIconWithMargin}
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => {}}>
+                  <Icon
+                    color={themes.colors.background}
+                    size={themes.spacing.unit * 3.5}
+                    name="magnify"
+                    style={sharedStyles.headerIconWithMargin}
+                  />
+                </TouchableOpacity>
               </View>
             ),
           }}
