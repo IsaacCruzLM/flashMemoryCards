@@ -106,7 +106,13 @@ const Routes = () => {
             ...headerStyled,
             headerRight: () => (
               <View style={sharedStyles.headerRightIconView}>
-                <TouchableOpacity onPress={() => {}}>
+                <TouchableOpacity
+                  onPress={() =>
+                    NavigationService.navigate('NewCategory', {
+                      categoryId: globalState.currentCategory.id || '',
+                      isEdit: true,
+                    })
+                  }>
                   <Icon
                     color={themes.colors.background}
                     size={themes.spacing.unit * 3.5}

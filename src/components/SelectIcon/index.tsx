@@ -9,10 +9,22 @@ import MaterialCommunityIconList from '../../assets/materialCommunityIconList';
 import styles from './styles';
 import {SelectIconProps} from './types';
 
-const SelectIcon = ({onPress}: SelectIconProps) => {
-  const [initalIconIndex, setInitalIconIndex] = useState(0);
-  const [selectedIcon, setSelectedIcon] = useState('');
-  const MaterialCommunityIconListNames = Object.keys(MaterialCommunityIconList);
+const MaterialCommunityIconListNames = Object.keys(MaterialCommunityIconList);
+const getInitialIndex = (value: string) => {
+  let initialIndex = 0;
+  const iconIndex = MaterialCommunityIconListNames.indexOf(value);
+  for (let index = initialIndex; index < iconIndex; index += 4) {
+    initialIndex = index;
+  }
+
+  return initialIndex;
+};
+
+const SelectIcon = ({value = '', onPress}: SelectIconProps) => {
+  const [initalIconIndex, setInitalIconIndex] = useState(
+    getInitialIndex(value),
+  );
+  const [selectedIcon, setSelectedIcon] = useState(value);
 
   const renderIconList = () => {
     const elementList = [];
