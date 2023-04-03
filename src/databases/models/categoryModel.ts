@@ -19,3 +19,10 @@ export class CategoryModel extends Model {
   @date('created_at')
   createdAt!: number;
 }
+
+export interface CategoryModelType {
+  name: string;
+  icon: string;
+  color: string;
+  createdAt: number;
+}

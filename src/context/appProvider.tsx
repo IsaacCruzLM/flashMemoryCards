@@ -6,15 +6,18 @@ export interface ProviderProps {
 }
 
 const ContextProvider = ({children}: ProviderProps | any) => {
-  const [currentCategoryName, setCurrentCategoryName] = useState('');
+  const [currentCategory, setCurrentCategory] = useState({
+    name: '',
+    id: '',
+  });
 
   const globalState = {
-    currentCategoryName,
+    currentCategory,
   };
 
   const contextValue = {
     globalState,
-    setCurrentCategoryName,
+    setCurrentCategory,
   };
 
   return (

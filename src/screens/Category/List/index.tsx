@@ -14,7 +14,7 @@ import EmpytMessage from '../../../components/EmpytMessage';
 import styles from './styles';
 
 const List = ({categories}: any) => {
-  const {setCurrentCategoryName} = useContext(AppContext);
+  const {setCurrentCategory} = useContext(AppContext);
 
   if (categories.length <= 0) {
     return (
@@ -31,22 +31,28 @@ const List = ({categories}: any) => {
       <FlatList
         data={categories}
         contentContainerStyle={styles.listContainer}
-        keyExtractor={(item, index) => item.title + index}
-        renderItem={({item}) => (
-          <CategoryListCard
-            title={item.name}
-            creationDate={item.createdAt.toLocaleDateString('pt-br')}
-            numberOfNotes={16}
-            icon={item.icon}
-            iconColor={item.color}
-            numberNotesToReview={2}
-            onPress={() => {
-              setCurrentCategoryName(item.name);
-              NavigationService.navigate('Notes', {categoryId: item.id});
-            }}
-            containerStyle={styles.itemStyle}
-          />
-        )}
+        keyExtractor={item => item.id}
+        renderItem={({item}) => {
+          const {id, name, createdAt, icon, color} = item;
+          return (
+            <CategoryListCard
+              title={name}
+              creationDate={createdAt.toLocaleDateString('pt-br')}
+              numberOfNotes={16}
+              icon={icon}
+              iconColor={color}
+              numberNotesToReview={2}
+              onPress={() => {
+                setCurrentCategory({name, id});
+                NavigationService.navigate('Notes', {
+                  categoryName: name,
+                  categoryId: id,
+                });
+              }}
+              containerStyle={styles.itemStyle}
+            />
+          );
+        }}
         style={styles.flatList}
       />
       <FloatingAddButton routeName="NewCategory" />
@@ -57,6 +63,9 @@ const List = ({categories}: any) => {
 export default compose(
   withDatabase,
   withObservables([], ({database}: any) => ({
-    categories: database.get('categories').query(),
+    categories: database
+      .get('categories')
+      .query()
+      .observeWithColumns(['name', 'icon', 'color']),
   })),
 )(List);
