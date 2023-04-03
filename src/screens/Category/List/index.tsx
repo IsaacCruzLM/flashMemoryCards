@@ -63,6 +63,9 @@ const List = ({categories}: any) => {
 export default compose(
   withDatabase,
   withObservables([], ({database}: any) => ({
-    categories: database.get('categories').query(),
+    categories: database
+      .get('categories')
+      .query()
+      .observeWithColumns(['name', 'icon', 'color']),
   })),
 )(List);

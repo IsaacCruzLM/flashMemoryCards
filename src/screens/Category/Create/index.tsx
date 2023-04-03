@@ -7,7 +7,7 @@ import get from 'lodash/get';
 import {of as $of} from 'rxjs';
 
 import NavigationService from '../../../navigation/NavigationService';
-import insertItemInWMDB from '../../../databases/utils/insertItemInWMDB';
+import WmdbUtils from '../../../databases/utils';
 
 import DefaultContainerView from '../../../components/DefaultContainerView';
 import TextInput from '../../../components/TextInput';
@@ -24,14 +24,20 @@ const Create: React.FunctionComponent<any> = ({
   category,
 }: CreateProps) => {
   const isEdit = get(route, 'params.isEdit', false);
+  const categoryId = get(route, 'params.categoryId', '');
 
   const cancelAction = (resetForm: () => void) => {
     resetForm();
     NavigationService.navigate('Categories');
   };
 
-  const createAction = async (values: formValues | Object) => {
-    await insertItemInWMDB('categories', {...values, createdAt: new Date()});
+  const submitAction = async (values: formValues | Object) => {
+    isEdit
+      ? await WmdbUtils.updateItemInWMDB('categories', values, categoryId)
+      : await WmdbUtils.insertItemInWMDB('categories', {
+          ...values,
+          createdAt: new Date(),
+        });
     NavigationService.navigate('Categories');
   };
 
@@ -80,7 +86,7 @@ const Create: React.FunctionComponent<any> = ({
             ? {name: category.name, icon: category.icon, color: category.color}
             : {name: '', icon: '', color: ''}
         }
-        onSubmit={values => createAction(values)}
+        onSubmit={values => submitAction(values)}
       />
     </DefaultContainerView>
   );
