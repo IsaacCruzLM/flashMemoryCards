@@ -3,7 +3,7 @@ import {ALERT_TYPE, Toast} from 'react-native-alert-notification';
 import {snakeCase} from 'snake-case';
 import {database} from '..';
 
-export default async function insertItenInWMDB(model: string, data: Object) {
+export default async function insertItemInWMDB(model: string, data: Object) {
   try {
     const modelInSnakeCase = snakeCase(model);
     const newItem = await database.write(async () => {
@@ -22,7 +22,7 @@ export default async function insertItenInWMDB(model: string, data: Object) {
     Toast.show({
       type: ALERT_TYPE.DANGER,
       title: 'Erro',
-      textBody: 'Algo de errado aconteceu na criação/edição deste item!',
+      textBody: 'Algo de errado aconteceu na criação deste item!',
     });
     return {error: true, message: error.message};
   }

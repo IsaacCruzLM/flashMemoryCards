@@ -7,7 +7,7 @@ import get from 'lodash/get';
 import {of as $of} from 'rxjs';
 
 import NavigationService from '../../../navigation/NavigationService';
-import insertItenInWMDB from '../../../databases/utils/insertItenInWMDB';
+import insertItemInWMDB from '../../../databases/utils/insertItemInWMDB';
 
 import DefaultContainerView from '../../../components/DefaultContainerView';
 import TextInput from '../../../components/TextInput';
@@ -31,7 +31,7 @@ const Create: React.FunctionComponent<any> = ({
   };
 
   const createAction = async (values: formValues | Object) => {
-    await insertItenInWMDB('categories', {...values, createdAt: new Date()});
+    await insertItemInWMDB('categories', {...values, createdAt: new Date()});
     NavigationService.navigate('Categories');
   };
 
