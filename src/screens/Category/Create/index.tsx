@@ -70,7 +70,7 @@ const Create: React.FunctionComponent<any> = ({
               onChangeColor={color => setFieldValue('color', color)}
             />
             <Button
-              label="Criar Categoria"
+              label={`${isEdit ? 'Editar' : 'Criar'}  Categoria`}
               onPress={handleSubmit}
               style={styles.createButton}
             />
