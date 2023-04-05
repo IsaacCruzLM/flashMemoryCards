@@ -12,7 +12,6 @@ import WmdbUtils from '../../../databases/utils';
 import DefaultContainerView from '../../../components/DefaultContainerView';
 import TextInput from '../../../components/TextInput';
 import Form from '../../../components/Form';
-import SelectIcon from '../../../components/SelectIcon';
 import ColorPicker from '../../../components/ColorPicker';
 import Button from '../../../components/Button';
 
@@ -21,24 +20,24 @@ import {CreateProps, CreateFormProps, formValues} from './types';
 
 const Create: React.FunctionComponent<any> = ({
   route,
-  category,
+  subject,
 }: CreateProps) => {
   const isEdit = get(route, 'params.isEdit', false);
-  const categoryId = get(route, 'params.categoryId', '');
+  const subjectId = get(route, 'params.subjectId', '');
 
   const cancelAction = (resetForm: () => void) => {
     resetForm();
-    NavigationService.navigate('Categories');
+    NavigationService.navigate('Subjects');
   };
 
   const submitAction = async (values: formValues | Object) => {
     isEdit
-      ? await WmdbUtils.updateItemInWMDB('categories', values, categoryId)
-      : await WmdbUtils.insertItemInWMDB('categories', {
+      ? await WmdbUtils.updateItemInWMDB('subjects', values, subjectId)
+      : await WmdbUtils.insertItemInWMDB('subjects', {
           ...values,
           createdAt: new Date(),
         });
-    NavigationService.navigate('Categories');
+    NavigationService.navigate('Subjects');
   };
 
   return (
@@ -54,19 +53,15 @@ const Create: React.FunctionComponent<any> = ({
         }: CreateFormProps) => (
           <View style={styles.formContainer}>
             <TextInput
-              label={'Nome da categoria'}
+              label={'Nome do assunto'}
               setText={handleChange('name')}
               onBlur={handleBlur('name')}
-              placeholder={'Nome da categoria'}
+              placeholder={'Nome do assunto'}
               value={values.name}
-            />
-            <SelectIcon
-              value={values.icon}
-              onPress={iconLabel => setFieldValue('icon', iconLabel)}
             />
             <ColorPicker
               value={values.color}
-              iconName={values.icon}
+              iconName={''}
               onChangeColor={color => setFieldValue('color', color)}
             />
             <Button
@@ -83,8 +78,8 @@ const Create: React.FunctionComponent<any> = ({
         )}
         initialValues={
           isEdit
-            ? {name: category.name, icon: category.icon, color: category.color}
-            : {name: '', icon: '', color: ''}
+            ? {name: subject.name, color: subject.color}
+            : {name: '', color: ''}
         }
         onSubmit={values => submitAction(values)}
       />
@@ -96,11 +91,11 @@ export default compose(
   withDatabase,
   withObservables([], ({database, route}: any) => {
     const isEdit = get(route, 'params.isEdit', false);
-    const categoryId = get(route, 'params.categoryId', '');
+    const subjectId = get(route, 'params.subjectId', '');
 
     return {
-      category: isEdit
-        ? database.get('categories').findAndObserve(categoryId)
+      subject: isEdit
+        ? database.get('subjects').findAndObserve(subjectId)
         : $of(null),
     };
   }),

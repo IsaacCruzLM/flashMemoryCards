@@ -1,9 +1,9 @@
 import {DefaultFormProps} from '../../../components/Form/types';
-import {CategoryModelType} from '../../../databases/models/categoryModel';
+import {SubjectModelType} from '../../../databases/models/subjectModel';
 
 export interface CreateProps extends DefaultFormProps {
   route: object;
-  category: CategoryModelType;
+  subject: SubjectModelType;
 }
 
 export interface CreateFormProps extends DefaultFormProps {
@@ -12,6 +12,5 @@ export interface CreateFormProps extends DefaultFormProps {
 
 export interface formValues {
   name: string;
-  icon: string;
   color: string;
 }

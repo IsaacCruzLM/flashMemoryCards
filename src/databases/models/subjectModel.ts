@@ -14,3 +14,8 @@ export class SubjectModel extends Model {
   @field('color')
   color!: string;
 }
+
+export interface SubjectModelType {
+  name: string;
+  color: string;
+}
