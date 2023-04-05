@@ -15,6 +15,7 @@ import TutorialPage from '../screens/TutorialPage';
 import HomeScreen from '../screens/Home';
 import Category from '../screens/Category';
 import Note from '../screens/Note';
+import Subject from '../screens/Subject';
 
 import SideMenu from '../components/SideMenu';
 
@@ -149,7 +150,7 @@ const Routes = () => {
         />
         <Stack.Screen
           name="Subjects"
-          component={Category.list}
+          component={Subject.list}
           options={{
             title: 'Assuntos',
             ...headerStyled,
@@ -165,7 +166,7 @@ const Routes = () => {
         />
         <Stack.Screen
           name={'NewSubject'}
-          component={Category.create}
+          component={Subject.create}
           options={props => {
             const isEdit = get(props, 'route.params.isEdit', false);
 
