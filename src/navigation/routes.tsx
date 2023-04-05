@@ -147,6 +147,34 @@ const Routes = () => {
             };
           }}
         />
+        <Stack.Screen
+          name="Subjects"
+          component={Category.list}
+          options={{
+            title: 'Assuntos',
+            ...headerStyled,
+            headerRight: () => (
+              <Icon
+                color={themes.colors.background}
+                size={themes.spacing.unit * 3.5}
+                name="magnify"
+                onPress={() => {}}
+              />
+            ),
+          }}
+        />
+        <Stack.Screen
+          name={'NewCategory'}
+          component={Category.create}
+          options={props => {
+            const isEdit = get(props, 'route.params.isEdit', false);
+
+            return {
+              title: isEdit ? 'Editar Assunto' : 'Novo Assunto',
+              ...headerStyled,
+            };
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
