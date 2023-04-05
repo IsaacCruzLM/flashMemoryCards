@@ -1,10 +1,9 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {FlatList} from 'react-native';
 import withObservables from '@nozbe/with-observables';
 import {withDatabase} from '@nozbe/watermelondb/DatabaseProvider';
 import {compose} from 'recompose';
 
-import AppContext from '../../../context/appContext';
 import NavigationService from '../../../navigation/NavigationService';
 
 import CategoryListCard from '../../../components/CategoryListCard';
@@ -14,8 +13,6 @@ import EmpytMessage from '../../../components/EmpytMessage';
 import styles from './styles';
 
 const List = ({categories}: any) => {
-  const {setCurrentCategory} = useContext(AppContext);
-
   if (categories.length <= 0) {
     return (
       <EmpytMessage
@@ -43,7 +40,6 @@ const List = ({categories}: any) => {
               iconColor={color}
               numberNotesToReview={2}
               onPress={() => {
-                setCurrentCategory({name, id});
                 NavigationService.navigate('Notes', {
                   categoryName: name,
                   categoryId: id,
