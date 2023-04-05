@@ -164,7 +164,7 @@ const Routes = () => {
           }}
         />
         <Stack.Screen
-          name={'NewCategory'}
+          name={'NewSubject'}
           component={Category.create}
           options={props => {
             const isEdit = get(props, 'route.params.isEdit', false);
