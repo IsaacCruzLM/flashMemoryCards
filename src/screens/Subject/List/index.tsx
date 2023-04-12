@@ -8,9 +8,9 @@ import NavigationService from '../../../navigation/NavigationService';
 
 import FloatingAddButton from '../../../components/FloatingAddButton';
 import EmpytMessage from '../../../components/EmpytMessage';
+import SubjectListCard from '../../../components/SubjectListCard';
 
 import styles from './styles';
-import {Text} from 'react-native-paper';
 
 const List = ({subjects}: any) => {
   if (subjects.length <= 0) {
@@ -30,7 +30,19 @@ const List = ({subjects}: any) => {
         contentContainerStyle={styles.listContainer}
         keyExtractor={item => item.id}
         renderItem={({item}) => {
-          return <Text>{item.name}</Text>;
+          const {id, name, color} = item;
+          return (
+            <SubjectListCard
+              title={name}
+              subjectColor={color}
+              onPress={() =>
+                NavigationService.navigate('NewSubject', {
+                  subjectId: id,
+                  isEdit: true,
+                })
+              }
+            />
+          );
         }}
         style={styles.flatList}
       />
