@@ -4,7 +4,11 @@ export const subjectSchema = tableSchema({
   name: 'subjects',
   columns: [
     {
-      name: 'title',
+      name: 'name',
+      type: 'string',
+    },
+    {
+      name: 'color',
       type: 'string',
     },
   ],

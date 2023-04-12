@@ -6,19 +6,19 @@ import {compose} from 'recompose';
 
 import NavigationService from '../../../navigation/NavigationService';
 
-import CategoryListCard from '../../../components/CategoryListCard';
 import FloatingAddButton from '../../../components/FloatingAddButton';
 import EmpytMessage from '../../../components/EmpytMessage';
+import SubjectListCard from '../../../components/SubjectListCard';
 
 import styles from './styles';
 
-const List = ({categories}: any) => {
-  if (categories.length <= 0) {
+const List = ({subjects}: any) => {
+  if (subjects.length <= 0) {
     return (
       <EmpytMessage
-        message={'Nenhuma Categoria Encontrada'}
-        actionLabel={'Crie uma nova categoria'}
-        onPressAction={() => NavigationService.navigate('NewCategory')}
+        message={'Nenhum Assunto Encontrado'}
+        actionLabel={'Crie um novo assunto'}
+        onPressAction={() => NavigationService.navigate('NewSubject')}
       />
     );
   }
@@ -26,32 +26,28 @@ const List = ({categories}: any) => {
   return (
     <>
       <FlatList
-        data={categories}
+        data={subjects}
         contentContainerStyle={styles.listContainer}
         keyExtractor={item => item.id}
         renderItem={({item}) => {
-          const {id, name, createdAt, icon, color} = item;
+          const {id, name, color} = item;
           return (
-            <CategoryListCard
+            <SubjectListCard
               title={name}
-              creationDate={createdAt.toLocaleDateString('pt-br')}
-              numberOfNotes={16}
-              icon={icon}
-              iconColor={color}
-              numberNotesToReview={2}
-              onPress={() => {
-                NavigationService.navigate('Notes', {
-                  categoryName: name,
-                  categoryId: id,
-                });
-              }}
+              subjectColor={color}
+              onPress={() =>
+                NavigationService.navigate('NewSubject', {
+                  subjectId: id,
+                  isEdit: true,
+                })
+              }
               containerStyle={styles.itemStyle}
             />
           );
         }}
         style={styles.flatList}
       />
-      <FloatingAddButton routeName="NewCategory" />
+      <FloatingAddButton routeName="NewSubject" />
     </>
   );
 };
@@ -59,9 +55,9 @@ const List = ({categories}: any) => {
 export default compose(
   withDatabase,
   withObservables([], ({database}: any) => ({
-    categories: database
-      .get('categories')
+    subjects: database
+      .get('subjects')
       .query()
-      .observeWithColumns(['name', 'icon', 'color']),
+      .observeWithColumns(['name', 'color']),
   })),
 )(List);

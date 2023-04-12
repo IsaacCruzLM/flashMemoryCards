@@ -15,6 +15,7 @@ import TutorialPage from '../screens/TutorialPage';
 import HomeScreen from '../screens/Home';
 import Category from '../screens/Category';
 import Note from '../screens/Note';
+import Subject from '../screens/Subject';
 
 import SideMenu from '../components/SideMenu';
 
@@ -144,6 +145,34 @@ const Routes = () => {
                   </TouchableOpacity>
                 </View>
               ),
+            };
+          }}
+        />
+        <Stack.Screen
+          name="Subjects"
+          component={Subject.list}
+          options={{
+            title: 'Assuntos',
+            ...headerStyled,
+            headerRight: () => (
+              <Icon
+                color={themes.colors.background}
+                size={themes.spacing.unit * 3.5}
+                name="magnify"
+                onPress={() => {}}
+              />
+            ),
+          }}
+        />
+        <Stack.Screen
+          name={'NewSubject'}
+          component={Subject.create}
+          options={props => {
+            const isEdit = get(props, 'route.params.isEdit', false);
+
+            return {
+              title: isEdit ? 'Editar Assunto' : 'Novo Assunto',
+              ...headerStyled,
             };
           }}
         />

@@ -8,6 +8,14 @@ export class SubjectModel extends Model {
     note_subjects: {type: 'has_many', foreignKey: 'subject_id'},
   } as const;
 
-  @field('title')
+  @field('name')
   name!: string;
+
+  @field('color')
+  color!: string;
+}
+
+export interface SubjectModelType {
+  name: string;
+  color: string;
 }
