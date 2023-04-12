@@ -3,14 +3,14 @@ import {TouchableOpacity, View} from 'react-native';
 import {Card, Text} from 'react-native-paper';
 
 import styles from './styles';
-import {CategoryListCardProps} from './types';
+import {SubjectListCardProps} from './types';
 
 const SubjectListCard = ({
   title,
   subjectColor,
   onPress,
   containerStyle,
-}: CategoryListCardProps) => {
+}: SubjectListCardProps) => {
   return (
     <View style={[styles.container, containerStyle]}>
       <TouchableOpacity onPress={onPress}>

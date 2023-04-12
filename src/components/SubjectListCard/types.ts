@@ -1,10 +1,6 @@
-export interface CategoryListCardProps {
+export interface SubjectListCardProps {
   title: string;
-  creationDate: string;
-  numberOfNotes: number;
-  icon: string;
-  iconColor: string;
-  numberNotesToReview?: number;
+  subjectColor: string;
   onPress: () => void;
   containerStyle?: object;
 }
