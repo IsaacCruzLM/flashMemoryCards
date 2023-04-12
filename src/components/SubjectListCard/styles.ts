@@ -28,14 +28,18 @@ const styles = StyleSheet.create({
     marginLeft: themes.spacing.unit * 3,
     flex: 1,
   },
-  categoryTitle: {
+  subjectTitle: {
     fontFamily: themes.fonts.medium.fontFamily,
-    fontSize: themes.typography.fontSizeText,
+    fontSize: themes.typography.fontSizeTitle,
     color: themes.colors.primary,
     fontWeight: '700',
-    marginBottom: themes.spacing.unit / 2,
+    marginLeft: themes.spacing.unit * 2,
   },
-  iconColorView: {},
+  iconColorView: {
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+  },
 });
 
 export default styles;

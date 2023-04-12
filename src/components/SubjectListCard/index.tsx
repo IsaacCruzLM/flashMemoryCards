@@ -19,7 +19,7 @@ const SubjectListCard = ({
             <View
               style={[styles.iconColorView, {backgroundColor: subjectColor}]}
             />
-            <Text numberOfLines={1} style={styles.categoryTitle}>
+            <Text numberOfLines={1} style={styles.subjectTitle}>
               {title}
             </Text>
           </Card.Content>
