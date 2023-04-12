@@ -16,7 +16,7 @@ const List = ({subjects}: any) => {
   if (subjects.length <= 0) {
     return (
       <EmpytMessage
-        message={'Nenhum Assunto Encontrad0'}
+        message={'Nenhum Assunto Encontrado'}
         actionLabel={'Crie um novo assunto'}
         onPressAction={() => NavigationService.navigate('NewSubject')}
       />
