@@ -41,6 +41,7 @@ const List = ({subjects}: any) => {
                   isEdit: true,
                 })
               }
+              containerStyle={styles.itemStyle}
             />
           );
         }}

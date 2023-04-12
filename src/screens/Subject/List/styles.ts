@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   itemStyle: {
-    marginBottom: themes.spacing.unit * 3,
+    marginBottom: themes.spacing.unit * 1.5,
   },
 });
 
