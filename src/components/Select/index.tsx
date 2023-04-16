@@ -1,6 +1,6 @@
 import React, {useCallback, useMemo, useRef, useState} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
-import {BottomSheetModal} from '@gorhom/bottom-sheet';
+import {BottomSheetModal, BottomSheetFlatList} from '@gorhom/bottom-sheet';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import Theme from '../../styles/themes';
@@ -26,6 +26,40 @@ const Select = ({options, onChange, defaultValue = ''}: SelectProps) => {
     bottomSheetModalRef.current?.dismiss();
   }, []);
 
+  // render
+  const renderItem = useCallback(
+    ({item}) => {
+      const {label, value, iconName, iconColor} = item;
+      return (
+        <TouchableOpacity>
+          <View style={styles.itemView}>
+            {iconName && (
+              <Icon
+                color={iconColor || Theme.colors.primary}
+                size={Theme.spacing.unit * 4}
+                name={iconName}
+              />
+            )}
+            <Text
+              onPress={() => {
+                setStateValue(value);
+                onChange(value);
+                handleDismissModalPress();
+              }}
+              style={[
+                styles.itemStyle,
+                // eslint-disable-next-line react-native/no-inline-styles
+                {fontWeight: value === stateValue ? '700' : '600'},
+              ]}>
+              {label}
+            </Text>
+          </View>
+        </TouchableOpacity>
+      );
+    },
+    [handleDismissModalPress, onChange, stateValue],
+  );
+
   const getOptionLabel = () =>
     get(
       options.find(({value}: optionType) => value === stateValue),
@@ -50,32 +84,12 @@ const Select = ({options, onChange, defaultValue = ''}: SelectProps) => {
         index={1}
         snapPoints={snapPoints}>
         <View style={styles.contentContainer}>
-          {options.map(({label, value, iconName, iconColor}: optionType) => (
-            <TouchableOpacity>
-              <View style={styles.itemView}>
-                {iconName && (
-                  <Icon
-                    color={iconColor || Theme.colors.primary}
-                    size={Theme.spacing.unit * 4}
-                    name={iconName}
-                  />
-                )}
-                <Text
-                  onPress={() => {
-                    setStateValue(value);
-                    onChange(value);
-                    handleDismissModalPress();
-                  }}
-                  style={[
-                    styles.itemStyle,
-                    // eslint-disable-next-line react-native/no-inline-styles
-                    {fontWeight: value === stateValue ? '700' : '600'},
-                  ]}>
-                  {label}
-                </Text>
-              </View>
-            </TouchableOpacity>
-          ))}
+          <BottomSheetFlatList
+            data={options}
+            keyExtractor={({value}: any) => value}
+            renderItem={renderItem}
+          />
+          {/* Actions here */}
         </View>
       </BottomSheetModal>
     </View>
