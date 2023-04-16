@@ -16,7 +16,7 @@ const Select = ({options, onChange, defaultValue = ''}: SelectProps) => {
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
   // variables
-  const snapPoints = useMemo(() => ['25%', '50%'], []);
+  const snapPoints = useMemo(() => ['40%', '60%'], []);
 
   // callbacks
   const handlePresentModalPress = useCallback(() => {
@@ -52,11 +52,11 @@ const Select = ({options, onChange, defaultValue = ''}: SelectProps) => {
         <View style={styles.contentContainer}>
           {options.map(({label, value, iconName, iconColor}: optionType) => (
             <TouchableOpacity>
-              <View>
+              <View style={styles.itemView}>
                 {iconName && (
                   <Icon
                     color={iconColor || Theme.colors.primary}
-                    size={Theme.spacing.unit * 5}
+                    size={Theme.spacing.unit * 4}
                     name={iconName}
                   />
                 )}
@@ -66,7 +66,11 @@ const Select = ({options, onChange, defaultValue = ''}: SelectProps) => {
                     onChange(value);
                     handleDismissModalPress();
                   }}
-                  style={styles.itemStyle}>
+                  style={[
+                    styles.itemStyle,
+                    // eslint-disable-next-line react-native/no-inline-styles
+                    {fontWeight: value === stateValue ? '700' : '600'},
+                  ]}>
                   {label}
                 </Text>
               </View>
