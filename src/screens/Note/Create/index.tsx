@@ -1,15 +1,20 @@
 import React from 'react';
-import {Text} from 'react-native';
+import {View} from 'react-native';
 
 import DefaultContainerView from '../../../components/DefaultContainerView';
+import Form from '../../../components/Form';
 
-// import styles from './styles';
-// import {CreateProps} from './types';
+import styles from './styles';
+import {CreateFormProps} from './types';
 
 const Create: React.FunctionComponent<any> = () => {
   return (
     <DefaultContainerView>
-      <Text>Create a Note</Text>
+      <Form
+        form={({}: CreateFormProps) => <View style={styles.formContainer} />}
+        initialValues={{category: '', subjects: []}}
+        onSubmit={() => {}}
+      />
     </DefaultContainerView>
   );
 };
