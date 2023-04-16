@@ -1,10 +1,12 @@
-export interface ButtonProps {
-  modeParam?: 'contained' | 'outlined' | 'text';
-  icon?: string;
+export interface SelectProps {
+  options: [optionType];
+  onChange: (arg: string) => void;
+  defaultValue?: string;
+}
+
+export interface optionType {
   label: string;
-  onPress?: (arg0?: any) => void | undefined;
-  buttonColorParam?: string;
-  textColorParam?: string;
-  style?: object;
-  disabled?: boolean;
+  value: string;
+  iconName?: string;
+  iconColor?: string;
 }

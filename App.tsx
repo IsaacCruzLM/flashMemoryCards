@@ -13,6 +13,7 @@ import DatabaseProvider from '@nozbe/watermelondb/DatabaseProvider';
 import {Provider as PaperProvider, useTheme} from 'react-native-paper';
 import {AlertNotificationRoot} from 'react-native-alert-notification';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import {BottomSheetModalProvider} from '@gorhom/bottom-sheet';
 
 import {database} from './src/databases';
 import theme from './src/styles/themes';
@@ -29,7 +30,9 @@ const App = () => {
         <PaperProvider theme={theme}>
           <AlertNotificationRoot>
             <DatabaseProvider database={database}>
-              <Routes />
+              <BottomSheetModalProvider>
+                <Routes />
+              </BottomSheetModalProvider>
             </DatabaseProvider>
           </AlertNotificationRoot>
         </PaperProvider>
