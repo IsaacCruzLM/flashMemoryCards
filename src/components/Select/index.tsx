@@ -89,7 +89,9 @@ const Select = ({options, onChange, defaultValue = ''}: SelectProps) => {
             keyExtractor={({value}: any) => value}
             renderItem={renderItem}
           />
-          {/* Actions here */}
+          <View>
+            <Text style={{color: 'black'}}>Action Here</Text>
+          </View>
         </View>
       </BottomSheetModal>
     </View>
