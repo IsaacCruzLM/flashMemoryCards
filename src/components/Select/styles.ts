@@ -18,9 +18,11 @@ const styles = StyleSheet.create({
     paddingLeft: themes.spacing.unit,
   },
   itemView: {
+    width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
-    padding: themes.spacing.unit * 3,
+    paddingVertical: themes.spacing.unit * 2,
+    paddingHorizontal: themes.spacing.unit * 3,
   },
   modalTitle: {
     fontFamily: themes.fonts.medium.fontFamily,
