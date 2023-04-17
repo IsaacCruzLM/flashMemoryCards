@@ -95,7 +95,7 @@ const Select = ({
               modeParam="contained"
               iconName="close"
               onPress={handleDismissModalPress}
-              iconSize={24}
+              iconSize={20}
             />
           </View>
           <BottomSheetFlatList

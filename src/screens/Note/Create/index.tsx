@@ -27,6 +27,7 @@ const Create: React.FunctionComponent<any> = ({categories}) => {
             <Select
               options={translateOptions(categories)}
               onChange={value => setFieldValue('category', value)}
+              modalTitle="Selecione uma categoria"
             />
           </View>
         )}
