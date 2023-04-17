@@ -8,6 +8,7 @@ import {ButtonProps} from './types';
 const IconButton = ({
   modeParam,
   iconName,
+  iconSize,
   onPress = () => {},
   iconColorParam,
   backgroundColor,
@@ -41,7 +42,7 @@ const IconButton = ({
       disabled={disabled}
       icon={iconName}
       iconColor={iconColor}
-      size={Theme.spacing.unit * 3.5}
+      size={iconSize || Theme.spacing.unit * 3.5}
       onPress={onPress}
       style={[getDefaultStyle(), style]}
     />
