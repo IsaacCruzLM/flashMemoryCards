@@ -2,17 +2,21 @@ import React, {useCallback, useMemo, useRef, useState} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import {BottomSheetModal, BottomSheetFlatList} from '@gorhom/bottom-sheet';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-
-import Theme from '../../styles/themes';
-
-import {SelectProps, optionType} from './types';
-
-import styles from './styles';
-import TextInput from '../TextInput';
 import get from 'lodash/get';
+
+import TextInput from '../TextInput';
 import IconButton from '../IconButton';
 
-const Select = ({options, onChange, defaultValue = ''}: SelectProps) => {
+import {SelectProps, optionType} from './types';
+import Theme from '../../styles/themes';
+import styles from './styles';
+
+const Select = ({
+  options,
+  onChange,
+  defaultValue = '',
+  modalTitle,
+}: SelectProps) => {
   const [stateValue, setStateValue] = useState(defaultValue);
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
@@ -85,18 +89,20 @@ const Select = ({options, onChange, defaultValue = ''}: SelectProps) => {
         index={1}
         snapPoints={snapPoints}>
         <View style={styles.contentContainer}>
+          <View style={styles.actionsContainer}>
+            <Text style={styles.modalTitle}>{modalTitle}</Text>
+            <IconButton
+              modeParam="contained"
+              iconName="close"
+              onPress={handleDismissModalPress}
+              iconSize={24}
+            />
+          </View>
           <BottomSheetFlatList
             data={options}
             keyExtractor={({value}: any) => value}
             renderItem={renderItem}
           />
-          <View>
-            <IconButton
-              modeParam="contained"
-              iconName="close"
-              onPress={handleDismissModalPress}
-            />
-          </View>
         </View>
       </BottomSheetModal>
     </View>
