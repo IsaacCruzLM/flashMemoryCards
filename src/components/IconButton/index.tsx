@@ -16,7 +16,9 @@ const IconButton = ({
 }: ButtonProps) => {
   const mode = modeParam || 'outlined';
 
-  const iconColor = iconColorParam || Theme.colors.dark;
+  const iconColor =
+    iconColorParam ||
+    (mode === 'outlined' ? Theme.colors.dark : Theme.colors.background);
 
   const getDefaultStyle = () => {
     let defaultStyle;
@@ -38,7 +40,7 @@ const IconButton = ({
     <PaperIconButton
       disabled={disabled}
       icon={iconName}
-      iconColor={mode === 'outlined' ? iconColor : Theme.colors.background}
+      iconColor={iconColor}
       size={Theme.spacing.unit * 3.5}
       onPress={onPress}
       style={[getDefaultStyle(), style]}

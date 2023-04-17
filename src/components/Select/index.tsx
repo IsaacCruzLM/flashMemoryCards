@@ -93,7 +93,8 @@ const Select = ({options, onChange, defaultValue = ''}: SelectProps) => {
           <View>
             <IconButton
               modeParam="contained"
-              iconName={'camera'}
+              iconName={'check-bold'}
+              backgroundColor={Theme.colors.green}
               onPress={handleDismissModalPress}
             />
           </View>
