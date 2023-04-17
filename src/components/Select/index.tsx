@@ -10,6 +10,7 @@ import {SelectProps, optionType} from './types';
 import styles from './styles';
 import TextInput from '../TextInput';
 import get from 'lodash/get';
+import IconButton from '../IconButton';
 
 const Select = ({options, onChange, defaultValue = ''}: SelectProps) => {
   const [stateValue, setStateValue] = useState(defaultValue);
@@ -90,7 +91,11 @@ const Select = ({options, onChange, defaultValue = ''}: SelectProps) => {
             renderItem={renderItem}
           />
           <View>
-            <Text style={{color: 'black'}}>Action Here</Text>
+            <IconButton
+              modeParam="contained"
+              iconName={'camera'}
+              onPress={handleDismissModalPress}
+            />
           </View>
         </View>
       </BottomSheetModal>
