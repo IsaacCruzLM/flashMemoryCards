@@ -1,12 +1,14 @@
 import React, {useCallback, useMemo, useRef, useState} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import {BottomSheetModal, BottomSheetFlatList} from '@gorhom/bottom-sheet';
+import CheckBox from '@react-native-community/checkbox';
+import cloneDeep from 'lodash/cloneDeep';
 
 import TextInput from '../TextInput';
 import IconButton from '../IconButton';
 
-import {SelectMultipleProps, optionType} from './types';
-import Theme from '../../styles/themes';
+import {SelectMultipleProps} from './types';
+// import Theme from '../../styles/themes';
 import styles from './styles';
 
 const SelectMultiple = ({
@@ -36,10 +38,23 @@ const SelectMultiple = ({
       return (
         <TouchableOpacity
           onPress={() => {
-            setStateValue(value);
-            onChange(value);
+            let selectedValues = cloneDeep(stateValue);
+            if (selectedValues.includes(value)) {
+              selectedValues = selectedValues.filter(
+                selectedValue => value !== selectedValue,
+              );
+            } else {
+              selectedValues.push(value);
+            }
+            setStateValue(selectedValues);
+            onChange(selectedValues);
           }}>
           <View style={styles.itemView}>
+            <CheckBox
+              disabled={false}
+              value={stateValue.includes(value as string)}
+              onValueChange={() => {}}
+            />
             {iconColor && (
               <View
                 style={[styles.iconColorView, {backgroundColor: iconColor}]}

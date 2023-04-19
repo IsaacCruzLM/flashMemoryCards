@@ -10,6 +10,7 @@ import Select from '../../../components/Select';
 
 import styles from './styles';
 import {CreateFormProps} from './types';
+import SelectMultiple from '../../../components/SelectMultiple';
 
 const Create: React.FunctionComponent<any> = ({categories}) => {
   const translateOptions = (optionsArray: any) =>
@@ -28,6 +29,11 @@ const Create: React.FunctionComponent<any> = ({categories}) => {
               options={translateOptions(categories)}
               onChange={value => setFieldValue('category', value)}
               modalTitle="Selecione uma categoria"
+            />
+            <SelectMultiple
+              options={translateOptions(categories)}
+              onChange={values => setFieldValue('subjects', values)}
+              modalTitle="Selecione vários assuntos"
             />
           </View>
         )}
