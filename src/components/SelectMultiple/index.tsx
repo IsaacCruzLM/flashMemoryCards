@@ -1,13 +1,11 @@
 import React, {useCallback, useMemo, useRef, useState} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import {BottomSheetModal, BottomSheetFlatList} from '@gorhom/bottom-sheet';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import get from 'lodash/get';
 
 import TextInput from '../TextInput';
 import IconButton from '../IconButton';
 
-import {SelectProps, optionType} from './types';
+import {SelectMultipleProps, optionType} from './types';
 import Theme from '../../styles/themes';
 import styles from './styles';
 
@@ -16,7 +14,7 @@ const SelectMultiple = ({
   onChange,
   defaultValue = [],
   modalTitle,
-}: SelectProps) => {
+}: SelectMultipleProps) => {
   const [stateValue, setStateValue] = useState(defaultValue);
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
@@ -66,12 +64,12 @@ const SelectMultiple = ({
     <View style={styles.container}>
       <TouchableOpacity onPress={handlePresentModalPress}>
         <View pointerEvents="none">
-          {/* <TextInput
-            label="Selecione Uma Categoria"
+          <TextInput
+            label="Selecionar Assuntos"
             setText={() => {}}
-            placeholder="Selecione Uma Categoria"
-            value={getOptionLabel()}
-          /> */}
+            placeholder="Selecione pelo menos um assunto"
+            value={''}
+          />
         </View>
       </TouchableOpacity>
       <BottomSheetModal

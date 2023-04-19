@@ -1,4 +1,4 @@
-export interface SelectProps {
+export interface SelectMultipleProps {
   options: [optionType];
   onChange: (arg: string) => void;
   defaultValue?: string[];
