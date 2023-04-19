@@ -36,7 +36,12 @@ const Select = ({
     ({item}) => {
       const {label, value, iconName, iconColor} = item;
       return (
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            setStateValue(value);
+            onChange(value);
+            handleDismissModalPress();
+          }}>
           <View style={styles.itemView}>
             {iconName && (
               <Icon
@@ -46,11 +51,6 @@ const Select = ({
               />
             )}
             <Text
-              onPress={() => {
-                setStateValue(value);
-                onChange(value);
-                handleDismissModalPress();
-              }}
               style={[
                 styles.itemStyle,
                 // eslint-disable-next-line react-native/no-inline-styles
