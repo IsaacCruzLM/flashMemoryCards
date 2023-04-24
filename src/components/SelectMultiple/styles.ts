@@ -43,6 +43,22 @@ const styles = StyleSheet.create({
     height: 30,
     borderRadius: 15,
   },
+  fakeInputStyle: {
+    borderColor: 'black',
+    minHeight: 58,
+    width: '100%',
+    borderWidth: 1,
+    borderRadius: 5,
+    backgroundColor: 'white',
+    justifyContent: 'center',
+  },
+  placeHolderStyle: {
+    fontFamily: themes.fonts.medium.fontFamily,
+    fontSize: themes.typography.fontSizeTitle,
+    fontWeight: '600',
+    textAlign: 'left',
+    marginLeft: themes.spacing.unit * 1.7,
+  },
 });
 
 export default styles;

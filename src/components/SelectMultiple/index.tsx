@@ -4,11 +4,9 @@ import {BottomSheetModal, BottomSheetFlatList} from '@gorhom/bottom-sheet';
 import CheckBox from '@react-native-community/checkbox';
 import cloneDeep from 'lodash/cloneDeep';
 
-import TextInput from '../TextInput';
 import IconButton from '../IconButton';
 
 import {SelectMultipleProps} from './types';
-// import Theme from '../../styles/themes';
 import styles from './styles';
 
 const SelectMultiple = ({
@@ -30,7 +28,6 @@ const SelectMultiple = ({
   const handleDismissModalPress = useCallback(() => {
     bottomSheetModalRef.current?.dismiss();
   }, []);
-
   const handleSelect = useCallback(
     (value: string) => {
       let selectedValues = cloneDeep(stateValue);
@@ -83,12 +80,9 @@ const SelectMultiple = ({
     <View style={styles.container}>
       <TouchableOpacity onPress={handlePresentModalPress}>
         <View pointerEvents="none">
-          <TextInput
-            label="Selecionar Assuntos"
-            setText={() => {}}
-            placeholder="Selecione pelo menos um assunto"
-            value={''}
-          />
+          <View style={styles.fakeInputStyle}>
+            <Text style={styles.placeHolderStyle}>Selecionar Asuntos</Text>
+          </View>
         </View>
       </TouchableOpacity>
       <BottomSheetModal
