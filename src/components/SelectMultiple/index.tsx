@@ -31,29 +31,33 @@ const SelectMultiple = ({
     bottomSheetModalRef.current?.dismiss();
   }, []);
 
+  const handleSelect = useCallback(
+    (value: string) => {
+      let selectedValues = cloneDeep(stateValue);
+      if (selectedValues.includes(value)) {
+        selectedValues = selectedValues.filter(
+          selectedValue => value !== selectedValue,
+        );
+      } else {
+        selectedValues.push(value);
+      }
+      setStateValue(selectedValues);
+      onChange(selectedValues);
+    },
+    [onChange, stateValue],
+  );
+
   // render
   const renderItem = useCallback(
     ({item}) => {
       const {label, value, iconColor} = item;
       return (
-        <TouchableOpacity
-          onPress={() => {
-            let selectedValues = cloneDeep(stateValue);
-            if (selectedValues.includes(value)) {
-              selectedValues = selectedValues.filter(
-                selectedValue => value !== selectedValue,
-              );
-            } else {
-              selectedValues.push(value);
-            }
-            setStateValue(selectedValues);
-            onChange(selectedValues);
-          }}>
+        <TouchableOpacity onPress={() => handleSelect(value)}>
           <View style={styles.itemView}>
             <CheckBox
               disabled={false}
               value={stateValue.includes(value as string)}
-              onValueChange={() => {}}
+              onValueChange={() => handleSelect(value)}
             />
             {iconColor && (
               <View
@@ -72,7 +76,7 @@ const SelectMultiple = ({
         </TouchableOpacity>
       );
     },
-    [onChange, stateValue],
+    [handleSelect, stateValue],
   );
 
   return (
