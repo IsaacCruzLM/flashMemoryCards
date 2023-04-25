@@ -9,6 +9,16 @@ import IconButton from '../IconButton';
 import {SelectMultipleProps} from './types';
 import styles from './styles';
 
+const ChipComponent = ({text}) => {
+  return (
+    <View style={styles.chipContainer}>
+      <Text numberOfLines={1} style={styles.chipText}>
+        {text}
+      </Text>
+    </View>
+  );
+};
+
 const SelectMultiple = ({
   options,
   onChange,
@@ -81,7 +91,19 @@ const SelectMultiple = ({
       <TouchableOpacity onPress={handlePresentModalPress}>
         <View pointerEvents="none">
           <View style={styles.fakeInputStyle}>
-            <Text style={styles.placeHolderStyle}>Selecionar Asuntos</Text>
+            {false ? (
+              <Text style={styles.placeHolderStyle}>Selecionar Asuntos</Text>
+            ) : (
+              [
+                'Alice Alice Alice Alice Alice Alice Alice Alice Alice Alice Alice Alice',
+                'Bruno',
+                'Carla',
+                'David',
+                'Elisa',
+                'Fernando',
+                'Gabriel',
+              ].map(name => <ChipComponent text={name} />)
+            )}
           </View>
         </View>
       </TouchableOpacity>

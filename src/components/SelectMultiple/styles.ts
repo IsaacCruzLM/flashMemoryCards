@@ -44,13 +44,16 @@ const styles = StyleSheet.create({
     borderRadius: 15,
   },
   fakeInputStyle: {
-    borderColor: 'black',
+    borderColor: 'gray',
     minHeight: 58,
     width: '100%',
     borderWidth: 1,
     borderRadius: 5,
     backgroundColor: 'white',
-    justifyContent: 'center',
+    paddingHorizontal: themes.spacing.unit,
+    paddingVertical: themes.spacing.unit,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
   },
   placeHolderStyle: {
     fontFamily: themes.fonts.medium.fontFamily,
@@ -58,6 +61,24 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     textAlign: 'left',
     marginLeft: themes.spacing.unit * 1.7,
+  },
+  chipContainer: {
+    height: 40,
+    backgroundColor: themes.colors.gray,
+    alignSelf: 'flex-start',
+    paddingVertical: themes.spacing.unit / 2,
+    paddingHorizontal: themes.spacing.unit * 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 20,
+    margin: themes.spacing.unit / 2,
+  },
+  chipText: {
+    fontFamily: themes.fonts.medium.fontFamily,
+    fontSize: themes.typography.fontSizeTitle,
+    fontWeight: '600',
+    textAlign: 'left',
+    color: themes.colors.dark,
   },
 });
 
