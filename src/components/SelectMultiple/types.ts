@@ -10,3 +10,7 @@ export interface optionType {
   value: string;
   iconColor?: string;
 }
+
+export interface ChipProps {
+  text: string;
+}

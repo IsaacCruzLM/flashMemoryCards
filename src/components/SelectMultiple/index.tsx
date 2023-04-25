@@ -6,10 +6,10 @@ import cloneDeep from 'lodash/cloneDeep';
 
 import IconButton from '../IconButton';
 
-import {SelectMultipleProps} from './types';
+import {SelectMultipleProps, ChipProps} from './types';
 import styles from './styles';
 
-const ChipComponent = ({text}) => {
+const ChipComponent = ({text}: ChipProps) => {
   return (
     <View style={styles.chipContainer}>
       <Text numberOfLines={1} style={styles.chipText}>
