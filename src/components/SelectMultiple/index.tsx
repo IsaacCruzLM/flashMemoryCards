@@ -91,18 +91,15 @@ const SelectMultiple = ({
       <TouchableOpacity onPress={handlePresentModalPress}>
         <View pointerEvents="none">
           <View style={styles.fakeInputStyle}>
-            {false ? (
+            {stateValue.length <= 0 ? (
               <Text style={styles.placeHolderStyle}>Selecionar Asuntos</Text>
             ) : (
-              [
-                'Alice Alice Alice Alice Alice Alice Alice Alice Alice Alice Alice Alice',
-                'Bruno',
-                'Carla',
-                'David',
-                'Elisa',
-                'Fernando',
-                'Gabriel',
-              ].map(name => <ChipComponent text={name} />)
+              stateValue.map(id => {
+                const option = options.find(({value}) => value === id);
+                if (option) {
+                  return <ChipComponent text={option.label} />;
+                }
+              })
             )}
           </View>
         </View>
