@@ -16,6 +16,8 @@ const Select = ({
   onChange,
   defaultValue = '',
   modalTitle,
+  inputLabel = '',
+  inputPlaceHolder = '',
 }: SelectProps) => {
   const [stateValue, setStateValue] = useState(defaultValue);
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
@@ -77,9 +79,9 @@ const Select = ({
       <TouchableOpacity onPress={handlePresentModalPress}>
         <View pointerEvents="none">
           <TextInput
-            label="Selecione Uma Categoria"
+            label={inputLabel}
             setText={() => {}}
-            placeholder="Selecione Uma Categoria"
+            placeholder={inputPlaceHolder}
             value={getOptionLabel()}
           />
         </View>

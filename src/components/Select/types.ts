@@ -3,6 +3,8 @@ export interface SelectProps {
   onChange: (arg: string) => void;
   defaultValue?: string;
   modalTitle: string;
+  inputLabel: string;
+  inputPlaceHolder: string;
 }
 
 export interface optionType {
