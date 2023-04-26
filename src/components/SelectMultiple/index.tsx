@@ -24,6 +24,7 @@ const SelectMultiple = ({
   onChange,
   defaultValue = [],
   modalTitle,
+  inputPlaceHolder = '',
 }: SelectMultipleProps) => {
   const [stateValue, setStateValue] = useState(defaultValue);
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
@@ -92,7 +93,7 @@ const SelectMultiple = ({
         <View pointerEvents="none">
           <View style={styles.fakeInputStyle}>
             {stateValue.length <= 0 ? (
-              <Text style={styles.placeHolderStyle}>Selecionar Asuntos</Text>
+              <Text style={styles.placeHolderStyle}>{inputPlaceHolder}</Text>
             ) : (
               stateValue.map(id => {
                 const option = options.find(({value}) => value === id);

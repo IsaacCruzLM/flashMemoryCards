@@ -3,6 +3,7 @@ export interface SelectMultipleProps {
   onChange: (arg: string[]) => void;
   defaultValue?: string[];
   modalTitle: string;
+  inputPlaceHolder: string;
 }
 
 export interface optionType {
