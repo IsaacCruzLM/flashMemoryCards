@@ -7,6 +7,7 @@ import {compose} from 'recompose';
 import DefaultContainerView from '../../../components/DefaultContainerView';
 import Form from '../../../components/Form';
 import Select from '../../../components/Select';
+import TextEditor from '../../../components/TextEditor';
 
 import styles from './styles';
 import {CreateFormProps} from './types';
@@ -25,7 +26,7 @@ const Create: React.FunctionComponent<any> = ({categories}) => {
       <Form
         form={({setFieldValue}: CreateFormProps) => (
           <View style={styles.formContainer}>
-            <Select
+            {/* <Select
               options={translateOptions(categories)}
               onChange={value => setFieldValue('category', value)}
               modalTitle="Selecione uma categoria"
@@ -37,7 +38,8 @@ const Create: React.FunctionComponent<any> = ({categories}) => {
               onChange={values => setFieldValue('subjects', values)}
               modalTitle="Selecione vários assuntos"
               inputPlaceHolder="Selecionar Assuntos"
-            />
+            /> */}
+            <TextEditor />
           </View>
         )}
         initialValues={{category: '', subjects: []}}
