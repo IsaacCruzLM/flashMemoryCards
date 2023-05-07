@@ -29,11 +29,14 @@ const Create: React.FunctionComponent<any> = ({categories}) => {
               options={translateOptions(categories)}
               onChange={value => setFieldValue('category', value)}
               modalTitle="Selecione uma categoria"
+              inputLabel="Selecionar Categoria"
+              inputPlaceHolder="Selecionar Categoria"
             />
             <SelectMultiple
               options={translateOptions(categories)}
               onChange={values => setFieldValue('subjects', values)}
               modalTitle="Selecione vários assuntos"
+              inputPlaceHolder="Selecionar Assuntos"
             />
           </View>
         )}
