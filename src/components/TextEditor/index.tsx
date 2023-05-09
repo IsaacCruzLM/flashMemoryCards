@@ -5,6 +5,7 @@ import {ScrollView} from 'react-native-gesture-handler';
 import {actions, RichEditor, RichToolbar} from 'react-native-pell-rich-editor';
 
 import styles from './styles';
+import Theme from '../../styles/themes';
 
 const TextEditor = () => {
   const richText = useRef() as LegacyRef<RichEditor> | undefined;
@@ -35,8 +36,8 @@ const TextEditor = () => {
         </ScrollView>
         <RichToolbar
           editor={richText}
-          selectedIconTint="#873c1e"
-          iconTint="#312921"
+          selectedIconTint={Theme.colors.red}
+          iconTint={Theme.colors.primary}
           actions={[
             actions.insertImage,
             actions.setBold,
