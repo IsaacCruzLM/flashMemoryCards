@@ -1,40 +1,20 @@
-import React from 'react';
+import React, {LegacyRef} from 'react';
 import {useRef, useState} from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  Dimensions,
-} from 'react-native';
+import {StyleSheet, View, Dimensions} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {actions, RichEditor, RichToolbar} from 'react-native-pell-rich-editor';
 
 export default function App() {
-  const richText = useRef();
+  const richText = useRef() as LegacyRef<RichEditor> | undefined;
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [descHTML, setDescHTML] = useState('');
-  const [showDescError, setShowDescError] = useState(false);
 
-  const richTextHandle = descriptionText => {
+  const richTextHandle = (descriptionText: string) => {
     if (descriptionText) {
-      setShowDescError(false);
       setDescHTML(descriptionText);
     } else {
-      setShowDescError(true);
       setDescHTML('');
-    }
-  };
-
-  const submitContentHandle = () => {
-    const replaceHTML = descHTML.replace(/<(.|\n)*?>/g, '').trim();
-    const replaceWhiteSpace = replaceHTML.replace(/&nbsp;/g, '').trim();
-
-    if (replaceWhiteSpace.length <= 0) {
-      setShowDescError(true);
-    } else {
-      // send data to your server!
     }
   };
 
@@ -46,7 +26,6 @@ export default function App() {
             ref={richText}
             onChange={richTextHandle}
             placeholder="Write your cool content here :)"
-            androidHardwareAccelerationDisabled={true}
             style={styles.richTextEditorStyle}
             initialHeight={Dimensions.get('screen').height - 50}
             scrollEnabled={false}
