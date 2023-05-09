@@ -4,7 +4,7 @@ import {StyleSheet, View, Dimensions} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {actions, RichEditor, RichToolbar} from 'react-native-pell-rich-editor';
 
-export default function App() {
+const TextEditor = () => {
   const richText = useRef() as LegacyRef<RichEditor> | undefined;
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -50,7 +50,9 @@ export default function App() {
       </View>
     </View>
   );
-}
+};
+
+export default TextEditor;
 
 const styles = StyleSheet.create({
   container: {
