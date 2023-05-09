@@ -6,6 +6,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Dimensions,
 } from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {actions, RichEditor, RichToolbar} from 'react-native-pell-rich-editor';
@@ -38,7 +39,7 @@ export default function App() {
   };
 
   return (
-    <View style={{height: 250}}>
+    <View style={styles.container}>
       <View style={styles.richTextContainer}>
         <ScrollView>
           <RichEditor
@@ -47,7 +48,7 @@ export default function App() {
             placeholder="Write your cool content here :)"
             androidHardwareAccelerationDisabled={true}
             style={styles.richTextEditorStyle}
-            initialHeight={250}
+            initialHeight={Dimensions.get('screen').height - 50}
             scrollEnabled={false}
           />
         </ScrollView>
@@ -73,9 +74,12 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    height: '90%',
+  },
   richTextContainer: {
     width: '100%',
-    maxHeight: 300,
+    maxHeight: Dimensions.get('screen').height - 50,
   },
   richTextEditorStyle: {
     borderBottomLeftRadius: 10,
@@ -91,7 +95,6 @@ const styles = StyleSheet.create({
     shadowRadius: 2.62,
     elevation: 4,
     fontSize: 20,
-    maxHeight: 300,
   },
   richTextToolbarStyle: {
     backgroundColor: '#c6c3b3',
