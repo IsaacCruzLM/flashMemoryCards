@@ -43,7 +43,7 @@ const Create: React.FunctionComponent<any> = ({categories}) => {
   return (
     <DefaultContainerView>
       <Form
-        form={({setFieldValue}: CreateFormProps) => (
+        form={({setFieldValue, handleSubmit}: CreateFormProps) => (
           <View style={styles.formContainer}>
             <View>
               {step === 1 ? (
@@ -74,7 +74,7 @@ const Create: React.FunctionComponent<any> = ({categories}) => {
               <View>
                 <Button
                   label={step === 2 ? 'Criar Anotação' : 'Proximo'}
-                  onPress={() => setStep(step === 1 ? 2 : 1)}
+                  onPress={step === 2 ? handleSubmit : () => setStep(step + 1)}
                 />
                 <Text style={styles.stepIndicator}>{`${step} / 2`}</Text>
               </View>
@@ -82,7 +82,9 @@ const Create: React.FunctionComponent<any> = ({categories}) => {
           </View>
         )}
         initialValues={{category: '', subjects: [], content: ''}}
-        onSubmit={() => {}}
+        onSubmit={values => {
+          console.log(values);
+        }}
       />
     </DefaultContainerView>
   );
