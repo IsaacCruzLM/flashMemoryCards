@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {View} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {Keyboard, Text, View} from 'react-native';
 import withObservables from '@nozbe/with-observables';
 import {withDatabase} from '@nozbe/watermelondb/DatabaseProvider';
 import {compose} from 'recompose';
@@ -16,6 +16,21 @@ import {CreateFormProps} from './types';
 
 const Create: React.FunctionComponent<any> = ({categories}) => {
   const [step, setStep] = useState(1);
+  const [keyboardStatus, setKeyboardStatus] = useState('');
+
+  useEffect(() => {
+    const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
+      setKeyboardStatus('Keyboard Shown');
+    });
+    const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
+      setKeyboardStatus('Keyboard Hidden');
+    });
+
+    return () => {
+      showSubscription.remove();
+      hideSubscription.remove();
+    };
+  }, []);
 
   const translateOptions = (optionsArray: any) =>
     optionsArray.map(({id, name, icon, color}: any) => ({
@@ -55,12 +70,15 @@ const Create: React.FunctionComponent<any> = ({categories}) => {
                 />
               ) : null}
             </View>
-            <View>
-              <Button
-                label={'Proximo'}
-                onPress={() => setStep(step === 1 ? 2 : 1)}
-              />
-            </View>
+            {step === 2 && keyboardStatus === 'Keyboard Shown' ? null : (
+              <View>
+                <Button
+                  label={step === 2 ? 'Criar Anotação' : 'Proximo'}
+                  onPress={() => setStep(step === 1 ? 2 : 1)}
+                />
+                <Text style={styles.stepIndicator}>{`${step} / 2`}</Text>
+              </View>
+            )}
           </View>
         )}
         initialValues={{category: '', subjects: [], content: ''}}
