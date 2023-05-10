@@ -9,7 +9,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   formContainer: {
+    flex: 1,
     width: '100%',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
   },
 });
 
