@@ -1,24 +1,18 @@
-import React, {LegacyRef} from 'react';
-import {useRef, useState} from 'react';
+import React, {LegacyRef, useRef} from 'react';
 import {View, Dimensions} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {actions, RichEditor, RichToolbar} from 'react-native-pell-rich-editor';
 
-import styles from './styles';
 import Theme from '../../styles/themes';
 
-const TextEditor = () => {
+import {TextEditorProps} from './types';
+import styles from './styles';
+
+const TextEditor = ({onChange, placeHolder}: TextEditorProps) => {
   const richText = useRef() as LegacyRef<RichEditor> | undefined;
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [descHTML, setDescHTML] = useState('');
-
   const richTextHandle = (descriptionText: string) => {
-    if (descriptionText) {
-      setDescHTML(descriptionText);
-    } else {
-      setDescHTML('');
-    }
+    onChange(descriptionText);
   };
 
   return (
@@ -28,7 +22,7 @@ const TextEditor = () => {
           <RichEditor
             ref={richText}
             onChange={richTextHandle}
-            placeholder="Write your cool content here :)"
+            placeholder={placeHolder}
             style={styles.richTextEditorStyle}
             initialHeight={Dimensions.get('screen').height - 50}
             scrollEnabled={false}
@@ -39,7 +33,7 @@ const TextEditor = () => {
           selectedIconTint={Theme.colors.red}
           iconTint={Theme.colors.primary}
           actions={[
-            actions.insertImage,
+            // actions.insertImage,
             actions.setBold,
             actions.setItalic,
             actions.insertBulletsList,
