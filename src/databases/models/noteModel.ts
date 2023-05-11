@@ -1,5 +1,5 @@
-import {Model} from '@nozbe/watermelondb';
-import {field, relation} from '@nozbe/watermelondb/decorators';
+import {Model, Q} from '@nozbe/watermelondb';
+import {field, relation, lazy, date} from '@nozbe/watermelondb/decorators';
 
 export class NoteModel extends Model {
   static table = 'notes';
@@ -8,15 +8,20 @@ export class NoteModel extends Model {
     note_subjects: {type: 'has_many', foreignKey: 'note_id'},
   } as const;
 
-  @field('title')
+  @field('name')
   name!: string;
 
   @field('content')
-  title!: string;
+  content!: string;
 
-  @field('initial_date')
-  initialDate!: string;
+  @date('created_at')
+  createdAt!: number;
 
   @relation('categories', 'category_id')
   category!: string;
+
+  @lazy
+  posts = this.collections
+    .get('subjects')
+    .query(Q.on('post_authors', 'note_id', this.id));
 }

@@ -4,7 +4,7 @@ export const noteSchema = tableSchema({
   name: 'notes',
   columns: [
     {
-      name: 'title',
+      name: 'name',
       type: 'string',
     },
     {
@@ -12,8 +12,8 @@ export const noteSchema = tableSchema({
       type: 'string',
     },
     {
-      name: 'initial_date',
-      type: 'string',
+      name: 'created_at',
+      type: 'number',
     },
     {
       name: 'module_id',
