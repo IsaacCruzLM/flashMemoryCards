@@ -10,6 +10,7 @@ import Select from '../../../components/Select';
 import TextEditor from '../../../components/TextEditor';
 import SelectMultiple from '../../../components/SelectMultiple';
 import Button from '../../../components/Button';
+import TextInput from '../../../components/TextInput';
 
 import styles from './styles';
 import {CreateFormProps} from './types';
@@ -43,11 +44,24 @@ const Create: React.FunctionComponent<any> = ({categories}) => {
   return (
     <DefaultContainerView>
       <Form
-        form={({setFieldValue, handleSubmit}: CreateFormProps) => (
+        form={({
+          setFieldValue,
+          handleSubmit,
+          handleChange,
+          handleBlur,
+          values,
+        }: CreateFormProps) => (
           <View style={styles.formContainer}>
             <View>
               {step === 1 ? (
                 <>
+                  <TextInput
+                    label={'Nome da anotação'}
+                    setText={handleChange('name')}
+                    onBlur={handleBlur('name')}
+                    placeholder={'Nome da anotação'}
+                    value={values.name}
+                  />
                   <Select
                     options={translateOptions(categories)}
                     onChange={value => setFieldValue('category', value)}
@@ -57,7 +71,7 @@ const Create: React.FunctionComponent<any> = ({categories}) => {
                   />
                   <SelectMultiple
                     options={translateOptions(categories)}
-                    onChange={values => setFieldValue('subjects', values)}
+                    onChange={value => setFieldValue('subjects', value)}
                     modalTitle="Selecione vários assuntos"
                     inputPlaceHolder="Selecionar Assuntos"
                   />
@@ -70,7 +84,7 @@ const Create: React.FunctionComponent<any> = ({categories}) => {
                 />
               ) : null}
             </View>
-            {step === 2 && keyboardStatus === 'Keyboard Shown' ? null : (
+            {keyboardStatus === 'Keyboard Shown' ? null : (
               <View>
                 <Button
                   label={step === 2 ? 'Criar Anotação' : 'Proximo'}
@@ -81,7 +95,7 @@ const Create: React.FunctionComponent<any> = ({categories}) => {
             )}
           </View>
         )}
-        initialValues={{category: '', subjects: [], content: ''}}
+        initialValues={{name: '', category: '', subjects: [], content: ''}}
         onSubmit={values => {
           console.log(values);
         }}
