@@ -21,7 +21,7 @@ export class NoteModel extends Model {
   category!: string;
 
   @lazy
-  posts = this.collections
+  subjects = this.collections
     .get('subjects')
-    .query(Q.on('post_authors', 'note_id', this.id));
+    .query(Q.on('note_subjects', 'note_id', this.id));
 }
