@@ -183,7 +183,7 @@ const Routes = () => {
             const isEdit = get(props, 'route.params.isEdit', false);
 
             return {
-              title: isEdit ? 'Editar Anotação' : 'Novo Anotação',
+              title: isEdit ? 'Editar Anotação' : 'Nova Anotação',
               ...headerStyled,
             };
           }}
