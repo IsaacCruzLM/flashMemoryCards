@@ -6,6 +6,7 @@ import NoteListCard from '../../../components/NoteListCard';
 import FloatingAddButton from '../../../components/FloatingAddButton';
 
 import styles from './styles';
+import {ListProps} from './types';
 
 const DATA_MOCK = [
   {
@@ -64,7 +65,7 @@ const DATA_MOCK = [
   },
 ];
 
-const List = ({route}) => {
+const List = ({route}: ListProps) => {
   return (
     <>
       <SectionList
