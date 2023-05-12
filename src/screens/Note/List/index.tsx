@@ -1,5 +1,6 @@
 import React from 'react';
 import {Text, SectionList} from 'react-native';
+import get from 'lodash/get';
 
 import NoteListCard from '../../../components/NoteListCard';
 import FloatingAddButton from '../../../components/FloatingAddButton';
@@ -63,7 +64,7 @@ const DATA_MOCK = [
   },
 ];
 
-const List = () => {
+const List = ({route}) => {
   return (
     <>
       <SectionList
@@ -86,7 +87,10 @@ const List = () => {
         )}
         style={styles.sectionList}
       />
-      <FloatingAddButton routeName="NewNote" />
+      <FloatingAddButton
+        routeName="NewNote"
+        params={{categoryId: get(route, 'params.categoryId', '')}}
+      />
     </>
   );
 };

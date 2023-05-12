@@ -3,6 +3,7 @@ import {Keyboard, Text, View} from 'react-native';
 import withObservables from '@nozbe/with-observables';
 import {withDatabase} from '@nozbe/watermelondb/DatabaseProvider';
 import {compose} from 'recompose';
+import get from 'lodash/get';
 
 import DefaultContainerView from '../../../components/DefaultContainerView';
 import Form from '../../../components/Form';
@@ -15,9 +16,10 @@ import TextInput from '../../../components/TextInput';
 import styles from './styles';
 import {CreateFormProps} from './types';
 
-const Create: React.FunctionComponent<any> = ({categories}) => {
+const Create: React.FunctionComponent<any> = ({categories, route}) => {
   const [step, setStep] = useState(1);
   const [keyboardStatus, setKeyboardStatus] = useState('');
+  console.log(route.params);
 
   useEffect(() => {
     const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
@@ -68,6 +70,7 @@ const Create: React.FunctionComponent<any> = ({categories}) => {
                     modalTitle="Selecione uma categoria"
                     inputLabel="Selecionar Categoria"
                     inputPlaceHolder="Selecionar Categoria"
+                    defaultValue={values.category}
                   />
                   <SelectMultiple
                     options={translateOptions(categories)}
@@ -95,7 +98,12 @@ const Create: React.FunctionComponent<any> = ({categories}) => {
             )}
           </View>
         )}
-        initialValues={{name: '', category: '', subjects: [], content: ''}}
+        initialValues={{
+          name: '',
+          category: get(route, 'params.categoryId', ''),
+          subjects: [],
+          content: '',
+        }}
         onSubmit={values => {
           console.log(values);
         }}
