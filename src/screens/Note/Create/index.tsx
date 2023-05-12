@@ -14,12 +14,14 @@ import Button from '../../../components/Button';
 import TextInput from '../../../components/TextInput';
 
 import styles from './styles';
-import {CreateFormProps} from './types';
+import {CreateFormProps, CreateProps} from './types';
 
-const Create: React.FunctionComponent<any> = ({categories, route}) => {
+const Create: React.FunctionComponent<CreateProps | any> = ({
+  categories,
+  route,
+}) => {
   const [step, setStep] = useState(1);
   const [keyboardStatus, setKeyboardStatus] = useState('');
-  console.log(route.params);
 
   useEffect(() => {
     const showSubscription = Keyboard.addListener('keyboardDidShow', () => {

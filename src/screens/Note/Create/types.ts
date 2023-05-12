@@ -2,6 +2,7 @@ import {DefaultFormProps} from '../../../components/Form/types';
 
 export interface CreateProps extends DefaultFormProps {
   route: object;
+  categories: Array<object>;
 }
 
 export interface CreateFormProps extends DefaultFormProps {
