@@ -18,6 +18,7 @@ import {CreateFormProps, CreateProps} from './types';
 
 const Create: React.FunctionComponent<CreateProps | any> = ({
   categories,
+  subjects,
   route,
 }) => {
   const [step, setStep] = useState(1);
@@ -75,7 +76,7 @@ const Create: React.FunctionComponent<CreateProps | any> = ({
                     defaultValue={values.category}
                   />
                   <SelectMultiple
-                    options={translateOptions(categories)}
+                    options={translateOptions(subjects)}
                     onChange={value => setFieldValue('subjects', value)}
                     modalTitle="Selecione vários assuntos"
                     inputPlaceHolder="Selecionar Assuntos"
@@ -119,6 +120,7 @@ export default compose(
   withObservables([], ({database}: any) => {
     return {
       categories: database.get('categories').query(),
+      subjects: database.get('subjects').query(),
     };
   }),
 )(Create);
