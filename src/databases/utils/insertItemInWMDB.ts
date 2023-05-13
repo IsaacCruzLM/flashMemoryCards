@@ -19,6 +19,7 @@ export default async function insertItemInWMDB(model: string, data: Object) {
     });
     return newItem;
   } catch (error: any) {
+    console.log('Flag Error', error);
     Toast.show({
       type: ALERT_TYPE.DANGER,
       title: 'Erro',

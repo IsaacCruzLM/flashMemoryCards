@@ -22,6 +22,7 @@ export default async function insertItemWithM2MRelationInWMDB(
 
     return itemCreated;
   } catch (error: any) {
+    console.log('Flag Error', error);
     Toast.show({
       type: ALERT_TYPE.DANGER,
       title: 'Erro',
