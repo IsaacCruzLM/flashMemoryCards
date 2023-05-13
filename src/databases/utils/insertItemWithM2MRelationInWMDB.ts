@@ -3,7 +3,7 @@ import {ALERT_TYPE, Toast} from 'react-native-alert-notification';
 
 import insertItemInWMDB from './insertItemInWMDB';
 
-export default async function insertItemWitmM2MRelationInWMDB(
+export default async function insertItemWithM2MRelationInWMDB(
   model: string,
   data: Object,
   relationshipModel: string,
