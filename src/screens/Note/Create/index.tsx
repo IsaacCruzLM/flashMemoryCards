@@ -49,14 +49,14 @@ const Create: React.FunctionComponent<CreateProps | any> = ({
       iconColor: color,
     }));
 
-  const submitAction = async (values: formValues | Object) => {
+  const submitAction = async (values: formValues) => {
     const newDataObject = cloneDeep(values);
-    const relationships = get(newDataObject, 'subjects', []).forEach(id => ({
+    const relationships = get(newDataObject, 'subjects', []).map(id => ({
       subject: id,
     }));
     delete newDataObject.subjects;
 
-    console.log("Flag", newDataObject, relationships);
+    console.log('Flag', newDataObject, relationships);
   };
 
   return (
@@ -120,7 +120,7 @@ const Create: React.FunctionComponent<CreateProps | any> = ({
           subjects: [],
           content: '',
         }}
-        onSubmit={values => submitAction(values)}
+        onSubmit={values => submitAction(values as formValues)}
       />
     </DefaultContainerView>
   );
