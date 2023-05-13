@@ -4,6 +4,7 @@ import withObservables from '@nozbe/with-observables';
 import {withDatabase} from '@nozbe/watermelondb/DatabaseProvider';
 import {compose} from 'recompose';
 import get from 'lodash/get';
+import cloneDeep from 'lodash/cloneDeep';
 
 import DefaultContainerView from '../../../components/DefaultContainerView';
 import Form from '../../../components/Form';
@@ -13,8 +14,10 @@ import SelectMultiple from '../../../components/SelectMultiple';
 import Button from '../../../components/Button';
 import TextInput from '../../../components/TextInput';
 
+import WmdbUtils from '../../../databases/utils';
+
 import styles from './styles';
-import {CreateFormProps, CreateProps} from './types';
+import {CreateFormProps, CreateProps, formValues} from './types';
 
 const Create: React.FunctionComponent<CreateProps | any> = ({
   categories,
@@ -45,6 +48,16 @@ const Create: React.FunctionComponent<CreateProps | any> = ({
       iconName: icon,
       iconColor: color,
     }));
+
+  const submitAction = async (values: formValues | Object) => {
+    const newDataObject = cloneDeep(values);
+    const relationships = get(newDataObject, 'subjects', []).forEach(id => ({
+      subject: id,
+    }));
+    delete newDataObject.subjects;
+
+    console.log("Flag", newDataObject, relationships);
+  };
 
   return (
     <DefaultContainerView>
@@ -107,9 +120,7 @@ const Create: React.FunctionComponent<CreateProps | any> = ({
           subjects: [],
           content: '',
         }}
-        onSubmit={values => {
-          console.log(values);
-        }}
+        onSubmit={values => submitAction(values)}
       />
     </DefaultContainerView>
   );
