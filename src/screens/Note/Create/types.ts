@@ -11,7 +11,7 @@ export interface CreateFormProps extends DefaultFormProps {
 }
 
 export interface formValues {
-  category: string;
+  category?: string;
   subjects?: [string];
   content: string;
   name: string;

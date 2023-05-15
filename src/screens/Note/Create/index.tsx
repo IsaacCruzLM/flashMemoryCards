@@ -55,19 +55,27 @@ const Create: React.FunctionComponent<CreateProps | any> = ({
 
   const submitAction = async (values: formValues) => {
     const newDataObject = cloneDeep(values);
-    const relationships = get(newDataObject, 'subjects', []).map(id => ({
+    const M2MRelationships = get(newDataObject, 'subjects', []).map(id => ({
       subject: id,
     }));
+    const categoryRelationshipId = get(newDataObject, 'category', '');
     delete newDataObject.subjects;
+    delete newDataObject.category;
 
     await WmdbUtils.insertItemWithM2MRelationInWMDB(
       'notes',
       {
         ...newDataObject,
         createdAt: new Date(),
+        relationships: [
+          {
+            type: 'category',
+            id: categoryRelationshipId,
+          },
+        ],
       },
       'note_subjects',
-      relationships,
+      M2MRelationships,
       'note',
     );
   };
