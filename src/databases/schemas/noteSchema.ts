@@ -16,7 +16,7 @@ export const noteSchema = tableSchema({
       type: 'number',
     },
     {
-      name: 'module_id',
+      name: 'category_id',
       type: 'string',
     },
   ],

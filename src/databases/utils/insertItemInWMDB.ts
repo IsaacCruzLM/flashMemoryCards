@@ -7,14 +7,20 @@ export default async function insertItemInWMDB(model: string, data: Object) {
   try {
     const modelInSnakeCase = snakeCase(model);
     const newItem = await database.write(async () => {
+      const {relationships = [], ...restOfData} = data;
+
       const itemCreated = await database
         .get(modelInSnakeCase)
         .create(wmdbModel => {
-          const dataKeys = Object.keys(data);
+          const dataKeys = Object.keys(restOfData);
           dataKeys.map((key: string) => {
-            (wmdbModel as Model | any)[key] = (data as Object | any)[key];
+            (wmdbModel as Model | any)[key] = (restOfData as Object | any)[key];
+          });
+          relationships.map(({type, id}) => {
+            wmdbModel[type].id = id;
           });
         });
+
       return itemCreated;
     });
     return newItem;
