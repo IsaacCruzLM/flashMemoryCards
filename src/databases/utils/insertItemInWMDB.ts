@@ -3,7 +3,7 @@ import {ALERT_TYPE, Toast} from 'react-native-alert-notification';
 import {snakeCase} from 'snake-case';
 import {database} from '..';
 
-export default async function insertItemInWMDB(model: string, data: Object) {
+export default async function insertItemInWMDB(model: string, data: Data) {
   try {
     const modelInSnakeCase = snakeCase(model);
     const newItem = await database.write(async () => {
@@ -16,8 +16,8 @@ export default async function insertItemInWMDB(model: string, data: Object) {
           dataKeys.map((key: string) => {
             (wmdbModel as Model | any)[key] = (restOfData as Object | any)[key];
           });
-          relationships.map(({type, id}) => {
-            wmdbModel[type].id = id;
+          relationships.map(({type, id}: Relationship) => {
+            (wmdbModel as Model | any)[type].id = id;
           });
         });
 
@@ -33,4 +33,14 @@ export default async function insertItemInWMDB(model: string, data: Object) {
     });
     return {error: true, message: error.message};
   }
+}
+
+interface Relationship {
+  type: string;
+  id: string;
+}
+
+interface Data {
+  relationships?: Array<Relationship>;
+  [x: string]: any;
 }
