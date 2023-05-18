@@ -8,10 +8,14 @@ import NavigationService from '../../navigation/NavigationService';
 import styles from './styles';
 import {FloatingAddButtonProps} from './types';
 
-const FloatingAddButton = ({routeName}: FloatingAddButtonProps) => {
+const FloatingAddButton = ({
+  routeName,
+  params = {},
+}: FloatingAddButtonProps) => {
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => NavigationService.navigate(routeName)}>
+      <TouchableOpacity
+        onPress={() => NavigationService.navigate(routeName, params)}>
         <Icon color={themes.colors.background} size={50} name="plus" />
       </TouchableOpacity>
     </View>

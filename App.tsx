@@ -12,6 +12,8 @@ import React from 'react';
 import DatabaseProvider from '@nozbe/watermelondb/DatabaseProvider';
 import {Provider as PaperProvider, useTheme} from 'react-native-paper';
 import {AlertNotificationRoot} from 'react-native-alert-notification';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import {BottomSheetModalProvider} from '@gorhom/bottom-sheet';
 
 import {database} from './src/databases';
 import theme from './src/styles/themes';
@@ -23,15 +25,19 @@ export const useAppTheme = () => useTheme<AppTheme>();
 
 const App = () => {
   return (
-    <ContextProvider>
-      <PaperProvider theme={theme}>
-        <AlertNotificationRoot>
-          <DatabaseProvider database={database}>
-            <Routes />
-          </DatabaseProvider>
-        </AlertNotificationRoot>
-      </PaperProvider>
-    </ContextProvider>
+    <GestureHandlerRootView style={{flex: 1}}>
+      <ContextProvider>
+        <PaperProvider theme={theme}>
+          <AlertNotificationRoot>
+            <DatabaseProvider database={database}>
+              <BottomSheetModalProvider>
+                <Routes />
+              </BottomSheetModalProvider>
+            </DatabaseProvider>
+          </AlertNotificationRoot>
+        </PaperProvider>
+      </ContextProvider>
+    </GestureHandlerRootView>
   );
 };
 

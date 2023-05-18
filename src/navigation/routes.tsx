@@ -176,6 +176,18 @@ const Routes = () => {
             };
           }}
         />
+        <Stack.Screen
+          name={'NewNote'}
+          component={Note.create}
+          options={props => {
+            const isEdit = get(props, 'route.params.isEdit', false);
+
+            return {
+              title: isEdit ? 'Editar Anotação' : 'Nova Anotação',
+              ...headerStyled,
+            };
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
