@@ -23,13 +23,9 @@ const Create: React.FunctionComponent<CreateProps | any> = ({
   categories,
   subjects,
   route,
-  notesSubjects,
-  notes,
 }) => {
   const [step, setStep] = useState(1);
   const [keyboardStatus, setKeyboardStatus] = useState('');
-
-  console.log('Flag', notesSubjects, notes);
 
   useEffect(() => {
     const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
@@ -56,7 +52,8 @@ const Create: React.FunctionComponent<CreateProps | any> = ({
   const submitAction = async (values: formValues) => {
     const newDataObject = cloneDeep(values);
     const M2MRelationships = get(newDataObject, 'subjects', []).map(id => ({
-      subject: id,
+      type: 'subject',
+      id,
     }));
     const categoryRelationshipId = get(newDataObject, 'category', '');
     delete newDataObject.subjects;
@@ -153,8 +150,6 @@ export default compose(
     return {
       categories: database.get('categories').query(),
       subjects: database.get('subjects').query(),
-      notes: database.get('notes').query(),
-      notesSubjects: database.get('note_subjects').query(),
     };
   }),
 )(Create);
