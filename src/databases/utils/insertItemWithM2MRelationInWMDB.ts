@@ -1,24 +1,26 @@
 import get from 'lodash/get';
 import {ALERT_TYPE, Toast} from 'react-native-alert-notification';
 
-import insertItemInWMDB from './insertItemInWMDB';
+import insertItemInWMDB, {Relationship, Data} from './insertItemInWMDB';
 
 export default async function insertItemWithM2MRelationInWMDB(
   model: string,
-  data: Object,
+  data: Data,
   relationshipModel: string,
-  relationships: Array<object>,
+  relationships: Array<Relationship>,
   relationshipeKey: string,
 ) {
   try {
     const itemCreated = await insertItemInWMDB(model, data);
 
-    // relationships.map(async relationshipData => {
-    //   await insertItemInWMDB(relationshipModel, {
-    //     [relationshipeKey]: get(itemCreated, 'id', ''),
-    //     ...relationshipData,
-    //   });
-    // });
+    relationships.map(async ({type: RelationshipType, id: RelationshipId}) => {
+      await insertItemInWMDB(relationshipModel, {
+        relationships: [
+          {type: relationshipeKey, id: get(itemCreated, 'id', '')},
+          {type: RelationshipType, id: RelationshipId},
+        ],
+      });
+    });
 
     return itemCreated;
   } catch (error: any) {

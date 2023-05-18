@@ -35,12 +35,13 @@ export default async function insertItemInWMDB(model: string, data: Data) {
   }
 }
 
-interface Relationship {
+export interface Relationship {
   type: string;
   id: string;
+  [x: string]: string;
 }
 
-interface Data {
+export interface Data {
   relationships?: Array<Relationship>;
   [x: string]: any;
 }
