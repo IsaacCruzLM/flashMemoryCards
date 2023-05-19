@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Text, SectionList} from 'react-native';
 import {withDatabase} from '@nozbe/watermelondb/DatabaseProvider';
 import withObservables from '@nozbe/with-observables';
@@ -12,68 +12,46 @@ import FloatingAddButton from '../../../components/FloatingAddButton';
 import styles from './styles';
 import {ListProps} from './types';
 
-const DATA_MOCK = [
-  {
-    title: 'Anotações a serem revisadas',
-    data: [
-      {
-        title: 'Titulo da anotação 1',
-        creationDate: '24/04/1997',
-        lastRevisionDate: '24/04/1998',
-        noteType: 'Texto',
-        category: 'Categoria X',
-        subjects: [
-          {content: 'Assunto 1', color: '#C31717'},
-          {content: 'Assunto 2', color: '#8db4e0'},
-        ],
-      },
-      {
-        title: 'Titulo da anotação 2',
-        creationDate: '24/04/1997',
-        lastRevisionDate: '24/04/1998',
-        noteType: 'Texto',
-        category: 'Categoria X',
-        subjects: [
-          {content: 'Assunto 1', color: '#C31717'},
-          {content: 'Assunto 2', color: '#8db4e0'},
-        ],
-      },
-    ],
-  },
-  {
-    title: 'Demais Anotações',
-    data: [
-      {
-        title: 'Titulo da anotação 3',
-        creationDate: '24/04/1997',
-        lastRevisionDate: '24/04/1998',
-        noteType: 'Texto',
-        category: 'Categoria X',
-        subjects: [
-          {content: 'Assunto 1', color: '#C31717'},
-          {content: 'Assunto 2', color: '#8db4e0'},
-        ],
-      },
-      {
-        title: 'Titulo da anotação 4',
-        creationDate: '24/04/1997',
-        lastRevisionDate: '24/04/1998',
-        noteType: 'Texto',
-        category: 'Categoria X',
-        subjects: [
-          {content: 'Assunto 1', color: '#C31717'},
-          {content: 'Assunto 2', color: '#8db4e0'},
-        ],
-      },
-    ],
-  },
-];
+const List: React.FunctionComponent<ListProps | any> = ({
+  route,
+  notes,
+  category,
+}) => {
+  const [noteBySections, setNoteBySections] = useState([] as Array<object>);
 
-const List: React.FunctionComponent<ListProps | any> = ({route}) => {
+  useEffect(() => {
+    const fetchNotes = async () => {
+      if (notes.length > 0) {
+        const defaultSection = {
+          title: 'Demais Anotações',
+          data: [] as Array<object>,
+        };
+        await notes.map(async (note: any) => {
+          const categoryName = get(category, 'name', '');
+          const subjects = await note.subjects.fetch();
+          defaultSection.data.push({
+            title: note.name,
+            creationDate: new Date(note.createdAt).toLocaleDateString('pt-BR'),
+            lastRevisionDate: '24/04/1998',
+            noteType: 'Texto',
+            category: categoryName,
+            subjects: (subjects || []).map(({name, color}: any) => ({
+              content: name,
+              color,
+            })),
+          });
+        });
+        setNoteBySections([defaultSection]);
+      }
+    };
+
+    fetchNotes();
+  }, []);
+
   return (
     <>
       <SectionList
-        sections={DATA_MOCK}
+        sections={noteBySections}
         contentContainerStyle={styles.listContainer}
         keyExtractor={(item, index) => item.title + index}
         renderItem={({item}) => (
@@ -105,7 +83,8 @@ export default compose(
   withObservables(['route'], ({database, route}: any) => {
     const categoryId = get(route, 'params.categoryId', '');
     return {
-      notes: database.get('notes').query(Q.where('id', categoryId)),
+      category: database.get('categories').findAndObserve(categoryId),
+      notes: database.get('notes').query(Q.where('category_id', categoryId)),
     };
   }),
 )(List);
