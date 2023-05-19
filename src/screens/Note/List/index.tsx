@@ -1,5 +1,9 @@
 import React from 'react';
 import {Text, SectionList} from 'react-native';
+import {withDatabase} from '@nozbe/watermelondb/DatabaseProvider';
+import withObservables from '@nozbe/with-observables';
+import {Q} from '@nozbe/watermelondb';
+import {compose} from 'recompose';
 import get from 'lodash/get';
 
 import NoteListCard from '../../../components/NoteListCard';
@@ -65,7 +69,7 @@ const DATA_MOCK = [
   },
 ];
 
-const List = ({route}: ListProps) => {
+const List: React.FunctionComponent<ListProps | any> = ({route}) => {
   return (
     <>
       <SectionList
@@ -96,4 +100,12 @@ const List = ({route}: ListProps) => {
   );
 };
 
-export default List;
+export default compose(
+  withDatabase,
+  withObservables(['route'], ({database, route}: any) => {
+    const categoryId = get(route, 'params.categoryId', '');
+    return {
+      notes: database.get('notes').query(Q.where('id', categoryId)),
+    };
+  }),
+)(List);
