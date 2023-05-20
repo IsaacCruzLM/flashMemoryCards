@@ -35,6 +35,7 @@ export class NoteModel extends Model {
 export interface NoteModelType {
   name: string;
   content: string;
+  levelRevision: number;
   createdAt: number;
   lastRevision: number;
   category: string;
