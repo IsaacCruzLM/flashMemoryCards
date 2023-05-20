@@ -11,6 +11,7 @@ import FloatingAddButton from '../../../components/FloatingAddButton';
 
 import styles from './styles';
 import {ListProps, CardData, sectionData} from './types';
+import {NoteModelType} from '../../../databases/models/noteModel';
 
 const List: React.FunctionComponent<ListProps | any> = ({
   route,
@@ -28,7 +29,7 @@ const List: React.FunctionComponent<ListProps | any> = ({
           title: 'Demais Anotações',
           data: [] as Array<CardData>,
         };
-        await notes.map(async (note: any) => {
+        await notes.map(async (note: NoteModelType) => {
           const categoryName = get(category, 'name', '');
           const subjects = await note.subjects.fetch();
           defaultSection.data.push({

@@ -1,4 +1,4 @@
-import {Model, Q} from '@nozbe/watermelondb';
+import {Model, Q, Query} from '@nozbe/watermelondb';
 import {field, relation, lazy, date} from '@nozbe/watermelondb/decorators';
 
 export class NoteModel extends Model {
@@ -24,4 +24,12 @@ export class NoteModel extends Model {
   subjects = this.collections
     .get('subjects')
     .query(Q.on('note_subjects', 'note_id', this.id));
+}
+
+export interface NoteModelType {
+  name: string;
+  content: string;
+  createdAt: number;
+  category: string;
+  subjects: Query<any>;
 }
