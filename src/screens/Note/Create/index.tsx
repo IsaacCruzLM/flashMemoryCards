@@ -63,7 +63,9 @@ const Create: React.FunctionComponent<CreateProps | any> = ({
       'notes',
       {
         ...newDataObject,
+        levelRevision: 1,
         createdAt: new Date(),
+        lastRevision: new Date(),
         relationships: [
           {
             type: 'category',
