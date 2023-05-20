@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Text, SectionList} from 'react-native';
+import {Text, SectionList, SectionListData} from 'react-native';
 import {withDatabase} from '@nozbe/watermelondb/DatabaseProvider';
 import withObservables from '@nozbe/with-observables';
 import {Q} from '@nozbe/watermelondb';
@@ -10,21 +10,23 @@ import NoteListCard from '../../../components/NoteListCard';
 import FloatingAddButton from '../../../components/FloatingAddButton';
 
 import styles from './styles';
-import {ListProps} from './types';
+import {ListProps, CardData, sectionData} from './types';
 
 const List: React.FunctionComponent<ListProps | any> = ({
   route,
   notes,
   category,
 }) => {
-  const [noteBySections, setNoteBySections] = useState([] as Array<object>);
+  const [noteBySections, setNoteBySections] = useState(
+    [] as SectionListData<any, sectionData>[],
+  );
 
   useEffect(() => {
     const fetchNotes = async () => {
       if (notes.length > 0) {
         const defaultSection = {
           title: 'Demais Anotações',
-          data: [] as Array<object>,
+          data: [] as Array<CardData>,
         };
         await notes.map(async (note: any) => {
           const categoryName = get(category, 'name', '');
@@ -46,7 +48,7 @@ const List: React.FunctionComponent<ListProps | any> = ({
     };
 
     fetchNotes();
-  }, []);
+  }, [category, notes]);
 
   return (
     <>

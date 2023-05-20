@@ -13,3 +13,22 @@ export interface formValues {
   icon: string;
   color: string;
 }
+
+export interface sectionData {
+  title: string;
+  data: Array<CardData>;
+}
+
+export interface CardData {
+  title: string;
+  creationDate: string;
+  lastRevisionDate: string;
+  noteType: string;
+  category: string;
+  subjects: Array<subjectData>;
+}
+
+export interface subjectData {
+  content: string;
+  color: string;
+}
