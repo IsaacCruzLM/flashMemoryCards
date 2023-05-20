@@ -35,7 +35,9 @@ const List: React.FunctionComponent<ListProps | any> = ({
           defaultSection.data.push({
             title: note.name,
             creationDate: new Date(note.createdAt).toLocaleDateString('pt-BR'),
-            lastRevisionDate: '24/04/1998',
+            lastRevisionDate: new Date(note.lastRevision).toLocaleDateString(
+              'pt-BR',
+            ),
             noteType: 'Texto',
             category: categoryName,
             subjects: (subjects || []).map(({name, color}: any) => ({
