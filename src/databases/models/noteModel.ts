@@ -14,8 +14,14 @@ export class NoteModel extends Model {
   @field('content')
   content!: string;
 
+  @field('level_revision')
+  levelRevision!: number;
+
   @date('created_at')
   createdAt!: number;
+
+  @date('last_revision')
+  lastRevision!: number;
 
   @relation('categories', 'category_id')
   category!: string;
@@ -30,6 +36,7 @@ export interface NoteModelType {
   name: string;
   content: string;
   createdAt: number;
+  lastRevision: number;
   category: string;
   subjects: Query<any>;
 }
