@@ -11,12 +11,13 @@ import TextEditor from '../../../components/TextEditor';
 import styles from './styles';
 import {ShowProps} from './types';
 
-const Show: React.FunctionComponent<ShowProps | any> = ({content}) => {
+const Show: React.FunctionComponent<ShowProps | any> = ({note}) => {
+  console.log(note.content);
   return (
     <DefaultContainerView>
       <View style={styles.container}>
         <TextEditor
-          initialContentHTML={content}
+          initialContentHTML={note.content}
           onChange={() => {}}
           placeHolder="Escreva sua anotação aqui!"
         />
