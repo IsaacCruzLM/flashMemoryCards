@@ -1,5 +1,9 @@
 import React from 'react';
 import {View} from 'react-native';
+import withObservables from '@nozbe/with-observables';
+import {withDatabase} from '@nozbe/watermelondb/DatabaseProvider';
+import {compose} from 'recompose';
+import get from 'lodash/get';
 
 import DefaultContainerView from '../../../components/DefaultContainerView';
 import TextEditor from '../../../components/TextEditor';
@@ -21,4 +25,12 @@ const Show: React.FunctionComponent<ShowProps | any> = ({content}) => {
   );
 };
 
-export default Show;
+export default compose(
+  withDatabase,
+  withObservables([], ({route, database}: any) => {
+    const categoryId = get(route, 'params.noteId', '');
+    return {
+      note: database.get('notes').findAndObserve(categoryId),
+    };
+  }),
+)(Show);

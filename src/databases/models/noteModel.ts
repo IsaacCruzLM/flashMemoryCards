@@ -33,6 +33,7 @@ export class NoteModel extends Model {
 }
 
 export interface NoteModelType {
+  id: string;
   name: string;
   content: string;
   levelRevision: number;

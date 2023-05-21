@@ -1,5 +1,4 @@
 import {StyleSheet} from 'react-native';
-import themes from '../../../styles/themes';
 
 const styles = StyleSheet.create({
   container: {
@@ -7,7 +6,6 @@ const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    // padding: themes.spacing.unit,
   },
 });
 

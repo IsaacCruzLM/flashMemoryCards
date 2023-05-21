@@ -20,6 +20,7 @@ export interface sectionData {
 }
 
 export interface CardData {
+  id: string;
   title: string;
   creationDate: string;
   lastRevisionDate: string;
