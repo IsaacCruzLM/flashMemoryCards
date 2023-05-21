@@ -1,5 +1,4 @@
 import React from 'react';
-import {TouchableOpacity} from 'react-native';
 
 import ListCard from '../../components/ListCard';
 import InlineField from '../../components/InlineField';
@@ -15,18 +14,16 @@ const NoteListCard = ({
   category,
   subjects,
   containerStyle = {},
-  onPress = () => {},
+  onPress,
 }: NoteListCardProps) => {
   return (
-    <TouchableOpacity onPress={onPress}>
-      <ListCard title={title} containerStyle={containerStyle}>
-        <InlineField label="Data de criação" content={creationDate} />
-        <InlineField label="Ultima revisão" content={lastRevisionDate} />
-        <InlineField label="Tipo de anotação" content={noteType} />
-        <InlineField label="Categoria" content={category} />
-        <InlineFieldChips label="Assuntos" arrayOfContents={subjects} />
-      </ListCard>
-    </TouchableOpacity>
+    <ListCard onPress={onPress} title={title} containerStyle={containerStyle}>
+      <InlineField label="Data de criação" content={creationDate} />
+      <InlineField label="Ultima revisão" content={lastRevisionDate} />
+      <InlineField label="Tipo de anotação" content={noteType} />
+      <InlineField label="Categoria" content={category} />
+      <InlineFieldChips label="Assuntos" arrayOfContents={subjects} />
+    </ListCard>
   );
 };
 
