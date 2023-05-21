@@ -20,11 +20,13 @@ const Show: React.FunctionComponent<ShowProps | any> = ({note}) => {
   return (
     <DefaultContainerView>
       <View style={styles.container}>
-        <TextEditor
-          initialContentHTML={note.content}
-          onChange={() => {}}
-          placeHolder="Escreva sua anotação aqui!"
-        />
+        <View>
+          <TextEditor
+            initialContentHTML={note.content}
+            onChange={() => {}}
+            placeHolder="Escreva sua anotação aqui!"
+          />
+        </View>
         {globalState.keyboardIsVisible ? null : (
           <View>
             <Button label={'Salvar Anotação'} onPress={() => {}} />
