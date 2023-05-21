@@ -6,18 +6,15 @@ export interface ProviderProps {
 }
 
 const ContextProvider = ({children}: ProviderProps | any) => {
-  const [currentCategory, setCurrentCategory] = useState({
-    name: '',
-    id: '',
-  });
+  const [keyboardIsVisible, setKeyboardIsVisible] = useState(false);
 
   const globalState = {
-    currentCategory,
+    keyboardIsVisible,
   };
 
   const contextValue = {
     globalState,
-    setCurrentCategory,
+    setKeyboardIsVisible,
   };
 
   return (
