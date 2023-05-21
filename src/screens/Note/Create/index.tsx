@@ -15,6 +15,7 @@ import Button from '../../../components/Button';
 import TextInput from '../../../components/TextInput';
 
 import WmdbUtils from '../../../databases/utils';
+import NavigationService from '../../../navigation/NavigationService';
 
 import styles from './styles';
 import {CreateFormProps, CreateProps, formValues} from './types';
@@ -77,6 +78,18 @@ const Create: React.FunctionComponent<CreateProps | any> = ({
       M2MRelationships,
       'note',
     );
+
+    NavigationService.navigate('Notes', {
+      categoryName: get(
+        categories.find(
+          (category: any) =>
+            category.id === get(route, 'params.categoryId', ''),
+        ),
+        'name',
+        '',
+      ),
+      categoryId: get(route, 'params.categoryId', ''),
+    });
   };
 
   return (
