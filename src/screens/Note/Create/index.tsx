@@ -19,7 +19,7 @@ import {CategoryModelType} from '../../../databases/models/categoryModel';
 import NavigationService from '../../../navigation/NavigationService';
 
 import styles from './styles';
-import {CreateFormProps, CreateProps, formValues} from './types';
+import {CreateFormProps, CreateProps, formValues, optionsType} from './types';
 
 const Create: React.FunctionComponent<CreateProps | any> = ({
   categories,
@@ -43,8 +43,8 @@ const Create: React.FunctionComponent<CreateProps | any> = ({
     };
   }, []);
 
-  const translateOptions = (optionsArray: any) =>
-    optionsArray.map(({id, name, icon, color}: any) => ({
+  const translateOptions = (optionsArray: optionsType[]) =>
+    optionsArray.map(({id, name, icon, color}: optionsType) => ({
       label: name,
       value: id,
       iconName: icon,
