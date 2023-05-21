@@ -9,9 +9,11 @@ import get from 'lodash/get';
 import NoteListCard from '../../../components/NoteListCard';
 import FloatingAddButton from '../../../components/FloatingAddButton';
 
+import {NoteModelType} from '../../../databases/models/noteModel';
+import NavigationService from '../../../navigation/NavigationService';
+
 import styles from './styles';
 import {ListProps, CardData, sectionData} from './types';
-import {NoteModelType} from '../../../databases/models/noteModel';
 
 const List: React.FunctionComponent<ListProps | any> = ({
   route,
@@ -72,6 +74,9 @@ const List: React.FunctionComponent<ListProps | any> = ({
             category={item.category}
             subjects={item.subjects}
             containerStyle={styles.cardCustomStyle}
+            onPress={() =>
+              NavigationService.navigate('ShowNote', {noteName: item.title})
+            }
           />
         )}
         renderSectionHeader={({section: {title}}) => (
