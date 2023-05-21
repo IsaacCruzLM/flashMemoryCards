@@ -1,5 +1,5 @@
-import React from 'react';
-import {TouchableOpacity, View} from 'react-native';
+import React, {useEffect, useContext} from 'react';
+import {TouchableOpacity, View, Keyboard} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {NavigationContainer} from '@react-navigation/native';
 import {
@@ -7,8 +7,10 @@ import {
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
 import {createDrawerNavigator} from '@react-navigation/drawer';
+import get from 'lodash/get';
 
 import NavigationService from './NavigationService';
+import AppContext from '../context/appContext';
 
 import InitialPage from '../screens/InitialPage';
 import TutorialPage from '../screens/TutorialPage';
@@ -21,7 +23,6 @@ import SideMenu from '../components/SideMenu';
 
 import themes from '../styles/themes';
 import sharedStyles from '../styles/sharedStyles';
-import {get} from 'lodash';
 
 function Home() {
   return (
@@ -53,6 +54,22 @@ const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
 const Routes = () => {
+  const {setKeyboardIsVisible} = useContext(AppContext);
+
+  useEffect(() => {
+    const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
+      setKeyboardIsVisible(true);
+    });
+    const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
+      setKeyboardIsVisible(false);
+    });
+
+    return () => {
+      showSubscription.remove();
+      hideSubscription.remove();
+    };
+  }, [setKeyboardIsVisible]);
+
   return (
     <NavigationContainer
       ref={navigatorRef => {
