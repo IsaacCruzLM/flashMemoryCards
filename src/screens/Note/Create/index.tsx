@@ -15,6 +15,7 @@ import Button from '../../../components/Button';
 import TextInput from '../../../components/TextInput';
 
 import WmdbUtils from '../../../databases/utils';
+import {CategoryModelType} from '../../../databases/models/categoryModel';
 import NavigationService from '../../../navigation/NavigationService';
 
 import styles from './styles';
@@ -82,7 +83,7 @@ const Create: React.FunctionComponent<CreateProps | any> = ({
     NavigationService.navigate('Notes', {
       categoryName: get(
         categories.find(
-          (category: any) =>
+          (category: CategoryModelType) =>
             category.id === get(route, 'params.categoryId', ''),
         ),
         'name',

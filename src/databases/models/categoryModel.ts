@@ -21,6 +21,7 @@ export class CategoryModel extends Model {
 }
 
 export interface CategoryModelType {
+  id: string;
   name: string;
   icon: string;
   color: string;
