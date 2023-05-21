@@ -29,23 +29,27 @@ const List: React.FunctionComponent<ListProps | any> = ({
           title: 'Demais Anotações',
           data: [] as Array<CardData>,
         };
-        await notes.map(async (note: NoteModelType) => {
-          const categoryName = get(category, 'name', '');
-          const subjects = await note.subjects.fetch();
-          defaultSection.data.push({
-            title: note.name,
-            creationDate: new Date(note.createdAt).toLocaleDateString('pt-BR'),
-            lastRevisionDate: new Date(note.lastRevision).toLocaleDateString(
-              'pt-BR',
-            ),
-            noteType: 'Texto',
-            category: categoryName,
-            subjects: (subjects || []).map(({name, color}: any) => ({
-              content: name,
-              color,
-            })),
-          });
-        });
+        await Promise.all(
+          notes.map(async (note: NoteModelType) => {
+            const categoryName = get(category, 'name', '');
+            const subjects = await note.subjects.fetch();
+            defaultSection.data.push({
+              title: note.name,
+              creationDate: new Date(note.createdAt).toLocaleDateString(
+                'pt-BR',
+              ),
+              lastRevisionDate: new Date(note.lastRevision).toLocaleDateString(
+                'pt-BR',
+              ),
+              noteType: 'Texto',
+              category: categoryName,
+              subjects: (subjects || []).map(({name, color}: any) => ({
+                content: name,
+                color,
+              })),
+            });
+          }),
+        );
         setNoteBySections([defaultSection]);
       }
     };
