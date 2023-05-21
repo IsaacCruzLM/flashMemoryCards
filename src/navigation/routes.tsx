@@ -188,6 +188,18 @@ const Routes = () => {
             };
           }}
         />
+        <Stack.Screen
+          name={'ShowNote'}
+          component={Note.show}
+          options={props => {
+            const noteName = get(props, 'route.params.noteName', '');
+
+            return {
+              title: noteName,
+              ...headerStyled,
+            };
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

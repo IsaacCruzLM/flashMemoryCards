@@ -5,7 +5,7 @@ import TextEditor from '../../../components/TextEditor';
 
 import {ShowProps} from './types';
 
-const Show = ({content}: ShowProps) => {
+const Show: React.FunctionComponent<ShowProps | any> = ({content}) => {
   return (
     <DefaultContainerView>
       <TextEditor
