@@ -54,7 +54,7 @@ const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
 const Routes = () => {
-  const {setKeyboardIsVisible} = useContext(AppContext);
+  const {setKeyboardIsVisible, setShowDialogEditNote} = useContext(AppContext);
 
   useEffect(() => {
     const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
@@ -219,7 +219,7 @@ const Routes = () => {
                   color={themes.colors.background}
                   size={themes.spacing.unit * 3.5}
                   name="square-edit-outline"
-                  onPress={() => {}}
+                  onPress={() => setShowDialogEditNote(true)}
                 />
               ),
             };
