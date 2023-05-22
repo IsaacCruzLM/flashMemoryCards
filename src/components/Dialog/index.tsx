@@ -1,7 +1,9 @@
 import * as React from 'react';
 import {Button, Dialog as DialogPaper, Portal, Text} from 'react-native-paper';
 
-const Dialog = ({isVisible, hideDialog, title}) => {
+import {DialogProps} from './types';
+
+const Dialog = ({isVisible, hideDialog, title}: DialogProps) => {
   return (
     <Portal>
       <DialogPaper visible={isVisible} onDismiss={hideDialog}>
