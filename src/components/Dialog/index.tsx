@@ -1,15 +1,36 @@
 import * as React from 'react';
-import {Button, Dialog as DialogPaper, Portal, Text} from 'react-native-paper';
+import {Button, Dialog as DialogPaper, Portal} from 'react-native-paper';
 
 import {DialogProps} from './types';
 
-const Dialog = ({isVisible, hideDialog, title}: DialogProps) => {
+const Dialog = ({
+  isVisible,
+  hideDialog,
+  title,
+  children,
+  ...props
+}: DialogProps) => {
   return (
     <Portal>
       <DialogPaper visible={isVisible} onDismiss={hideDialog}>
         <DialogPaper.Title>{title}</DialogPaper.Title>
         <DialogPaper.Content>
-          <Text variant="bodyMedium">This is simple DialogPaper</Text>
+          {children.length
+            ? children.map((child: Element, index: number) =>
+                React.isValidElement(child)
+                  ? React.cloneElement(child, {
+                      key: index,
+                      ...(props as object),
+                      ...(child.props as object),
+                    })
+                  : null,
+              )
+            : React.isValidElement(children)
+            ? React.cloneElement(children, {
+                ...(props as object),
+                ...(children.props as object),
+              })
+            : null}
         </DialogPaper.Content>
         <DialogPaper.Actions>
           <Button onPress={hideDialog}>Done</Button>

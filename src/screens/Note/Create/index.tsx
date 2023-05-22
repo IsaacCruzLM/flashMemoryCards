@@ -21,6 +21,14 @@ import NavigationService from '../../../navigation/NavigationService';
 import styles from './styles';
 import {CreateFormProps, CreateProps, formValues, optionsType} from './types';
 
+export const translateOptions = (optionsArray: optionsType[]) =>
+  optionsArray.map(({id, name, icon, color}: optionsType) => ({
+    label: name,
+    value: id,
+    iconName: icon,
+    iconColor: color,
+  }));
+
 const Create: React.FunctionComponent<CreateProps | any> = ({
   categories,
   subjects,
@@ -42,14 +50,6 @@ const Create: React.FunctionComponent<CreateProps | any> = ({
       hideSubscription.remove();
     };
   }, []);
-
-  const translateOptions = (optionsArray: optionsType[]) =>
-    optionsArray.map(({id, name, icon, color}: optionsType) => ({
-      label: name,
-      value: id,
-      iconName: icon,
-      iconColor: color,
-    }));
 
   const submitAction = async (values: formValues) => {
     const newDataObject = cloneDeep(values);
