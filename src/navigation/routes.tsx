@@ -214,6 +214,14 @@ const Routes = () => {
             return {
               title: noteName,
               ...headerStyled,
+              headerRight: () => (
+                <Icon
+                  color={themes.colors.background}
+                  size={themes.spacing.unit * 3.5}
+                  name="square-edit-outline"
+                  onPress={() => {}}
+                />
+              ),
             };
           }}
         />
