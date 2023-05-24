@@ -30,6 +30,9 @@ const Show: React.FunctionComponent<ShowProps | any> = ({
 }) => {
   const {globalState} = useContext(AppContext);
   const [newContent, setNewContent] = useState(note.content);
+  const [newInfo, setNewInfo] = useState({
+    title: note.name,
+  });
 
   const submitAction = async () => {
     const noteId = get(route, 'params.noteId', '');
@@ -65,7 +68,7 @@ const Show: React.FunctionComponent<ShowProps | any> = ({
             label={'Nome da anotação'}
             setText={value => {}}
             placeholder={'Nome da anotação'}
-            value={''}
+            value={newInfo.title}
           />
           <Select
             options={translateOptions(categories)}
