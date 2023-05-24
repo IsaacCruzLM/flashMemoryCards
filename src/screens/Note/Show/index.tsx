@@ -4,6 +4,7 @@ import withObservables from '@nozbe/with-observables';
 import {withDatabase} from '@nozbe/watermelondb/DatabaseProvider';
 import {compose} from 'recompose';
 import get from 'lodash/get';
+import cloneDeep from 'lodash/cloneDeep';
 
 import DefaultContainerView from '../../../components/DefaultContainerView';
 import TextEditor from '../../../components/TextEditor';
@@ -46,6 +47,12 @@ const Show: React.FunctionComponent<ShowProps | any> = ({
     });
   };
 
+  const handleInfoChange = (key: 'name', value: string) => {
+    const newInfoClone = cloneDeep(newInfo);
+    newInfoClone[key] = value;
+    setNewInfo(newInfoClone);
+  };
+
   return (
     <DefaultContainerView>
       <View style={styles.container}>
@@ -66,7 +73,7 @@ const Show: React.FunctionComponent<ShowProps | any> = ({
         <View>
           <TextInput
             label={'Nome da anotação'}
-            setText={value => {}}
+            setText={value => handleInfoChange('name', value)}
             placeholder={'Nome da anotação'}
             value={newInfo.name}
           />
