@@ -63,13 +63,13 @@ const Show: React.FunctionComponent<ShowProps | any> = ({
         <View>
           <TextInput
             label={'Nome da anotação'}
-            setText={(value) => {}}
+            setText={value => {}}
             placeholder={'Nome da anotação'}
             value={''}
           />
           <Select
             options={translateOptions(categories)}
-            onChange={(value) => {}}
+            onChange={value => {}}
             modalTitle="Selecione uma categoria"
             inputLabel="Selecionar Categoria"
             inputPlaceHolder="Selecionar Categoria"
@@ -77,7 +77,7 @@ const Show: React.FunctionComponent<ShowProps | any> = ({
           />
           <SelectMultiple
             options={translateOptions(subjects)}
-            onChange={(value) => {}}
+            onChange={value => {}}
             modalTitle="Selecione vários assuntos"
             inputPlaceHolder="Selecionar Assuntos"
           />

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Button, Dialog as DialogPaper, Portal} from 'react-native-paper';
+import {Button, Dialog as DialogPaper} from 'react-native-paper';
 
 import {DialogProps} from './types';
 
