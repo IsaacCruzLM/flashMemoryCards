@@ -1,3 +1,4 @@
+import {Q} from '@nozbe/watermelondb';
 import get from 'lodash/get';
 import {ALERT_TYPE, Toast} from 'react-native-alert-notification';
 import {database} from '..';
@@ -5,16 +6,25 @@ import {database} from '..';
 import insertItemInWMDB, {Relationship, Data} from './insertItemInWMDB';
 import updateItemInWMDB from './updateItemInWMDB';
 
-export default async function insertItemWithM2MRelationInWMDB(
+export default async function updateItemWithM2MRelationInWMDB(
   model: string,
   data: Data,
   id: string,
-  // relationshipModel: string,
-  // relationships: Array<Relationship>,
-  // relationshipeKey: string,
+  relationshipModel: string,
+  relationships: Array<Relationship>,
+  relationshipKey: string,
 ) {
   try {
     const itemUpdated = await updateItemInWMDB(model, data, id);
+
+    await database.write(async () => {
+      const relations = await database
+        .get(relationshipModel)
+        .query(Q.where(relationshipKey, get(itemUpdated, 'id', '')))
+        .fetch();
+
+      console.log("Flag", relations);
+    });
 
     // Get all relations
 

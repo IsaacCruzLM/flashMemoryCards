@@ -8,6 +8,7 @@ const Dialog = ({
   hideDialog,
   title,
   children,
+  actions,
   ...props
 }: DialogProps) => {
   return (
@@ -32,7 +33,11 @@ const Dialog = ({
           : null}
       </DialogPaper.Content>
       <DialogPaper.Actions>
-        <Button onPress={hideDialog}>Done</Button>
+        {actions.map(({label, buttonMode, buttonAction}) => (
+          <Button mode={buttonMode} onPress={buttonAction}>
+            {label}
+          </Button>
+        ))}
       </DialogPaper.Actions>
     </DialogPaper>
   );
