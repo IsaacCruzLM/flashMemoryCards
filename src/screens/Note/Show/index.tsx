@@ -69,7 +69,22 @@ const Show: React.FunctionComponent<ShowProps | any> = ({
           </View>
         )}
       </View>
-      <Dialog isVisible={true} hideDialog={() => {}} title={'AA'}>
+      <Dialog
+        actions={[
+          {
+            label: 'Atuzalizar',
+            buttonMode: 'contained',
+            buttonAction: () => {},
+          },
+          {
+            label: 'Fechar',
+            buttonMode: 'outlined',
+            buttonAction: () => {},
+          },
+        ]}
+        isVisible={true}
+        hideDialog={() => {}}
+        title={'AA'}>
         <View>
           <TextInput
             label={'Nome da anotação'}
