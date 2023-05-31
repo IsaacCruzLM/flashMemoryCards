@@ -33,6 +33,7 @@ const Show: React.FunctionComponent<ShowProps | any> = ({
   const [newContent, setNewContent] = useState(note.content);
   const [newInfo, setNewInfo] = useState({
     name: get(note, 'name', ''),
+    category: get(note, 'category.id', ''),
   });
 
   const submitAction = async () => {
@@ -47,7 +48,7 @@ const Show: React.FunctionComponent<ShowProps | any> = ({
     });
   };
 
-  const handleInfoChange = (key: 'name', value: string) => {
+  const handleInfoChange = (key: 'name' | 'category', value: string) => {
     const newInfoClone = cloneDeep(newInfo);
     newInfoClone[key] = value;
     setNewInfo(newInfoClone);
@@ -94,11 +95,11 @@ const Show: React.FunctionComponent<ShowProps | any> = ({
           />
           <Select
             options={translateOptions(categories)}
-            onChange={value => {}}
+            onChange={value => handleInfoChange('category', value)}
             modalTitle="Selecione uma categoria"
             inputLabel="Selecionar Categoria"
             inputPlaceHolder="Selecionar Categoria"
-            defaultValue={''}
+            defaultValue={newInfo.category}
           />
           <SelectMultiple
             options={translateOptions(subjects)}
