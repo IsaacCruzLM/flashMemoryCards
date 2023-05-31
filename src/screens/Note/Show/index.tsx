@@ -1,5 +1,6 @@
 import React, {useContext, useState} from 'react';
 import {View} from 'react-native';
+import {Q} from '@nozbe/watermelondb';
 import withObservables from '@nozbe/with-observables';
 import {withDatabase} from '@nozbe/watermelondb/DatabaseProvider';
 import {compose} from 'recompose';
@@ -22,18 +23,23 @@ import {translateOptions} from '../Create';
 import styles from './styles';
 import {ShowProps} from './types';
 import {CategoryModelType} from '../../../databases/models/categoryModel';
+import {NoteSubjectModelType} from '../../../databases/models/noteSubjectModel';
 
 const Show: React.FunctionComponent<ShowProps | any> = ({
   route,
   note,
   categories,
   subjects,
+  noteSubjects = [],
 }) => {
   const {globalState} = useContext(AppContext);
   const [newContent, setNewContent] = useState(note.content);
   const [newInfo, setNewInfo] = useState({
     name: get(note, 'name', ''),
     category: get(note, 'category.id', ''),
+    subjects: noteSubjects.map((noteSubject: NoteSubjectModelType) =>
+      get(noteSubject, 'subject.id'),
+    ),
   });
 
   const submitAction = async () => {
@@ -48,7 +54,10 @@ const Show: React.FunctionComponent<ShowProps | any> = ({
     });
   };
 
-  const handleInfoChange = (key: 'name' | 'category', value: string) => {
+  const handleInfoChange = (
+    key: 'name' | 'category' | 'subjects',
+    value: string | string[],
+  ) => {
     const newInfoClone = cloneDeep(newInfo);
     newInfoClone[key] = value;
     setNewInfo(newInfoClone);
@@ -103,9 +112,10 @@ const Show: React.FunctionComponent<ShowProps | any> = ({
           />
           <SelectMultiple
             options={translateOptions(subjects)}
-            onChange={value => {}}
+            onChange={value => handleInfoChange('subjects', value)}
             modalTitle="Selecione vários assuntos"
             inputPlaceHolder="Selecionar Assuntos"
+            defaultValue={newInfo.subjects}
           />
         </View>
       </Dialog>
@@ -121,6 +131,9 @@ export default compose(
       note: database.get('notes').findAndObserve(noteId),
       categories: database.get('categories').query(),
       subjects: database.get('subjects').query(),
+      noteSubjects: database
+        .get('note_subjects')
+        .query(Q.where('note_id', noteId)),
     };
   }),
 )(Show);
