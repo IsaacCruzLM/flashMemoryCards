@@ -57,10 +57,12 @@ const Show: React.FunctionComponent<ShowProps | any> = ({
   const updateAction = async () => {
     const noteId = get(route, 'params.noteId', '');
     const newDataObject = cloneDeep(newInfo);
-    const M2MRelationships = get(newDataObject, 'subjects', []).map(id => ({
-      type: 'subject',
-      id,
-    }));
+    const M2MRelationships = get(newDataObject, 'subjects', []).map(
+      (id: String) => ({
+        type: 'subject',
+        id,
+      }),
+    );
     const categoryRelationshipId = get(newDataObject, 'category', '');
     delete newDataObject.subjects;
     delete newDataObject.category;
