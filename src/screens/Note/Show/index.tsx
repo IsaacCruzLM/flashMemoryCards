@@ -54,6 +54,36 @@ const Show: React.FunctionComponent<ShowProps | any> = ({
     });
   };
 
+  const updateAction = async () => {
+    const noteId = get(route, 'params.noteId', '');
+    const newDataObject = cloneDeep(newInfo);
+    const M2MRelationships = get(newDataObject, 'subjects', []).map(id => ({
+      type: 'subject',
+      id,
+    }));
+    const categoryRelationshipId = get(newDataObject, 'category', '');
+    delete newDataObject.subjects;
+    delete newDataObject.category;
+
+    await WmdbUtils.updateItemWithM2MRelationInWMDB(
+      'notes',
+      {
+        ...newDataObject,
+        relationships: [
+          {
+            type: 'category',
+            id: categoryRelationshipId,
+          },
+        ],
+      },
+      noteId,
+      'note_subjects',
+      M2MRelationships,
+      'note_id',
+      'note',
+    );
+  };
+
   const handleInfoChange = (
     key: 'name' | 'category' | 'subjects',
     value: string | string[],
@@ -84,7 +114,7 @@ const Show: React.FunctionComponent<ShowProps | any> = ({
           {
             label: 'Atuzalizar',
             buttonMode: 'contained',
-            buttonAction: () => {},
+            buttonAction: () => updateAction(),
           },
           {
             label: 'Fechar',

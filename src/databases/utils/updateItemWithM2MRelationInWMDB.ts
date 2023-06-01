@@ -1,9 +1,11 @@
 import {Q} from '@nozbe/watermelondb';
-import get from 'lodash/get';
+import Model from '@nozbe/watermelondb/Model';
 import {ALERT_TYPE, Toast} from 'react-native-alert-notification';
+import get from 'lodash/get';
+
 import {database} from '..';
 
-import insertItemInWMDB, {Relationship, Data} from './insertItemInWMDB';
+import {Relationship, Data} from './insertItemInWMDB';
 import updateItemInWMDB from './updateItemInWMDB';
 
 export default async function updateItemWithM2MRelationInWMDB(
@@ -11,28 +13,41 @@ export default async function updateItemWithM2MRelationInWMDB(
   data: Data,
   id: string,
   relationshipModel: string,
-  relationships: Array<Relationship>,
+  newRelationships: Array<Relationship>,
+  relationshipField: string,
   relationshipKey: string,
 ) {
   try {
     const itemUpdated = await updateItemInWMDB(model, data, id);
+    const itemUpdatedId = get(itemUpdated, 'id', '');
 
     await database.write(async () => {
-      const relations = await database
+      const actualRelationships = await database
         .get(relationshipModel)
-        .query(Q.where(relationshipKey, get(itemUpdated, 'id', '')))
+        .query(Q.where(relationshipField, itemUpdatedId))
         .fetch();
 
-      console.log("Flag", relations);
+      const prepareDeleteOldRelations = actualRelationships.map(relation =>
+        relation.prepareDestroyPermanently(),
+      );
+
+      const prepateCreateNewRelations = newRelationships.map(
+        ({type, id: relationshipId}) =>
+          database.get(relationshipModel).prepareCreate(wmdbModel => {
+            (wmdbModel as Model | any)[relationshipKey].id = itemUpdatedId;
+            (wmdbModel as Model | any)[type].id = relationshipId;
+          }),
+      );
+
+      await database.batch(
+        ...prepareDeleteOldRelations,
+        ...prepateCreateNewRelations,
+      );
     });
 
-    // Get all relations
+    const a = await database.get(relationshipModel).query().fetch();
 
-    // Verify if have a relation that not exists anymore and delete him
-
-    // Create new relations
-
-    // If exists, dont do anything
+    console.log('Flag', a);
 
     return itemUpdated;
   } catch (error: any) {
