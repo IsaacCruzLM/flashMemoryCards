@@ -32,7 +32,7 @@ const Show: React.FunctionComponent<ShowProps | any> = ({
   subjects,
   noteSubjects = [],
 }) => {
-  const {globalState} = useContext(AppContext);
+  const {globalState, setShowDialogEditNote} = useContext(AppContext);
   const [newContent, setNewContent] = useState(note.content);
   const [newInfo, setNewInfo] = useState({
     name: get(note, 'name', ''),
@@ -114,19 +114,19 @@ const Show: React.FunctionComponent<ShowProps | any> = ({
       <Dialog
         actions={[
           {
-            label: 'Atuzalizar',
+            label: 'Fechar',
+            buttonMode: 'outlined',
+            buttonAction: () => setShowDialogEditNote(false),
+          },
+          {
+            label: 'Atualizar',
             buttonMode: 'contained',
             buttonAction: () => updateAction(),
           },
-          {
-            label: 'Fechar',
-            buttonMode: 'outlined',
-            buttonAction: () => {},
-          },
         ]}
-        isVisible={true}
-        hideDialog={() => {}}
-        title={'AA'}>
+        isVisible={globalState.showDialogEditNote}
+        hideDialog={() => setShowDialogEditNote(false)}
+        title={'Atualizar informações da anotação'}>
         <View>
           <TextInput
             label={'Nome da anotação'}
