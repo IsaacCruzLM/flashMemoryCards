@@ -24,6 +24,7 @@ import styles from './styles';
 import {ShowProps} from './types';
 import {CategoryModelType} from '../../../databases/models/categoryModel';
 import {NoteSubjectModelType} from '../../../databases/models/noteSubjectModel';
+import toastShow from '../../../utils/toastShow';
 
 const Show: React.FunctionComponent<ShowProps | any> = ({
   route,
@@ -87,7 +88,7 @@ const Show: React.FunctionComponent<ShowProps | any> = ({
 
     setShowDialogEditNote(false);
     if (!get(response, 'error', false)) {
-      //notify item atualizado
+      toastShow('success', 'Sucesso', 'Item Atualizado com sucesso');
     }
   };
 
