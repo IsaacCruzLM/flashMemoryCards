@@ -1,7 +1,10 @@
 import * as React from 'react';
-import {Button, Dialog as DialogPaper} from 'react-native-paper';
+import {Dialog as DialogPaper} from 'react-native-paper';
+import Button from '../Button';
 
+import styles from './styles';
 import {DialogProps} from './types';
+import {View} from 'react-native';
 
 const Dialog = ({
   isVisible,
@@ -13,7 +16,7 @@ const Dialog = ({
 }: DialogProps) => {
   return (
     <DialogPaper visible={isVisible} onDismiss={hideDialog}>
-      <DialogPaper.Title>{title}</DialogPaper.Title>
+      <DialogPaper.Title style={styles.title}>{title}</DialogPaper.Title>
       <DialogPaper.Content>
         {children.length
           ? children.map((child: Element, index: number) =>
@@ -31,14 +34,20 @@ const Dialog = ({
               ...(children.props as object),
             })
           : null}
+        {
+          <View style={styles.actionsContainer}>
+            {actions.map(({label, buttonMode, buttonAction}, index) => (
+              <Button
+                // eslint-disable-next-line react-native/no-inline-styles
+                style={[styles.button, {marginLeft: index === 0 ? 0 : 8}]}
+                modeParam={buttonMode}
+                onPress={buttonAction}
+                label={label}
+              />
+            ))}
+          </View>
+        }
       </DialogPaper.Content>
-      <DialogPaper.Actions>
-        {actions.map(({label, buttonMode, buttonAction}) => (
-          <Button mode={buttonMode} onPress={buttonAction}>
-            {label}
-          </Button>
-        ))}
-      </DialogPaper.Actions>
     </DialogPaper>
   );
 };
