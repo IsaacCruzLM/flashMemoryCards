@@ -19,6 +19,7 @@ const List: React.FunctionComponent<ListProps | any> = ({
   route,
   notes,
   category,
+  noteSubjects,
 }) => {
   const [noteBySections, setNoteBySections] = useState(
     [] as SectionListData<any, sectionData>[],
@@ -58,7 +59,7 @@ const List: React.FunctionComponent<ListProps | any> = ({
     };
 
     fetchNotes();
-  }, [category, notes]);
+  }, [category, notes, noteSubjects]);
 
   return (
     <>
@@ -102,7 +103,14 @@ export default compose(
     const categoryId = get(route, 'params.categoryId', '');
     return {
       category: database.get('categories').findAndObserve(categoryId),
-      notes: database.get('notes').query(Q.where('category_id', categoryId)),
+      notes: database
+        .get('notes')
+        .query(Q.where('category_id', categoryId))
+        .observeWithColumns(['name', 'category_id']),
+      noteSubjects: database
+        .get('note_subjects')
+        .query()
+        .observeWithColumns(['note_id', 'subject_id']),
     };
   }),
 )(List);
