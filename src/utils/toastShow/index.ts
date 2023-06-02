@@ -1,6 +1,10 @@
 import {ALERT_TYPE, Toast} from 'react-native-alert-notification';
 
-const toastShow = (type: string, title: string, textBody: string) => {
+const toastShow = (
+  type: 'danger' | 'success' | 'warning',
+  title: string,
+  textBody: string,
+) => {
   const getType = () => {
     switch (type) {
       case 'danger':
