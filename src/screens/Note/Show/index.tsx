@@ -84,6 +84,8 @@ const Show: React.FunctionComponent<ShowProps | any> = ({
       'note_id',
       'note',
     );
+
+    setShowDialogEditNote(false);
   };
 
   const handleInfoChange = (
