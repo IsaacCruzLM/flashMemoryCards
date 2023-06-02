@@ -67,7 +67,7 @@ const Show: React.FunctionComponent<ShowProps | any> = ({
     delete newDataObject.subjects;
     delete newDataObject.category;
 
-    await WmdbUtils.updateItemWithM2MRelationInWMDB(
+    const response = await WmdbUtils.updateItemWithM2MRelationInWMDB(
       'notes',
       {
         ...newDataObject,
@@ -86,6 +86,9 @@ const Show: React.FunctionComponent<ShowProps | any> = ({
     );
 
     setShowDialogEditNote(false);
+    if (!get(response, 'error', false)) {
+      //notify item atualizado
+    }
   };
 
   const handleInfoChange = (
