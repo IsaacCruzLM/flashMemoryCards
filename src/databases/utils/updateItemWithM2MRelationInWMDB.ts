@@ -45,10 +45,6 @@ export default async function updateItemWithM2MRelationInWMDB(
       );
     });
 
-    const a = await database.get(relationshipModel).query().fetch();
-
-    console.log('Flag', a);
-
     return itemUpdated;
   } catch (error: any) {
     console.log('Flag Error', error);
