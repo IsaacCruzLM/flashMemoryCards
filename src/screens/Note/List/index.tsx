@@ -28,15 +28,19 @@ const List: React.FunctionComponent<ListProps | any> = ({
   useEffect(() => {
     const fetchNotes = async () => {
       if (notes.length > 0) {
-        const defaultSection = {
-          title: 'Demais Anotações',
+        const otherSection = {
+          title: 'Demais anotações',
+          data: [] as Array<CardData>,
+        };
+        const revisionSection = {
+          title: 'Anotações a serem revisadas',
           data: [] as Array<CardData>,
         };
         await Promise.all(
           notes.map(async (note: NoteModelType) => {
             const categoryName = get(category, 'name', '');
             const subjects = await note.subjects.fetch();
-            defaultSection.data.push({
+            otherSection.data.push({
               id: note.id,
               title: note.name,
               creationDate: new Date(note.createdAt).toLocaleDateString(
@@ -54,7 +58,7 @@ const List: React.FunctionComponent<ListProps | any> = ({
             });
           }),
         );
-        setNoteBySections([defaultSection]);
+        setNoteBySections([otherSection]);
       }
     };
 
