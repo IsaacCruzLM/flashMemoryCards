@@ -11,6 +11,7 @@ import FloatingAddButton from '../../../components/FloatingAddButton';
 
 import {NoteModelType} from '../../../databases/models/noteModel';
 import NavigationService from '../../../navigation/NavigationService';
+import noteNeedToBeRevised from '../../../utils/noteValidations';
 
 import styles from './styles';
 import {ListProps, CardData, sectionData} from './types';
@@ -40,7 +41,9 @@ const List: React.FunctionComponent<ListProps | any> = ({
           notes.map(async (note: NoteModelType) => {
             const categoryName = get(category, 'name', '');
             const subjects = await note.subjects.fetch();
-            otherSection.data.push({
+            const needRevision = noteNeedToBeRevised(note);
+
+            (needRevision ? revisionSection : otherSection).data.push({
               id: note.id,
               title: note.name,
               creationDate: new Date(note.createdAt).toLocaleDateString(
