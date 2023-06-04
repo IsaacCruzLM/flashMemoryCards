@@ -1,17 +1,18 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {FlatList} from 'react-native';
 import withObservables from '@nozbe/with-observables';
 import {withDatabase} from '@nozbe/watermelondb/DatabaseProvider';
 import {compose} from 'recompose';
 
 import NavigationService from '../../../navigation/NavigationService';
+import noteNeedToBeRevised from '../../../utils/noteValidations';
 
 import CategoryListCard from '../../../components/CategoryListCard';
 import FloatingAddButton from '../../../components/FloatingAddButton';
 import EmpytMessage from '../../../components/EmpytMessage';
 
 import styles from './styles';
-import noteNeedToBeRevised from '../../../utils/noteValidations';
+import {NoteModelType} from '../../../databases/models/noteModel';
 
 const List = ({categories, notes}: any) => {
   if (categories.length <= 0) {
@@ -24,13 +25,13 @@ const List = ({categories, notes}: any) => {
     );
   }
 
-  const getNotesByCategory = categoryId => {
+  const getNotesByCategory = (categoryId: string) => {
     let totalOfNotes = 0;
     let numberOfNotesToRevision = 0;
 
     notes
-      .filter(note => note.category.id === categoryId)
-      .map(note => {
+      .filter((note: NoteModelType) => note.category.id === categoryId)
+      .map((note: NoteModelType) => {
         totalOfNotes += 1;
         if (noteNeedToBeRevised(note)) {
           numberOfNotesToRevision += 1;

@@ -39,6 +39,6 @@ export interface NoteModelType {
   levelRevision: number;
   createdAt: number;
   lastRevision: number;
-  category: string;
+  category: {id: string};
   subjects: Query<any>;
 }
