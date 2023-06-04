@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {FlatList} from 'react-native';
 import withObservables from '@nozbe/with-observables';
 import {withDatabase} from '@nozbe/watermelondb/DatabaseProvider';
@@ -11,8 +11,9 @@ import FloatingAddButton from '../../../components/FloatingAddButton';
 import EmpytMessage from '../../../components/EmpytMessage';
 
 import styles from './styles';
+import noteNeedToBeRevised from '../../../utils/noteValidations';
 
-const List = ({categories}: any) => {
+const List = ({categories, notes}: any) => {
   if (categories.length <= 0) {
     return (
       <EmpytMessage
@@ -23,6 +24,22 @@ const List = ({categories}: any) => {
     );
   }
 
+  const getNotesByCategory = categoryId => {
+    let totalOfNotes = 0;
+    let numberOfNotesToRevision = 0;
+
+    notes
+      .filter(note => note.category.id === categoryId)
+      .map(note => {
+        totalOfNotes += 1;
+        if (noteNeedToBeRevised(note)) {
+          numberOfNotesToRevision += 1;
+        }
+      });
+
+    return {totalOfNotes, numberOfNotesToRevision};
+  };
+
   return (
     <>
       <FlatList
@@ -31,14 +48,17 @@ const List = ({categories}: any) => {
         keyExtractor={item => item.id}
         renderItem={({item}) => {
           const {id, name, createdAt, icon, color} = item;
+          const {numberOfNotesToRevision, totalOfNotes} =
+            getNotesByCategory(id);
+
           return (
             <CategoryListCard
               title={name}
               creationDate={createdAt.toLocaleDateString('pt-br')}
-              numberOfNotes={16}
+              numberOfNotes={totalOfNotes}
               icon={icon}
               iconColor={color}
-              numberNotesToReview={2}
+              numberNotesToReview={numberOfNotesToRevision}
               onPress={() => {
                 NavigationService.navigate('Notes', {
                   categoryName: name,
@@ -63,5 +83,9 @@ export default compose(
       .get('categories')
       .query()
       .observeWithColumns(['name', 'icon', 'color']),
+    notes: database
+      .get('notes')
+      .query()
+      .observeWithColumns(['name', 'category_id']),
   })),
 )(List);
