@@ -80,21 +80,21 @@ const Create: React.FunctionComponent<CreateProps | any> = ({
       'note',
     );
 
-    if (!get(route, 'params.categoryId', '')) {
+    if (get(route, 'params.categoryId', '')) {
+      NavigationService.navigate('Notes', {
+        categoryName: get(
+          categories.find(
+            (category: CategoryModelType) =>
+              category.id === get(route, 'params.categoryId', ''),
+          ),
+          'name',
+          '',
+        ),
+        categoryId: get(route, 'params.categoryId', ''),
+      });
+    } else {
       NavigationService.navigate('Home');
     }
-
-    NavigationService.navigate('Notes', {
-      categoryName: get(
-        categories.find(
-          (category: CategoryModelType) =>
-            category.id === get(route, 'params.categoryId', ''),
-        ),
-        'name',
-        '',
-      ),
-      categoryId: get(route, 'params.categoryId', ''),
-    });
   };
 
   return (
