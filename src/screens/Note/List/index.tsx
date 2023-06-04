@@ -8,6 +8,7 @@ import get from 'lodash/get';
 
 import NoteListCard from '../../../components/NoteListCard';
 import FloatingAddButton from '../../../components/FloatingAddButton';
+import EmpytMessage from '../../../components/EmpytMessage';
 
 import {NoteModelType} from '../../../databases/models/noteModel';
 import NavigationService from '../../../navigation/NavigationService';
@@ -76,6 +77,20 @@ const List: React.FunctionComponent<ListProps | any> = ({
 
     fetchNotes();
   }, [category, notes, noteSubjects]);
+
+  if (noteBySections.length <= 0) {
+    return (
+      <EmpytMessage
+        message={'Nenhuma anotação criada para esta categoria'}
+        actionLabel={'Crie uma anotação'}
+        onPressAction={() =>
+          NavigationService.navigate('NewNote', {
+            categoryId: get(route, 'params.categoryId', ''),
+          })
+        }
+      />
+    );
+  }
 
   return (
     <>
