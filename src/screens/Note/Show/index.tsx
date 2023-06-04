@@ -88,7 +88,7 @@ const Show: React.FunctionComponent<ShowProps | any> = ({
 
     setShowDialogEditNote(false);
     if (!get(response, 'error', false)) {
-      toastShow('success', 'Sucesso', 'Item Atualizado com sucesso');
+      toastShow('success', 'Item Atualizado com sucesso');
     }
   };
 
