@@ -12,9 +12,10 @@ import FloatingAddButton from '../../../components/FloatingAddButton';
 import EmpytMessage from '../../../components/EmpytMessage';
 
 import styles from './styles';
+import {ListProps} from './types';
 import {NoteModelType} from '../../../databases/models/noteModel';
 
-const List = ({categories, notes}: any) => {
+const List = ({categories, notes}: ListProps | any) => {
   if (categories.length <= 0) {
     return (
       <EmpytMessage
@@ -55,7 +56,7 @@ const List = ({categories, notes}: any) => {
           return (
             <CategoryListCard
               title={name}
-              creationDate={createdAt.toLocaleDateString('pt-br')}
+              creationDate={createdAt.toLocaleString('pt-BR')}
               numberOfNotes={totalOfNotes}
               icon={icon}
               iconColor={color}

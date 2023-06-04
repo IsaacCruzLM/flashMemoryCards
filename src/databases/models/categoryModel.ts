@@ -25,5 +25,5 @@ export interface CategoryModelType {
   name: string;
   icon: string;
   color: string;
-  createdAt: number;
+  createdAt: number | Date;
 }
