@@ -49,6 +49,7 @@ const Show: React.FunctionComponent<ShowProps | any> = ({
       ({id}: CategoryModelType) => id === note.category.id,
     );
     await WmdbUtils.updateItemInWMDB('notes', {content: newContent}, noteId);
+    toastShow('success', 'Conteúdo da anotação atualizado com sucesso');
     NavigationService.navigate('Notes', {
       categoryName: get(category, 'name', ''),
       categoryId: get(category, 'id', ''),
@@ -88,7 +89,7 @@ const Show: React.FunctionComponent<ShowProps | any> = ({
 
     setShowDialogEditNote(false);
     if (!get(response, 'error', false)) {
-      toastShow('success', 'Item Atualizado com sucesso');
+      toastShow('success', 'Anotação Atualizada com sucesso');
     }
   };
 
