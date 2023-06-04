@@ -14,7 +14,7 @@ const noteNeedToBeRevised = (note: NoteModelType) => {
   let needToBeRevised = false;
   const today = new Date();
 
-  if (isNaN(levelRevision) && levelRevision < 5 && levelRevision > 0) {
+  if (!isNaN(levelRevision) && levelRevision < 5 && levelRevision > 0) {
     needToBeRevised =
       today.getTime() - new Date(lastRevision).getTime() >
       ONE_DAY_IN_MILLISECONDS *
