@@ -29,6 +29,7 @@ const List: React.FunctionComponent<ListProps | any> = ({
   useEffect(() => {
     const fetchNotes = async () => {
       if (notes.length > 0) {
+        const newNoteBySections = [];
         const otherSection = {
           title: 'Demais anotações',
           data: [] as Array<CardData>,
@@ -61,7 +62,15 @@ const List: React.FunctionComponent<ListProps | any> = ({
             });
           }),
         );
-        setNoteBySections([otherSection]);
+
+        if (revisionSection.data.length > 0) {
+          newNoteBySections.push(revisionSection);
+        }
+        if (otherSection.data.length > 0) {
+          newNoteBySections.push(otherSection);
+        }
+
+        setNoteBySections(newNoteBySections);
       }
     };
 
