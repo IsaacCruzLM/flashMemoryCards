@@ -20,6 +20,7 @@ import NavigationService from '../../../navigation/NavigationService';
 
 import styles from './styles';
 import {CreateFormProps, CreateProps, formValues, optionsType} from './types';
+import toastShow from '../../../utils/toastShow';
 
 export const translateOptions = (optionsArray: optionsType[]) =>
   optionsArray.map(({id, name, icon, color}: optionsType) => ({
@@ -79,6 +80,8 @@ const Create: React.FunctionComponent<CreateProps | any> = ({
       M2MRelationships,
       'note',
     );
+
+    toastShow('success', 'Anotação criada com sucesso');
 
     if (get(route, 'params.categoryId', '')) {
       NavigationService.navigate('Notes', {
