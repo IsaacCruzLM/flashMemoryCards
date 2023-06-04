@@ -80,6 +80,10 @@ const Create: React.FunctionComponent<CreateProps | any> = ({
       'note',
     );
 
+    if (!get(route, 'params.categoryId', '')) {
+      NavigationService.navigate('Home');
+    }
+
     NavigationService.navigate('Notes', {
       categoryName: get(
         categories.find(
