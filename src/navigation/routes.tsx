@@ -238,14 +238,13 @@ const headerStyled = {
 
 const headerSearchBar = () => {
   return {
-    placeholder: 'Buscar',
     onChangeText: event => {},
     onCancelButtonPress: event => {},
     headerIconColor: themes.colors.background,
     tintColor: themes.colors.background,
     textColor: themes.colors.background,
-    hintTextColor: themes.colors.background,
     barTintColor: themes.colors.disabled,
+    shouldShowHintSearchIcon: false,
   };
 };
 
