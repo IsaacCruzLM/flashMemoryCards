@@ -10,7 +10,7 @@ interface ContextType {
   globalState: globalStateType;
   setKeyboardIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
   setShowDialogEditNote: React.Dispatch<React.SetStateAction<boolean>>;
-  setSearchParams: React.Dispatch<React.SetStateAction<object>>;
+  setSearchParamsFunction: React.Dispatch<React.SetStateAction<object>>;
 }
 
 const AppContext = createContext<ContextType>({
@@ -21,7 +21,7 @@ const AppContext = createContext<ContextType>({
   },
   setKeyboardIsVisible: () => {},
   setShowDialogEditNote: () => {},
-  setSearchParams: () => {},
+  setSearchParamsFunction: () => {},
 });
 
 export default AppContext;

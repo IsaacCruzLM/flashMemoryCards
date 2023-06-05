@@ -10,6 +10,9 @@ const ContextProvider = ({children}: ProviderProps | any) => {
   const [showDialogEditNote, setShowDialogEditNote] = useState(false);
   const [searchParams, setSearchParams] = useState({});
 
+  const setSearchParamsFunction = (newParam: object) =>
+    setSearchParams({...searchParams, ...newParam});
+
   const globalState = {
     keyboardIsVisible,
     showDialogEditNote,
@@ -20,7 +23,7 @@ const ContextProvider = ({children}: ProviderProps | any) => {
     globalState,
     setKeyboardIsVisible,
     setShowDialogEditNote,
-    setSearchParams,
+    setSearchParamsFunction,
   };
 
   return (
