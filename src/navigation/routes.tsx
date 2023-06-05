@@ -95,16 +95,9 @@ const Routes = () => {
           name="Categories"
           component={Category.list}
           options={{
-            title: 'Categorias',
+            title: '',
             ...headerStyled,
-            headerRight: () => (
-              <Icon
-                color={themes.colors.background}
-                size={themes.spacing.unit * 3.5}
-                name="magnify"
-                onPress={() => {}}
-              />
-            ),
+            headerSearchBarOptions: headerSearchBar(),
           }}
         />
         <Stack.Screen
@@ -242,5 +235,18 @@ const headerStyled = {
     color: themes.colors.background,
   },
 } as NativeStackNavigationOptions;
+
+const headerSearchBar = () => {
+  return {
+    placeholder: 'Buscar',
+    onChangeText: event => {},
+    onCancelButtonPress: event => {},
+    headerIconColor: themes.colors.background,
+    tintColor: themes.colors.background,
+    textColor: themes.colors.background,
+    hintTextColor: themes.colors.background,
+    barTintColor: themes.colors.disabled,
+  };
+};
 
 export default Routes;
