@@ -24,6 +24,10 @@ function navigate(name: string, params?: object | undefined) {
   );
 }
 
+function setParams(params: object) {
+  _navigator.dispatch(CommonActions.setParams(params));
+}
+
 export default {
   navigate,
   setTopLevelNavigator,
