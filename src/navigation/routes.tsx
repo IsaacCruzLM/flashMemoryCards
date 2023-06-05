@@ -54,7 +54,21 @@ const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
 const Routes = () => {
-  const {setKeyboardIsVisible, setShowDialogEditNote} = useContext(AppContext);
+  const {setKeyboardIsVisible, setShowDialogEditNote, setSearchParamsFunction} =
+    useContext(AppContext);
+
+  const headerSearchBar = (pageName: string) => {
+    return {
+      onChangeText: (event: any) =>
+        setSearchParamsFunction({[pageName]: event.nativeEvent.text}),
+      onCancelButtonPress: () => setSearchParamsFunction({[pageName]: ''}),
+      headerIconColor: themes.colors.background,
+      tintColor: themes.colors.background,
+      textColor: themes.colors.background,
+      barTintColor: themes.colors.disabled,
+      shouldShowHintSearchIcon: false,
+    };
+  };
 
   useEffect(() => {
     const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
@@ -95,9 +109,9 @@ const Routes = () => {
           name="Categories"
           component={Category.list}
           options={{
-            title: '',
+            title: 'Categorias',
             ...headerStyled,
-            headerSearchBarOptions: headerSearchBar(),
+            headerSearchBarOptions: headerSearchBar('Categories'),
           }}
         />
         <Stack.Screen
@@ -235,17 +249,5 @@ const headerStyled = {
     color: themes.colors.background,
   },
 } as NativeStackNavigationOptions;
-
-const headerSearchBar = () => {
-  return {
-    onChangeText: event => {},
-    onCancelButtonPress: event => {},
-    headerIconColor: themes.colors.background,
-    tintColor: themes.colors.background,
-    textColor: themes.colors.background,
-    barTintColor: themes.colors.disabled,
-    shouldShowHintSearchIcon: false,
-  };
-};
 
 export default Routes;
