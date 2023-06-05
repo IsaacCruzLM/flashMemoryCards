@@ -31,4 +31,5 @@ function setParams(params: object) {
 export default {
   navigate,
   setTopLevelNavigator,
+  setParams,
 };
