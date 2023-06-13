@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
   listContainer: {
     paddingVertical: themes.spacing.unit * 3,
     paddingHorizontal: themes.spacing.unit * 2 + 4,
+    flexGrow: 1,
   },
   flatList: {
     flex: 1,

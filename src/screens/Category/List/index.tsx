@@ -10,6 +10,7 @@ import noteNeedToBeRevised from '../../../utils/noteValidations';
 import CategoryListCard from '../../../components/CategoryListCard';
 import FloatingAddButton from '../../../components/FloatingAddButton';
 import EmpytMessage from '../../../components/EmpytMessage';
+import EmpytListMessage from '../../../components/EmpytListMessage';
 
 import styles from './styles';
 import {ListProps} from './types';
@@ -79,6 +80,7 @@ const List = ({categories, notes}: ListProps | any) => {
           );
         }}
         style={styles.flatList}
+        ListEmptyComponent={() => <EmpytListMessage itemName="categoria" />}
       />
       <FloatingAddButton routeName="NewCategory" />
     </>
