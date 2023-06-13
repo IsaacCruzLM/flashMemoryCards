@@ -178,7 +178,7 @@ const Routes = () => {
           options={{
             title: 'Assuntos',
             ...headerStyled,
-            headerSearchBarOptions: headerSearchBar('Categories'),
+            headerSearchBarOptions: headerSearchBar('Subjects'),
           }}
         />
         <Stack.Screen
