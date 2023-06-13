@@ -178,14 +178,7 @@ const Routes = () => {
           options={{
             title: 'Assuntos',
             ...headerStyled,
-            headerRight: () => (
-              <Icon
-                color={themes.colors.background}
-                size={themes.spacing.unit * 3.5}
-                name="magnify"
-                onPress={() => {}}
-              />
-            ),
+            headerSearchBarOptions: headerSearchBar('Categories'),
           }}
         />
         <Stack.Screen
