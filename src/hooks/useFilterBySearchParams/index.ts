@@ -1,5 +1,5 @@
 import get from 'lodash/get';
-import useGetFromGlobalSate from '../getFromGlobalState';
+import useGetFromGlobalSate from '../useGetFromGlobalSate';
 
 const useFilterBySearchParams = (
   defaultData: Array<any> = [],
