@@ -10,6 +10,7 @@ import useFilterBySearchParams from '../../../hooks/useFilterBySearchParams';
 import FloatingAddButton from '../../../components/FloatingAddButton';
 import EmpytMessage from '../../../components/EmpytMessage';
 import SubjectListCard from '../../../components/SubjectListCard';
+import EmpytListMessage from '../../../components/EmpytListMessage';
 
 import styles from './styles';
 
@@ -52,6 +53,7 @@ const List = ({subjects}: any) => {
             />
           );
         }}
+        ListEmptyComponent={() => <EmpytListMessage itemName="assunto" />}
         style={styles.flatList}
       />
       <FloatingAddButton routeName="NewSubject" />
