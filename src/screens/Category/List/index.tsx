@@ -1,13 +1,11 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {FlatList} from 'react-native';
 import withObservables from '@nozbe/with-observables';
 import {withDatabase} from '@nozbe/watermelondb/DatabaseProvider';
 import {compose} from 'recompose';
-import get from 'lodash/get';
 
 import NavigationService from '../../../navigation/NavigationService';
 import noteNeedToBeRevised from '../../../utils/noteValidations';
-import AppContext from '../../../context/appContext';
 
 import CategoryListCard from '../../../components/CategoryListCard';
 import FloatingAddButton from '../../../components/FloatingAddButton';
@@ -16,10 +14,14 @@ import EmpytMessage from '../../../components/EmpytMessage';
 import styles from './styles';
 import {ListProps} from './types';
 import {NoteModelType} from '../../../databases/models/noteModel';
-import {CategoryModelType} from '../../../databases/models/categoryModel';
+import useFilterBySearchParams from '../../../hooks/useFilterBySearchParams';
 
 const List = ({categories, notes}: ListProps | any) => {
-  const {globalState} = useContext(AppContext);
+  const filteredCategories = useFilterBySearchParams(
+    categories,
+    'Categories',
+    'name',
+  );
 
   if (categories.length <= 0) {
     return (
@@ -47,19 +49,10 @@ const List = ({categories, notes}: ListProps | any) => {
     return {totalOfNotes, numberOfNotesToRevision};
   };
 
-  const filterCategories = () => {
-    const searchQuery = get(globalState, 'searchParams.Categories', '');
-    return searchQuery
-      ? categories.filter((category: CategoryModelType) =>
-          category.name.includes(searchQuery),
-        )
-      : categories;
-  };
-
   return (
     <>
       <FlatList
-        data={filterCategories()}
+        data={filteredCategories}
         contentContainerStyle={styles.listContainer}
         keyExtractor={item => item.id}
         renderItem={({item}) => {

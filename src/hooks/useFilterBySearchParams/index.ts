@@ -1,12 +1,12 @@
 import get from 'lodash/get';
-import useGetFromGlobalSate from '../useGetFromGlobalSate';
+import useGetFromGlobalState from '../useGetFromGlobalState';
 
 const useFilterBySearchParams = (
   defaultData: Array<any> = [],
   screenName: string = '',
   searchDataPath: string,
 ) => {
-  const searchQuery = useGetFromGlobalSate(`searchParams.${screenName}`, '');
+  const searchQuery = useGetFromGlobalState(`searchParams.${screenName}`, '');
   return searchQuery
     ? defaultData.filter((item: any) =>
         get(item, searchDataPath, '').includes(searchQuery),
