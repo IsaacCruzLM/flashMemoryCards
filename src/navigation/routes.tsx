@@ -55,6 +55,7 @@ const Drawer = createDrawerNavigator();
 
 const Routes = () => {
   const {
+    globalState,
     setKeyboardIsVisible,
     setShowDialogEditNote,
     setSearchParamsFunction,
@@ -138,38 +139,38 @@ const Routes = () => {
           options={props => {
             const categoryName = get(props, 'route.params.categoryName', '');
             const categoryId = get(props, 'route.params.categoryId', '');
-            console.log(props);
 
             return {
               title: categoryName,
               ...headerStyled,
               headerSearchBarOptions: headerSearchBar('Notes'),
-              headerRight: () => (
-                <View style={sharedStyles.headerRightIconView}>
-                  <TouchableOpacity
-                    onPress={() =>
-                      NavigationService.navigate('NewCategory', {
-                        categoryId: categoryId,
-                        isEdit: true,
-                      })
-                    }>
-                    <Icon
-                      color={themes.colors.background}
-                      size={themes.spacing.unit * 3}
-                      name="square-edit-outline"
-                      style={sharedStyles.headerIconWithMargin}
-                    />
-                  </TouchableOpacity>
-                  <TouchableOpacity onPress={() => {}}>
-                    <Icon
-                      color={themes.colors.background}
-                      size={themes.spacing.unit * 3}
-                      name="filter-variant"
-                      style={sharedStyles.headerIconWithMargin}
-                    />
-                  </TouchableOpacity>
-                </View>
-              ),
+              headerRight: () =>
+                globalState.isOpenSearchBar ? null : (
+                  <View style={sharedStyles.headerRightIconView}>
+                    <TouchableOpacity
+                      onPress={() =>
+                        NavigationService.navigate('NewCategory', {
+                          categoryId: categoryId,
+                          isEdit: true,
+                        })
+                      }>
+                      <Icon
+                        color={themes.colors.background}
+                        size={themes.spacing.unit * 3}
+                        name="square-edit-outline"
+                        style={sharedStyles.headerIconWithMargin}
+                      />
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => {}}>
+                      <Icon
+                        color={themes.colors.background}
+                        size={themes.spacing.unit * 3}
+                        name="filter-variant"
+                        style={sharedStyles.headerIconWithMargin}
+                      />
+                    </TouchableOpacity>
+                  </View>
+                ),
             };
           }}
         />
