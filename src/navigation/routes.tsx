@@ -54,8 +54,12 @@ const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
 const Routes = () => {
-  const {setKeyboardIsVisible, setShowDialogEditNote, setSearchParamsFunction} =
-    useContext(AppContext);
+  const {
+    setKeyboardIsVisible,
+    setShowDialogEditNote,
+    setSearchParamsFunction,
+    setIsOpenSearchBar,
+  } = useContext(AppContext);
 
   const headerSearchBar = (pageName: string) => {
     return {
@@ -67,7 +71,8 @@ const Routes = () => {
       textColor: themes.colors.background,
       barTintColor: themes.colors.disabled,
       shouldShowHintSearchIcon: false,
-      onFocus: () => console.log("FOCUS"),
+      onFocus: () => setIsOpenSearchBar(true),
+      onBlur: () => setIsOpenSearchBar(false),
     };
   };
 
@@ -134,7 +139,7 @@ const Routes = () => {
             const categoryName = get(props, 'route.params.categoryName', '');
             const categoryId = get(props, 'route.params.categoryId', '');
             console.log(props);
-            
+
             return {
               title: categoryName,
               ...headerStyled,
