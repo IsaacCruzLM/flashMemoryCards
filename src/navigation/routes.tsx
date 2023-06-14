@@ -67,6 +67,7 @@ const Routes = () => {
       textColor: themes.colors.background,
       barTintColor: themes.colors.disabled,
       shouldShowHintSearchIcon: false,
+      onFocus: () => console.log("FOCUS"),
     };
   };
 
@@ -132,9 +133,12 @@ const Routes = () => {
           options={props => {
             const categoryName = get(props, 'route.params.categoryName', '');
             const categoryId = get(props, 'route.params.categoryId', '');
+            console.log(props);
+            
             return {
               title: categoryName,
               ...headerStyled,
+              headerSearchBarOptions: headerSearchBar('Notes'),
               headerRight: () => (
                 <View style={sharedStyles.headerRightIconView}>
                   <TouchableOpacity
@@ -146,7 +150,7 @@ const Routes = () => {
                     }>
                     <Icon
                       color={themes.colors.background}
-                      size={themes.spacing.unit * 3.5}
+                      size={themes.spacing.unit * 3}
                       name="square-edit-outline"
                       style={sharedStyles.headerIconWithMargin}
                     />
@@ -154,16 +158,8 @@ const Routes = () => {
                   <TouchableOpacity onPress={() => {}}>
                     <Icon
                       color={themes.colors.background}
-                      size={themes.spacing.unit * 3.5}
+                      size={themes.spacing.unit * 3}
                       name="filter-variant"
-                      style={sharedStyles.headerIconWithMargin}
-                    />
-                  </TouchableOpacity>
-                  <TouchableOpacity onPress={() => {}}>
-                    <Icon
-                      color={themes.colors.background}
-                      size={themes.spacing.unit * 3.5}
-                      name="magnify"
                       style={sharedStyles.headerIconWithMargin}
                     />
                   </TouchableOpacity>
