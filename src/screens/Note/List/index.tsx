@@ -1,19 +1,24 @@
 import React, {useEffect, useState} from 'react';
-import {Text, SectionList, SectionListData} from 'react-native';
+import {Text, SectionList, SectionListData, View} from 'react-native';
 import {withDatabase} from '@nozbe/watermelondb/DatabaseProvider';
 import withObservables from '@nozbe/with-observables';
 import {Q} from '@nozbe/watermelondb';
 import {compose} from 'recompose';
 import get from 'lodash/get';
+import cloneDeep from 'lodash/cloneDeep';
 
 import NoteListCard from '../../../components/NoteListCard';
 import FloatingAddButton from '../../../components/FloatingAddButton';
 import EmpytMessage from '../../../components/EmpytMessage';
-import useGetFromGlobalState from '../../../hooks/useGetFromGlobalState';
+import Dialog from '../../../components/Dialog';
+import Select from '../../../components/Select';
+import SelectMultiple from '../../../components/SelectMultiple';
 
+import useGetFromGlobalState from '../../../hooks/useGetFromGlobalState';
 import {NoteModelType} from '../../../databases/models/noteModel';
 import NavigationService from '../../../navigation/NavigationService';
 import noteNeedToBeRevised from '../../../utils/noteValidations';
+import {translateOptions} from '../Create';
 
 import styles from './styles';
 import {ListProps, CardData, sectionData} from './types';
@@ -23,12 +28,19 @@ const List: React.FunctionComponent<ListProps | any> = ({
   notes,
   category,
   noteSubjects,
+  categories,
+  subjects,
 }) => {
+  const openFilterDialog = get(route, 'params.openFilterDialog', false);
   const searchQuery = useGetFromGlobalState('searchParams.Notes', '');
 
   const [noteBySections, setNoteBySections] = useState(
     [] as SectionListData<any, sectionData>[],
   );
+  const [filters, setFilters] = useState({
+    category: '',
+    subjects: [] as any,
+  });
 
   useEffect(() => {
     const fetchNotes = async () => {
@@ -45,7 +57,7 @@ const List: React.FunctionComponent<ListProps | any> = ({
         await Promise.all(
           notes.map(async (note: NoteModelType) => {
             const categoryName = get(category, 'name', '');
-            const subjects = await note.subjects.fetch();
+            const subjectsFetch = await note.subjects.fetch();
             const needRevision = noteNeedToBeRevised(note);
             if (note.name.includes(searchQuery)) {
               (needRevision ? revisionSection : otherSection).data.push({
@@ -59,7 +71,7 @@ const List: React.FunctionComponent<ListProps | any> = ({
                 ).toLocaleDateString('pt-BR'),
                 noteType: 'Texto',
                 category: categoryName,
-                subjects: (subjects || []).map(({name, color}: any) => ({
+                subjects: (subjectsFetch || []).map(({name, color}: any) => ({
                   content: name,
                   color,
                 })),
@@ -81,6 +93,18 @@ const List: React.FunctionComponent<ListProps | any> = ({
 
     fetchNotes();
   }, [category, notes, noteSubjects, searchQuery]);
+
+  const handleFilterChange = (
+    key: 'category' | 'subjects',
+    value: string | string[],
+  ) => {
+    const newFiltersClone = cloneDeep(filters);
+    newFiltersClone[key] = value;
+    setFilters(newFiltersClone);
+  };
+
+  const hideFilterDialog = () =>
+    NavigationService.setParams({openFilterDialog: false});
 
   if (notes.length <= 0) {
     return (
@@ -128,6 +152,40 @@ const List: React.FunctionComponent<ListProps | any> = ({
         routeName="NewNote"
         params={{categoryId: get(route, 'params.categoryId', '')}}
       />
+      <Dialog
+        actions={[
+          {
+            label: 'Limpar',
+            buttonMode: 'outlined',
+            buttonAction: () => {},
+          },
+          {
+            label: 'Filtrar',
+            buttonMode: 'contained',
+            buttonAction: () => {},
+          },
+        ]}
+        isVisible={openFilterDialog}
+        hideDialog={() => hideFilterDialog()}
+        title={'Adicionar filtros'}>
+        <View>
+          <Select
+            options={translateOptions(categories)}
+            onChange={value => handleFilterChange('category', value)}
+            modalTitle="Selecione uma categoria"
+            inputLabel="Selecionar Categoria"
+            inputPlaceHolder="Selecionar Categoria"
+            defaultValue={filters.category}
+          />
+          <SelectMultiple
+            options={translateOptions(subjects)}
+            onChange={value => handleFilterChange('subjects', value)}
+            modalTitle="Selecione vários assuntos"
+            inputPlaceHolder="Selecionar Assuntos"
+            defaultValue={filters.subjects}
+          />
+        </View>
+      </Dialog>
     </>
   );
 };
@@ -146,6 +204,8 @@ export default compose(
         .get('note_subjects')
         .query()
         .observeWithColumns(['note_id', 'subject_id']),
+      categories: database.get('categories').query(),
+      subjects: database.get('subjects').query(),
     };
   }),
 )(List);

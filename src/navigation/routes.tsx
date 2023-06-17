@@ -161,7 +161,10 @@ const Routes = () => {
                         style={sharedStyles.headerIconWithMargin}
                       />
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => {}}>
+                    <TouchableOpacity
+                      onPress={() =>
+                        NavigationService.setParams({openFilterDialog: true})
+                      }>
                       <Icon
                         color={themes.colors.background}
                         size={themes.spacing.unit * 3}
