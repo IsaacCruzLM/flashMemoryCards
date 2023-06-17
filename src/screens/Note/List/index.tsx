@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {Text, SectionList, SectionListData} from 'react-native';
 import {withDatabase} from '@nozbe/watermelondb/DatabaseProvider';
 import withObservables from '@nozbe/with-observables';
@@ -13,9 +13,11 @@ import EmpytMessage from '../../../components/EmpytMessage';
 import {NoteModelType} from '../../../databases/models/noteModel';
 import NavigationService from '../../../navigation/NavigationService';
 import noteNeedToBeRevised from '../../../utils/noteValidations';
+import AppContext from '../../../context/appContext';
 
 import styles from './styles';
 import {ListProps, CardData, sectionData} from './types';
+import useGetFromGlobalState from '../../../hooks/useGetFromGlobalState';
 
 const List: React.FunctionComponent<ListProps | any> = ({
   route,
@@ -23,6 +25,11 @@ const List: React.FunctionComponent<ListProps | any> = ({
   category,
   noteSubjects,
 }) => {
+  // const {globalState} = useContext(AppContext);
+  // const searchQuey = get(globalState, 'searchParams.Notes', '');
+
+  const searchQuery = useGetFromGlobalState('searchParams.Notes', '');
+
   const [noteBySections, setNoteBySections] = useState(
     [] as SectionListData<any, sectionData>[],
   );
@@ -44,23 +51,24 @@ const List: React.FunctionComponent<ListProps | any> = ({
             const categoryName = get(category, 'name', '');
             const subjects = await note.subjects.fetch();
             const needRevision = noteNeedToBeRevised(note);
-
-            (needRevision ? revisionSection : otherSection).data.push({
-              id: note.id,
-              title: note.name,
-              creationDate: new Date(note.createdAt).toLocaleDateString(
-                'pt-BR',
-              ),
-              lastRevisionDate: new Date(note.lastRevision).toLocaleDateString(
-                'pt-BR',
-              ),
-              noteType: 'Texto',
-              category: categoryName,
-              subjects: (subjects || []).map(({name, color}: any) => ({
-                content: name,
-                color,
-              })),
-            });
+            if (note.name.includes(searchQuery)) {
+              (needRevision ? revisionSection : otherSection).data.push({
+                id: note.id,
+                title: note.name,
+                creationDate: new Date(note.createdAt).toLocaleDateString(
+                  'pt-BR',
+                ),
+                lastRevisionDate: new Date(
+                  note.lastRevision,
+                ).toLocaleDateString('pt-BR'),
+                noteType: 'Texto',
+                category: categoryName,
+                subjects: (subjects || []).map(({name, color}: any) => ({
+                  content: name,
+                  color,
+                })),
+              });
+            }
           }),
         );
 
@@ -76,9 +84,9 @@ const List: React.FunctionComponent<ListProps | any> = ({
     };
 
     fetchNotes();
-  }, [category, notes, noteSubjects]);
+  }, [category, notes, noteSubjects, searchQuery]);
 
-  if (noteBySections.length <= 0) {
+  if (notes.length <= 0) {
     return (
       <EmpytMessage
         message={'Nenhuma anotação criada para esta categoria'}
