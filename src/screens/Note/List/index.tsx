@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useContext} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Text, SectionList, SectionListData} from 'react-native';
 import {withDatabase} from '@nozbe/watermelondb/DatabaseProvider';
 import withObservables from '@nozbe/with-observables';
@@ -9,15 +9,14 @@ import get from 'lodash/get';
 import NoteListCard from '../../../components/NoteListCard';
 import FloatingAddButton from '../../../components/FloatingAddButton';
 import EmpytMessage from '../../../components/EmpytMessage';
+import useGetFromGlobalState from '../../../hooks/useGetFromGlobalState';
 
 import {NoteModelType} from '../../../databases/models/noteModel';
 import NavigationService from '../../../navigation/NavigationService';
 import noteNeedToBeRevised from '../../../utils/noteValidations';
-import AppContext from '../../../context/appContext';
 
 import styles from './styles';
 import {ListProps, CardData, sectionData} from './types';
-import useGetFromGlobalState from '../../../hooks/useGetFromGlobalState';
 
 const List: React.FunctionComponent<ListProps | any> = ({
   route,
@@ -25,9 +24,6 @@ const List: React.FunctionComponent<ListProps | any> = ({
   category,
   noteSubjects,
 }) => {
-  // const {globalState} = useContext(AppContext);
-  // const searchQuey = get(globalState, 'searchParams.Notes', '');
-
   const searchQuery = useGetFromGlobalState('searchParams.Notes', '');
 
   const [noteBySections, setNoteBySections] = useState(
