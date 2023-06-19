@@ -60,6 +60,7 @@ const Routes = () => {
     setShowDialogEditNote,
     setSearchParamsFunction,
     setIsOpenSearchBar,
+    setFilterDialogOpenFunction,
   } = useContext(AppContext);
 
   const headerSearchBar = (pageName: string) => {
@@ -163,7 +164,7 @@ const Routes = () => {
                     </TouchableOpacity>
                     <TouchableOpacity
                       onPress={() =>
-                        NavigationService.setParams({openFilterDialog: true})
+                        setFilterDialogOpenFunction({Notes: true})
                       }>
                       <Icon
                         color={themes.colors.background}
