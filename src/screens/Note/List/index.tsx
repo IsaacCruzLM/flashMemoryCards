@@ -18,11 +18,44 @@ import useGetFromGlobalState from '../../../hooks/useGetFromGlobalState';
 import {NoteModelType} from '../../../databases/models/noteModel';
 import NavigationService from '../../../navigation/NavigationService';
 import noteNeedToBeRevised from '../../../utils/noteValidations';
+import AppContext from '../../../context/appContext';
 import {translateOptions} from '../Create';
 
 import styles from './styles';
-import {ListProps, CardData, sectionData} from './types';
-import AppContext from '../../../context/appContext';
+import {
+  ListProps,
+  CardData,
+  sectionData,
+  filterProps,
+  filterState,
+} from './types';
+
+const NotesFilter: React.FunctionComponent<filterProps> = ({
+  filters,
+  handleFilterChange,
+  categories,
+  subjects,
+}) => {
+  return (
+    <View>
+      <Select
+        options={translateOptions(categories)}
+        onChange={value => handleFilterChange('category', value)}
+        modalTitle="Selecione uma categoria"
+        inputLabel="Selecionar Categoria"
+        inputPlaceHolder="Selecionar Categoria"
+        defaultValue={filters.category}
+      />
+      <SelectMultiple
+        options={translateOptions(subjects as any)}
+        onChange={value => handleFilterChange('subjects', value)}
+        modalTitle="Selecione vários assuntos"
+        inputPlaceHolder="Selecionar Assuntos"
+        defaultValue={filters.subjects}
+      />
+    </View>
+  );
+};
 
 const List: React.FunctionComponent<ListProps | any> = ({
   route,
@@ -44,8 +77,8 @@ const List: React.FunctionComponent<ListProps | any> = ({
   );
   const [filters, setFilters] = useState({
     category: '',
-    subjects: [] as any,
-  });
+    subjects: [],
+  } as filterState);
 
   useEffect(() => {
     const fetchNotes = async () => {
@@ -101,7 +134,7 @@ const List: React.FunctionComponent<ListProps | any> = ({
 
   const handleFilterChange = (
     key: 'category' | 'subjects',
-    value: string | string[],
+    value: string & string[],
   ) => {
     const newFiltersClone = cloneDeep(filters);
     newFiltersClone[key] = value;
@@ -172,23 +205,12 @@ const List: React.FunctionComponent<ListProps | any> = ({
         isVisible={openFilterDialog}
         hideDialog={() => hideFilterDialog()}
         title={'Adicionar filtros'}>
-        <View>
-          <Select
-            options={translateOptions(categories)}
-            onChange={value => handleFilterChange('category', value)}
-            modalTitle="Selecione uma categoria"
-            inputLabel="Selecionar Categoria"
-            inputPlaceHolder="Selecionar Categoria"
-            defaultValue={filters.category}
-          />
-          <SelectMultiple
-            options={translateOptions(subjects)}
-            onChange={value => handleFilterChange('subjects', value)}
-            modalTitle="Selecione vários assuntos"
-            inputPlaceHolder="Selecionar Assuntos"
-            defaultValue={filters.subjects}
-          />
-        </View>
+        <NotesFilter
+          filters={filters}
+          handleFilterChange={handleFilterChange}
+          categories={categories}
+          subjects={subjects}
+        />
       </Dialog>
     </>
   );
