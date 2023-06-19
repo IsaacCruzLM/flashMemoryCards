@@ -5,6 +5,7 @@ interface globalStateType {
   showDialogEditNote: boolean;
   searchParams: object;
   isOpenSearchBar: boolean;
+  filterDialogOpen: object;
 }
 
 interface ContextType {
@@ -13,6 +14,7 @@ interface ContextType {
   setShowDialogEditNote: React.Dispatch<React.SetStateAction<boolean>>;
   setSearchParamsFunction: React.Dispatch<React.SetStateAction<object>>;
   setIsOpenSearchBar: React.Dispatch<React.SetStateAction<boolean>>;
+  setFilterDialogOpenFunction: React.Dispatch<React.SetStateAction<object>>;
 }
 
 const AppContext = createContext<ContextType>({
@@ -21,11 +23,13 @@ const AppContext = createContext<ContextType>({
     showDialogEditNote: false,
     searchParams: {},
     isOpenSearchBar: false,
+    filterDialogOpen: {},
   },
   setKeyboardIsVisible: () => {},
   setShowDialogEditNote: () => {},
   setSearchParamsFunction: () => {},
   setIsOpenSearchBar: () => {},
+  setFilterDialogOpenFunction: () => {},
 });
 
 export default AppContext;

@@ -10,15 +10,19 @@ const ContextProvider = ({children}: ProviderProps | any) => {
   const [showDialogEditNote, setShowDialogEditNote] = useState(false);
   const [searchParams, setSearchParams] = useState({});
   const [isOpenSearchBar, setIsOpenSearchBar] = useState(false);
+  const [filterDialogOpen, setFilterDialogOpen] = useState({});
 
   const setSearchParamsFunction = (newParam: object) =>
     setSearchParams({...searchParams, ...newParam});
+  const setFilterDialogOpenFunction = (newParam: object) =>
+    setFilterDialogOpen({...filterDialogOpen, ...newParam});
 
   const globalState = {
     keyboardIsVisible,
     showDialogEditNote,
     searchParams,
     isOpenSearchBar,
+    filterDialogOpen,
   };
 
   const contextValue = {
@@ -27,6 +31,7 @@ const ContextProvider = ({children}: ProviderProps | any) => {
     setShowDialogEditNote,
     setSearchParamsFunction,
     setIsOpenSearchBar,
+    setFilterDialogOpenFunction,
   };
 
   return (
