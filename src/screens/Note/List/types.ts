@@ -1,7 +1,17 @@
 import {DefaultFormProps} from '../../../components/Form/types';
 
+import {NoteModelType} from '../../../databases/models/noteModel';
+import {NoteSubjectModelType} from '../../../databases/models/noteSubjectModel';
+import {CategoryModelType} from '../../../databases/models/categoryModel';
+import {SubjectModelType} from '../../../databases/models/subjectModel';
+
 export interface ListProps {
-  route: object;
+  route?: object;
+  notes?: NoteModelType[];
+  category?: CategoryModelType;
+  noteSubjects?: NoteSubjectModelType[];
+  categories: CategoryModelType[];
+  subjects: SubjectModelType[];
 }
 
 export interface NewCategoryFormProps extends DefaultFormProps {
@@ -32,4 +42,14 @@ export interface CardData {
 export interface subjectData {
   content: string;
   color: string;
+}
+
+export interface filterState {
+  category: string;
+  subjects: string[];
+}
+
+export interface filterProps extends ListProps {
+  filters: filterState;
+  handleFilterChange: Function;
 }
