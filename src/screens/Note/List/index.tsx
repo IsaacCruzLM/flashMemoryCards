@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {Text, SectionList, SectionListData, View} from 'react-native';
 import {withDatabase} from '@nozbe/watermelondb/DatabaseProvider';
 import withObservables from '@nozbe/with-observables';
@@ -22,6 +22,7 @@ import {translateOptions} from '../Create';
 
 import styles from './styles';
 import {ListProps, CardData, sectionData} from './types';
+import AppContext from '../../../context/appContext';
 
 const List: React.FunctionComponent<ListProps | any> = ({
   route,
@@ -31,8 +32,12 @@ const List: React.FunctionComponent<ListProps | any> = ({
   categories,
   subjects,
 }) => {
-  const openFilterDialog = get(route, 'params.openFilterDialog', false);
+  const {setFilterDialogOpenFunction} = useContext(AppContext);
   const searchQuery = useGetFromGlobalState('searchParams.Notes', '');
+  const openFilterDialog = useGetFromGlobalState(
+    'filterDialogOpen.Notes',
+    false,
+  ) as boolean;
 
   const [noteBySections, setNoteBySections] = useState(
     [] as SectionListData<any, sectionData>[],
@@ -103,8 +108,7 @@ const List: React.FunctionComponent<ListProps | any> = ({
     setFilters(newFiltersClone);
   };
 
-  const hideFilterDialog = () =>
-    NavigationService.setParams({openFilterDialog: false});
+  const hideFilterDialog = () => setFilterDialogOpenFunction({Notes: false});
 
   if (notes.length <= 0) {
     return (
