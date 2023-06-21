@@ -22,6 +22,7 @@ const DataInput = ({label, placeHolder, onConfirmData}: DataInputProps) => {
       </TouchableOpacity>
       <DatePicker
         modal
+        mode="date"
         open={open}
         date={date}
         onConfirm={dateReturn => {
