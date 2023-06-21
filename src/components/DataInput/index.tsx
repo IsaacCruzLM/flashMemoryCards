@@ -32,6 +32,8 @@ const DataInput = ({label, placeHolder, onConfirmData}: DataInputProps) => {
         onCancel={() => {
           setOpen(false);
         }}
+        locale="pt-BR"
+        is24hourSource="locale"
       />
     </>
   );
