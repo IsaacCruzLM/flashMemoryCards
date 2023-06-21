@@ -13,6 +13,8 @@ import EmpytMessage from '../../../components/EmpytMessage';
 import Dialog from '../../../components/Dialog';
 import Select from '../../../components/Select';
 import SelectMultiple from '../../../components/SelectMultiple';
+import DataRangeInput from '../../../components/DataRangeInput';
+import {rangeDataType} from '../../../components/DataRangeInput/types';
 
 import useGetFromGlobalState from '../../../hooks/useGetFromGlobalState';
 import {NoteModelType} from '../../../databases/models/noteModel';
@@ -53,6 +55,10 @@ const NotesFilter: React.FunctionComponent<filterProps> = ({
         inputPlaceHolder="Selecionar Assuntos"
         defaultValue={filters.subjects}
       />
+      <DataRangeInput
+        label={'Data de criação'}
+        onChangeRange={date => handleFilterChange('creationDate', date)}
+      />
     </View>
   );
 };
@@ -78,6 +84,7 @@ const List: React.FunctionComponent<ListProps | any> = ({
   const [filters, setFilters] = useState({
     category: '',
     subjects: [],
+    creationDate: {init: null, end: null},
   } as filterState);
 
   useEffect(() => {
@@ -133,8 +140,8 @@ const List: React.FunctionComponent<ListProps | any> = ({
   }, [category, notes, noteSubjects, searchQuery]);
 
   const handleFilterChange = (
-    key: 'category' | 'subjects',
-    value: string & string[],
+    key: 'category' | 'subjects' | 'creationDate',
+    value: string & string[] & rangeDataType,
   ) => {
     const newFiltersClone = cloneDeep(filters);
     newFiltersClone[key] = value;

@@ -1,4 +1,5 @@
 import {DefaultFormProps} from '../../../components/Form/types';
+import {rangeDataType} from '../../../components/DataRangeInput/types';
 
 import {NoteModelType} from '../../../databases/models/noteModel';
 import {NoteSubjectModelType} from '../../../databases/models/noteSubjectModel';
@@ -47,6 +48,7 @@ export interface subjectData {
 export interface filterState {
   category: string;
   subjects: string[];
+  creationDate: rangeDataType;
 }
 
 export interface filterProps extends ListProps {
