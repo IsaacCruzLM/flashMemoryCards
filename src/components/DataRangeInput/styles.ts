@@ -1,9 +1,16 @@
 import {StyleSheet} from 'react-native';
-import themes from '../../styles/themes';
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: themes.spacing.unit * 2,
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  containerStyle: {
+    width: '48%',
+  },
+  textInputStyle: {
+    fontSize: 12,
   },
 });
 

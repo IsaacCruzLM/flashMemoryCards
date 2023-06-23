@@ -22,6 +22,8 @@ const DataRangeInput = ({label, onChangeRange}: DataRangeInputProps) => {
           setRangeData(newRangeData);
           onChangeRange(newRangeData);
         }}
+        textInputStyle={styles.textInputStyle}
+        containerStyle={styles.containerStyle}
       />
       <DataInput
         label={`A (${label})`}
@@ -31,6 +33,8 @@ const DataRangeInput = ({label, onChangeRange}: DataRangeInputProps) => {
           setRangeData(newRangeData);
           onChangeRange(newRangeData);
         }}
+        textInputStyle={styles.textInputStyle}
+        containerStyle={styles.containerStyle}
       />
     </View>
   );

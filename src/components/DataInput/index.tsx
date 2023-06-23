@@ -5,11 +5,17 @@ import DatePicker from 'react-native-date-picker';
 import {DataInputProps} from './types';
 import TextInput from '../TextInput';
 
-const DataInput = ({label, placeHolder, onConfirmData}: DataInputProps) => {
+const DataInput = ({
+  label,
+  placeHolder,
+  onConfirmData,
+  textInputStyle,
+  containerStyle,
+}: DataInputProps) => {
   const [date, setDate] = useState(null as unknown as Date);
   const [open, setOpen] = useState(false);
   return (
-    <>
+    <View style={containerStyle}>
       <TouchableOpacity onPress={() => setOpen(true)}>
         <View pointerEvents="none">
           <TextInput
@@ -17,6 +23,7 @@ const DataInput = ({label, placeHolder, onConfirmData}: DataInputProps) => {
             setText={() => {}}
             placeholder={placeHolder}
             value={date ? date.toLocaleDateString('pt-BR') : ''}
+            style={textInputStyle}
           />
         </View>
       </TouchableOpacity>
@@ -36,7 +43,7 @@ const DataInput = ({label, placeHolder, onConfirmData}: DataInputProps) => {
         locale="pt-BR"
         is24hourSource="locale"
       />
-    </>
+    </View>
   );
 };
 
