@@ -7,10 +7,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   containerStyle: {
-    width: '48%',
+    width: '49%',
   },
   textInputStyle: {
-    fontSize: 12,
+    fontSize: 13,
   },
 });
 
