@@ -3,6 +3,7 @@ import {View} from 'react-native';
 
 import DataInput from '../DataInput';
 
+import styles from './styles';
 import {DataRangeInputProps, rangeDataType} from './types';
 
 const DataRangeInput = ({label, onChangeRange}: DataRangeInputProps) => {
@@ -12,7 +13,7 @@ const DataRangeInput = ({label, onChangeRange}: DataRangeInputProps) => {
   } as rangeDataType);
 
   return (
-    <View>
+    <View style={styles.container}>
       <DataInput
         label={`De (${label})`}
         placeHolder={'Insira a data de início'}
