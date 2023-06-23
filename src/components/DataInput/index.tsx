@@ -6,7 +6,7 @@ import {DataInputProps} from './types';
 import TextInput from '../TextInput';
 
 const DataInput = ({label, placeHolder, onConfirmData}: DataInputProps) => {
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(null as unknown as Date);
   const [open, setOpen] = useState(false);
   return (
     <>
@@ -16,7 +16,7 @@ const DataInput = ({label, placeHolder, onConfirmData}: DataInputProps) => {
             label={label}
             setText={() => {}}
             placeholder={placeHolder}
-            value={date.toLocaleDateString('pt-BR')}
+            value={date ? date.toLocaleDateString('pt-BR') : ''}
           />
         </View>
       </TouchableOpacity>
@@ -24,7 +24,7 @@ const DataInput = ({label, placeHolder, onConfirmData}: DataInputProps) => {
         modal
         mode="date"
         open={open}
-        date={date}
+        date={date === null ? new Date() : date}
         onConfirm={dateReturn => {
           setOpen(false);
           onConfirmData(dateReturn);
