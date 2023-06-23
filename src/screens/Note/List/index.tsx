@@ -59,6 +59,10 @@ const NotesFilter: React.FunctionComponent<filterProps> = ({
         label={'Data de criação'}
         onChangeRange={date => handleFilterChange('creationDate', date)}
       />
+      <DataRangeInput
+        label={'Ultima revisão'}
+        onChangeRange={date => handleFilterChange('lastRevision', date)}
+      />
     </View>
   );
 };
@@ -85,6 +89,7 @@ const List: React.FunctionComponent<ListProps | any> = ({
     category: '',
     subjects: [],
     creationDate: {init: null, end: null},
+    lastRevision: {init: null, end: null},
   } as filterState);
 
   useEffect(() => {
@@ -140,7 +145,7 @@ const List: React.FunctionComponent<ListProps | any> = ({
   }, [category, notes, noteSubjects, searchQuery]);
 
   const handleFilterChange = (
-    key: 'category' | 'subjects' | 'creationDate',
+    key: 'category' | 'subjects' | 'creationDate' | 'lastRevision',
     value: string & string[] & rangeDataType,
   ) => {
     const newFiltersClone = cloneDeep(filters);

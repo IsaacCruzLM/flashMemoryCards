@@ -49,6 +49,7 @@ export interface filterState {
   category: string;
   subjects: string[];
   creationDate: rangeDataType;
+  lastRevision: rangeDataType;
 }
 
 export interface filterProps extends ListProps {
