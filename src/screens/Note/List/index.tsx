@@ -70,6 +70,13 @@ const NotesFilter: React.FunctionComponent<filterProps> = ({
   );
 };
 
+const DEFAULT_FILTER_STATE = {
+  category: '',
+  subjects: [],
+  creationDate: {init: null, end: null},
+  lastRevision: {init: null, end: null},
+};
+
 const List: React.FunctionComponent<ListProps | any> = ({
   route,
   notes,
@@ -88,12 +95,7 @@ const List: React.FunctionComponent<ListProps | any> = ({
   const [noteBySections, setNoteBySections] = useState(
     [] as SectionListData<any, sectionData>[],
   );
-  const [filters, setFilters] = useState({
-    category: '',
-    subjects: [],
-    creationDate: {init: null, end: null},
-    lastRevision: {init: null, end: null},
-  } as filterState);
+  const [filters, setFilters] = useState(DEFAULT_FILTER_STATE as filterState);
 
   useEffect(() => {
     const fetchNotes = async () => {
@@ -158,6 +160,9 @@ const List: React.FunctionComponent<ListProps | any> = ({
 
   const hideFilterDialog = () => setFilterDialogOpenFunction({Notes: false});
 
+  const resetFilterDialog = () =>
+    setFilters(DEFAULT_FILTER_STATE as filterState);
+
   if (notes.length <= 0) {
     return (
       <EmpytMessage
@@ -209,12 +214,12 @@ const List: React.FunctionComponent<ListProps | any> = ({
           {
             label: 'Limpar',
             buttonMode: 'outlined',
-            buttonAction: () => {},
+            buttonAction: () => resetFilterDialog(),
           },
           {
             label: 'Filtrar',
             buttonMode: 'contained',
-            buttonAction: () => {},
+            buttonAction: () => hideFilterDialog(),
           },
         ]}
         isVisible={openFilterDialog}
