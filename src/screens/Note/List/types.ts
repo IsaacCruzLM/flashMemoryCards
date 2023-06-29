@@ -55,4 +55,5 @@ export interface filterState {
 export interface filterProps extends ListProps {
   filters: filterState;
   handleFilterChange: Function;
+  dontShowCategory?: boolean;
 }

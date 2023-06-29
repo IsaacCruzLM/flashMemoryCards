@@ -37,17 +37,20 @@ const NotesFilter: React.FunctionComponent<filterProps> = ({
   handleFilterChange,
   categories,
   subjects,
+  dontShowCategory,
 }) => {
   return (
     <View>
-      <Select
-        options={translateOptions(categories)}
-        onChange={value => handleFilterChange('category', value)}
-        modalTitle="Selecione uma categoria"
-        inputLabel="Selecionar Categoria"
-        inputPlaceHolder="Selecionar Categoria"
-        defaultValue={filters.category}
-      />
+      {dontShowCategory ? null : (
+        <Select
+          options={translateOptions(categories)}
+          onChange={value => handleFilterChange('category', value)}
+          modalTitle="Selecione uma categoria"
+          inputLabel="Selecionar Categoria"
+          inputPlaceHolder="Selecionar Categoria"
+          defaultValue={filters.category}
+        />
+      )}
       <SelectMultiple
         options={translateOptions(subjects as any)}
         onChange={value => handleFilterChange('subjects', value)}
@@ -222,6 +225,7 @@ const List: React.FunctionComponent<ListProps | any> = ({
           handleFilterChange={handleFilterChange}
           categories={categories}
           subjects={subjects}
+          dontShowCategory
         />
       </Dialog>
     </>
