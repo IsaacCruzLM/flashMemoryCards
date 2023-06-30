@@ -123,7 +123,10 @@ const List: React.FunctionComponent<ListProps | any> = ({
     }
 
     if ((creationDate.init || creationDate.end) && dontFilter) {
-      dontFilter = filterActions.rangeInputDateVerify(creationDate);
+      dontFilter = filterActions.rangeInputDateVerify(
+        creationDate,
+        note.createdAt,
+      );
     }
 
     // if (category && dontFilter) {
@@ -196,8 +199,10 @@ const List: React.FunctionComponent<ListProps | any> = ({
 
   const hideFilterDialog = () => setFilterDialogOpenFunction({Notes: false});
 
-  const resetFilterDialog = () =>
+  const resetFilterDialog = () => {
     setFilters(DEFAULT_FILTER_STATE as filterState);
+    hideFilterDialog();
+  };
 
   if (notes.length <= 0) {
     return (
