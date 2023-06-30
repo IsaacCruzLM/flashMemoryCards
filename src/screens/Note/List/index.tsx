@@ -21,6 +21,7 @@ import useGetFromGlobalState from '../../../hooks/useGetFromGlobalState';
 import {NoteModelType} from '../../../databases/models/noteModel';
 import NavigationService from '../../../navigation/NavigationService';
 import noteNeedToBeRevised from '../../../utils/noteValidations';
+import filterActions from '../../../utils/filters';
 import AppContext from '../../../context/appContext';
 import {translateOptions} from '../Create';
 
@@ -121,9 +122,9 @@ const List: React.FunctionComponent<ListProps | any> = ({
       dontFilter = someIdIsIncluded;
     }
 
-    // if (category && dontFilter) {
-    //   dontFilter = note.category.id === category
-    // }
+    if ((creationDate.init || creationDate.end) && dontFilter) {
+      dontFilter = filterActions.rangeInputDateVerify(creationDate);
+    }
 
     // if (category && dontFilter) {
     //   dontFilter = note.category.id === category
