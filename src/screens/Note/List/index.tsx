@@ -129,9 +129,12 @@ const List: React.FunctionComponent<ListProps | any> = ({
       );
     }
 
-    // if (category && dontFilter) {
-    //   dontFilter = note.category.id === category
-    // }
+    if ((lastRevision.init || lastRevision.end) && dontFilter) {
+      dontFilter = filterActions.rangeInputDateVerify(
+        lastRevision,
+        note.lastRevision,
+      );
+    }
 
     return dontFilter;
   };
