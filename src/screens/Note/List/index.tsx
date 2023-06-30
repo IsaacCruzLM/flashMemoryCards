@@ -63,10 +63,12 @@ const NotesFilter: React.FunctionComponent<filterProps> = ({
       <DataRangeInput
         label={'Data de criação'}
         onChangeRange={date => handleFilterChange('creationDate', date)}
+        defaultValue={filters.creationDate}
       />
       <DataRangeInput
         label={'Ultima revisão'}
         onChangeRange={date => handleFilterChange('lastRevision', date)}
+        defaultValue={filters.lastRevision}
       />
     </View>
   );

@@ -4,13 +4,17 @@ import {View} from 'react-native';
 import DataInput from '../DataInput';
 
 import styles from './styles';
-import {DataRangeInputProps, rangeDataType} from './types';
+import {DataRangeInputProps} from './types';
 
-const DataRangeInput = ({label, onChangeRange}: DataRangeInputProps) => {
-  const [rangeData, setRangeData] = useState({
+const DataRangeInput = ({
+  label,
+  onChangeRange,
+  defaultValue = {
     init: null,
     end: null,
-  } as rangeDataType);
+  },
+}: DataRangeInputProps) => {
+  const [rangeData, setRangeData] = useState(defaultValue);
 
   return (
     <View style={styles.container}>
@@ -24,6 +28,7 @@ const DataRangeInput = ({label, onChangeRange}: DataRangeInputProps) => {
         }}
         textInputStyle={styles.textInputStyle}
         containerStyle={styles.containerStyle}
+        defaultValue={rangeData.init}
       />
       <DataInput
         label={`A (${label})`}
@@ -35,6 +40,7 @@ const DataRangeInput = ({label, onChangeRange}: DataRangeInputProps) => {
         }}
         textInputStyle={styles.textInputStyle}
         containerStyle={styles.containerStyle}
+        defaultValue={rangeData.end}
       />
     </View>
   );

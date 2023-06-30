@@ -11,8 +11,9 @@ const DataInput = ({
   onConfirmData,
   textInputStyle,
   containerStyle,
+  defaultValue = null,
 }: DataInputProps) => {
-  const [date, setDate] = useState(null as unknown as Date);
+  const [date, setDate] = useState(defaultValue);
   const [open, setOpen] = useState(false);
   return (
     <View style={containerStyle}>

@@ -1,6 +1,7 @@
 export interface DataRangeInputProps {
   label: string;
   onChangeRange: (data: rangeDataType) => {};
+  defaultValue?: rangeDataType;
 }
 
 export interface rangeDataType {

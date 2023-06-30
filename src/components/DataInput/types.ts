@@ -4,4 +4,5 @@ export interface DataInputProps {
   onConfirmData: (data: Date) => {};
   textInputStyle: object;
   containerStyle: object;
+  defaultValue?: Date | null;
 }
