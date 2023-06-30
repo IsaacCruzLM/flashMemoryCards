@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useState, useContext} from 'react';
 import {Text, SectionList, SectionListData, View} from 'react-native';
 import {withDatabase} from '@nozbe/watermelondb/DatabaseProvider';
@@ -97,6 +98,40 @@ const List: React.FunctionComponent<ListProps | any> = ({
   );
   const [filters, setFilters] = useState(DEFAULT_FILTER_STATE as filterState);
 
+  const filterData = note => {
+    const {
+      creationDate,
+      lastRevision,
+      category: categoryFilter,
+      subjects: subjectsFilter,
+    } = cloneDeep(filters);
+    let dontFilter = true;
+
+    if (categoryFilter && dontFilter) {
+      dontFilter = note.category.id === categoryFilter;
+    }
+
+    if (subjectsFilter.length > 0 && dontFilter) {
+      const subjectsIds = noteSubjects
+        .filter((record: any) => record.note.id === note.id)
+        .map((record: any) => record.subject.id);
+      const someIdIsIncluded = subjectsIds.some((id: string) =>
+        subjectsFilter.includes(id),
+      );
+      dontFilter = someIdIsIncluded;
+    }
+
+    // if (category && dontFilter) {
+    //   dontFilter = note.category.id === category
+    // }
+
+    // if (category && dontFilter) {
+    //   dontFilter = note.category.id === category
+    // }
+
+    return dontFilter;
+  };
+
   useEffect(() => {
     const fetchNotes = async () => {
       if (notes.length > 0) {
@@ -110,7 +145,7 @@ const List: React.FunctionComponent<ListProps | any> = ({
           data: [] as Array<CardData>,
         };
         await Promise.all(
-          notes.map(async (note: NoteModelType) => {
+          notes.filter(filterData).map(async (note: NoteModelType) => {
             const categoryName = get(category, 'name', '');
             const subjectsFetch = await note.subjects.fetch();
             const needRevision = noteNeedToBeRevised(note);
@@ -147,7 +182,7 @@ const List: React.FunctionComponent<ListProps | any> = ({
     };
 
     fetchNotes();
-  }, [category, notes, noteSubjects, searchQuery]);
+  }, [category, notes, noteSubjects, searchQuery, filters]);
 
   const handleFilterChange = (
     key: 'category' | 'subjects' | 'creationDate' | 'lastRevision',
