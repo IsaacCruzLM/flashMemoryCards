@@ -101,7 +101,7 @@ const List: React.FunctionComponent<ListProps | any> = ({
   );
   const [filters, setFilters] = useState(DEFAULT_FILTER_STATE as filterState);
 
-  const filterData = note => {
+  const filterData = (note: NoteModelType) => {
     const {
       creationDate,
       lastRevision,
@@ -127,14 +127,14 @@ const List: React.FunctionComponent<ListProps | any> = ({
     if ((creationDate.init || creationDate.end) && dontFilter) {
       dontFilter = filterActions.rangeInputDateVerify(
         creationDate,
-        note.createdAt,
+        note.createdAt.toString(),
       );
     }
 
     if ((lastRevision.init || lastRevision.end) && dontFilter) {
       dontFilter = filterActions.rangeInputDateVerify(
         lastRevision,
-        note.lastRevision,
+        note.lastRevision.toString(),
       );
     }
 
