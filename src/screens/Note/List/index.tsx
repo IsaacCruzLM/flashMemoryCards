@@ -244,9 +244,9 @@ const List: React.FunctionComponent<ListProps | any> = ({
             }
           />
         )}
-        renderSectionHeader={({section: {title}}) => (
-          <Text style={styles.listHeader}>{title}</Text>
-        )}
+        renderSectionHeader={({section: {title}}) =>
+          title ? <Text style={styles.listHeader}>{title}</Text> : null
+        }
         style={styles.sectionList}
       />
       <FloatingAddButton
