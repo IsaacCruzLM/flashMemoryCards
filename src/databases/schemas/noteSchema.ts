@@ -12,7 +12,15 @@ export const noteSchema = tableSchema({
       type: 'string',
     },
     {
+      name: 'level_revision',
+      type: 'number',
+    },
+    {
       name: 'created_at',
+      type: 'number',
+    },
+    {
+      name: 'last_revision',
       type: 'number',
     },
     {

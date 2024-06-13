@@ -5,14 +5,22 @@ import {withDatabase} from '@nozbe/watermelondb/DatabaseProvider';
 import {compose} from 'recompose';
 
 import NavigationService from '../../../navigation/NavigationService';
+import useFilterBySearchParams from '../../../hooks/useFilterBySearchParams';
 
 import FloatingAddButton from '../../../components/FloatingAddButton';
 import EmpytMessage from '../../../components/EmpytMessage';
 import SubjectListCard from '../../../components/SubjectListCard';
+import EmpytListMessage from '../../../components/EmpytListMessage';
 
 import styles from './styles';
 
 const List = ({subjects}: any) => {
+  const filteredSubjects = useFilterBySearchParams(
+    subjects,
+    'Subjects',
+    'name',
+  );
+
   if (subjects.length <= 0) {
     return (
       <EmpytMessage
@@ -26,7 +34,7 @@ const List = ({subjects}: any) => {
   return (
     <>
       <FlatList
-        data={subjects}
+        data={filteredSubjects}
         contentContainerStyle={styles.listContainer}
         keyExtractor={item => item.id}
         renderItem={({item}) => {
@@ -45,6 +53,7 @@ const List = ({subjects}: any) => {
             />
           );
         }}
+        ListEmptyComponent={() => <EmpytListMessage itemName="assunto" />}
         style={styles.flatList}
       />
       <FloatingAddButton routeName="NewSubject" />

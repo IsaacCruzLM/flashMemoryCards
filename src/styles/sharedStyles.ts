@@ -8,7 +8,7 @@ const sharedStyles = StyleSheet.create({
     alignItems: 'center',
   },
   headerIconWithMargin: {
-    marginHorizontal: themes.spacing.unit,
+    marginHorizontal: themes.spacing.unit * 1.3,
   },
 });
 

@@ -13,14 +13,18 @@ export default async function insertItemWithM2MRelationInWMDB(
   try {
     const itemCreated = await insertItemInWMDB(model, data);
 
-    relationships.map(async ({type: RelationshipType, id: RelationshipId}) => {
-      await insertItemInWMDB(relationshipModel, {
-        relationships: [
-          {type: relationshipeKey, id: get(itemCreated, 'id', '')},
-          {type: RelationshipType, id: RelationshipId},
-        ],
-      });
-    });
+    await Promise.all(
+      relationships.map(
+        async ({type: RelationshipType, id: RelationshipId}) => {
+          await insertItemInWMDB(relationshipModel, {
+            relationships: [
+              {type: relationshipeKey, id: get(itemCreated, 'id', '')},
+              {type: RelationshipType, id: RelationshipId},
+            ],
+          });
+        },
+      ),
+    );
 
     return itemCreated;
   } catch (error: any) {

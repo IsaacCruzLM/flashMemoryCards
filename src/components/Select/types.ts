@@ -1,5 +1,5 @@
 export interface SelectProps {
-  options: [optionType];
+  options: optionType[];
   onChange: (arg: string) => void;
   defaultValue?: string;
   modalTitle: string;

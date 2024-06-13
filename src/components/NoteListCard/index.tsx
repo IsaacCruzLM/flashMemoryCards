@@ -14,9 +14,10 @@ const NoteListCard = ({
   category,
   subjects,
   containerStyle = {},
+  onPress,
 }: NoteListCardProps) => {
   return (
-    <ListCard title={title} containerStyle={containerStyle}>
+    <ListCard onPress={onPress} title={title} containerStyle={containerStyle}>
       <InlineField label="Data de criação" content={creationDate} />
       <InlineField label="Ultima revisão" content={lastRevisionDate} />
       <InlineField label="Tipo de anotação" content={noteType} />

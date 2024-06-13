@@ -8,4 +8,5 @@ export interface NoteListCardProps {
   category: string;
   subjects: contentProps[];
   containerStyle?: object;
+  onPress?: () => void;
 }

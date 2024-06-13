@@ -15,3 +15,8 @@ export class NoteSubjectModel extends Model {
   @immutableRelation('subjects', 'subject_id')
   subject!: string;
 }
+
+export interface NoteSubjectModelType {
+  note: string;
+  subject: string;
+}

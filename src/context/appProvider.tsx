@@ -1,23 +1,37 @@
-import React, {useState} from 'react';
+import React, {ReactNode, useState} from 'react';
 import AppContext from './appContext';
 
 export interface ProviderProps {
-  children: JSX.Element | any;
+  children: ReactNode;
 }
 
 const ContextProvider = ({children}: ProviderProps | any) => {
-  const [currentCategory, setCurrentCategory] = useState({
-    name: '',
-    id: '',
-  });
+  const [keyboardIsVisible, setKeyboardIsVisible] = useState(false);
+  const [showDialogEditNote, setShowDialogEditNote] = useState(false);
+  const [searchParams, setSearchParams] = useState({});
+  const [isOpenSearchBar, setIsOpenSearchBar] = useState(false);
+  const [filterDialogOpen, setFilterDialogOpen] = useState({});
+
+  const setSearchParamsFunction = (newParam: object) =>
+    setSearchParams({...searchParams, ...newParam});
+  const setFilterDialogOpenFunction = (newParam: object) =>
+    setFilterDialogOpen({...filterDialogOpen, ...newParam});
 
   const globalState = {
-    currentCategory,
+    keyboardIsVisible,
+    showDialogEditNote,
+    searchParams,
+    isOpenSearchBar,
+    filterDialogOpen,
   };
 
   const contextValue = {
     globalState,
-    setCurrentCategory,
+    setKeyboardIsVisible,
+    setShowDialogEditNote,
+    setSearchParamsFunction,
+    setIsOpenSearchBar,
+    setFilterDialogOpenFunction,
   };
 
   return (

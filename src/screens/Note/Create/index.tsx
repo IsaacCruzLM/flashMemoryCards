@@ -15,9 +15,20 @@ import Button from '../../../components/Button';
 import TextInput from '../../../components/TextInput';
 
 import WmdbUtils from '../../../databases/utils';
+import {CategoryModelType} from '../../../databases/models/categoryModel';
+import NavigationService from '../../../navigation/NavigationService';
 
 import styles from './styles';
-import {CreateFormProps, CreateProps, formValues} from './types';
+import {CreateFormProps, CreateProps, formValues, optionsType} from './types';
+import toastShow from '../../../utils/toastShow';
+
+export const translateOptions = (optionsArray: optionsType[]) =>
+  optionsArray.map(({id, name, icon, color}: optionsType) => ({
+    label: name,
+    value: id,
+    iconName: icon,
+    iconColor: color,
+  }));
 
 const Create: React.FunctionComponent<CreateProps | any> = ({
   categories,
@@ -41,14 +52,6 @@ const Create: React.FunctionComponent<CreateProps | any> = ({
     };
   }, []);
 
-  const translateOptions = (optionsArray: any) =>
-    optionsArray.map(({id, name, icon, color}: any) => ({
-      label: name,
-      value: id,
-      iconName: icon,
-      iconColor: color,
-    }));
-
   const submitAction = async (values: formValues) => {
     const newDataObject = cloneDeep(values);
     const M2MRelationships = get(newDataObject, 'subjects', []).map(id => ({
@@ -63,7 +66,9 @@ const Create: React.FunctionComponent<CreateProps | any> = ({
       'notes',
       {
         ...newDataObject,
+        levelRevision: 1,
         createdAt: new Date(),
+        lastRevision: new Date(),
         relationships: [
           {
             type: 'category',
@@ -75,6 +80,24 @@ const Create: React.FunctionComponent<CreateProps | any> = ({
       M2MRelationships,
       'note',
     );
+
+    toastShow('success', 'Anotação criada com sucesso');
+
+    if (get(route, 'params.categoryId', '')) {
+      NavigationService.navigate('Notes', {
+        categoryName: get(
+          categories.find(
+            (category: CategoryModelType) =>
+              category.id === get(route, 'params.categoryId', ''),
+          ),
+          'name',
+          '',
+        ),
+        categoryId: get(route, 'params.categoryId', ''),
+      });
+    } else {
+      NavigationService.navigate('Home');
+    }
   };
 
   return (

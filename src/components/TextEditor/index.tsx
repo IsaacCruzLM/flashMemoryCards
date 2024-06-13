@@ -8,7 +8,11 @@ import Theme from '../../styles/themes';
 import {TextEditorProps} from './types';
 import styles from './styles';
 
-const TextEditor = ({onChange, placeHolder}: TextEditorProps) => {
+const TextEditor = ({
+  onChange,
+  placeHolder,
+  initialContentHTML = '',
+}: TextEditorProps) => {
   const richText = useRef() as LegacyRef<RichEditor> | undefined;
 
   const richTextHandle = (descriptionText: string) => {
@@ -21,6 +25,7 @@ const TextEditor = ({onChange, placeHolder}: TextEditorProps) => {
         <ScrollView>
           <RichEditor
             ref={richText}
+            initialContentHTML={initialContentHTML}
             onChange={richTextHandle}
             placeholder={placeHolder}
             style={styles.richTextEditorStyle}
