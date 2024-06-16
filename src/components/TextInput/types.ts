@@ -5,4 +5,6 @@ export interface TextInputProps {
   value: string;
   style?: object;
   onBlur?: Function | any;
+  error?: boolean;
+  errorLabel?: string;
 }

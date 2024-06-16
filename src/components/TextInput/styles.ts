@@ -10,6 +10,11 @@ const styles = StyleSheet.create({
   inputDefaultStyle: {
     fontSize: themes.typography.fontSizeTitle,
   },
+  error: {
+    color: themes.colors.error,
+    marginLeft: themes.spacing.unit / 2,
+    fontSize: themes.typography.fontSizeSmallText,
+  },
 });
 
 export default styles;
