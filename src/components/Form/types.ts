@@ -1,5 +1,5 @@
 import {ReactNode} from 'react';
-import {FormikHelpers} from 'formik';
+import {FormikHelpers, FormikErrors} from 'formik';
 
 export interface FormProps {
   form: ReactNode | React.FC<any> | JSX.Element;
@@ -9,6 +9,7 @@ export interface FormProps {
     formikHelpers: FormikHelpers<object>,
   ) => void | Promise<any>) &
     (Function | Promise<any>);
+  validate?: (values: object) => void | object | Promise<FormikErrors<object>>;
 }
 
 export interface DefaultFormProps {
