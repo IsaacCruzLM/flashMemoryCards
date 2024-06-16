@@ -9,7 +9,7 @@ export interface FormProps {
     formikHelpers: FormikHelpers<object>,
   ) => void | Promise<any>) &
     (Function | Promise<any>);
-  validate?: (values: object) => void | object | Promise<FormikErrors<object>>;
+  validate?: (values: any) => void | object | Promise<FormikErrors<any>>;
 }
 
 export interface DefaultFormProps {
@@ -18,4 +18,6 @@ export interface DefaultFormProps {
   handleSubmit: (field: string) => any;
   setFieldValue: (field: string, value: any) => void;
   resetForm: () => void;
+  errors: object;
+  touched: object;
 }
