@@ -40,9 +40,22 @@ const Create: React.FunctionComponent<any> = ({
     NavigationService.navigate('Subjects');
   };
 
+  const validate = (values: formValues) => {
+    const errors = {} as formValues;
+
+    if (!values.name) {
+      errors.name = 'Campo "Nome" obrigatório';
+    } else if (!values.color) {
+      errors.color = 'Campo "Cor" obrigatório';
+    }
+
+    return errors;
+  };
+
   return (
     <DefaultContainerView>
       <Form
+        validate={validate}
         form={({
           handleChange,
           handleBlur,
@@ -50,6 +63,8 @@ const Create: React.FunctionComponent<any> = ({
           resetForm,
           handleSubmit,
           values,
+          errors,
+          touched,
         }: CreateFormProps) => (
           <View style={styles.formContainer}>
             <TextInput
@@ -58,11 +73,17 @@ const Create: React.FunctionComponent<any> = ({
               onBlur={handleBlur('name')}
               placeholder={'Nome do assunto'}
               value={values.name}
+              error={get(errors, 'name', false) && get(touched, 'name', false)}
+              errorLabel={get(errors, 'name')}
             />
             <ColorPicker
               value={values.color}
               iconName={''}
               onChangeColor={color => setFieldValue('color', color)}
+              error={
+                get(errors, 'color', false) && get(touched, 'color', false)
+              }
+              errorLabel={get(errors, 'color')}
             />
             <Button
               label={`${isEdit ? 'Editar' : 'Criar'}  Categoria`}
