@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Theme from '../../styles/themes';
 
 import Button from '../Button';
+import ErrorWarning from '../ErrorWarning';
 
 import styles from './styles';
 import {ColorPickerProps} from './types';
@@ -15,6 +16,8 @@ const ColorPickerComponent = ({
   value = '#fff',
   iconName,
   onChangeColor,
+  error = false,
+  errorLabel = '',
 }: ColorPickerProps) => {
   const [background, setBackground] = useState(value);
   const [visible, setVisible] = React.useState(false);
@@ -42,6 +45,7 @@ const ColorPickerComponent = ({
               ]}
             />
           </TouchableOpacity>
+          <ErrorWarning show={error} label={errorLabel} />
         </View>
         {background !== '#fff' && iconName && (
           <View style={styles.infoContainer}>
