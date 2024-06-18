@@ -8,6 +8,7 @@ import {of as $of} from 'rxjs';
 
 import NavigationService from '../../../navigation/NavigationService';
 import WmdbUtils from '../../../databases/utils';
+import ErrorHandlers from '../../../utils/errorHandlers';
 
 import DefaultContainerView from '../../../components/DefaultContainerView';
 import TextInput from '../../../components/TextInput';
@@ -41,9 +42,26 @@ const Create: React.FunctionComponent<any> = ({
     NavigationService.navigate('Categories');
   };
 
+  const validate = (values: formValues) => {
+    const errors = {} as formValues;
+
+    if (!values.name) {
+      errors.name = 'Campo "Nome da categoria" obrigatório';
+    }
+    if (!values.icon) {
+      errors.icon = 'Campo de "Ícone" obrigatório';
+    }
+    if (!values.color) {
+      errors.color = 'Campo "Cor" obrigatório';
+    }
+
+    return errors;
+  };
+
   return (
     <DefaultContainerView>
       <Form
+        validate={validate}
         form={({
           handleChange,
           handleBlur,
@@ -51,6 +69,8 @@ const Create: React.FunctionComponent<any> = ({
           resetForm,
           handleSubmit,
           values,
+          errors,
+          touched,
         }: CreateFormProps) => (
           <View style={styles.formContainer}>
             <TextInput
@@ -59,15 +79,42 @@ const Create: React.FunctionComponent<any> = ({
               onBlur={handleBlur('name')}
               placeholder={'Nome da categoria'}
               value={values.name}
+              error={ErrorHandlers.showError(
+                errors,
+                touched,
+                'name' as keyof Object,
+              )}
+              errorLabel={ErrorHandlers.getErrorLabel(
+                errors,
+                'name' as keyof Object,
+              )}
             />
             <SelectIcon
               value={values.icon}
               onPress={iconLabel => setFieldValue('icon', iconLabel)}
+              error={ErrorHandlers.showError(
+                errors,
+                touched,
+                'icon' as keyof Object,
+              )}
+              errorLabel={ErrorHandlers.getErrorLabel(
+                errors,
+                'icon' as keyof Object,
+              )}
             />
             <ColorPicker
               value={values.color}
               iconName={values.icon}
               onChangeColor={color => setFieldValue('color', color)}
+              error={ErrorHandlers.showError(
+                errors,
+                touched,
+                'color' as keyof Object,
+              )}
+              errorLabel={ErrorHandlers.getErrorLabel(
+                errors,
+                'color' as keyof Object,
+              )}
             />
             <Button
               label={`${isEdit ? 'Editar' : 'Criar'}  Categoria`}
