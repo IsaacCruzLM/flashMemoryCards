@@ -8,6 +8,7 @@ import {of as $of} from 'rxjs';
 
 import NavigationService from '../../../navigation/NavigationService';
 import WmdbUtils from '../../../databases/utils';
+import ErrorHandlers from '../../../utils/errorHandlers';
 
 import DefaultContainerView from '../../../components/DefaultContainerView';
 import TextInput from '../../../components/TextInput';
@@ -45,7 +46,8 @@ const Create: React.FunctionComponent<any> = ({
 
     if (!values.name) {
       errors.name = 'Campo "Nome" obrigatório';
-    } else if (!values.color) {
+    }
+    if (!values.color) {
       errors.color = 'Campo "Cor" obrigatório';
     }
 
@@ -73,17 +75,29 @@ const Create: React.FunctionComponent<any> = ({
               onBlur={handleBlur('name')}
               placeholder={'Nome do assunto'}
               value={values.name}
-              error={get(errors, 'name', false) && get(touched, 'name', false)}
-              errorLabel={get(errors, 'name')}
+              error={ErrorHandlers.showError(
+                errors,
+                touched,
+                'name' as keyof Object,
+              )}
+              errorLabel={ErrorHandlers.getErrorLabel(
+                errors,
+                'name' as keyof Object,
+              )}
             />
             <ColorPicker
               value={values.color}
               iconName={''}
               onChangeColor={color => setFieldValue('color', color)}
-              error={
-                get(errors, 'color', false) && get(touched, 'color', false)
-              }
-              errorLabel={get(errors, 'color')}
+              error={ErrorHandlers.showError(
+                errors,
+                touched,
+                'color' as keyof Object,
+              )}
+              errorLabel={ErrorHandlers.getErrorLabel(
+                errors,
+                'color' as keyof Object,
+              )}
             />
             <Button
               label={`${isEdit ? 'Editar' : 'Criar'}  Categoria`}
