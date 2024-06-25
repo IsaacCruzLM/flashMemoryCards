@@ -5,6 +5,8 @@ export interface SelectProps {
   modalTitle: string;
   inputLabel: string;
   inputPlaceHolder: string;
+  error?: boolean;
+  errorLabel?: string;
 }
 
 export interface optionType {

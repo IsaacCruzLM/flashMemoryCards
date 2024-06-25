@@ -4,6 +4,7 @@ import themes from '../../styles/themes';
 const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
+    paddingBottom: themes.spacing.unit,
   },
   contentContainer: {
     flex: 1,
