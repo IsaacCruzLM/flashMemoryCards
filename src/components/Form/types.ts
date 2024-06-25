@@ -15,7 +15,7 @@ export interface FormProps {
 export interface DefaultFormProps {
   handleChange: (field: string) => any;
   handleBlur: (field: string) => any;
-  handleSubmit: (field: string) => any;
+  handleSubmit: (field?: string) => any;
   setFieldValue: (field: string, value: any) => void;
   resetForm: () => void;
   errors: object;
