@@ -30,6 +30,7 @@ const TextInput = ({
         value={value}
         theme={themes}
         onBlur={onBlur}
+        error={error}
         style={[styles.inputDefaultStyle, style]}
         {...otherProps}
       />

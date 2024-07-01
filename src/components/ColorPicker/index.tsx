@@ -34,7 +34,13 @@ const ColorPickerComponent = ({
     <View style={styles.container}>
       <View style={styles.contentContainer}>
         <View style={styles.infoContainer}>
-          <Text style={styles.labelStyle}>Cor do Icone</Text>
+          <Text
+            style={[
+              styles.labelStyle,
+              {color: error ? Theme.colors.error : Theme.colors.textColor2},
+            ]}>
+            Cor do Icone
+          </Text>
           <TouchableOpacity onPress={() => showDialog()}>
             <View
               style={[

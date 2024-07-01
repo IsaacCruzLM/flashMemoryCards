@@ -26,7 +26,6 @@ const styles = StyleSheet.create({
   labelStyle: {
     fontSize: themes.typography.fontSizeTitle,
     fontWeight: '700',
-    color: themes.colors.textColor2,
     marginBottom: themes.spacing.unit,
   },
   contentContainer: {

@@ -9,6 +9,10 @@ const styles = StyleSheet.create({
   },
   inputDefaultStyle: {
     fontSize: themes.typography.fontSizeTitle,
+    borderColor: themes.colors.error,
+  },
+  errorInputStyle: {
+    borderColor: themes.colors.error,
   },
   error: {
     color: themes.colors.error,

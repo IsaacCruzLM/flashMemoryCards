@@ -61,7 +61,13 @@ const SelectIcon = ({
 
   return (
     <View style={styles.container}>
-      <Text style={styles.labelStyle}>Selecione um icone</Text>
+      <Text
+        style={[
+          styles.labelStyle,
+          {color: error ? Theme.colors.error : Theme.colors.textColor2},
+        ]}>
+        Selecione um icone
+      </Text>
       <View style={styles.iconListContainer}>
         <TouchableOpacity
           onPress={() => setInitalIconIndex(initalIconIndex - 4)}

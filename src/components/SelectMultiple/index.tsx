@@ -4,6 +4,8 @@ import {BottomSheetModal, BottomSheetFlatList} from '@gorhom/bottom-sheet';
 import CheckBox from '@react-native-community/checkbox';
 import cloneDeep from 'lodash/cloneDeep';
 
+import Theme from '../../styles/themes';
+
 import ErrorWarning from '../ErrorWarning';
 import IconButton from '../IconButton';
 
@@ -94,9 +96,20 @@ const SelectMultiple = ({
     <View style={styles.container}>
       <TouchableOpacity onPress={handlePresentModalPress}>
         <View pointerEvents="none">
-          <View style={styles.fakeInputStyle}>
+          <View
+            style={[
+              styles.fakeInputStyle,
+              // eslint-disable-next-line react-native/no-inline-styles
+              {borderColor: error ? Theme.colors.error : 'gray'},
+            ]}>
             {stateValue.length <= 0 ? (
-              <Text style={styles.placeHolderStyle}>{inputPlaceHolder}</Text>
+              <Text
+                style={[
+                  styles.placeHolderStyle,
+                  {color: error ? Theme.colors.error : Theme.colors.textColor2},
+                ]}>
+                {inputPlaceHolder}
+              </Text>
             ) : (
               stateValue.map(id => {
                 const option = options.find(({value}) => value === id);
