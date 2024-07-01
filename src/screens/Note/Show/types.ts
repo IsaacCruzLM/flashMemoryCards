@@ -11,3 +11,9 @@ export interface ShowProps extends DefaultFormProps {
   subjects: SubjectModelType[];
   noteSubjects: NoteSubjectModelType[];
 }
+
+export interface NewInfoData {
+  name: string;
+  category: string;
+  subjects: string[];
+}

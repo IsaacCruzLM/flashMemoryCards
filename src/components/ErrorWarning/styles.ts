@@ -3,16 +3,7 @@ import themes from '../../styles/themes';
 
 const styles = StyleSheet.create({
   container: {
-    height: 36,
-    width: '100%',
-    marginBottom: themes.spacing.unit * 6,
-  },
-  inputDefaultStyle: {
-    fontSize: themes.typography.fontSizeTitle,
-    borderColor: themes.colors.error,
-  },
-  errorInputStyle: {
-    borderColor: themes.colors.error,
+    marginBottom: themes.spacing.unit,
   },
   error: {
     color: themes.colors.error,

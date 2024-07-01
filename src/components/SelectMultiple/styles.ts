@@ -45,7 +45,6 @@ const styles = StyleSheet.create({
     borderRadius: 15,
   },
   fakeInputStyle: {
-    borderColor: 'gray',
     minHeight: 58,
     width: '100%',
     borderWidth: 1,

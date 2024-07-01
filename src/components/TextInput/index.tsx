@@ -4,6 +4,8 @@ import {TextInput as PaperTextInput} from 'react-native-paper';
 
 import themes from '../../styles/themes';
 
+import ErrorWarning from '../ErrorWarning';
+
 import styles from './styles';
 import {TextInputProps} from './types';
 
@@ -14,6 +16,8 @@ const TextInput = ({
   value,
   style,
   onBlur,
+  error = false,
+  errorLabel = '',
   ...otherProps
 }: TextInputProps) => {
   return (
@@ -26,9 +30,11 @@ const TextInput = ({
         value={value}
         theme={themes}
         onBlur={onBlur}
+        error={error}
         style={[styles.inputDefaultStyle, style]}
         {...otherProps}
       />
+      <ErrorWarning show={error} label={errorLabel} />
     </View>
   );
 };

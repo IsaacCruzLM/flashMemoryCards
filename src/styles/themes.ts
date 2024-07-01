@@ -35,6 +35,6 @@ export default {
     fontSizeLargeTitle: 20,
     fontSizeTitle: 16,
     fontSizeText: 14,
-    fontSizeSmallText: 10,
+    fontSizeSmallText: 12,
   },
 };

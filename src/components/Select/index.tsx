@@ -18,6 +18,8 @@ const Select = ({
   modalTitle,
   inputLabel = '',
   inputPlaceHolder = '',
+  error = false,
+  errorLabel = '',
 }: SelectProps) => {
   const [stateValue, setStateValue] = useState(defaultValue);
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
@@ -77,12 +79,14 @@ const Select = ({
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={handlePresentModalPress}>
-        <View pointerEvents="none">
+        <View style={{}} pointerEvents="none">
           <TextInput
             label={inputLabel}
             setText={() => {}}
             placeholder={inputPlaceHolder}
             value={getOptionLabel()}
+            error={error}
+            errorLabel={errorLabel}
           />
         </View>
       </TouchableOpacity>

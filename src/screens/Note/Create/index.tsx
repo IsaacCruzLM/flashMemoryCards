@@ -17,10 +17,11 @@ import TextInput from '../../../components/TextInput';
 import WmdbUtils from '../../../databases/utils';
 import {CategoryModelType} from '../../../databases/models/categoryModel';
 import NavigationService from '../../../navigation/NavigationService';
+import ErrorHandlers from '../../../utils/errorHandlers';
+import toastShow from '../../../utils/toastShow';
 
 import styles from './styles';
 import {CreateFormProps, CreateProps, formValues, optionsType} from './types';
-import toastShow from '../../../utils/toastShow';
 
 export const translateOptions = (optionsArray: optionsType[]) =>
   optionsArray.map(({id, name, icon, color}: optionsType) => ({
@@ -100,15 +101,37 @@ const Create: React.FunctionComponent<CreateProps | any> = ({
     }
   };
 
+  const validate = (values: formValues) => {
+    const errors = {} as formValues;
+
+    if (!values.name) {
+      errors.name = 'Campo "Nome da anotação" obrigatório';
+    }
+    if (!values.category) {
+      errors.category = 'Selecione uma categoria';
+    }
+
+    return errors;
+  };
+
+  const earlyValidate = (values: formValues) => {
+    const validationCheck = validate(values);
+
+    return Object.keys(validationCheck).length === 0;
+  };
+
   return (
     <DefaultContainerView>
       <Form
+        validate={validate}
         form={({
           setFieldValue,
           handleSubmit,
           handleChange,
           handleBlur,
           values,
+          errors,
+          touched,
         }: CreateFormProps) => (
           <View style={styles.formContainer}>
             <View>
@@ -120,6 +143,15 @@ const Create: React.FunctionComponent<CreateProps | any> = ({
                     onBlur={handleBlur('name')}
                     placeholder={'Nome da anotação'}
                     value={values.name}
+                    error={ErrorHandlers.showError(
+                      errors,
+                      touched,
+                      'name' as keyof Object,
+                    )}
+                    errorLabel={ErrorHandlers.getErrorLabel(
+                      errors,
+                      'name' as keyof Object,
+                    )}
                   />
                   <Select
                     options={translateOptions(categories)}
@@ -128,6 +160,15 @@ const Create: React.FunctionComponent<CreateProps | any> = ({
                     inputLabel="Selecionar Categoria"
                     inputPlaceHolder="Selecionar Categoria"
                     defaultValue={values.category}
+                    error={ErrorHandlers.showError(
+                      errors,
+                      touched,
+                      'category' as keyof Object,
+                    )}
+                    errorLabel={ErrorHandlers.getErrorLabel(
+                      errors,
+                      'category' as keyof Object,
+                    )}
                   />
                   <SelectMultiple
                     options={translateOptions(subjects)}
@@ -148,7 +189,14 @@ const Create: React.FunctionComponent<CreateProps | any> = ({
               <View>
                 <Button
                   label={step === 2 ? 'Criar Anotação' : 'Proximo'}
-                  onPress={step === 2 ? handleSubmit : () => setStep(step + 1)}
+                  onPress={
+                    step === 2
+                      ? handleSubmit
+                      : () =>
+                          earlyValidate(values)
+                            ? setStep(step + 1)
+                            : handleSubmit()
+                  }
                 />
                 <Text style={styles.stepIndicator}>{`${step} / 2`}</Text>
               </View>

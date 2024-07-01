@@ -3,8 +3,8 @@ import {Formik} from 'formik';
 
 import {FormProps} from './types';
 
-const Form = ({form, initialValues, onSubmit}: FormProps) => (
-  <Formik initialValues={initialValues} onSubmit={onSubmit}>
+const Form = ({form, initialValues, onSubmit, validate}: FormProps) => (
+  <Formik initialValues={initialValues} onSubmit={onSubmit} validate={validate}>
     {form}
   </Formik>
 );

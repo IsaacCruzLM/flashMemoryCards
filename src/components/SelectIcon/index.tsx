@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
+import ErrorWarning from '../ErrorWarning';
+
 import Theme from '../../styles/themes';
 
 import MaterialCommunityIconList from '../../assets/materialCommunityIconList';
@@ -20,7 +22,12 @@ const getInitialIndex = (value: string) => {
   return initialIndex;
 };
 
-const SelectIcon = ({value = '', onPress}: SelectIconProps) => {
+const SelectIcon = ({
+  value = '',
+  onPress,
+  error = false,
+  errorLabel = '',
+}: SelectIconProps) => {
   const [initalIconIndex, setInitalIconIndex] = useState(
     getInitialIndex(value),
   );
@@ -54,7 +61,13 @@ const SelectIcon = ({value = '', onPress}: SelectIconProps) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.labelStyle}>Selecione um icone</Text>
+      <Text
+        style={[
+          styles.labelStyle,
+          {color: error ? Theme.colors.error : Theme.colors.textColor2},
+        ]}>
+        Selecione um icone
+      </Text>
       <View style={styles.iconListContainer}>
         <TouchableOpacity
           onPress={() => setInitalIconIndex(initalIconIndex - 4)}
@@ -78,6 +91,7 @@ const SelectIcon = ({value = '', onPress}: SelectIconProps) => {
           />
         </TouchableOpacity>
       </View>
+      <ErrorWarning show={error} label={errorLabel} />
     </View>
   );
 };
