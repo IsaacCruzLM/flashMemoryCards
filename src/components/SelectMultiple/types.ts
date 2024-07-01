@@ -4,6 +4,8 @@ export interface SelectMultipleProps {
   defaultValue?: string[];
   modalTitle: string;
   inputPlaceHolder: string;
+  error?: boolean;
+  errorLabel?: string;
 }
 
 export interface optionType {

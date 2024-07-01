@@ -4,6 +4,7 @@ import {BottomSheetModal, BottomSheetFlatList} from '@gorhom/bottom-sheet';
 import CheckBox from '@react-native-community/checkbox';
 import cloneDeep from 'lodash/cloneDeep';
 
+import ErrorWarning from '../ErrorWarning';
 import IconButton from '../IconButton';
 
 import {SelectMultipleProps, ChipProps} from './types';
@@ -25,6 +26,8 @@ const SelectMultiple = ({
   defaultValue = [],
   modalTitle,
   inputPlaceHolder = '',
+  error = false,
+  errorLabel = '',
 }: SelectMultipleProps) => {
   const [stateValue, setStateValue] = useState(defaultValue);
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
@@ -103,6 +106,7 @@ const SelectMultiple = ({
               })
             )}
           </View>
+          <ErrorWarning show={error} label={errorLabel} />
         </View>
       </TouchableOpacity>
       <BottomSheetModal
