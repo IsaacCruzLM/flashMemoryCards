@@ -21,7 +21,7 @@ import NavigationService from '../../../navigation/NavigationService';
 import {translateOptions} from '../Create';
 
 import styles from './styles';
-import {ShowProps} from './types';
+import {ShowProps, NewInfoData} from './types';
 import {CategoryModelType} from '../../../databases/models/categoryModel';
 import {NoteSubjectModelType} from '../../../databases/models/noteSubjectModel';
 import toastShow from '../../../utils/toastShow';
@@ -33,6 +33,12 @@ const Show: React.FunctionComponent<ShowProps | any> = ({
   subjects,
   noteSubjects = [],
 }) => {
+  const defaultFormErros = {
+    name: '',
+    category: '',
+    subjects: '',
+  };
+
   const {globalState, setShowDialogEditNote} = useContext(AppContext);
   const [newContent, setNewContent] = useState(note.content);
   const [newInfo, setNewInfo] = useState({
@@ -42,6 +48,7 @@ const Show: React.FunctionComponent<ShowProps | any> = ({
       get(noteSubject, 'subject.id'),
     ),
   });
+  const [formErrors, setFormErrors] = useState(defaultFormErros);
 
   const submitAction = async () => {
     const noteId = get(route, 'params.noteId', '');
@@ -56,40 +63,61 @@ const Show: React.FunctionComponent<ShowProps | any> = ({
     });
   };
 
+  const validate = (values: NewInfoData) => {
+    const errors = {} as NewInfoData;
+
+    if (!values.name) {
+      errors.name = 'Campo "Nome da anotação" obrigatório';
+    }
+    if (!values.category) {
+      errors.category = 'Selecione uma categoria';
+    }
+
+    return errors;
+  };
+
   const updateAction = async () => {
     const noteId = get(route, 'params.noteId', '');
     const newDataObject = cloneDeep(newInfo);
-    const M2MRelationships = get(newDataObject, 'subjects', []).map(
-      (id: String) => ({
-        type: 'subject',
-        id,
-      }),
-    );
-    const categoryRelationshipId = get(newDataObject, 'category', '');
-    delete newDataObject.subjects;
-    delete newDataObject.category;
 
-    const response = await WmdbUtils.updateItemWithM2MRelationInWMDB(
-      'notes',
-      {
-        ...newDataObject,
-        relationships: [
-          {
-            type: 'category',
-            id: categoryRelationshipId,
-          },
-        ],
-      },
-      noteId,
-      'note_subjects',
-      M2MRelationships,
-      'note_id',
-      'note',
-    );
+    const errors = validate(newDataObject);
 
-    setShowDialogEditNote(false);
-    if (!get(response, 'error', false)) {
-      toastShow('success', 'Anotação Atualizada com sucesso');
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors as any);
+    } else {
+      const M2MRelationships = get(newDataObject, 'subjects', []).map(
+        (id: String) => ({
+          type: 'subject',
+          id,
+        }),
+      );
+      const categoryRelationshipId = get(newDataObject, 'category', '');
+      delete newDataObject.subjects;
+      delete newDataObject.category;
+
+      const response = await WmdbUtils.updateItemWithM2MRelationInWMDB(
+        'notes',
+        {
+          ...newDataObject,
+          relationships: [
+            {
+              type: 'category',
+              id: categoryRelationshipId,
+            },
+          ],
+        },
+        noteId,
+        'note_subjects',
+        M2MRelationships,
+        'note_id',
+        'note',
+      );
+
+      setShowDialogEditNote(false);
+      setFormErrors(defaultFormErros);
+      if (!get(response, 'error', false)) {
+        toastShow('success', 'Anotação Atualizada com sucesso');
+      }
     }
   };
 
@@ -123,7 +151,10 @@ const Show: React.FunctionComponent<ShowProps | any> = ({
           {
             label: 'Fechar',
             buttonMode: 'outlined',
-            buttonAction: () => setShowDialogEditNote(false),
+            buttonAction: () => {
+              setFormErrors(defaultFormErros);
+              setShowDialogEditNote(false);
+            },
           },
           {
             label: 'Atualizar',
@@ -140,6 +171,8 @@ const Show: React.FunctionComponent<ShowProps | any> = ({
             setText={value => handleInfoChange('name', value)}
             placeholder={'Nome da anotação'}
             value={newInfo.name}
+            error={formErrors.name !== ''}
+            errorLabel={formErrors.name}
           />
           <Select
             options={translateOptions(categories)}
@@ -148,6 +181,8 @@ const Show: React.FunctionComponent<ShowProps | any> = ({
             inputLabel="Selecionar Categoria"
             inputPlaceHolder="Selecionar Categoria"
             defaultValue={newInfo.category}
+            error={formErrors.category !== ''}
+            errorLabel={formErrors.category}
           />
           <SelectMultiple
             options={translateOptions(subjects)}
