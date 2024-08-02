@@ -10,6 +10,8 @@ const styles = StyleSheet.create({
     paddingVertical: themes.spacing.unit * 3,
     paddingHorizontal: themes.spacing.unit * 2 + 4,
   },
+  flatList: {},
+  listContainer: {},
 });
 
 export default styles;
