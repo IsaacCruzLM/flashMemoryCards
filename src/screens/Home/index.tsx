@@ -7,7 +7,8 @@ import {compose} from 'recompose';
 import DefaultContainerView from '../../components/DefaultContainerView';
 import NoteListCard from '../../components/NoteListCard';
 import FloatingAddButton from '../../components/FloatingAddButton';
-import EmpytListMessage from '../../components/EmpytListMessage';
+
+import EmpytListMessage from './components/EmpytListMessage';
 
 import styles from './styles';
 
@@ -38,7 +39,7 @@ const Home = ({notes}: any) => {
           );
         }}
         style={styles.flatList}
-        ListEmptyComponent={() => <EmpytListMessage itemName="categoria" />}
+        ListEmptyComponent={() => <EmpytListMessage />}
       />
       <FloatingAddButton routeName="NewNote" />
     </DefaultContainerView>
