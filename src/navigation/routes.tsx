@@ -24,7 +24,10 @@ import SideMenu from '../components/SideMenu';
 import themes from '../styles/themes';
 import sharedStyles from '../styles/sharedStyles';
 
-function Home() {
+function Home(
+  globalState: {isOpenSearchBar: boolean},
+  setFilterDialogOpenFunction: (newParam: Object) => void,
+) {
   return (
     <Drawer.Navigator
       initialRouteName="HomeScreen"
@@ -44,6 +47,20 @@ function Home() {
             fontSize: themes.typography.fontSizeLargeTitle,
             color: themes.colors.background,
           },
+          headerRight: () =>
+            globalState.isOpenSearchBar ? null : (
+              <View style={sharedStyles.headerRightIconView}>
+                <TouchableOpacity
+                  onPress={() => setFilterDialogOpenFunction({Home: true})}>
+                  <Icon
+                    color={themes.colors.background}
+                    size={themes.spacing.unit * 3}
+                    name="filter-variant"
+                    style={sharedStyles.headerIconWithMargin}
+                  />
+                </TouchableOpacity>
+              </View>
+            ),
         }}
       />
     </Drawer.Navigator>
@@ -110,8 +127,8 @@ const Routes = () => {
         />
         <Stack.Screen
           name="Home"
-          component={Home}
           options={{headerShown: false}}
+          children={() => Home(globalState, setFilterDialogOpenFunction)}
         />
         <Stack.Screen
           name="Categories"
