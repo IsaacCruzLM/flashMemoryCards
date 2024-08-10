@@ -34,7 +34,7 @@ import {
   filterState,
 } from './types';
 
-const NotesFilter: React.FunctionComponent<filterProps> = ({
+export const NotesFilter: React.FunctionComponent<filterProps> = ({
   filters,
   handleFilterChange,
   categories,
@@ -74,7 +74,7 @@ const NotesFilter: React.FunctionComponent<filterProps> = ({
   );
 };
 
-const DEFAULT_FILTER_STATE = {
+export const DEFAULT_FILTER_STATE = {
   category: '',
   subjects: [],
   creationDate: {init: null, end: null},
