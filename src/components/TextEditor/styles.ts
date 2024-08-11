@@ -31,6 +31,17 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 10,
     borderWidth: 1,
   },
+  containerFloatingButton: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: themes.colors.lightGreen,
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    bottom: themes.spacing.unit * 3,
+    right: themes.spacing.unit * 2.5,
+  },
 });
 
 export default styles;
