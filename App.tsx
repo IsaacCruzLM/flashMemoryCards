@@ -19,9 +19,21 @@ import {database} from './src/databases';
 import theme from './src/styles/themes';
 import Routes from './src/navigation/routes';
 import ContextProvider from './src/context/appProvider';
+import PushNotification from 'react-native-push-notification';
 
 export type AppTheme = typeof theme;
 export const useAppTheme = () => useTheme<AppTheme>();
+
+PushNotification.createChannel(
+  {
+    channelId: 'your-channel-id', // (required)
+    channelName: 'My channel', // (required)
+    playSound: true, // (optional) default: true
+    soundName: 'default', // (optional) See `soundName` parameter of `localNotification` function
+    vibrate: true, // (optional) default: true. Creates the default vibration pattern if true.
+  },
+  created => console.log(`createChannel returned '${created}'`), // (optional) callback returns whether the channel was created, false means it already existed.
+);
 
 const App = () => {
   return (
