@@ -25,9 +25,11 @@ import {CategoryModelType} from '../../../databases/models/categoryModel';
 import NavigationService from '../../../navigation/NavigationService';
 import ErrorHandlers from '../../../utils/errorHandlers';
 import toastShow from '../../../utils/toastShow';
+import notifyNotes from '../../../utils/notifications/notifyNotes';
 
 import styles from './styles';
 import {CreateFormProps, CreateProps, formValues, optionsType} from './types';
+import {NoteModel} from '../../../databases/models/noteModel';
 
 export const translateOptions = (optionsArray: optionsType[]) =>
   optionsArray.map(({id, name, icon, color}: optionsType) => ({
@@ -69,7 +71,7 @@ const Create: React.FunctionComponent<CreateProps | any> = ({
     delete newDataObject.subjects;
     delete newDataObject.category;
 
-    await WmdbUtils.insertItemWithM2MRelationInWMDB(
+    const note = (await WmdbUtils.insertItemWithM2MRelationInWMDB(
       'notes',
       {
         ...newDataObject,
@@ -86,9 +88,11 @@ const Create: React.FunctionComponent<CreateProps | any> = ({
       'note_subjects',
       M2MRelationships,
       'note',
-    );
+    )) as NoteModel;
 
     toastShow('success', 'Anotação criada com sucesso');
+
+    notifyNotes({name: note.name, id: note.id});
 
     if (get(route, 'params.categoryId', '')) {
       NavigationService.navigate('Notes', {

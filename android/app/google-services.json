@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "388080705904",
+    "project_id": "flashmemorycards-d3528",
+    "storage_bucket": "flashmemorycards-d3528.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:388080705904:android:45e7f0b6ef555b28576fb5",
+        "android_client_info": {
+          "package_name": "com.flashmemorycards"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1prKGQrvqJR2KIn-5nj3Fd4lJ2dy6ozA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

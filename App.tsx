@@ -19,12 +19,25 @@ import {database} from './src/databases';
 import theme from './src/styles/themes';
 import Routes from './src/navigation/routes';
 import ContextProvider from './src/context/appProvider';
+import PushNotification from 'react-native-push-notification';
 
 export type AppTheme = typeof theme;
 export const useAppTheme = () => useTheme<AppTheme>();
 
+PushNotification.createChannel(
+  {
+    channelId: 'note-notification-id',
+    channelName: 'Notificações de revisão',
+    playSound: true,
+    soundName: 'default',
+    vibrate: true,
+  },
+  created => console.log(`createChannel returned '${created}'`),
+);
+
 const App = () => {
   return (
+    // eslint-disable-next-line react-native/no-inline-styles
     <GestureHandlerRootView style={{flex: 1}}>
       <ContextProvider>
         <PaperProvider theme={theme}>
