@@ -25,7 +25,7 @@ import {CategoryModelType} from '../../../databases/models/categoryModel';
 import NavigationService from '../../../navigation/NavigationService';
 import ErrorHandlers from '../../../utils/errorHandlers';
 import toastShow from '../../../utils/toastShow';
-import scheduleLocalNotification from '../../../utils/notifications/scheduleNotification';
+import notifyNotes from '../../../utils/notifications/notifyNotes';
 
 import styles from './styles';
 import {CreateFormProps, CreateProps, formValues, optionsType} from './types';
@@ -92,12 +92,7 @@ const Create: React.FunctionComponent<CreateProps | any> = ({
 
     toastShow('success', 'Anotação criada com sucesso');
 
-    scheduleLocalNotification(
-      'note-notification-id',
-      newDataObject.name,
-      new Date(Date.now() + 60 * 2000),
-      {title: newDataObject.name, id: note.id},
-    );
+    notifyNotes({name: note.name, id: note.id});
 
     if (get(route, 'params.categoryId', '')) {
       NavigationService.navigate('Notes', {
