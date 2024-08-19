@@ -1,5 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {Keyboard, Text, View} from 'react-native';
+import {
+  Keyboard,
+  Text,
+  View,
+  KeyboardAvoidingView,
+  Platform,
+} from 'react-native';
 import withObservables from '@nozbe/with-observables';
 import {withDatabase} from '@nozbe/watermelondb/DatabaseProvider';
 import {compose} from 'recompose';
@@ -133,7 +139,9 @@ const Create: React.FunctionComponent<CreateProps | any> = ({
           errors,
           touched,
         }: CreateFormProps) => (
-          <View style={styles.formContainer}>
+          <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            style={styles.formContainer}>
             <View>
               {step === 1 ? (
                 <>
@@ -201,7 +209,7 @@ const Create: React.FunctionComponent<CreateProps | any> = ({
                 <Text style={styles.stepIndicator}>{`${step} / 2`}</Text>
               </View>
             )}
-          </View>
+          </KeyboardAvoidingView>
         )}
         initialValues={{
           name: '',

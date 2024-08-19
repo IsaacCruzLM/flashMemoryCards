@@ -1,7 +1,8 @@
-import React, {LegacyRef, useRef} from 'react';
-import {View, Dimensions} from 'react-native';
+import React, {LegacyRef, useRef, useState, useEffect} from 'react';
+import {View, Dimensions, Keyboard, TouchableOpacity} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {actions, RichEditor, RichToolbar} from 'react-native-pell-rich-editor';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import Theme from '../../styles/themes';
 
@@ -13,11 +14,26 @@ const TextEditor = ({
   placeHolder,
   initialContentHTML = '',
 }: TextEditorProps) => {
-  const richText = useRef() as LegacyRef<RichEditor> | undefined;
+  const [keyboardStatus, setKeyboardStatus] = useState('');
+  const richText = useRef() as LegacyRef<RichEditor> | any;
 
   const richTextHandle = (descriptionText: string) => {
     onChange(descriptionText);
   };
+
+  useEffect(() => {
+    const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
+      setKeyboardStatus('Keyboard Shown');
+    });
+    const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
+      setKeyboardStatus('Keyboard Hidden');
+    });
+
+    return () => {
+      showSubscription.remove();
+      hideSubscription.remove();
+    };
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -50,6 +66,18 @@ const TextEditor = ({
           style={styles.richTextToolbarStyle}
         />
       </View>
+      {keyboardStatus === 'Keyboard Shown' ? (
+        <View style={styles.containerFloatingButton}>
+          <TouchableOpacity
+            onPress={() =>
+              richText !== null && richText !== undefined
+                ? richText.current?.blurContentEditor()
+                : null
+            }>
+            <Icon color={Theme.colors.primary} size={30} name="check" />
+          </TouchableOpacity>
+        </View>
+      ) : null}
     </View>
   );
 };
