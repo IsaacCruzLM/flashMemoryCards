@@ -39,7 +39,8 @@ const Show: React.FunctionComponent<ShowProps | any> = ({
     subjects: '',
   };
 
-  const {globalState, setShowDialogEditNote} = useContext(AppContext);
+  const {globalState, setShowDialogEditNote, setShowDialogDeleteNote} =
+    useContext(AppContext);
   const [newContent, setNewContent] = useState(note.content);
   const [newInfo, setNewInfo] = useState({
     name: get(note, 'name', ''),
@@ -114,10 +115,28 @@ const Show: React.FunctionComponent<ShowProps | any> = ({
       );
 
       setShowDialogEditNote(false);
-      setFormErrors(defaultFormErros);
+
       if (!get(response, 'error', false)) {
         toastShow('success', 'Anotação Atualizada com sucesso');
       }
+    }
+  };
+
+  const deleteAction = async () => {
+    const noteId = get(route, 'params.noteId', '');
+
+    const response = await WmdbUtils.deleteItemWithM2MRelationInWMDB(
+      'notes',
+      noteId,
+      'note_subjects',
+      'note_id',
+    );
+
+    setShowDialogDeleteNote(false);
+
+    if (!get(response, 'error', false)) {
+      toastShow('success', 'Anotação Atualizada com sucesso');
+      NavigationService.navigate('Home');
     }
   };
 
@@ -192,6 +211,26 @@ const Show: React.FunctionComponent<ShowProps | any> = ({
             defaultValue={newInfo.subjects}
           />
         </View>
+      </Dialog>
+      <Dialog
+        actions={[
+          {
+            label: 'Cancelar',
+            buttonMode: 'outlined',
+            buttonAction: () => {
+              setShowDialogDeleteNote(false);
+            },
+          },
+          {
+            label: 'Deletar',
+            buttonMode: 'contained',
+            buttonAction: () => deleteAction(),
+          },
+        ]}
+        isVisible={globalState.showDialogDeleteNote}
+        hideDialog={() => setShowDialogDeleteNote(false)}
+        title={'Você realmente deseja deletar essa anotação?'}>
+        <View />
       </Dialog>
     </DefaultContainerView>
   );
