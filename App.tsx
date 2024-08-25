@@ -20,6 +20,7 @@ import theme from './src/styles/themes';
 import Routes from './src/navigation/routes';
 import ContextProvider from './src/context/appProvider';
 import PushNotification from 'react-native-push-notification';
+import NotificationWrapper from './src/utils/notifications/notificationWrapper';
 
 export type AppTheme = typeof theme;
 export const useAppTheme = () => useTheme<AppTheme>();
@@ -44,6 +45,7 @@ const App = () => {
           <AlertNotificationRoot>
             <DatabaseProvider database={database}>
               <BottomSheetModalProvider>
+                <NotificationWrapper />
                 <Routes />
               </BottomSheetModalProvider>
             </DatabaseProvider>
