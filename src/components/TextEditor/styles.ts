@@ -3,7 +3,7 @@ import themes from '../../styles/themes';
 
 const styles = StyleSheet.create({
   container: {
-    height: '90%',
+    height: '92%',
   },
   richTextContainer: {
     width: '100%',
