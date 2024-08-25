@@ -75,6 +75,7 @@ const Routes = () => {
     globalState,
     setKeyboardIsVisible,
     setShowDialogEditNote,
+    setShowDialogDeleteNote,
     setSearchParamsFunction,
     setIsOpenSearchBar,
     setFilterDialogOpenFunction,
@@ -238,12 +239,25 @@ const Routes = () => {
               title: noteName,
               ...headerStyled,
               headerRight: () => (
-                <Icon
-                  color={themes.colors.background}
-                  size={themes.spacing.unit * 3.5}
-                  name="square-edit-outline"
-                  onPress={() => setShowDialogEditNote(true)}
-                />
+                <View style={sharedStyles.headerRightIconView}>
+                  <TouchableOpacity onPress={() => setShowDialogEditNote(true)}>
+                    <Icon
+                      color={themes.colors.background}
+                      size={themes.spacing.unit * 3.5}
+                      name="square-edit-outline"
+                      style={sharedStyles.headerIconWithMargin}
+                    />
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => setShowDialogDeleteNote(true)}>
+                    <Icon
+                      color={themes.colors.background}
+                      size={themes.spacing.unit * 3.5}
+                      name="trash-can"
+                      style={sharedStyles.headerIconWithMargin}
+                    />
+                  </TouchableOpacity>
+                </View>
               ),
             };
           }}
