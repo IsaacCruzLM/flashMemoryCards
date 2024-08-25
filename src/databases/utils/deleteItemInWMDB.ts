@@ -8,15 +8,17 @@ export default async function deleteItemInWMDB(model: string, id: string) {
     const modelInSnakeCase = snakeCase(model);
     const deletedItem = await database.write(async () => {
       const item: Model = await database.get(modelInSnakeCase).find(id);
+      console.log('Flag 12', item);
       if (!item) {
-        await (item as Model).destroyPermanently();
-      } else {
         throw Error('Item não encontrado!');
+      } else {
+        await (item as Model).destroyPermanently();
       }
       return item;
     });
     return deletedItem;
   } catch (error: any) {
+    console.log('Flag 2', error);
     Toast.show({
       type: ALERT_TYPE.DANGER,
       title: 'Erro',
