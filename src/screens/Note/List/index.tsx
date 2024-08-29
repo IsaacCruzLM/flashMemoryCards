@@ -324,7 +324,12 @@ export default compose(
       notes: database
         .get('notes')
         .query(Q.where('category_id', categoryId))
-        .observeWithColumns(['name', 'category_id']),
+        .observeWithColumns([
+          'name',
+          'category_id',
+          'last_revision',
+          'next_revision',
+        ]),
       noteSubjects: database
         .get('note_subjects')
         .query()
