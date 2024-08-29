@@ -17,24 +17,26 @@ const noteRevisionUpdate = (
   const createdAt = new Date(creationDate);
   const newLevelRevision = levelRevision + 1;
 
-  WmdbUtils.updateItemInWMDB(
-    'notes',
-    {
-      lastRevision: today,
-      ...(needRevision
-        ? {
-            levelRevision: newLevelRevision,
-            nextRevision: createdAt.setDate(
-              createdAt.getDate() +
-                MULTIPLICATOR_FACTOR[
-                  newLevelRevision.toString() as keyof typeof MULTIPLICATOR_FACTOR
-                ],
-            ),
-          }
-        : {}),
-    },
-    id,
-  );
+  if (newLevelRevision <= 4) {
+    WmdbUtils.updateItemInWMDB(
+      'notes',
+      {
+        lastRevision: today,
+        ...(needRevision
+          ? {
+              levelRevision: newLevelRevision,
+              nextRevision: createdAt.setDate(
+                createdAt.getDate() +
+                  MULTIPLICATOR_FACTOR[
+                    newLevelRevision.toString() as keyof typeof MULTIPLICATOR_FACTOR
+                  ],
+              ),
+            }
+          : {}),
+      },
+      id,
+    );
+  }
 };
 
 export default noteRevisionUpdate;
