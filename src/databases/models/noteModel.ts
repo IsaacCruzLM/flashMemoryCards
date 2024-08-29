@@ -23,6 +23,9 @@ export class NoteModel extends Model {
   @date('last_revision')
   lastRevision!: number;
 
+  @date('next_revision')
+  nextRevision!: number;
+
   @relation('categories', 'category_id')
   category!: string;
 
@@ -39,6 +42,7 @@ export interface NoteModelType {
   levelRevision: number;
   createdAt: number;
   lastRevision: number;
+  nextRevision: number;
   category: {
     [x: string]: any;
     id: string;
