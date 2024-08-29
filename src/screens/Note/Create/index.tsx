@@ -80,7 +80,7 @@ const Create: React.FunctionComponent<CreateProps | any> = ({
         levelRevision: 1,
         createdAt: new Date(),
         lastRevision: new Date(),
-        nextRevision: today.setDate(today.getDate() + 5),
+        nextRevision: today.setDate(today.getDate() + 1),
         relationships: [
           {
             type: 'category',

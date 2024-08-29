@@ -39,6 +39,8 @@ export interface CardData {
   noteType: string;
   category: string;
   subjects: Array<subjectData>;
+  levelRevision?: number;
+  needRevision?: boolean;
 }
 
 export interface subjectData {

@@ -21,6 +21,7 @@ import useGetFromGlobalState from '../../../hooks/useGetFromGlobalState';
 import {NoteModelType} from '../../../databases/models/noteModel';
 import NavigationService from '../../../navigation/NavigationService';
 import noteNeedToBeRevised from '../../../utils/noteValidations';
+import noteRevisionUpdate from '../../../utils/noteValidations/noteRevisionUpdate';
 import filterActions from '../../../utils/filters';
 import AppContext from '../../../context/appContext';
 import {translateOptions} from '../Create';
@@ -191,6 +192,8 @@ const List: React.FunctionComponent<ListProps | any> = ({
                   content: name,
                   color,
                 })),
+                levelRevision: note.levelRevision,
+                needRevision: needRevision,
               });
             }
           }),
@@ -261,12 +264,18 @@ const List: React.FunctionComponent<ListProps | any> = ({
             category={item.category}
             subjects={item.subjects}
             containerStyle={styles.cardCustomStyle}
-            onPress={() =>
+            onPress={() => {
+              noteRevisionUpdate(
+                item.id,
+                item.levelRevision,
+                item.creationDate,
+                item.needRevision,
+              );
               NavigationService.navigate('ShowNote', {
                 noteName: item.title,
                 noteId: item.id,
-              })
-            }
+              });
+            }}
           />
         )}
         renderSectionHeader={({section: {title}}) =>
