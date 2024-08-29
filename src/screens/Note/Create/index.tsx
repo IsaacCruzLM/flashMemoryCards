@@ -71,6 +71,8 @@ const Create: React.FunctionComponent<CreateProps | any> = ({
     delete newDataObject.subjects;
     delete newDataObject.category;
 
+    const today = new Date();
+
     const note = (await WmdbUtils.insertItemWithM2MRelationInWMDB(
       'notes',
       {
@@ -78,6 +80,7 @@ const Create: React.FunctionComponent<CreateProps | any> = ({
         levelRevision: 1,
         createdAt: new Date(),
         lastRevision: new Date(),
+        nextRevision: today.setDate(today.getDate() + 5),
         relationships: [
           {
             type: 'category',

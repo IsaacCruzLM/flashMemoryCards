@@ -70,6 +70,11 @@ export const NotesFilter: React.FunctionComponent<filterProps> = ({
         onChangeRange={date => handleFilterChange('lastRevision', date)}
         defaultValue={filters.lastRevision}
       />
+      <DataRangeInput
+        label={'Próxima revisão'}
+        onChangeRange={date => handleFilterChange('nextRevision', date)}
+        defaultValue={filters.nextRevision}
+      />
     </View>
   );
 };
@@ -79,6 +84,7 @@ export const DEFAULT_FILTER_STATE = {
   subjects: [],
   creationDate: {init: null, end: null},
   lastRevision: {init: null, end: null},
+  nextRevision: {init: null, end: null},
 };
 
 const List: React.FunctionComponent<ListProps | any> = ({
@@ -105,6 +111,7 @@ const List: React.FunctionComponent<ListProps | any> = ({
     const {
       creationDate,
       lastRevision,
+      nextRevision,
       category: categoryFilter,
       subjects: subjectsFilter,
     } = cloneDeep(filters);
@@ -138,6 +145,13 @@ const List: React.FunctionComponent<ListProps | any> = ({
       );
     }
 
+    if ((nextRevision.init || nextRevision.end) && dontFilter) {
+      dontFilter = filterActions.rangeInputDateVerify(
+        nextRevision,
+        note.nextRevision.toString(),
+      );
+    }
+
     return dontFilter;
   };
 
@@ -168,6 +182,9 @@ const List: React.FunctionComponent<ListProps | any> = ({
                 lastRevisionDate: new Date(
                   note.lastRevision,
                 ).toLocaleDateString('pt-BR'),
+                nextRevisionDate: new Date(
+                  note.nextRevision,
+                ).toLocaleDateString('pt-BR'),
                 noteType: 'Texto',
                 category: categoryName,
                 subjects: (subjectsFetch || []).map(({name, color}: any) => ({
@@ -194,7 +211,12 @@ const List: React.FunctionComponent<ListProps | any> = ({
   }, [category, notes, noteSubjects, searchQuery, filters]);
 
   const handleFilterChange = (
-    key: 'category' | 'subjects' | 'creationDate' | 'lastRevision',
+    key:
+      | 'category'
+      | 'subjects'
+      | 'creationDate'
+      | 'lastRevision'
+      | 'nextRevision',
     value: string & string[] & rangeDataType,
   ) => {
     const newFiltersClone = cloneDeep(filters);
@@ -234,6 +256,7 @@ const List: React.FunctionComponent<ListProps | any> = ({
             title={item.title}
             creationDate={item.creationDate}
             lastRevisionDate={item.lastRevisionDate}
+            nextRevisionDate={item.nextRevisionDate}
             noteType={item.noteType}
             category={item.category}
             subjects={item.subjects}
