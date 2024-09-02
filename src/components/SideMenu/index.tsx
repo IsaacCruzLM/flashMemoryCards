@@ -37,6 +37,14 @@ const SideMenu = (props: DrawerContentComponentProps) => {
             )}
             labelStyle={styles.labelStyle}
           />
+          <DrawerItem
+            label={'Criar Resumo PDF'}
+            onPress={() => NavigationService.navigate('PDFResume')}
+            icon={({color, size}) => (
+              <Icon color={color} size={size} name={'file-pdf-box'} />
+            )}
+            labelStyle={styles.labelStyle}
+          />
         </DrawerContentScrollView>
       </View>
     </View>

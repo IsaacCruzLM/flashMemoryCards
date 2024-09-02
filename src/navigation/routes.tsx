@@ -18,6 +18,7 @@ import HomeScreen from '../screens/Home';
 import Category from '../screens/Category';
 import Note from '../screens/Note';
 import Subject from '../screens/Subject';
+import PDFResumeScreen from '../screens/PDFResume';
 
 import SideMenu from '../components/SideMenu';
 
@@ -260,6 +261,14 @@ const Routes = () => {
                 </View>
               ),
             };
+          }}
+        />
+        <Stack.Screen
+          name={'PDFResume'}
+          component={PDFResumeScreen}
+          options={{
+            title: 'Resumo PDF',
+            ...headerStyled,
           }}
         />
       </Stack.Navigator>
