@@ -9,6 +9,7 @@ import Form from '../../components/Form';
 import Button from '../../components/Button';
 import TextInput from '../../components/TextInput';
 import SelectMultiple from '../../components/SelectMultiple';
+import InfoContainer from '../../components/InfoContainer';
 
 import ErrorHandlers from '../../utils/errorHandlers';
 
@@ -52,6 +53,11 @@ const PDFResumePage: React.FunctionComponent<any> = ({
           touched,
         }: PDFResumeFormProps) => (
           <View style={styles.formContainer}>
+            <InfoContainer
+              message={
+                'Preencha o nome do arquivo, selecione as categorias e os assuntos desejados, e gere um PDF das anotações com base nas informações fornecidas.'
+              }
+            />
             <TextInput
               label={'Nome do resumo'}
               setText={handleChange('pdf_name')}
