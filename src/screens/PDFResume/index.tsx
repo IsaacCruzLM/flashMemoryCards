@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View} from 'react-native';
 import withObservables from '@nozbe/with-observables';
 import {withDatabase} from '@nozbe/watermelondb/DatabaseProvider';
@@ -10,6 +10,7 @@ import Button from '../../components/Button';
 import TextInput from '../../components/TextInput';
 import SelectMultiple from '../../components/SelectMultiple';
 import InfoContainer from '../../components/InfoContainer';
+import Dialog from '../../components/Dialog';
 
 import ErrorHandlers from '../../utils/errorHandlers';
 
@@ -22,6 +23,9 @@ const PDFResumePage: React.FunctionComponent<any> = ({
   categories,
   subjects,
 }: PDFResumeProps) => {
+  const [showConfirmDialog, setShowConfirmDialog] = useState(false);
+  const [formPDFValues, setFormPDFValues] = useState({});
+
   const validate = (values: formValues) => {
     const errors = {} as formValues;
 
@@ -36,6 +40,8 @@ const PDFResumePage: React.FunctionComponent<any> = ({
   };
 
   const confirmPDFGeneration = async (values: formValues) => {
+    setFormPDFValues(values);
+    setShowConfirmDialog(true);
     return values;
   };
 
@@ -106,6 +112,26 @@ const PDFResumePage: React.FunctionComponent<any> = ({
         initialValues={{pdf_name: '', categories: [], subjects: []}}
         onSubmit={values => confirmPDFGeneration(values as formValues)}
       />
+      <Dialog
+        actions={[
+          {
+            label: 'Cancelar',
+            buttonMode: 'outlined',
+            buttonAction: () => {
+              setShowConfirmDialog(false);
+            },
+          },
+          {
+            label: 'Gerar PDF',
+            buttonMode: 'contained',
+            buttonAction: () => {},
+          },
+        ]}
+        isVisible={showConfirmDialog}
+        hideDialog={() => setShowConfirmDialog(false)}
+        title={'Você realmente deseja gerar o PDF com essas informações?'}>
+        <View />
+      </Dialog>
     </DefaultContainerView>
   );
 };
