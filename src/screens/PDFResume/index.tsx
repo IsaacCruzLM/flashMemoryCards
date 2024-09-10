@@ -3,6 +3,7 @@ import {View} from 'react-native';
 import withObservables from '@nozbe/with-observables';
 import {withDatabase} from '@nozbe/watermelondb/DatabaseProvider';
 import {compose} from 'recompose';
+import RNHTMLtoPDF from 'react-native-html-to-pdf';
 
 import DefaultContainerView from '../../components/DefaultContainerView';
 import Form from '../../components/Form';
@@ -18,6 +19,26 @@ import {translateOptions} from '../Note/Create';
 
 import {PDFResumeProps, PDFResumeFormProps, formValues} from './types';
 import styles from './styles';
+
+const generatePDF = async () => {
+  const htmlContent = `
+    <h1>Nome da Anotação: Minha Primeira Anotação</h1>
+    <p>Data de Criação: 2024-09-09</p>
+    <p>Categoria: Trabalho, Estudo</p>
+    <p>Assuntos: React Native, PDF</p>
+    <div style="border:1px solid black; height:300px;"></div>
+    <p>Aqui está o conteúdo da anotação...</p>
+  `;
+
+  let options = {
+    html: htmlContent,
+    fileName: 'test-pdf',
+    directory: 'Documents',
+  };
+
+  let file = await RNHTMLtoPDF.convert(options);
+  console.log('PDF criado no caminho:', file.filePath);
+};
 
 const PDFResumePage: React.FunctionComponent<any> = ({
   categories,
@@ -124,7 +145,9 @@ const PDFResumePage: React.FunctionComponent<any> = ({
           {
             label: 'Gerar PDF',
             buttonMode: 'contained',
-            buttonAction: () => {},
+            buttonAction: () => {
+              generatePDF();
+            },
           },
         ]}
         isVisible={showConfirmDialog}
