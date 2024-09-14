@@ -46,6 +46,7 @@ const PDFResumePage: React.FunctionComponent<any> = ({
 }: PDFResumeProps) => {
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [formPDFValues, setFormPDFValues] = useState({});
+  const [loadingPDFGenerate, setLoadingPDFGenerate] = useState(false);
 
   const validate = (values: formValues) => {
     const errors = {} as formValues;
@@ -145,9 +146,11 @@ const PDFResumePage: React.FunctionComponent<any> = ({
           {
             label: 'Gerar PDF',
             buttonMode: 'contained',
-            buttonAction: () => {
-              generatePDF();
+            buttonAction: async () => {
+              setLoadingPDFGenerate(true);
+              generatePDF().then(() => setLoadingPDFGenerate(false));
             },
+            loading: loadingPDFGenerate,
           },
         ]}
         isVisible={showConfirmDialog}
