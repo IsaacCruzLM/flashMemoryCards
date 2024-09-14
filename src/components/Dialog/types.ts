@@ -11,4 +11,5 @@ export type ActionType = {
   label: string;
   buttonMode: 'contained' | 'outlined' | 'text';
   buttonAction: () => void;
+  loading?: boolean;
 };
