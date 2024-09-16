@@ -31,12 +31,11 @@ export default async function deleteItemWithM2MRelationInWMDB(
 
     return itemUpdated;
   } catch (error: any) {
-    console.log('Flag Error', error);
     Toast.show({
       type: ALERT_TYPE.DANGER,
       title: 'Erro',
       textBody: 'Algo de errado aconteceu na criação deste item!',
     });
-    return {error: true, message: error.message};
+    return {error: true, message: error.message} as any;
   }
 }
