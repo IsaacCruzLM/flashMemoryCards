@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {View} from 'react-native';
 import withObservables from '@nozbe/with-observables';
 import {withDatabase} from '@nozbe/watermelondb/DatabaseProvider';
+import {Q} from '@nozbe/watermelondb';
 import {compose} from 'recompose';
 import RNHTMLtoPDF from 'react-native-html-to-pdf';
 
@@ -14,25 +15,33 @@ import InfoContainer from '../../components/InfoContainer';
 import Dialog from '../../components/Dialog';
 
 import ErrorHandlers from '../../utils/errorHandlers';
+import WmdbUtils from '../../databases/utils';
+import {NoteSubjectModelType} from '../../databases/models/noteSubjectModel';
 
 import {translateOptions} from '../Note/Create';
 
 import {PDFResumeProps, PDFResumeFormProps, formValues} from './types';
 import styles from './styles';
 
-const generatePDF = async () => {
+const generatePDF = async (notesToExport: any) => {
+  // Continuar daqui -> colocar ty para notesToExport e importar nome do arquivo na função tbm
+  console.log(notesToExport);
+
   const htmlContent = `
-    <h1>Nome da Anotação: Minha Primeira Anotação</h1>
-    <p>Data de Criação: 2024-09-09</p>
-    <p>Categoria: Trabalho, Estudo</p>
-    <p>Assuntos: React Native, PDF</p>
-    <div style="border:1px solid black; height:300px;"></div>
-    <p>Aqui está o conteúdo da anotação...</p>
+    <div class="container" style="border-bottom: 1px solid #000; padding-bottom: 10px; margin-bottom: 20px;">
+      <div class="header" style="background-color: #22272E; padding: 10px; border-radius: 6px; margin-bottom: 5px;">
+        <h1 style="font-size: 24px; margin: 0; color: #FFFFFF;"><strong>Minha Primeira Anotação</strong></h1>
+        <p style="font-size: 14px; margin: 5px 0; color: #FFFFFF";"><strong>Data de Criação:</strong> 2024-09-09</p>
+        <p style="font-size: 14px; margin: 5px 0; color: #FFFFFF";"><strong>Categoria:</strong> Trabalho, Estudo</p>
+        <p style="font-size: 14px; margin: 5px 0; color: #FFFFFF";"><strong>Assuntos:</strong> React Native, PDF</p>
+      </div>
+      <div style="border: 1px solid black; height: 300px; border-radius: 6px;"></div>
+    </div>
   `;
 
   let options = {
     html: htmlContent,
-    fileName: 'test-pdf',
+    fileName: 'test-pdf-2',
     directory: 'Documents',
   };
 
@@ -45,7 +54,7 @@ const PDFResumePage: React.FunctionComponent<any> = ({
   subjects,
 }: PDFResumeProps) => {
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
-  const [formPDFValues, setFormPDFValues] = useState({});
+  const [formPDFValues, setFormPDFValues] = useState({} as formValues);
   const [loadingPDFGenerate, setLoadingPDFGenerate] = useState(false);
 
   const validate = (values: formValues) => {
@@ -148,7 +157,35 @@ const PDFResumePage: React.FunctionComponent<any> = ({
             buttonMode: 'contained',
             buttonAction: async () => {
               setLoadingPDFGenerate(true);
-              generatePDF().then(() => setLoadingPDFGenerate(false));
+              let notesWithTheSubjects = [];
+              if (formPDFValues.subjects.length > 0) {
+                notesWithTheSubjects = (
+                  await WmdbUtils.getDataFromWMDB(
+                    'note_subjects',
+                    Q.where('subject_id', Q.oneOf(formPDFValues.subjects)),
+                  )
+                ).map(
+                  (noteSubject: NoteSubjectModelType) =>
+                    noteSubject._raw.note_id,
+                );
+              }
+
+              const notesToExport = await WmdbUtils.getDataFromWMDB(
+                'notes',
+                Q.and(
+                  Q.where(
+                    'category_id',
+                    Q.oneOf(formPDFValues.categories as Array<any>),
+                  ),
+                  ...(notesWithTheSubjects.length > 0
+                    ? [Q.where('id', Q.oneOf(notesWithTheSubjects))]
+                    : []),
+                ),
+              );
+
+              generatePDF(notesToExport).then(() =>
+                setLoadingPDFGenerate(false),
+              );
             },
             loading: loadingPDFGenerate,
           },
