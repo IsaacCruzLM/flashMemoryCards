@@ -19,4 +19,10 @@ export class NoteSubjectModel extends Model {
 export interface NoteSubjectModelType {
   note: string;
   subject: string;
+  _raw: RawNoteSubjectModelType;
+}
+
+export interface RawNoteSubjectModelType {
+  note_id: string;
+  subject_id: string;
 }
