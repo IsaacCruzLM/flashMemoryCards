@@ -3,7 +3,6 @@ import {Clause} from '@nozbe/watermelondb/QueryDescription';
 import {ALERT_TYPE, Toast} from 'react-native-alert-notification';
 import {snakeCase} from 'snake-case';
 import {database} from '..';
-import {Q} from '@nozbe/watermelondb';
 
 export default async function getDataFromWMDB(model: string, query: Clause) {
   try {
@@ -11,7 +10,7 @@ export default async function getDataFromWMDB(model: string, query: Clause) {
     const data = await database.read(async () => {
       const itens: Model[] | any[] = await database
         .get(modelInSnakeCase)
-        .query(Q.experimentalJoinTables(['note_subjects']), query)
+        .query(query)
         .fetch();
 
       return itens;
