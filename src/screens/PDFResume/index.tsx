@@ -5,6 +5,7 @@ import {withDatabase} from '@nozbe/watermelondb/DatabaseProvider';
 import {Q} from '@nozbe/watermelondb';
 import {compose} from 'recompose';
 import RNHTMLtoPDF from 'react-native-html-to-pdf';
+import {ALERT_TYPE, Toast} from 'react-native-alert-notification';
 
 import DefaultContainerView from '../../components/DefaultContainerView';
 import Form from '../../components/Form';
@@ -19,13 +20,20 @@ import WmdbUtils from '../../databases/utils';
 import {NoteSubjectModelType} from '../../databases/models/noteSubjectModel';
 
 import {translateOptions} from '../Note/Create';
+import {NoteModelType} from '../../databases/models/noteModel';
 
 import {PDFResumeProps, PDFResumeFormProps, formValues} from './types';
 import styles from './styles';
 
-const generatePDF = async (notesToExport: any) => {
-  // Continuar daqui -> colocar ty para notesToExport e importar nome do arquivo na função tbm
-  console.log(notesToExport);
+const generatePDF = async (notesToExport: NoteModelType[]) => {
+  if (notesToExport.length === 0) {
+    return Toast.show({
+      type: ALERT_TYPE.WARNING,
+      title: 'Nenhuma anotação encontrada!',
+      textBody:
+        'O Resumo em PDF não foi gerado pois não foram encontradas nenhuma anotação com as caracteristicas inseridas.',
+    });
+  }
 
   const htmlContent = `
     <div class="container" style="border-bottom: 1px solid #000; padding-bottom: 10px; margin-bottom: 20px;">
