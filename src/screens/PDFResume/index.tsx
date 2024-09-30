@@ -37,6 +37,7 @@ const generatePDF = async (
   subjects: SubjectModelType[],
   noteSubjects: NoteSubjectModelType[],
 ) => {
+  // Tester todas variações de notes, com graandes textos
   if (notesToExport.length === 0) {
     return Toast.show({
       type: ALERT_TYPE.WARNING,
@@ -71,8 +72,6 @@ const generatePDF = async (
       ),
     );
 
-    console.log(subjectsNames);
-
     return `
     <div class="container" style="border-bottom: 1px solid #000; padding-bottom: 10px; margin-bottom: 20px;">
       <div class="header" style="background-color: #22272E; padding: 10px; border-radius: 6px; margin-bottom: 5px;">
@@ -98,7 +97,7 @@ const generatePDF = async (
     <div class="html-container" style="padding: 20px;">
      ${notesToExport
        .map((note: NoteModelType) => generateNoteContent(note))
-       .join()} 
+       .join('')}
     </div>
   `;
 

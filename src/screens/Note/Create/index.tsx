@@ -11,6 +11,7 @@ import {withDatabase} from '@nozbe/watermelondb/DatabaseProvider';
 import {compose} from 'recompose';
 import get from 'lodash/get';
 import cloneDeep from 'lodash/cloneDeep';
+import {useHeaderHeight} from '@react-navigation/elements';
 
 import DefaultContainerView from '../../../components/DefaultContainerView';
 import Form from '../../../components/Form';
@@ -44,6 +45,8 @@ const Create: React.FunctionComponent<CreateProps | any> = ({
   subjects,
   route,
 }) => {
+  const headerHeight = useHeaderHeight();
+
   const [step, setStep] = useState(1);
   const [keyboardStatus, setKeyboardStatus] = useState('');
 
@@ -147,7 +150,9 @@ const Create: React.FunctionComponent<CreateProps | any> = ({
           touched,
         }: CreateFormProps) => (
           <KeyboardAvoidingView
+            keyboardVerticalOffset={headerHeight + 47}
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            enabled
             style={styles.formContainer}>
             <View>
               {step === 1 ? (
