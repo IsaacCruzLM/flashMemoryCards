@@ -5,7 +5,11 @@ import {withDatabase} from '@nozbe/watermelondb/DatabaseProvider';
 import {Q} from '@nozbe/watermelondb';
 import {compose} from 'recompose';
 import RNHTMLtoPDF from 'react-native-html-to-pdf';
-import {ALERT_TYPE, Toast} from 'react-native-alert-notification';
+import {
+  ALERT_TYPE,
+  Toast,
+  Dialog as DialogAlert,
+} from 'react-native-alert-notification';
 import get from 'lodash/get';
 import find from 'lodash/find';
 import filter from 'lodash/filter';
@@ -37,7 +41,6 @@ const generatePDF = async (
   subjects: SubjectModelType[],
   noteSubjects: NoteSubjectModelType[],
 ) => {
-  // Tester todas variações de notes, com graandes textos
   if (notesToExport.length === 0) {
     return Toast.show({
       type: ALERT_TYPE.WARNING,
@@ -108,7 +111,16 @@ const generatePDF = async (
   };
 
   let file = await RNHTMLtoPDF.convert(options);
-  console.log('PDF criado no caminho:', file.filePath);
+
+  DialogAlert.show({
+    type: ALERT_TYPE.SUCCESS,
+    title: 'Resumo em PDF gerado com sucesso',
+    textBody: `O PDF foi armazenado no seguinte local: ${file.filePath}`,
+    button: 'Abrir PDF',
+    onPressButton: () => {
+      console.log('Here');
+    },
+  });
 };
 
 const PDFResumePage: React.FunctionComponent<any> = ({
@@ -252,7 +264,10 @@ const PDFResumePage: React.FunctionComponent<any> = ({
                 categories,
                 subjects,
                 noteSubjects,
-              ).then(() => setLoadingPDFGenerate(false));
+              ).then(() => {
+                setShowConfirmDialog(false);
+                setLoadingPDFGenerate(false);
+              });
             },
             loading: loadingPDFGenerate,
           },
