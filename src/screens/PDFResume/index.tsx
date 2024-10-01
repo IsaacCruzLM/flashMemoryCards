@@ -13,6 +13,7 @@ import {
 import get from 'lodash/get';
 import find from 'lodash/find';
 import filter from 'lodash/filter';
+import FileViewer from 'react-native-file-viewer';
 
 import DefaultContainerView from '../../components/DefaultContainerView';
 import Form from '../../components/Form';
@@ -118,7 +119,13 @@ const generatePDF = async (
     textBody: `O PDF foi armazenado no seguinte local: ${file.filePath}`,
     button: 'Abrir PDF',
     onPressButton: () => {
-      console.log('Here');
+      FileViewer.open(file.filePath as string)
+        .then(() => {
+          console.log('PDF aberto com sucesso');
+        })
+        .catch(error => {
+          console.log('Erro ao abrir o PDF:', error);
+        });
     },
   });
 };
