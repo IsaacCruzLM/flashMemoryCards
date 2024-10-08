@@ -36,7 +36,7 @@ const scheduleNotifyNotes = (noteData: NoteData): void => {
       'note-notification-id',
       `Revise a anotação "${noteData.name}"`,
       schedule.message,
-      new Date(Date.now() + schedule.day * 1000),
+      new Date(Date.now() + schedule.day * DAY_IN_MILISECONDS),
       {title: noteData.name, id: noteData.id},
     );
   });
