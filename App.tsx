@@ -14,6 +14,7 @@ import {Provider as PaperProvider, useTheme} from 'react-native-paper';
 import {AlertNotificationRoot} from 'react-native-alert-notification';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {BottomSheetModalProvider} from '@gorhom/bottom-sheet';
+import Formbricks from '@formbricks/react-native';
 
 import {database} from './src/databases';
 import theme from './src/styles/themes';
@@ -24,6 +25,12 @@ import NotificationWrapper from './src/utils/notifications/notificationWrapper';
 
 export type AppTheme = typeof theme;
 export const useAppTheme = () => useTheme<AppTheme>();
+
+const config = {
+  environmentId: 'cm2cg1sgg00083g5800ro9j8y',
+  apiHost: 'https://app.formbricks.com',
+  userId: 'Anonymous',
+};
 
 PushNotification.createChannel(
   {
@@ -47,6 +54,7 @@ const App = () => {
               <BottomSheetModalProvider>
                 <NotificationWrapper />
                 <Routes />
+                <Formbricks initConfig={config} />
               </BottomSheetModalProvider>
             </DatabaseProvider>
           </AlertNotificationRoot>
