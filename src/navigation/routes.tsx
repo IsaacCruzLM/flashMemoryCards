@@ -1,4 +1,4 @@
-import React, {useEffect, useContext} from 'react';
+import React, {useEffect, useContext, useState} from 'react';
 import {TouchableOpacity, View, Keyboard} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {NavigationContainer} from '@react-navigation/native';
@@ -7,6 +7,7 @@ import {
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
 import {createDrawerNavigator} from '@react-navigation/drawer';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import get from 'lodash/get';
 
 import NavigationService from './NavigationService';
@@ -20,6 +21,7 @@ import Note from '../screens/Note';
 import Subject from '../screens/Subject';
 import PDFResumeScreen from '../screens/PDFResume';
 import HelpPageScreen from '../screens/HelpPage';
+import LoadingPage from '../screens/LoadingPage';
 
 import SideMenu from '../components/SideMenu';
 
@@ -73,6 +75,9 @@ const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
 const Routes = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [initialRoute, setInitialRoute] = useState('InitialPage');
+
   const {
     globalState,
     setKeyboardIsVisible,
@@ -112,12 +117,34 @@ const Routes = () => {
     };
   }, [setKeyboardIsVisible]);
 
+  useEffect(() => {
+    const checkTutorial = async () => {
+      try {
+        const tutorialSeen = await AsyncStorage.getItem('tutorialSeen');
+        console.log(tutorialSeen);
+        if (tutorialSeen === 'true') {
+          setInitialRoute('Home');
+        }
+      } catch (error) {
+        console.error('Erro ao ler AsyncStorage', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    checkTutorial();
+  }, []);
+
+  if (isLoading) {
+    return <LoadingPage />;
+  }
+
   return (
     <NavigationContainer
       ref={navigatorRef => {
         NavigationService.setTopLevelNavigator(navigatorRef);
       }}>
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator initialRouteName={initialRoute}>
         <Stack.Screen
           name="InitialPage"
           component={InitialPage}

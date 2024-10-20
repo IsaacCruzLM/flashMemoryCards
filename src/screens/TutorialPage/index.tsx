@@ -6,6 +6,7 @@ import Animated, {
   useSharedValue,
   withDelay,
 } from 'react-native-reanimated';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import NavigationService from '../../navigation/NavigationService';
 
@@ -58,7 +59,10 @@ const TutorialPage = () => {
         <Animated.View style={[styles.buttonContainer, buttonContainerStyle]}>
           <Button
             disabled={isDisabled}
-            onPress={() => NavigationService.navigate('Home')}
+            onPress={async () => {
+              await AsyncStorage.setItem('tutorialSeen', 'true');
+              NavigationService.navigate('Home');
+            }}
             label="Começar"
           />
         </Animated.View>
