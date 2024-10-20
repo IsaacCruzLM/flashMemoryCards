@@ -7,6 +7,7 @@ import type {DrawerContentComponentProps} from '@react-navigation/drawer';
 import NavigationService from '../../navigation/NavigationService';
 
 import styles from './styles';
+import {track} from '@formbricks/react-native';
 
 const SideMenu = (props: DrawerContentComponentProps) => {
   return (
@@ -46,6 +47,18 @@ const SideMenu = (props: DrawerContentComponentProps) => {
             labelStyle={styles.labelStyle}
           />
         </DrawerContentScrollView>
+        <View>
+          <DrawerItem
+            label={'Reportar Erros ou Melhorias'}
+            onPress={() => {
+              track('answer_feedback_survey');
+            }}
+            icon={({color, size}) => (
+              <Icon color={color} size={size} name={'folder-eye'} />
+            )}
+            labelStyle={styles.labelStyle}
+          />
+        </View>
       </View>
     </View>
   );
