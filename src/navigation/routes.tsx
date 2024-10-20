@@ -19,6 +19,7 @@ import Category from '../screens/Category';
 import Note from '../screens/Note';
 import Subject from '../screens/Subject';
 import PDFResumeScreen from '../screens/PDFResume';
+import HelpPageScreen from '../screens/HelpPage';
 
 import SideMenu from '../components/SideMenu';
 
@@ -268,6 +269,14 @@ const Routes = () => {
           component={PDFResumeScreen}
           options={{
             title: 'Resumo PDF',
+            ...headerStyled,
+          }}
+        />
+        <Stack.Screen
+          name={'Help'}
+          component={HelpPageScreen}
+          options={{
+            title: 'Ajuda',
             ...headerStyled,
           }}
         />

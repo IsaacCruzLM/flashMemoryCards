@@ -49,12 +49,20 @@ const SideMenu = (props: DrawerContentComponentProps) => {
         </DrawerContentScrollView>
         <View>
           <DrawerItem
-            label={'Reportar Erros ou Melhorias'}
+            label={'Ajuda'}
+            onPress={() => NavigationService.navigate('Help')}
+            icon={({color, size}) => (
+              <Icon color={color} size={size} name={'help-circle-outline'} />
+            )}
+            labelStyle={styles.labelStyle}
+          />
+          <DrawerItem
+            label={'Reportar Melhorias'}
             onPress={() => {
               track('answer_feedback_survey');
             }}
             icon={({color, size}) => (
-              <Icon color={color} size={size} name={'folder-eye'} />
+              <Icon color={color} size={size} name={'comment-edit-outline'} />
             )}
             labelStyle={styles.labelStyle}
           />
