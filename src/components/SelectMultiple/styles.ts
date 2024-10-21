@@ -82,6 +82,16 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     color: themes.colors.dark,
   },
+  fakeLabelContainer: {
+    position: 'absolute',
+    top: -10,
+    left: 14,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 4,
+  },
+  fakeLabel: {
+    fontSize: themes.typography.fontSizeSmallText,
+  },
 });
 
 export default styles;
