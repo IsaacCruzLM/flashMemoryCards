@@ -1,10 +1,17 @@
 import React, {useEffect, useState} from 'react';
-import {Keyboard, Text, View} from 'react-native';
+import {
+  Keyboard,
+  Text,
+  View,
+  KeyboardAvoidingView,
+  Platform,
+} from 'react-native';
 import withObservables from '@nozbe/with-observables';
 import {withDatabase} from '@nozbe/watermelondb/DatabaseProvider';
 import {compose} from 'recompose';
 import get from 'lodash/get';
 import cloneDeep from 'lodash/cloneDeep';
+import {useHeaderHeight} from '@react-navigation/elements';
 
 import DefaultContainerView from '../../../components/DefaultContainerView';
 import Form from '../../../components/Form';
@@ -19,9 +26,11 @@ import {CategoryModelType} from '../../../databases/models/categoryModel';
 import NavigationService from '../../../navigation/NavigationService';
 import ErrorHandlers from '../../../utils/errorHandlers';
 import toastShow from '../../../utils/toastShow';
+import notifyNotes from '../../../utils/notifications/notifyNotes';
 
 import styles from './styles';
 import {CreateFormProps, CreateProps, formValues, optionsType} from './types';
+import {NoteModel} from '../../../databases/models/noteModel';
 
 export const translateOptions = (optionsArray: optionsType[]) =>
   optionsArray.map(({id, name, icon, color}: optionsType) => ({
@@ -36,6 +45,8 @@ const Create: React.FunctionComponent<CreateProps | any> = ({
   subjects,
   route,
 }) => {
+  const headerHeight = useHeaderHeight();
+
   const [step, setStep] = useState(1);
   const [keyboardStatus, setKeyboardStatus] = useState('');
 
@@ -63,13 +74,16 @@ const Create: React.FunctionComponent<CreateProps | any> = ({
     delete newDataObject.subjects;
     delete newDataObject.category;
 
-    await WmdbUtils.insertItemWithM2MRelationInWMDB(
+    const today = new Date();
+
+    const note = (await WmdbUtils.insertItemWithM2MRelationInWMDB(
       'notes',
       {
         ...newDataObject,
         levelRevision: 1,
         createdAt: new Date(),
         lastRevision: new Date(),
+        nextRevision: today.setDate(today.getDate() + 1),
         relationships: [
           {
             type: 'category',
@@ -80,9 +94,11 @@ const Create: React.FunctionComponent<CreateProps | any> = ({
       'note_subjects',
       M2MRelationships,
       'note',
-    );
+    )) as NoteModel;
 
     toastShow('success', 'Anotação criada com sucesso');
+
+    notifyNotes({name: note.name, id: note.id});
 
     if (get(route, 'params.categoryId', '')) {
       NavigationService.navigate('Notes', {
@@ -133,7 +149,11 @@ const Create: React.FunctionComponent<CreateProps | any> = ({
           errors,
           touched,
         }: CreateFormProps) => (
-          <View style={styles.formContainer}>
+          <KeyboardAvoidingView
+            keyboardVerticalOffset={headerHeight + 47}
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            enabled
+            style={styles.formContainer}>
             <View>
               {step === 1 ? (
                 <>
@@ -201,7 +221,7 @@ const Create: React.FunctionComponent<CreateProps | any> = ({
                 <Text style={styles.stepIndicator}>{`${step} / 2`}</Text>
               </View>
             )}
-          </View>
+          </KeyboardAvoidingView>
         )}
         initialValues={{
           name: '',

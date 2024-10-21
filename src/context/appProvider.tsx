@@ -8,6 +8,7 @@ export interface ProviderProps {
 const ContextProvider = ({children}: ProviderProps | any) => {
   const [keyboardIsVisible, setKeyboardIsVisible] = useState(false);
   const [showDialogEditNote, setShowDialogEditNote] = useState(false);
+  const [showDialogDeleteNote, setShowDialogDeleteNote] = useState(false);
   const [searchParams, setSearchParams] = useState({});
   const [isOpenSearchBar, setIsOpenSearchBar] = useState(false);
   const [filterDialogOpen, setFilterDialogOpen] = useState({});
@@ -20,6 +21,7 @@ const ContextProvider = ({children}: ProviderProps | any) => {
   const globalState = {
     keyboardIsVisible,
     showDialogEditNote,
+    showDialogDeleteNote,
     searchParams,
     isOpenSearchBar,
     filterDialogOpen,
@@ -29,6 +31,7 @@ const ContextProvider = ({children}: ProviderProps | any) => {
     globalState,
     setKeyboardIsVisible,
     setShowDialogEditNote,
+    setShowDialogDeleteNote,
     setSearchParamsFunction,
     setIsOpenSearchBar,
     setFilterDialogOpenFunction,

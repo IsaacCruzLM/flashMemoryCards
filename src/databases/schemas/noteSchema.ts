@@ -24,6 +24,10 @@ export const noteSchema = tableSchema({
       type: 'number',
     },
     {
+      name: 'next_revision',
+      type: 'number',
+    },
+    {
       name: 'category_id',
       type: 'string',
     },

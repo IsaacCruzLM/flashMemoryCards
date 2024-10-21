@@ -13,15 +13,27 @@ function setTopLevelNavigator(
 }
 
 function navigate(name: string, params?: object | undefined) {
-  if (name === 'Home') {
-    _navigator.dispatch(DrawerActions.closeDrawer());
+  const navigateAction = () => {
+    if (name === 'Home') {
+      _navigator.dispatch(DrawerActions.closeDrawer());
+    }
+    _navigator.dispatch(
+      CommonActions.navigate({
+        name,
+        params,
+      }),
+    );
+  };
+
+  try {
+    navigateAction();
+  } catch (error: any) {
+    if (
+      error.message.includes("Cannot read property 'dispatch' of undefined")
+    ) {
+      setInterval(() => navigateAction(), 500);
+    }
   }
-  _navigator.dispatch(
-    CommonActions.navigate({
-      name,
-      params,
-    }),
-  );
 }
 
 function setParams(params: object) {

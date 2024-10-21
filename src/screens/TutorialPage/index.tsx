@@ -6,8 +6,10 @@ import Animated, {
   useSharedValue,
   withDelay,
 } from 'react-native-reanimated';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import NavigationService from '../../navigation/NavigationService';
+import WmdbUtils from '../../databases/utils';
 
 import LinearGradientView from '../../components/LinearGradientView';
 import Button from '../../components/Button';
@@ -58,7 +60,21 @@ const TutorialPage = () => {
         <Animated.View style={[styles.buttonContainer, buttonContainerStyle]}>
           <Button
             disabled={isDisabled}
-            onPress={() => NavigationService.navigate('Home')}
+            onPress={async () => {
+              await AsyncStorage.setItem('tutorialSeen', 'true');
+              await WmdbUtils.insertItemInWMDB('categories', {
+                color: '#000000',
+                createdAt: new Date(),
+                icon: 'archive-edit',
+                name: 'Minhas Anotações',
+              });
+              await WmdbUtils.insertItemInWMDB('subjects', {
+                color: '#00c65c',
+                createdAt: new Date(),
+                name: 'Geral',
+              });
+              NavigationService.navigate('Home');
+            }}
             label="Começar"
           />
         </Animated.View>

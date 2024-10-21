@@ -6,7 +6,11 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   subContainer: {
-    height: '90%',
+    height: '100%',
+    paddingVertical: themes.spacing.unit * 2,
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
   },
   labelStyle: {
     fontFamily: themes.fonts.medium.fontFamily,

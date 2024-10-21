@@ -62,7 +62,7 @@ const SelectMultiple = ({
 
   // render
   const renderItem = useCallback(
-    ({item}) => {
+    ({item}: any) => {
       const {label, value, iconColor} = item;
       return (
         <TouchableOpacity onPress={() => handleSelect(value)}>
@@ -102,6 +102,9 @@ const SelectMultiple = ({
               // eslint-disable-next-line react-native/no-inline-styles
               {borderColor: error ? Theme.colors.error : 'gray'},
             ]}>
+            <View style={styles.fakeLabelContainer}>
+              <Text style={styles.fakeLabel}>{inputPlaceHolder}</Text>
+            </View>
             {stateValue.length <= 0 ? (
               <Text
                 style={[
@@ -114,7 +117,7 @@ const SelectMultiple = ({
               stateValue.map(id => {
                 const option = options.find(({value}) => value === id);
                 if (option) {
-                  return <ChipComponent text={option.label} />;
+                  return <ChipComponent key={id} text={option.label} />;
                 }
               })
             )}

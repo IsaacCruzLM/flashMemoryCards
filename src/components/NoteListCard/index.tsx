@@ -10,6 +10,7 @@ const NoteListCard = ({
   title,
   creationDate,
   lastRevisionDate,
+  nextRevisionDate,
   noteType,
   category,
   subjects,
@@ -19,7 +20,10 @@ const NoteListCard = ({
   return (
     <ListCard onPress={onPress} title={title} containerStyle={containerStyle}>
       <InlineField label="Data de criação" content={creationDate} />
-      <InlineField label="Ultima revisão" content={lastRevisionDate} />
+      <InlineField label="Última revisão" content={lastRevisionDate} />
+      {nextRevisionDate ? (
+        <InlineField label="Próxima revisão" content={nextRevisionDate} />
+      ) : null}
       <InlineField label="Tipo de anotação" content={noteType} />
       <InlineField label="Categoria" content={category} />
       <InlineFieldChips label="Assuntos" arrayOfContents={subjects} />

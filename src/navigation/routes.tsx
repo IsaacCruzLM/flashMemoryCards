@@ -1,4 +1,4 @@
-import React, {useEffect, useContext} from 'react';
+import React, {useEffect, useContext, useState} from 'react';
 import {TouchableOpacity, View, Keyboard} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {NavigationContainer} from '@react-navigation/native';
@@ -7,6 +7,7 @@ import {
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
 import {createDrawerNavigator} from '@react-navigation/drawer';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import get from 'lodash/get';
 
 import NavigationService from './NavigationService';
@@ -18,13 +19,19 @@ import HomeScreen from '../screens/Home';
 import Category from '../screens/Category';
 import Note from '../screens/Note';
 import Subject from '../screens/Subject';
+import PDFResumeScreen from '../screens/PDFResume';
+import HelpPageScreen from '../screens/HelpPage';
+import LoadingPage from '../screens/LoadingPage';
 
 import SideMenu from '../components/SideMenu';
 
 import themes from '../styles/themes';
 import sharedStyles from '../styles/sharedStyles';
 
-function Home() {
+function Home(
+  globalState: {isOpenSearchBar: boolean},
+  setFilterDialogOpenFunction: (newParam: Object) => void,
+) {
   return (
     <Drawer.Navigator
       initialRouteName="HomeScreen"
@@ -44,6 +51,20 @@ function Home() {
             fontSize: themes.typography.fontSizeLargeTitle,
             color: themes.colors.background,
           },
+          headerRight: () =>
+            globalState.isOpenSearchBar ? null : (
+              <View style={sharedStyles.headerRightIconView}>
+                <TouchableOpacity
+                  onPress={() => setFilterDialogOpenFunction({Home: true})}>
+                  <Icon
+                    color={themes.colors.background}
+                    size={themes.spacing.unit * 3}
+                    name="filter-variant"
+                    style={sharedStyles.headerIconWithMargin}
+                  />
+                </TouchableOpacity>
+              </View>
+            ),
         }}
       />
     </Drawer.Navigator>
@@ -54,10 +75,14 @@ const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
 const Routes = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [initialRoute, setInitialRoute] = useState('InitialPage');
+
   const {
     globalState,
     setKeyboardIsVisible,
     setShowDialogEditNote,
+    setShowDialogDeleteNote,
     setSearchParamsFunction,
     setIsOpenSearchBar,
     setFilterDialogOpenFunction,
@@ -92,12 +117,34 @@ const Routes = () => {
     };
   }, [setKeyboardIsVisible]);
 
+  useEffect(() => {
+    const checkTutorial = async () => {
+      try {
+        const tutorialSeen = await AsyncStorage.getItem('tutorialSeen');
+        console.log(tutorialSeen);
+        if (tutorialSeen === 'true') {
+          setInitialRoute('Home');
+        }
+      } catch (error) {
+        console.error('Erro ao ler AsyncStorage', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    checkTutorial();
+  }, []);
+
+  if (isLoading) {
+    return <LoadingPage />;
+  }
+
   return (
     <NavigationContainer
       ref={navigatorRef => {
         NavigationService.setTopLevelNavigator(navigatorRef);
       }}>
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator initialRouteName={initialRoute}>
         <Stack.Screen
           name="InitialPage"
           component={InitialPage}
@@ -110,8 +157,8 @@ const Routes = () => {
         />
         <Stack.Screen
           name="Home"
-          component={Home}
           options={{headerShown: false}}
+          children={() => Home(globalState, setFilterDialogOpenFunction)}
         />
         <Stack.Screen
           name="Categories"
@@ -221,14 +268,43 @@ const Routes = () => {
               title: noteName,
               ...headerStyled,
               headerRight: () => (
-                <Icon
-                  color={themes.colors.background}
-                  size={themes.spacing.unit * 3.5}
-                  name="square-edit-outline"
-                  onPress={() => setShowDialogEditNote(true)}
-                />
+                <View style={sharedStyles.headerRightIconView}>
+                  <TouchableOpacity onPress={() => setShowDialogEditNote(true)}>
+                    <Icon
+                      color={themes.colors.background}
+                      size={themes.spacing.unit * 3.5}
+                      name="square-edit-outline"
+                      style={sharedStyles.headerIconWithMargin}
+                    />
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => setShowDialogDeleteNote(true)}>
+                    <Icon
+                      color={themes.colors.background}
+                      size={themes.spacing.unit * 3.5}
+                      name="trash-can"
+                      style={sharedStyles.headerIconWithMargin}
+                    />
+                  </TouchableOpacity>
+                </View>
               ),
             };
+          }}
+        />
+        <Stack.Screen
+          name={'PDFResume'}
+          component={PDFResumeScreen}
+          options={{
+            title: 'Resumo PDF',
+            ...headerStyled,
+          }}
+        />
+        <Stack.Screen
+          name={'Help'}
+          component={HelpPageScreen}
+          options={{
+            title: 'Ajuda',
+            ...headerStyled,
           }}
         />
       </Stack.Navigator>

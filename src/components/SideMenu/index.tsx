@@ -7,6 +7,7 @@ import type {DrawerContentComponentProps} from '@react-navigation/drawer';
 import NavigationService from '../../navigation/NavigationService';
 
 import styles from './styles';
+import {track} from '@formbricks/react-native';
 
 const SideMenu = (props: DrawerContentComponentProps) => {
   return (
@@ -37,7 +38,35 @@ const SideMenu = (props: DrawerContentComponentProps) => {
             )}
             labelStyle={styles.labelStyle}
           />
+          <DrawerItem
+            label={'Criar Resumo PDF'}
+            onPress={() => NavigationService.navigate('PDFResume')}
+            icon={({color, size}) => (
+              <Icon color={color} size={size} name={'file-pdf-box'} />
+            )}
+            labelStyle={styles.labelStyle}
+          />
         </DrawerContentScrollView>
+        <View>
+          <DrawerItem
+            label={'Ajuda'}
+            onPress={() => NavigationService.navigate('Help')}
+            icon={({color, size}) => (
+              <Icon color={color} size={size} name={'help-circle-outline'} />
+            )}
+            labelStyle={styles.labelStyle}
+          />
+          <DrawerItem
+            label={'Reportar Melhorias'}
+            onPress={() => {
+              track('answer_feedback_survey');
+            }}
+            icon={({color, size}) => (
+              <Icon color={color} size={size} name={'comment-edit-outline'} />
+            )}
+            labelStyle={styles.labelStyle}
+          />
+        </View>
       </View>
     </View>
   );

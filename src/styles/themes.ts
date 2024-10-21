@@ -29,6 +29,7 @@ export default {
     red: '#F44336',
     amber: '#FFC107',
     green: '#4CAF50',
+    lightGreen: '#D1FFBD',
   },
   fonts: configureFonts(fontConfig),
   typography: {

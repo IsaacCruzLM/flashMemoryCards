@@ -21,6 +21,7 @@ import useGetFromGlobalState from '../../../hooks/useGetFromGlobalState';
 import {NoteModelType} from '../../../databases/models/noteModel';
 import NavigationService from '../../../navigation/NavigationService';
 import noteNeedToBeRevised from '../../../utils/noteValidations';
+import noteRevisionUpdate from '../../../utils/noteValidations/noteRevisionUpdate';
 import filterActions from '../../../utils/filters';
 import AppContext from '../../../context/appContext';
 import {translateOptions} from '../Create';
@@ -34,7 +35,7 @@ import {
   filterState,
 } from './types';
 
-const NotesFilter: React.FunctionComponent<filterProps> = ({
+export const NotesFilter: React.FunctionComponent<filterProps> = ({
   filters,
   handleFilterChange,
   categories,
@@ -70,15 +71,21 @@ const NotesFilter: React.FunctionComponent<filterProps> = ({
         onChangeRange={date => handleFilterChange('lastRevision', date)}
         defaultValue={filters.lastRevision}
       />
+      <DataRangeInput
+        label={'Próxima revisão'}
+        onChangeRange={date => handleFilterChange('nextRevision', date)}
+        defaultValue={filters.nextRevision}
+      />
     </View>
   );
 };
 
-const DEFAULT_FILTER_STATE = {
+export const DEFAULT_FILTER_STATE = {
   category: '',
   subjects: [],
   creationDate: {init: null, end: null},
   lastRevision: {init: null, end: null},
+  nextRevision: {init: null, end: null},
 };
 
 const List: React.FunctionComponent<ListProps | any> = ({
@@ -105,6 +112,7 @@ const List: React.FunctionComponent<ListProps | any> = ({
     const {
       creationDate,
       lastRevision,
+      nextRevision,
       category: categoryFilter,
       subjects: subjectsFilter,
     } = cloneDeep(filters);
@@ -138,6 +146,13 @@ const List: React.FunctionComponent<ListProps | any> = ({
       );
     }
 
+    if ((nextRevision.init || nextRevision.end) && dontFilter) {
+      dontFilter = filterActions.rangeInputDateVerify(
+        nextRevision,
+        note.nextRevision.toString(),
+      );
+    }
+
     return dontFilter;
   };
 
@@ -168,12 +183,17 @@ const List: React.FunctionComponent<ListProps | any> = ({
                 lastRevisionDate: new Date(
                   note.lastRevision,
                 ).toLocaleDateString('pt-BR'),
+                nextRevisionDate: new Date(
+                  note.nextRevision,
+                ).toLocaleDateString('pt-BR'),
                 noteType: 'Texto',
                 category: categoryName,
                 subjects: (subjectsFetch || []).map(({name, color}: any) => ({
                   content: name,
                   color,
                 })),
+                levelRevision: note.levelRevision,
+                needRevision: needRevision,
               });
             }
           }),
@@ -194,7 +214,12 @@ const List: React.FunctionComponent<ListProps | any> = ({
   }, [category, notes, noteSubjects, searchQuery, filters]);
 
   const handleFilterChange = (
-    key: 'category' | 'subjects' | 'creationDate' | 'lastRevision',
+    key:
+      | 'category'
+      | 'subjects'
+      | 'creationDate'
+      | 'lastRevision'
+      | 'nextRevision',
     value: string & string[] & rangeDataType,
   ) => {
     const newFiltersClone = cloneDeep(filters);
@@ -234,16 +259,23 @@ const List: React.FunctionComponent<ListProps | any> = ({
             title={item.title}
             creationDate={item.creationDate}
             lastRevisionDate={item.lastRevisionDate}
+            nextRevisionDate={item.nextRevisionDate}
             noteType={item.noteType}
             category={item.category}
             subjects={item.subjects}
             containerStyle={styles.cardCustomStyle}
-            onPress={() =>
+            onPress={() => {
+              noteRevisionUpdate(
+                item.id,
+                item.levelRevision,
+                item.creationDate,
+                item.needRevision,
+              );
               NavigationService.navigate('ShowNote', {
                 noteName: item.title,
                 noteId: item.id,
-              })
-            }
+              });
+            }}
           />
         )}
         renderSectionHeader={({section: {title}}) =>
@@ -292,7 +324,12 @@ export default compose(
       notes: database
         .get('notes')
         .query(Q.where('category_id', categoryId))
-        .observeWithColumns(['name', 'category_id']),
+        .observeWithColumns([
+          'name',
+          'category_id',
+          'last_revision',
+          'next_revision',
+        ]),
       noteSubjects: database
         .get('note_subjects')
         .query()

@@ -3,7 +3,7 @@ import themes from '../../styles/themes';
 
 const styles = StyleSheet.create({
   container: {
-    height: '90%',
+    height: '92%',
   },
   richTextContainer: {
     width: '100%',
@@ -30,6 +30,17 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
     borderWidth: 1,
+  },
+  containerFloatingButton: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: themes.colors.lightGreen,
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    bottom: themes.spacing.unit * 3,
+    right: themes.spacing.unit * 2.5,
   },
 });
 

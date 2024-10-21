@@ -35,9 +35,12 @@ export interface CardData {
   title: string;
   creationDate: string;
   lastRevisionDate: string;
+  nextRevisionDate: string;
   noteType: string;
   category: string;
   subjects: Array<subjectData>;
+  levelRevision?: number;
+  needRevision?: boolean;
 }
 
 export interface subjectData {
@@ -50,6 +53,7 @@ export interface filterState {
   subjects: string[];
   creationDate: rangeDataType;
   lastRevision: rangeDataType;
+  nextRevision: rangeDataType;
 }
 
 export interface filterProps extends ListProps {

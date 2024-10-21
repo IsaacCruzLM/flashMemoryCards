@@ -4,6 +4,7 @@ export interface NoteListCardProps {
   title: string;
   creationDate: string;
   lastRevisionDate: string;
+  nextRevisionDate?: string;
   noteType: string;
   category: string;
   subjects: contentProps[];
