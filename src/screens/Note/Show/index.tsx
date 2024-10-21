@@ -115,6 +115,7 @@ const Show: React.FunctionComponent<ShowProps | any> = ({
       );
 
       setShowDialogEditNote(false);
+      NavigationService.setParams({noteName: newDataObject.name});
 
       if (!get(response, 'error', false)) {
         toastShow('success', 'Anotação Atualizada com sucesso');
