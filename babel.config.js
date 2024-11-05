@@ -3,5 +3,6 @@ module.exports = {
   plugins: [
     ['@babel/plugin-proposal-decorators', {legacy: true}],
     'react-native-reanimated/plugin',
+    '@babel/plugin-transform-flow-strip-types',
   ],
 };

@@ -78,7 +78,21 @@
       "jsx",
       "json",
       "node"
-    ]
+    ],
+    "transform": {
+      "^.+\\.(js|jsx|ts|tsx)$": "babel-jest"
+    },
+    "transformIgnorePatterns": [
+      "node_modules/(?!(react-native|@react-native|@react-native/polyfills|react-native-iphone-x-helper|react-native-paper|@gorhom/bottom-sheet|react-native-safe-area-context|react-native-webview)/)"
+    ],
+    "setupFiles": [
+      "./jest.setup.js"
+    ],
+    "moduleNameMapper": {
+      "\\.(css|less)$": "identity-obj-proxy",
+      "^.+\\.(jpg|jpeg|png|gif|svg)$": "<rootDir>/__mocks__/fileMock.js",
+      "^react-native-linear-gradient$": "<rootDir>/__mocks__/react-native-linear-gradient.js"
+    }
   },
   "resolutions": {
     "react-devtools-core": "4.24.3"
