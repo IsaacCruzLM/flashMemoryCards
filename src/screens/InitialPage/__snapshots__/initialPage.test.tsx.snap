@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InitialPage renders correctly 1`] = `
+<View
+  colors={
+    Array [
+      "rgba(34, 39, 46, 0.7)",
+      "rgba(34, 39, 46, 1)",
+    ]
+  }
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "space-between",
+        "paddingHorizontal": 24,
+        "paddingVertical": 100,
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      style={[Function]}
+    >
+      <LogoSvg
+        fill="#ffffff"
+        height={78}
+        width={93}
+      />
+    </View>
+    <View
+      style={
+        Object {
+          "width": "100%",
+        }
+      }
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#FFFFFF",
+              "fontFamily": "System",
+              "fontSize": 20,
+              "fontWeight": "700",
+              "marginBottom": 30,
+              "textAlign": "center",
+            },
+            [Function],
+          ]
+        }
+      >
+        Bem vindo(a) ao
+Flash Memory
+Cards
+      </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#FFFFFF",
+              "fontFamily": "System",
+              "fontSize": 14,
+              "fontWeight": "500",
+              "marginBottom": 70,
+              "textAlign": "center",
+            },
+            [Function],
+          ]
+        }
+      >
+        Seja relembrado de suas anotações, para que o conhecimento seja realmente fixado!
+      </Text>
+      <View
+        style={[Function]}
+      >
+        Button-Entrar
+      </View>
+    </View>
+  </View>
+</View>
+`;
