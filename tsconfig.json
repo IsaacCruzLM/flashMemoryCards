@@ -5,7 +5,7 @@
     "jsx": "react",
     "experimentalDecorators": true,
     /* Visit https://aka.ms/tsconfig.json to read more about this file */
-
+    "types": ["node", "jest", "react-native"],
     /* Completeness */
     "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
   }

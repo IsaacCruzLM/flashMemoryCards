@@ -50,6 +50,7 @@
     "@tsconfig/react-native": "^2.0.2",
     "@types/jest": "^26.0.23",
     "@types/lodash": "^4.14.192",
+    "@types/node": "^22.9.0",
     "@types/react-native": "^0.70.4",
     "@types/react-native-html-to-pdf": "^0.8.3",
     "@types/react-native-push-notification": "^8.1.4",

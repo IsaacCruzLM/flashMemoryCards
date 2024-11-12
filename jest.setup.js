@@ -33,6 +33,9 @@ jest.mock('react-native-reanimated', () => {
     Extrapolate: {CLAMP: jest.fn()},
     withRepeat: jest.fn(),
     withTiming: jest.fn(),
+    withDelay: jest.fn((delay, animation) => {
+      return animation;
+    }),
     runOnUI: fn => fn(),
     useSharedValue: jest.fn().mockReturnValue({value: 0}),
     useAnimatedStyle: jest.fn(style => style),
@@ -95,5 +98,12 @@ jest.mock('react-native/Libraries/Animated/Animated', () => {
   return {
     ...ActualAnimated,
     View: jest.fn(props => props.children),
+  };
+});
+
+jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => {
+  return {
+    __esModule: true,
+    default: 'Icon',
   };
 });

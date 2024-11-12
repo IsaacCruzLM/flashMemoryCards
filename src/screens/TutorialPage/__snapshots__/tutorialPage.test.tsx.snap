@@ -1,0 +1,258 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TutorialPage renders correctly with initial state 1`] = `
+<View
+  colors={
+    Array [
+      "rgba(34, 39, 46, 0.7)",
+      "rgba(34, 39, 46, 1)",
+    ]
+  }
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "space-between",
+        "paddingHorizontal": 24,
+        "paddingVertical": 100,
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flexDirection": "column",
+          "justifyContent": "center",
+          "width": "100%",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "column",
+            "justifyContent": "center",
+            "marginBottom": 40,
+            "width": "100%",
+          }
+        }
+      >
+        <View
+          style={[Function]}
+        >
+          <Icon
+            color="#FFFFFF"
+            name="pen-plus"
+            size={70}
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "flexDirection": "column",
+              "justifyContent": "center",
+              "width": "100%",
+            }
+          }
+        >
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#FFFFFF",
+                  "fontFamily": "System",
+                  "fontSize": 16,
+                  "fontWeight": "700",
+                  "marginBottom": 8,
+                  "textAlign": "center",
+                },
+                [Function],
+              ]
+            }
+          >
+            Crie suas anotações
+          </Text>
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#FFFFFF",
+                  "fontFamily": "System",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "textAlign": "center",
+                },
+                [Function],
+              ]
+            }
+          >
+            Crie suas anotações dos mais diversos assuntos
+          </Text>
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "column",
+            "justifyContent": "center",
+            "marginBottom": 40,
+            "width": "100%",
+          }
+        }
+      >
+        <View
+          style={[Function]}
+        >
+          <Icon
+            color="#FFFFFF"
+            name="folder-plus"
+            size={70}
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "flexDirection": "column",
+              "justifyContent": "center",
+              "width": "100%",
+            }
+          }
+        >
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#FFFFFF",
+                  "fontFamily": "System",
+                  "fontSize": 16,
+                  "fontWeight": "700",
+                  "marginBottom": 8,
+                  "textAlign": "center",
+                },
+                [Function],
+              ]
+            }
+          >
+            Separe-as por assunto
+          </Text>
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#FFFFFF",
+                  "fontFamily": "System",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "textAlign": "center",
+                },
+                [Function],
+              ]
+            }
+          >
+            Melhore sua organização, separando suas anotações
+          </Text>
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "column",
+            "justifyContent": "center",
+            "marginBottom": 40,
+            "width": "100%",
+          }
+        }
+      >
+        <View
+          style={[Function]}
+        >
+          <Icon
+            color="#FFFFFF"
+            name="bell-ring"
+            size={70}
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "flexDirection": "column",
+              "justifyContent": "center",
+              "width": "100%",
+            }
+          }
+        >
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#FFFFFF",
+                  "fontFamily": "System",
+                  "fontSize": 16,
+                  "fontWeight": "700",
+                  "marginBottom": 8,
+                  "textAlign": "center",
+                },
+                [Function],
+              ]
+            }
+          >
+            Seja relembrado
+          </Text>
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#FFFFFF",
+                  "fontFamily": "System",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "textAlign": "center",
+                },
+                [Function],
+              ]
+            }
+          >
+            Receba uma recordação para relembrar suas anotações, após 1 dia, 7 dias, 1 mês e 3 meses.
+          </Text>
+        </View>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "width": "100%",
+          },
+          [Function],
+        ]
+      }
+    >
+      <Button
+        disabled={true}
+        label="Começar"
+        onPress={[Function]}
+      />
+    </View>
+  </View>
+</View>
+`;
