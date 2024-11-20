@@ -1,22 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`InitialPage renders correctly 1`] = `
-<View
-  style={
-    Object {
-      "alignItems": "center",
-      "flex": 1,
-      "justifyContent": "center",
-    }
-  }
->
-  <ActivityIndicator
-    color="#22272E"
-    size="large"
-  />
-</View>
-`;
-
 exports[`LoadingPage should render correctly 1`] = `
 <View
   style={
