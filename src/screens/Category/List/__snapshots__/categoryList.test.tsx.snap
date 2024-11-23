@@ -1,0 +1,151 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Category List Screen should render correctly 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+        "width": "100%",
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "marginBottom": 64,
+        },
+        [Function],
+      ]
+    }
+  >
+    <test-file-stub
+      height={93}
+      width={108}
+    />
+  </View>
+  <Text
+    style={
+      Object {
+        "color": "#22272E",
+        "fontFamily": "System",
+        "fontSize": 20,
+        "fontWeight": "700",
+        "marginBottom": 8,
+      }
+    }
+  >
+    Opsss!
+  </Text>
+  <Text
+    style={
+      Object {
+        "color": "#000000",
+        "fontFamily": "System",
+        "fontSize": 16,
+        "fontWeight": "500",
+        "marginBottom": 48,
+      }
+    }
+  >
+    Nenhuma Categoria Encontrada
+  </Text>
+  <View
+    accessibilityRole="button"
+    accessibilityState={
+      Object {
+        "disabled": false,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "overflow": "hidden",
+        },
+        false,
+        Object {
+          "borderRadius": 20,
+        },
+      ]
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "justifyContent": "center",
+          },
+          undefined,
+        ]
+      }
+    >
+      <Text
+        numberOfLines={1}
+        selectable={false}
+        style={
+          Array [
+            Object {
+              "color": "rgba(28, 27, 31, 1)",
+              "fontFamily": "System",
+              "fontSize": 14,
+              "fontWeight": "500",
+              "letterSpacing": 0.1,
+              "lineHeight": 20,
+            },
+            Object {
+              "textAlign": "left",
+            },
+            Object {
+              "writingDirection": "ltr",
+            },
+            Array [
+              Object {
+                "marginHorizontal": 16,
+                "marginVertical": 9,
+                "textAlign": "center",
+              },
+              false,
+              Object {
+                "marginHorizontal": 24,
+                "marginVertical": 10,
+              },
+              undefined,
+              false,
+              Object {
+                "color": "#FFFFFF",
+                "fontFamily": "System",
+                "fontSize": 14,
+                "fontWeight": "500",
+                "letterSpacing": 0.1,
+                "lineHeight": 20,
+              },
+              undefined,
+            ],
+          ]
+        }
+      >
+        Crie uma nova categoria
+      </Text>
+    </View>
+  </View>
+</View>
+`;

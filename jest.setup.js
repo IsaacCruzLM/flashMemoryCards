@@ -97,6 +97,12 @@ jest.mock('@nozbe/watermelondb/DatabaseProvider', () => ({
               return {unsubscribe: jest.fn()}; // Simula a funcionalidade de subscribe
             }),
           })),
+          observeWithColumns: jest.fn(() => ({
+            subscribe: jest.fn(callback => {
+              callback([]); // Retorna uma lista vazia ou dados mockados
+              return {unsubscribe: jest.fn()}; // Simula a funcionalidade de subscribe
+            }),
+          })),
         })),
       })),
     };
