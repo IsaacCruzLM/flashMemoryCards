@@ -76,20 +76,4 @@ describe('Home Screen', () => {
 
     expect(numberOfChildren).toBe(2);
   });
-
-  it('render filter list', async () => {
-    let component: renderer.ReactTestRenderer;
-
-    await act(() => {
-      component = renderer.create(<Home />);
-    });
-
-    const flatList = component.root.findByType(
-      'RCTScrollView' as React.ElementType,
-    );
-
-    const numberOfChildren = flatList.props.children.length;
-
-    expect(numberOfChildren).toBe(2);
-  });
 });
