@@ -86,30 +86,81 @@ jest.mock('@nozbe/watermelondb', () => {
   };
 });
 
-jest.mock('@nozbe/watermelondb/DatabaseProvider', () => ({
-  withDatabase: jest.fn(Component => props => {
-    const mockDatabase = {
-      get: jest.fn(() => ({
-        query: jest.fn(() => ({
-          observe: jest.fn(() => ({
-            subscribe: jest.fn(callback => {
-              callback([]); // Retorna uma lista vazia ou dados mockados
-              return {unsubscribe: jest.fn()}; // Simula a funcionalidade de subscribe
-            }),
-          })),
-          observeWithColumns: jest.fn(() => ({
-            subscribe: jest.fn(callback => {
-              callback([]); // Retorna uma lista vazia ou dados mockados
-              return {unsubscribe: jest.fn()}; // Simula a funcionalidade de subscribe
-            }),
+jest.mock('@nozbe/watermelondb/DatabaseProvider', () => {
+  const mockedData = {
+    notes: [
+      {
+        id: 'note_1',
+        name: 'Introduction to React',
+        content:
+          'Learn the basics of React, including components, hooks, and state.',
+        levelRevision: 1,
+        createdAt: new Date('2024-01-01').getTime(),
+        lastRevision: new Date('2024-01-05').getTime(),
+        nextRevision: new Date('2024-01-12').getTime(),
+        category: {
+          fetch: () => ({
+            name: 'Categoria 1',
+          }),
+        },
+        subjects: {
+          fetch: () => [
+            {name: 'Assunto 1', color: '#ffffff'},
+            {name: 'Assunto 2', color: '#d11cd5'},
+          ],
+        },
+      },
+      {
+        id: 'note_2',
+        name: 'Advanced TypeScript',
+        content:
+          'Explore advanced TypeScript features like generics, decorators, and utility types.',
+        levelRevision: 2,
+        createdAt: new Date('2024-01-02').getTime(),
+        lastRevision: new Date('2024-01-06').getTime(),
+        nextRevision: new Date('2024-01-13').getTime(),
+        category: {
+          fetch: () => ({
+            name: 'Categoria 2',
+          }),
+        },
+        subjects: {
+          fetch: () => [
+            {name: 'Assunto 1', color: '#ffffff'},
+            {name: 'Assunto 2', color: '#d11cd5'},
+          ],
+        },
+      },
+    ],
+  };
+
+  const getMockedData = tableName => mockedData[tableName] || [];
+
+  return {
+    withDatabase: jest.fn(Component => props => {
+      const mockDatabase = {
+        get: jest.fn(tableName => ({
+          query: jest.fn(() => ({
+            observe: jest.fn(() => ({
+              subscribe: jest.fn(callback => {
+                callback(getMockedData(tableName));
+                return {unsubscribe: jest.fn()};
+              }),
+            })),
+            observeWithColumns: jest.fn(() => ({
+              subscribe: jest.fn(callback => {
+                callback(getMockedData(tableName));
+                return {unsubscribe: jest.fn()};
+              }),
+            })),
           })),
         })),
-      })),
-    };
+      };
 
-    return <Component {...props} database={mockDatabase} />;
-  }),
-}));
+      return <Component {...props} database={mockDatabase} />;
+    }),
+  };
+});
 
 jest.mock('@nozbe/watermelondb/hooks', () => ({
   withObservables: jest.fn((_, getObservables) => Component => props => {
@@ -230,3 +281,29 @@ jest.mock('react-native-push-notification', () => ({
   createChannel: jest.fn((channelId, channelName) => Promise.resolve()),
   deleteChannel: jest.fn(() => Promise.resolve()),
 }));
+
+jest.mock('react-native-paper', () => {
+  const React = require('react');
+  const {View, Text} = require('react-native');
+
+  const Dialog = ({visible, children}) =>
+    visible ? <View testID="MockDialog">{children}</View> : null;
+
+  Dialog.Title = ({children}) => (
+    <Text testID="MockDialogTitle">{children}</Text>
+  );
+  Dialog.Content = ({children}) => (
+    <View testID="MockDialogContent">{children}</View>
+  );
+  Dialog.Actions = ({children}) => (
+    <View testID="MockDialogActions">{children}</View>
+  );
+
+  const Portal = ({children}) => <View>{children}</View>;
+
+  return {
+    ...jest.requireActual('react-native-paper'),
+    Dialog,
+    Portal,
+  };
+});

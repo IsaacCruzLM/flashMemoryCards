@@ -111,6 +111,7 @@ exports[`Home Screen should render correctly 1`] = `
         "width": 60,
       }
     }
+    testID="floating-add-container"
   >
     <Icon
       color="#FFFFFF"

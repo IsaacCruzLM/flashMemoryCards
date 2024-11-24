@@ -76,6 +76,7 @@ const Home = ({notes, categories, subjects, noteSubjects}: any) => {
 
   useEffect(() => {
     const fetchNotes = async () => {
+      console.log(notes);
       if (notes.length > 0) {
         const notesDataToRevise = [] as Array<CardData>;
         await Promise.all(

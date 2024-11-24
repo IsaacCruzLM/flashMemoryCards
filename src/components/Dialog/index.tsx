@@ -39,6 +39,7 @@ const Dialog = ({
             {actions.map(
               ({label, buttonMode, buttonAction, loading = false}, index) => (
                 <Button
+                  key={`${label}-${index}`}
                   // eslint-disable-next-line react-native/no-inline-styles
                   style={[styles.button, {marginLeft: index === 0 ? 0 : 8}]}
                   modeParam={buttonMode}
