@@ -132,6 +132,24 @@ jest.mock('@nozbe/watermelondb/DatabaseProvider', () => {
         },
       },
     ],
+    categories: [
+      {
+        id: 'category_1',
+        name: 'Categoria 1',
+        color: '#d11cd5',
+        createdAt: new Date('2024-04-12').getTime(),
+      },
+      {
+        id: 'category_2',
+        name: 'Categoria 2',
+        color: '#f2f2f2',
+        createdAt: new Date('2024-03-12').getTime(),
+      },
+    ],
+    subjects: [
+      {id: 'subject_1', name: 'Assunto 1', color: '#ffffff'},
+      {id: 'subject_2', name: 'Assunto 2', color: '#d11cd5'},
+    ],
   };
 
   const getMockedData = tableName => mockedData[tableName] || [];

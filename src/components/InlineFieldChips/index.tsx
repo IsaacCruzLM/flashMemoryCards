@@ -14,7 +14,7 @@ const InlineFieldChips = ({label, arrayOfContents}: InlineFieldChipsProps) => {
         const textColor = getContrastColor(color);
 
         return (
-          <View style={[styles.chip, {backgroundColor: color}]}>
+          <View key={content} style={[styles.chip, {backgroundColor: color}]}>
             <Text
               numberOfLines={1}
               style={[styles.content, {color: textColor}]}>
