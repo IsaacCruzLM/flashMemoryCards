@@ -96,7 +96,13 @@
       "\\.(css|less)$": "identity-obj-proxy",
       "^.+\\.(jpg|jpeg|png|gif|svg)$": "<rootDir>/__mocks__/fileMock.js",
       "^react-native-linear-gradient$": "<rootDir>/__mocks__/react-native-linear-gradient.js"
-    }
+    },
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      "!src/**/*.d.ts",
+      "!**/node_modules/**",
+      "!**/types.ts"
+    ]
   },
   "resolutions": {
     "react-devtools-core": "4.24.3"
