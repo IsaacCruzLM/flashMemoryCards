@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable no-undef */
 // jest.setup.js
 import {NativeModules} from 'react-native';
@@ -61,6 +62,7 @@ jest.mock('@nozbe/watermelondb', () => {
       query: jest.fn().mockReturnThis(),
       fetch: jest.fn(),
       create: jest.fn(),
+      findAndObserve: jest.fn(),
     })),
   };
 
@@ -83,6 +85,13 @@ jest.mock('@nozbe/watermelondb', () => {
     relation: jest.fn(),
     tableSchema: jest.fn(() => ({})),
     appSchema: jest.fn(() => ({})),
+    Q: {
+      where: jest.fn(),
+      or: jest.fn(),
+      and: jest.fn(),
+      on: jest.fn(),
+      unique: jest.fn(),
+    },
   };
 });
 
@@ -171,6 +180,12 @@ jest.mock('@nozbe/watermelondb/DatabaseProvider', () => {
                 return {unsubscribe: jest.fn()};
               }),
             })),
+          })),
+          findAndObserve: jest.fn(() => ({
+            subscribe: jest.fn(callback => {
+              callback(getMockedData(tableName));
+              return {unsubscribe: jest.fn()};
+            }),
           })),
         })),
       };
@@ -323,5 +338,21 @@ jest.mock('react-native-paper', () => {
     ...jest.requireActual('react-native-paper'),
     Dialog,
     Portal,
+  };
+});
+
+jest.mock('react-native-date-picker', () => {
+  const React = require('react');
+  return ({date, onDateChange, mode}) => {
+    return (
+      <div>
+        <p>Mocked DatePicker</p>
+        <p>Mode: {mode}</p>
+        <p>Date: {date ? date.toISOString() : 'No date'}</p>
+        <button onClick={() => onDateChange(new Date('2025-01-01T00:00:00Z'))}>
+          Change Date
+        </button>
+      </div>
+    );
   };
 });
