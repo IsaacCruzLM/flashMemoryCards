@@ -356,3 +356,40 @@ jest.mock('react-native-date-picker', () => {
     );
   };
 });
+
+jest.mock('react-native-html-to-pdf', () => {
+  return {
+    convert: jest.fn(async options => {
+      return {
+        filePath: '/mock/path/to/generated.pdf',
+        fileName: 'generated.pdf',
+        options,
+      };
+    }),
+  };
+});
+
+jest.mock('react-native-file-viewer', () => {
+  return {
+    open: jest.fn((filePath, options) => {
+      if (!filePath) {
+        throw new Error('No file path provided');
+      }
+      return Promise.resolve(`File opened: ${filePath}`);
+    }),
+  };
+});
+
+jest.mock('@gorhom/bottom-sheet', () => {
+  const React = require('react');
+  const {View} = require('react-native');
+
+  return {
+    BottomSheetModal: ({children}) => (
+      <View testID="mockBottomSheetModal">{children}</View>
+    ),
+    BottomSheetFlatList: jest.fn(props => (
+      <View {...props} testID="mockBottomSheetFlatList" />
+    )),
+  };
+});
