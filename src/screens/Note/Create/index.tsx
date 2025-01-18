@@ -51,17 +51,21 @@ const Create: React.FunctionComponent<CreateProps | any> = ({
   const [keyboardStatus, setKeyboardStatus] = useState('');
 
   useEffect(() => {
-    const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
-      setKeyboardStatus('Keyboard Shown');
-    });
-    const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
-      setKeyboardStatus('Keyboard Hidden');
-    });
+    try {
+      const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
+        setKeyboardStatus('Keyboard Shown');
+      });
+      const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
+        setKeyboardStatus('Keyboard Hidden');
+      });
 
-    return () => {
-      showSubscription.remove();
-      hideSubscription.remove();
-    };
+      return () => {
+        showSubscription.remove();
+        hideSubscription.remove();
+      };
+    } catch (error) {
+      console.log(error);
+    }
   }, []);
 
   const submitAction = async (values: formValues) => {
