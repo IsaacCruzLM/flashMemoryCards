@@ -40,6 +40,7 @@ const Button = ({
 
   return (
     <PaperButton
+      testID={`ButtonTestID ${label}`}
       disabled={disabled}
       loading={loading}
       icon={icon}

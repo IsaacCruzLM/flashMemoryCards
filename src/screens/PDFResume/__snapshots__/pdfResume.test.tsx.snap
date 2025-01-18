@@ -490,7 +490,7 @@ exports[`PDFResume Screen should render correctly 1`] = `
             }
             keyExtractor={[Function]}
             renderItem={[Function]}
-            testID="mockBottomSheetFlatList"
+            testID="mockBottomSheetFlatList Selecione as categorias do resumo"
           />
         </View>
       </View>
@@ -693,7 +693,7 @@ exports[`PDFResume Screen should render correctly 1`] = `
             }
             keyExtractor={[Function]}
             renderItem={[Function]}
-            testID="mockBottomSheetFlatList"
+            testID="mockBottomSheetFlatList Selecione os assuntos do resumo"
           />
         </View>
       </View>
@@ -728,6 +728,7 @@ exports[`PDFResume Screen should render correctly 1`] = `
           },
         ]
       }
+      testID="ButtonTestID Gerar Resumo"
     >
       <View
         style={

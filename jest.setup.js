@@ -389,7 +389,7 @@ jest.mock('@gorhom/bottom-sheet', () => {
       <View testID="mockBottomSheetModal">{children}</View>
     ),
     BottomSheetFlatList: jest.fn(props => (
-      <View {...props} testID="mockBottomSheetFlatList" />
+      <View {...props} testID={`mockBottomSheetFlatList ${props.testID}`} />
     )),
   };
 });
