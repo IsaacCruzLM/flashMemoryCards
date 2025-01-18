@@ -62,12 +62,14 @@ const TutorialPage = () => {
             disabled={isDisabled}
             onPress={async () => {
               await AsyncStorage.setItem('tutorialSeen', 'true');
+              console.log('Button pressed');
               await WmdbUtils.insertItemInWMDB('categories', {
                 color: '#000000',
                 createdAt: new Date(),
                 icon: 'archive-edit',
                 name: 'Minhas Anotações',
               });
+              console.log('First insert done');
               await WmdbUtils.insertItemInWMDB('subjects', {
                 color: '#00c65c',
                 createdAt: new Date(),

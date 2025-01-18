@@ -140,6 +140,7 @@ const SelectMultiple = ({
             />
           </View>
           <BottomSheetFlatList
+            testID={modalTitle}
             data={options}
             keyExtractor={({value}: any) => value}
             renderItem={renderItem}

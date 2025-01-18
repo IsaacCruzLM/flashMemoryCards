@@ -5,8 +5,12 @@ import Theme from '../../styles/themes';
 import styles from './styles';
 
 const LoadingPage = () => (
-  <View style={styles.container}>
-    <ActivityIndicator size="large" color={Theme.colors.primary} />
+  <View testID="loading-container" style={styles.container}>
+    <ActivityIndicator
+      testID="loading-indicator"
+      size="large"
+      color={Theme.colors.primary}
+    />
   </View>
 );
 

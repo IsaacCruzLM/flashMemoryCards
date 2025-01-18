@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoadingPage should render correctly 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+  testID="loading-container"
+>
+  <ActivityIndicator
+    color="#22272E"
+    size="large"
+    testID="loading-indicator"
+  />
+</View>
+`;

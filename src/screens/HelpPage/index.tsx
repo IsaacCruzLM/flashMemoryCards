@@ -6,7 +6,9 @@ import styles from './styles';
 const HelpPage = () => {
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>Como Utilizar Memory Cards</Text>
+      <Text testID="help-title" style={styles.title}>
+        Como Utilizar Memory Cards
+      </Text>
 
       <View style={styles.section}>
         <Text style={styles.subtitle}>1. Criar uma Anotação</Text>

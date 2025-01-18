@@ -1,0 +1,247 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HelpPage should render correctly 1`] = `
+<RCTScrollView
+  contentContainerStyle={
+    Object {
+      "flex": 1,
+      "padding": 20,
+    }
+  }
+>
+  <View>
+    <Text
+      style={
+        Object {
+          "color": "#22272E",
+          "fontSize": 20,
+          "fontWeight": "bold",
+          "marginBottom": 20,
+        }
+      }
+      testID="help-title"
+    >
+      Como Utilizar Memory Cards
+    </Text>
+    <View
+      style={
+        Object {
+          "marginBottom": 20,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#22272E",
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "marginBottom": 10,
+          }
+        }
+      >
+        1. Criar uma Anotação
+      </Text>
+      <Text
+        style={
+          Object {
+            "color": "#000000",
+            "fontSize": 14,
+            "lineHeight": 24,
+          }
+        }
+      >
+        Para criar uma nova anotação, basta clicar no ícone "+" na tela inicial ou na tela de uma categoria especifica e preencher os detalhes. Você pode adicionar um título e o conteúdo da sua anotação.
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "marginBottom": 20,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#22272E",
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "marginBottom": 10,
+          }
+        }
+      >
+        2. Revisar Anotações
+      </Text>
+      <Text
+        style={
+          Object {
+            "color": "#000000",
+            "fontSize": 14,
+            "lineHeight": 24,
+          }
+        }
+      >
+        O app enviará lembretes automáticos para você revisar suas anotações em 1 dia, 7 dias, 1 mês, e 6 meses. Você pode acessar esses lembretes diretamente pela notificação. Lembre-se de ativar as notificações!
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "marginBottom": 20,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#22272E",
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "marginBottom": 10,
+          }
+        }
+      >
+        3. Editar ou Excluir Anotações
+      </Text>
+      <Text
+        style={
+          Object {
+            "color": "#000000",
+            "fontSize": 14,
+            "lineHeight": 24,
+          }
+        }
+      >
+        Para editar ou excluir uma anotação, toque na anotação desejada e utilize os botões de edição ou exclusão no topo da tela.
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "marginBottom": 20,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#22272E",
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "marginBottom": 10,
+          }
+        }
+      >
+        4. Criar Categorias e Assuntos
+      </Text>
+      <Text
+        style={
+          Object {
+            "color": "#000000",
+            "fontSize": 14,
+            "lineHeight": 24,
+          }
+        }
+      >
+        Para organizar melhor suas anotações, você pode criar categorias e assuntos personalizados. Isso ajudará a separar suas anotações em grupos relacionados. Vá até o menu lateral, acesse a seção correspondente e adicione novas categorias e assuntos conforme suas necessidades.
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "marginBottom": 20,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#22272E",
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "marginBottom": 10,
+          }
+        }
+      >
+        5. Gerar Resumo PDF
+      </Text>
+      <Text
+        style={
+          Object {
+            "color": "#000000",
+            "fontSize": 14,
+            "lineHeight": 24,
+          }
+        }
+      >
+        Se desejar gerar um PDF a partir de suas anotações, vá até a opção "Criar Resumo PDF" no menu lateral e selecione as características das anotações que deseja incluir.
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "marginBottom": 20,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#22272E",
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "marginBottom": 10,
+          }
+        }
+      >
+        6. Enviar Feedback
+      </Text>
+      <Text
+        style={
+          Object {
+            "color": "#000000",
+            "fontSize": 14,
+            "lineHeight": 24,
+          }
+        }
+      >
+        Caso tenha encontrado algum problema ou tenha sugestões de melhorias, acesse o menu lateral e selecione "Feedback" para nos enviar sua opinião.
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "flex": 1,
+          "justifyContent": "flex-end",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#22272E",
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "textAlign": "center",
+          }
+        }
+      >
+        Versão 1.0.0
+      </Text>
+      <Text
+        style={
+          Object {
+            "color": "#000000",
+            "fontSize": 14,
+            "lineHeight": 24,
+            "textAlign": "center",
+          }
+        }
+      >
+        Criado por: Isaac Cruz
+      </Text>
+    </View>
+  </View>
+</RCTScrollView>
+`;

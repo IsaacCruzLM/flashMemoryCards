@@ -1,0 +1,796 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PDFResume Screen should render correctly 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "space-between",
+        "paddingHorizontal": 20,
+        "paddingVertical": 24,
+        "width": "100%",
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "gray",
+          "borderRadius": 16,
+          "flexDirection": "row",
+          "marginBottom": 32,
+          "padding": 8,
+        }
+      }
+    >
+      <Icon
+        color="#22272E"
+        name="information"
+        size={40}
+      />
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "rgba(28, 27, 31, 1)",
+            },
+            Object {
+              "textAlign": "left",
+            },
+            Array [
+              Object {
+                "textAlign": "left",
+              },
+              Object {
+                "color": "rgba(28, 27, 31, 0.87)",
+                "writingDirection": "ltr",
+              },
+              Array [
+                Object {
+                  "fontSize": 14,
+                  "letterSpacing": 0.25,
+                  "lineHeight": 20,
+                  "marginVertical": 2,
+                },
+                Object {
+                  "color": "#FFFFFF",
+                  "flex": 1,
+                  "flexWrap": "wrap",
+                  "fontSize": 16,
+                  "marginLeft": 16,
+                },
+              ],
+            ],
+          ]
+        }
+      >
+        Preencha o nome do arquivo, selecione as categorias e os assuntos desejados, e gere um PDF das anotações com base nas informações fornecidas.
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "height": 36,
+          "marginBottom": 48,
+          "width": "100%",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "borderColor": "#B00020",
+          }
+        }
+      >
+        <View
+          pointerEvents="none"
+          style={
+            Array [
+              Object {
+                "bottom": 0,
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 6,
+              },
+              Object {
+                "backgroundColor": "#FFFFFF",
+                "borderColor": "rgba(0, 0, 0, 0.54)",
+                "borderRadius": 4,
+                "borderWidth": 1,
+              },
+              undefined,
+            ]
+          }
+          testID="text-input-outline"
+        />
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "paddingBottom": 0,
+                },
+                Object {
+                  "minHeight": 64,
+                  "paddingTop": 8,
+                },
+              ]
+            }
+          >
+            <Text
+              collapsable={false}
+              maxFontSizeMultiplier={1.5}
+              numberOfLines={1}
+              style={
+                Object {
+                  "backgroundColor": "#FFFFFF",
+                  "color": "transparent",
+                  "fontFamily": "System",
+                  "fontSize": 16,
+                  "fontWeight": undefined,
+                  "left": 8,
+                  "letterSpacing": 0.25,
+                  "lineHeight": undefined,
+                  "opacity": 0,
+                  "paddingHorizontal": 0,
+                  "position": "absolute",
+                  "textAlign": "left",
+                  "top": 37,
+                  "transform": Array [
+                    Object {
+                      "translateX": 0,
+                    },
+                    Object {
+                      "translateY": 0,
+                    },
+                    Object {
+                      "scale": 1,
+                    },
+                    Object {
+                      "scaleY": 1,
+                    },
+                  ],
+                  "width": -14,
+                  "writingDirection": "ltr",
+                }
+              }
+            >
+              Nome do resumo
+            </Text>
+            <Text
+              collapsable={false}
+              maxFontSizeMultiplier={1.5}
+              numberOfLines={1}
+              onLayout={[Function]}
+              style={
+                Object {
+                  "color": "#22272E",
+                  "fontFamily": "System",
+                  "fontSize": 16,
+                  "fontWeight": undefined,
+                  "left": 0,
+                  "letterSpacing": 0.4,
+                  "lineHeight": undefined,
+                  "opacity": 0,
+                  "paddingHorizontal": 14,
+                  "position": "absolute",
+                  "textAlign": "left",
+                  "top": 36,
+                  "transform": Array [
+                    Object {
+                      "translateX": 0,
+                    },
+                    Object {
+                      "translateY": 0,
+                    },
+                    Object {
+                      "scale": 1,
+                    },
+                  ],
+                  "writingDirection": "ltr",
+                }
+              }
+              testID="text-input-outlined-label-active"
+            >
+              Nome do resumo
+            </Text>
+            <Text
+              collapsable={false}
+              maxFontSizeMultiplier={1.5}
+              numberOfLines={1}
+              style={
+                Object {
+                  "color": "rgba(0, 0, 0, 0.54)",
+                  "fontFamily": "System",
+                  "fontSize": 16,
+                  "fontWeight": undefined,
+                  "left": 0,
+                  "letterSpacing": 0.4,
+                  "lineHeight": undefined,
+                  "opacity": 0,
+                  "paddingHorizontal": 14,
+                  "position": "absolute",
+                  "textAlign": "left",
+                  "top": 36,
+                  "transform": Array [
+                    Object {
+                      "translateX": 0,
+                    },
+                    Object {
+                      "translateY": 0,
+                    },
+                    Object {
+                      "scale": 1,
+                    },
+                  ],
+                  "writingDirection": "ltr",
+                }
+              }
+              testID="text-input-outlined-label-inactive"
+            >
+              Nome do resumo
+            </Text>
+            <TextInput
+              editable={true}
+              maxFontSizeMultiplier={1.5}
+              multiline={false}
+              onBlur={[Function]}
+              onChangeText={[Function]}
+              onFocus={[Function]}
+              placeholder=" "
+              placeholderTextColor="rgba(0, 0, 0, 0.54)"
+              selectionColor="#22272E"
+              style={
+                Array [
+                  Object {
+                    "flexGrow": 1,
+                    "margin": 0,
+                    "zIndex": 1,
+                  },
+                  Object {
+                    "height": 56,
+                  },
+                  Object {
+                    "paddingBottom": 0,
+                    "paddingTop": 0,
+                  },
+                  Object {
+                    "color": "#000000",
+                    "fontFamily": "System",
+                    "fontSize": 16,
+                    "fontWeight": undefined,
+                    "lineHeight": undefined,
+                    "paddingHorizontal": 14,
+                    "textAlign": "left",
+                    "textAlignVertical": "center",
+                  },
+                  false,
+                  Array [
+                    Object {},
+                  ],
+                ]
+              }
+              testID="text-input-outlined"
+              underlineColorAndroid="transparent"
+              value=""
+            />
+          </View>
+        </View>
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "justifyContent": "center",
+          "marginBottom": 16,
+        }
+      }
+    >
+      <View
+        pointerEvents="none"
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "backgroundColor": "white",
+                "borderRadius": 5,
+                "borderWidth": 1,
+                "flexDirection": "row",
+                "flexWrap": "wrap",
+                "minHeight": 58,
+                "paddingHorizontal": 8,
+                "paddingVertical": 8,
+                "width": "100%",
+              },
+              Object {
+                "borderColor": "gray",
+              },
+            ]
+          }
+        >
+          <View
+            style={
+              Object {
+                "backgroundColor": "#FFFFFF",
+                "borderRadius": 4,
+                "left": 14,
+                "position": "absolute",
+                "top": -10,
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "fontSize": 12,
+                }
+              }
+            >
+              Selecionar Categorias
+            </Text>
+          </View>
+          <Text
+            style={
+              Array [
+                Object {
+                  "fontFamily": "System",
+                  "fontSize": 16,
+                  "fontWeight": "600",
+                  "height": 40,
+                  "marginLeft": 5.6,
+                  "textAlign": "left",
+                  "textAlignVertical": "center",
+                },
+                Object {
+                  "color": "#162133",
+                },
+              ]
+            }
+          >
+            Selecionar Categorias
+          </Text>
+        </View>
+      </View>
+      <View
+        testID="mockBottomSheetModal"
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "flex-start",
+              "flex": 1,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+                "paddingHorizontal": 16,
+                "width": "100%",
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "color": "#22272E",
+                  "fontFamily": "System",
+                  "fontSize": 20,
+                  "fontWeight": "600",
+                  "textAlign": "left",
+                }
+              }
+            >
+              Selecione as categorias do resumo
+            </Text>
+            <View
+              accessibilityComponentType="button"
+              accessibilityRole="button"
+              accessibilityState={
+                Object {
+                  "disabled": false,
+                }
+              }
+              accessibilityTraits="button"
+              accessible={true}
+              centered={true}
+              collapsable={false}
+              focusable={true}
+              hitSlop={
+                Object {
+                  "bottom": 6,
+                  "left": 6,
+                  "right": 6,
+                  "top": 6,
+                }
+              }
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Array [
+                  Object {
+                    "overflow": "hidden",
+                  },
+                  false,
+                  Object {
+                    "alignItems": "center",
+                    "flexGrow": 1,
+                    "justifyContent": "center",
+                  },
+                ]
+              }
+            >
+              <Icon
+                accessibilityElementsHidden={true}
+                color="#FFFFFF"
+                importantForAccessibility="no-hide-descendants"
+                name="close"
+                pointerEvents="none"
+                selectable={false}
+                size={20}
+                style={
+                  Array [
+                    Object {
+                      "lineHeight": 20,
+                      "transform": Array [
+                        Object {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    Object {
+                      "backgroundColor": "transparent",
+                    },
+                  ]
+                }
+              />
+            </View>
+          </View>
+          <View
+            data={
+              Array [
+                Object {
+                  "iconColor": "#d11cd5",
+                  "iconName": undefined,
+                  "label": "Categoria 1",
+                  "value": "category_1",
+                },
+                Object {
+                  "iconColor": "#f2f2f2",
+                  "iconName": undefined,
+                  "label": "Categoria 2",
+                  "value": "category_2",
+                },
+              ]
+            }
+            keyExtractor={[Function]}
+            renderItem={[Function]}
+            testID="mockBottomSheetFlatList Selecione as categorias do resumo"
+          />
+        </View>
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "justifyContent": "center",
+          "marginBottom": 16,
+        }
+      }
+    >
+      <View
+        pointerEvents="none"
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "backgroundColor": "white",
+                "borderRadius": 5,
+                "borderWidth": 1,
+                "flexDirection": "row",
+                "flexWrap": "wrap",
+                "minHeight": 58,
+                "paddingHorizontal": 8,
+                "paddingVertical": 8,
+                "width": "100%",
+              },
+              Object {
+                "borderColor": "gray",
+              },
+            ]
+          }
+        >
+          <View
+            style={
+              Object {
+                "backgroundColor": "#FFFFFF",
+                "borderRadius": 4,
+                "left": 14,
+                "position": "absolute",
+                "top": -10,
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "fontSize": 12,
+                }
+              }
+            >
+              Selecionar Assuntos
+            </Text>
+          </View>
+          <Text
+            style={
+              Array [
+                Object {
+                  "fontFamily": "System",
+                  "fontSize": 16,
+                  "fontWeight": "600",
+                  "height": 40,
+                  "marginLeft": 5.6,
+                  "textAlign": "left",
+                  "textAlignVertical": "center",
+                },
+                Object {
+                  "color": "#162133",
+                },
+              ]
+            }
+          >
+            Selecionar Assuntos
+          </Text>
+        </View>
+      </View>
+      <View
+        testID="mockBottomSheetModal"
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "flex-start",
+              "flex": 1,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+                "paddingHorizontal": 16,
+                "width": "100%",
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "color": "#22272E",
+                  "fontFamily": "System",
+                  "fontSize": 20,
+                  "fontWeight": "600",
+                  "textAlign": "left",
+                }
+              }
+            >
+              Selecione os assuntos do resumo
+            </Text>
+            <View
+              accessibilityComponentType="button"
+              accessibilityRole="button"
+              accessibilityState={
+                Object {
+                  "disabled": false,
+                }
+              }
+              accessibilityTraits="button"
+              accessible={true}
+              centered={true}
+              collapsable={false}
+              focusable={true}
+              hitSlop={
+                Object {
+                  "bottom": 6,
+                  "left": 6,
+                  "right": 6,
+                  "top": 6,
+                }
+              }
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Array [
+                  Object {
+                    "overflow": "hidden",
+                  },
+                  false,
+                  Object {
+                    "alignItems": "center",
+                    "flexGrow": 1,
+                    "justifyContent": "center",
+                  },
+                ]
+              }
+            >
+              <Icon
+                accessibilityElementsHidden={true}
+                color="#FFFFFF"
+                importantForAccessibility="no-hide-descendants"
+                name="close"
+                pointerEvents="none"
+                selectable={false}
+                size={20}
+                style={
+                  Array [
+                    Object {
+                      "lineHeight": 20,
+                      "transform": Array [
+                        Object {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    Object {
+                      "backgroundColor": "transparent",
+                    },
+                  ]
+                }
+              />
+            </View>
+          </View>
+          <View
+            data={
+              Array [
+                Object {
+                  "iconColor": "#ffffff",
+                  "iconName": undefined,
+                  "label": "Assunto 1",
+                  "value": "subject_1",
+                },
+                Object {
+                  "iconColor": "#d11cd5",
+                  "iconName": undefined,
+                  "label": "Assunto 2",
+                  "value": "subject_2",
+                },
+              ]
+            }
+            keyExtractor={[Function]}
+            renderItem={[Function]}
+            testID="mockBottomSheetFlatList Selecione os assuntos do resumo"
+          />
+        </View>
+      </View>
+    </View>
+    <View
+      accessibilityRole="button"
+      accessibilityState={
+        Object {
+          "disabled": false,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "overflow": "hidden",
+          },
+          false,
+          Object {
+            "borderRadius": 20,
+          },
+        ]
+      }
+      testID="ButtonTestID Gerar Resumo"
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "center",
+            },
+            undefined,
+          ]
+        }
+      >
+        <Text
+          numberOfLines={1}
+          selectable={false}
+          style={
+            Array [
+              Object {
+                "color": "rgba(28, 27, 31, 1)",
+                "fontFamily": "System",
+                "fontSize": 14,
+                "fontWeight": "500",
+                "letterSpacing": 0.1,
+                "lineHeight": 20,
+              },
+              Object {
+                "textAlign": "left",
+              },
+              Object {
+                "writingDirection": "ltr",
+              },
+              Array [
+                Object {
+                  "marginHorizontal": 16,
+                  "marginVertical": 9,
+                  "textAlign": "center",
+                },
+                false,
+                Object {
+                  "marginHorizontal": 24,
+                  "marginVertical": 10,
+                },
+                undefined,
+                false,
+                Object {
+                  "color": "#FFFFFF",
+                  "fontFamily": "System",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
+                },
+                undefined,
+              ],
+            ]
+          }
+        >
+          Gerar Resumo
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;

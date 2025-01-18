@@ -101,6 +101,7 @@ const Home = ({notes, categories, subjects, noteSubjects}: any) => {
                     content: name,
                     color,
                   })),
+                  nextRevisionDate: '',
                 });
               }
             }),
@@ -132,6 +133,7 @@ const Home = ({notes, categories, subjects, noteSubjects}: any) => {
   return (
     <DefaultContainerView>
       <FlatList
+        testID="home-list"
         data={notesToRevise}
         contentContainerStyle={styles.listContainer}
         keyExtractor={item => item.id}

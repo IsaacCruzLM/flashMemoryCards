@@ -13,8 +13,9 @@ const FloatingAddButton = ({
   params = {},
 }: FloatingAddButtonProps) => {
   return (
-    <View style={styles.container}>
+    <View testID="floating-add-container" style={styles.container}>
       <TouchableOpacity
+        testID="floating-add-button"
         onPress={() => NavigationService.navigate(routeName, params)}>
         <Icon color={themes.colors.background} size={50} name="plus" />
       </TouchableOpacity>

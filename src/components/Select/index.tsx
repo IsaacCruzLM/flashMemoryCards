@@ -37,7 +37,7 @@ const Select = ({
 
   // render
   const renderItem = useCallback(
-    ({item}) => {
+    ({item}: any) => {
       const {label, value, iconName, iconColor} = item;
       return (
         <TouchableOpacity
@@ -105,6 +105,7 @@ const Select = ({
             />
           </View>
           <BottomSheetFlatList
+            testID={modalTitle}
             data={options}
             keyExtractor={({value}: any) => value}
             renderItem={renderItem}

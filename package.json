@@ -7,6 +7,9 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:update-snapshots": "jest --updateSnapshot",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
@@ -50,6 +53,7 @@
     "@tsconfig/react-native": "^2.0.2",
     "@types/jest": "^26.0.23",
     "@types/lodash": "^4.14.192",
+    "@types/node": "^22.9.0",
     "@types/react-native": "^0.70.4",
     "@types/react-native-html-to-pdf": "^0.8.3",
     "@types/react-native-push-notification": "^8.1.4",
@@ -78,6 +82,26 @@
       "jsx",
       "json",
       "node"
+    ],
+    "transform": {
+      "^.+\\.(js|jsx|ts|tsx)$": "babel-jest"
+    },
+    "transformIgnorePatterns": [
+      "node_modules/(?!(react-native|@react-native|@react-native/polyfills|react-native-iphone-x-helper|react-native-paper|@gorhom/bottom-sheet|react-native-safe-area-context|react-native-webview)/)"
+    ],
+    "setupFiles": [
+      "./jest.setup.js"
+    ],
+    "moduleNameMapper": {
+      "\\.(css|less)$": "identity-obj-proxy",
+      "^.+\\.(jpg|jpeg|png|gif|svg)$": "<rootDir>/__mocks__/fileMock.js",
+      "^react-native-linear-gradient$": "<rootDir>/__mocks__/react-native-linear-gradient.js"
+    },
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      "!src/**/*.d.ts",
+      "!**/node_modules/**",
+      "!**/types.ts"
     ]
   },
   "resolutions": {
