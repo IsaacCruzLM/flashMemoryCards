@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import {View} from 'react-native';
+import {View, Text} from 'react-native';
 import {Q} from '@nozbe/watermelondb';
 import withObservables from '@nozbe/with-observables';
 import {withDatabase} from '@nozbe/watermelondb/DatabaseProvider';
@@ -14,6 +14,7 @@ import Dialog from '../../../components/Dialog';
 import TextInput from '../../../components/TextInput';
 import Select from '../../../components/Select';
 import SelectMultiple from '../../../components/SelectMultiple';
+import ErrorBoundary from '../../../components/ErrorBoundary';
 
 import AppContext from '../../../context/appContext';
 import WmdbUtils from '../../../databases/utils';
@@ -154,11 +155,18 @@ const Show: React.FunctionComponent<ShowProps | any> = ({
     <DefaultContainerView>
       <View style={styles.container}>
         <View>
-          <TextEditor
-            initialContentHTML={note.content}
-            onChange={content => setNewContent(content)}
-            placeHolder="Escreva sua anotação aqui!"
-          />
+          <ErrorBoundary
+            fallback={
+              <View>
+                <Text>Erro</Text>
+              </View>
+            }>
+            <TextEditor
+              initialContentHTML={note.content}
+              onChange={content => setNewContent(content)}
+              placeHolder="Escreva sua anotação aqui!"
+            />
+          </ErrorBoundary>
         </View>
         {globalState.keyboardIsVisible ? null : (
           <View>
