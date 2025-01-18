@@ -100,7 +100,7 @@ const Create: React.FunctionComponent<any> = ({
               )}
             />
             <Button
-              label={`${isEdit ? 'Editar' : 'Criar'}  Categoria`}
+              label={`${isEdit ? 'Editar' : 'Criar'}  Assunto`}
               onPress={handleSubmit}
               style={styles.createButton}
             />
