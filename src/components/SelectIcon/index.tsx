@@ -68,7 +68,7 @@ const SelectIcon = ({
         ]}>
         Selecione um icone
       </Text>
-      <View style={styles.iconListContainer}>
+      <View testID="select-icon-container" style={styles.iconListContainer}>
         <TouchableOpacity
           onPress={() => setInitalIconIndex(initalIconIndex - 4)}
           disabled={initalIconIndex - 4 < 0}>

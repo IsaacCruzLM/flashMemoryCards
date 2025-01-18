@@ -393,3 +393,13 @@ jest.mock('@gorhom/bottom-sheet', () => {
     )),
   };
 });
+
+jest.mock('react-native-wheel-color-picker', () => {
+  return {
+    __esModule: true,
+    default: jest.fn().mockImplementation(({onColorChange}) => {
+      onColorChange?.('#000000');
+      return <div testID="mocked-color-picker" />;
+    }),
+  };
+});
